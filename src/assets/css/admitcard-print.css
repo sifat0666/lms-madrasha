@@ -1,0 +1,85 @@
+/* override styles when printing */
+@media print {
+  body {
+    background: #fff;
+  }
+  .main-container {
+    border: none;
+    margin: none;
+    border-radius: 0;
+    padding: 0;
+  }
+  .section-bg {
+    width: 100%;
+    background-color: #fff;
+    background-image: none;
+    border-radius: none;
+    background-repeat: none;
+    background-size: none;
+    box-shadow: none;
+  }
+  .pages-title {
+    text-align: center;
+    padding-top: 0;
+  }
+
+  .filter-menu {
+    padding: 0px;
+    background: #fff;
+  }
+  .filter-menu > .form-control,
+  .form-select {
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .filter-menu > select option {
+    padding-left: 0px;
+  }
+
+  .form-control,
+  .form-select {
+    border: none !important;
+    border-radius: 0 !important;
+  }
+  .preview-page {
+    width: 100%;
+    min-height: 100%;
+    max-height: 0 !important;
+    background: #fff;
+    position: relative;
+    overflow: visible;
+    opacity: 9;
+  }
+  .admitcard-container {
+    border: 3px solid black;
+    padding: 10px;
+    position: relative;
+    padding-top: 15px;
+  }
+  .admitcard-container::before {
+    position: absolute;
+    content: "";
+    border: 1px solid rgb(15, 0, 0);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 7px;
+  }
+  .admitcard-content {
+    margin-top: 80px !important;
+  }
+  .table-responsive {
+    max-width: 450px;
+    overflow-x: visible;
+  }
+  .pages-content {
+    margin: 50px 15px 10px 15px;
+  }
+}
+
+@page {
+  size: A4;
+  border: 2px solid #000;
+}

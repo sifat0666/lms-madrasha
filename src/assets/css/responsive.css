@@ -1,0 +1,430 @@
+/*
+===================
+Surpace Pro 7 Css
+===================
+*/
+
+@media screen and (max-width: 1050px) {
+  .main-navbar {
+    width: 0 !important;
+  }
+  .toggler-icon {
+    font-size: 74px;
+  }
+  .user-avator {
+    font-size: 75px;
+    color: #ffffff;
+  }
+  .notification {
+    display: flex;
+    font-size: 75px;
+  }
+  .nav-link {
+    text-align: left;
+  }
+  ion-icon {
+    text-align: center;
+    transform: translate(141px, 2px);
+  }
+  .dropdown-item {
+    white-space: inherit;
+  }
+}
+/*
+===================
+iPAD Air Css
+===================
+*/
+@media screen and (max-width: 820px) {
+  .company-about {
+    margin-top: 30px;
+  }
+  .nav-link {
+    text-align: left;
+  }
+  .main-navbar {
+    width: 0 !important;
+  }
+  .toggler-icon {
+    font-size: 74px;
+  }
+  .user-avator {
+    font-size: 75px;
+    color: #ffffff;
+  }
+  .notification {
+    display: flex;
+    font-size: 75px;
+  }
+  button:focus:not(:focus-visible) {
+    outline: 0;
+    color: #fff !important;
+  }
+  /*
+  ============================
+  New User Form Responsive Css
+  ============================
+  */
+  .col-form-label {
+    text-align: left !important;
+  }
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 37px;
+    padding-right: 0;
+    margin-bottom: 21px;
+  }
+}
+/*
+===================
+iPAD Mini Air Css
+===================
+*/
+@media screen and (max-width: 768px) {
+  .main-navbar {
+    width: 0;
+  }
+  .nav-link {
+    text-align: left;
+  }
+  .notification {
+    display: flex;
+    font-size: 65px;
+  }
+  .user-avator {
+    font-size: 55px;
+    color: #ffffff;
+  }
+  .incomeExpance-form > .button-group {
+    padding-right: 0;
+    padding-left: 0 !important;
+    justify-content: center;
+    gap: 30px;
+  }
+  .nav-right {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: center;
+    gap: 25px;
+  }
+  .offcanvas {
+    max-width: 75%;
+  }
+  .company-about {
+    margin-top: 50px;
+  }
+  .col-form-label {
+    text-align: left !important;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .main-navbar {
+    width: 0;
+    margin: 5px 0 5px 0 !important;
+  }
+  .nav-link {
+    text-align: left;
+  }
+  .toggler-icon {
+    font-size: 25px;
+  }
+  .grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  }
+  .grid-card {
+    padding: 18px;
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 38px;
+    text-align: center;
+  }
+  .company-about {
+    margin-top: 20px;
+  }
+  .offcanvas {
+    max-width: 75%;
+  }
+  .notification {
+    display: flex;
+    font-size: 25px;
+  }
+  .notification > a::after {
+    position: absolute;
+    content: "";
+    width: 8px;
+    height: 8px;
+    background: #fff500;
+    top: 5px;
+    right: 3px;
+    border-radius: 50%;
+  }
+  .user-avator {
+    font-size: 25px;
+    color: #ffffff;
+  }
+  .nav-right {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    align-items: center;
+    gap: 25px;
+  }
+  .invoice-title {
+    margin: 0 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    white-space: nowrap;
+    margin-left: 22%;
+  }
+  /*
+  ============================
+  New User Form Responsive Css
+  ============================
+  */
+  .user-create-form {
+    margin-top: -8px;
+    margin-bottom: 42px;
+  }
+  .user-form-create::after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    background-color: #ffffff;
+    top: 0;
+    right: 0;
+  }
+  .col-form-label {
+    text-align: left !important;
+  }
+  .user-permission {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+    padding-right: 0;
+  }
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+    padding-right: 0;
+    margin-bottom: 10px;
+  }
+  .custom-btn {
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 3px;
+    border: none;
+    transition: 0.8s;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+  .search {
+    width: 244px !important;
+  }
+  .search-icon {
+    position: absolute;
+    transform: translateY(39%);
+    margin-left: 10px;
+    top: -3px;
+  }
+  /*
+  ============================
+  Institute Form Responsive Css
+  ============================
+  */
+  .intitute-form > .button-group {
+    justify-content: center;
+    align-items: center;
+    margin-top: 37px;
+    padding-right: 0;
+    gap: 10px;
+    display: flex;
+    margin-left: 0;
+  }
+  .upload-container {
+    display: flex;
+    margin-top: 40px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .section-subtitle {
+    left: 37%;
+  }
+  /*
+  ============================
+  Fee Determine Page Responsive Css
+  ============================
+  */
+  .feesdeterminationa-form > .button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 18px;
+    padding-right: 0;
+    gap: 25px;
+  }
+  .feesdeterminationa-form > .button-group > .custom-btn {
+    width: 100%;
+  }
+  /*
+  ============================
+  Students Entry Page Responsive Css
+  ============================
+  */
+  .option-subtext {
+    text-align: left;
+    transform: translateY(0);
+  }
+  .studentsinfo-form > .button-group {
+    margin-top: 19px !important;
+    gap: 10px;
+    width: 100%;
+    padding-right: 0 !important;
+    display: grid;
+    grid-template-columns: auto auto auto;
+  }
+  .migration-title {
+    left: 24%;
+  }
+  .info-form-check {
+    font-size: 14px;
+  }
+  .migration-container {
+    border: 1px solid #000;
+    padding: 10px 26px;
+    position: relative;
+    text-align: center;
+  }
+  span.print-button {
+    position: absolute;
+    top: -2px;
+    left: 6px;
+    font-size: 29px;
+    cursor: pointer;
+  }
+  .pages-title {
+    text-align: center;
+    padding-top: 35px;
+  }
+  .pages-title > h5 {
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .pages-title > p {
+    font-size: 12px;
+  }
+  .pages-title > span {
+    font-size: 12px;
+  }
+  .pages-subtitle {
+    margin-top: 5px;
+  }
+  .addbank > .button-group {
+    gap: 12px;
+  }
+  .payroll > .button-group {
+    gap: 9px;
+  }
+  .filter-container {
+    padding-left: 23px;
+    padding-right: 10px;
+  }
+  .donoate > .button-group {
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+  .hisab-btn {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /*
+  ===============
+  ID Card Css
+  ==============
+  */
+  .idcard-title {
+    left: 16%;
+  }
+  .id-card {
+    width: 200px;
+    position: relative;
+    border: 1px solid #3362d3;
+    height: auto;
+  }
+  .idcard-logo {
+    position: absolute;
+    max-width: 40px;
+    top: 0;
+    right: 2px;
+  }
+  .idcard-avator {
+    position: absolute;
+    width: 91px;
+    top: -132px;
+    left: 38px;
+    border: 1px solid #2c1b81;
+    height: 87px;
+    border-radius: 5px;
+    background-color: #2c187d;
+  }
+  .idcard-info {
+    position: absolute;
+    top: 45%;
+    text-align: left;
+    left: 10px;
+  }
+  .info {
+    font-size: 13px;
+  }
+  .authorized-sing::after {
+    position: absolute;
+    content: "";
+    border: 1px solid red;
+    height: 2px;
+    width: 107px;
+    bottom: 16px;
+  }
+  .authorized-sing {
+    font-size: 12px;
+  }
+  .authorized-sing > img {
+    width: 40px;
+    height: 40px;
+  }
+  /*
+  ==========================
+  Admit Card responsive css
+  ==========================
+  */
+  .admitcard-logo {
+    width: 44px;
+    height: 76px;
+    position: absolute;
+    top: 119px;
+    left: 15px;
+  }
+  .admitcard-image {
+    width: 57px;
+    border: 1px solid #000;
+    display: inline-block;
+    position: absolute;
+    right: 3px;
+    top: 123px;
+    border-radius: 2px;
+  }
+}

@@ -1,0 +1,61 @@
+/* override styles when printing */
+@media print {
+  body {
+    background: #fff;
+  }
+  .main-container {
+    border: none;
+    margin: none;
+    border-radius: 0;
+    padding: 0;
+  }
+  .section-bg {
+    width: 100%;
+    background-color: #fff;
+    background-image: none;
+    border-radius: none;
+    background-repeat: none;
+    background-size: none;
+    box-shadow: none;
+  }
+  .pages-title {
+    text-align: center;
+    padding-top: 0;
+  }
+
+  .filter-menu {
+    padding: 0px;
+    background: #fff;
+  }
+  .filter-menu > .form-control,
+  .form-select {
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .filter-menu > select option {
+    padding-left: 0px;
+  }
+
+  .form-control,
+  .form-select {
+    border: none !important;
+    border-radius: 0 !important;
+  }
+  .preview-page {
+    width: 100%;
+    min-height: 100%;
+    max-height: 0 !important;
+    background: #fff;
+    position: relative;
+    overflow: visible;
+    opacity: 9;
+  }
+  .table-responsive {
+    max-width: 793.7007874px;
+    overflow-x: visible;
+  }
+  .idcard-page {
+    margin-top: 0px;
+  }
+}
