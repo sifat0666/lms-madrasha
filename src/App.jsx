@@ -21,7 +21,7 @@ import IncomeExpenceEntry from "./pages/IncomeExpenceEntry";
 import IncomeEntry from "./pages/IncomeEntry";
 import ExpenceEntry from "./pages/ExpenceEntry";
 import FeesDetermination from "./pages/FeesDetermination";
-import Report from "./pages/report";
+import Report from "./pages/Report";
 import ExamEntry from "./pages/ExamEntry";
 import ExamFeesDetermination from "./pages/ExamFeesDetermination";
 import ResultCondition from "./pages/ResultCondition";
