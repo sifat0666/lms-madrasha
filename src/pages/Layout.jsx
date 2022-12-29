@@ -97,46 +97,53 @@ const Layout = ({ children }) => {
                             </a>
                             <ul class="dropdown-menu">
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Accounting/hisab-nikash.html"
-                                >
-                                  হিসাব নিকাশ
-                                </a>
+                                <Link to="/accounting/hishab-nikash">
+                                  <p class="dropdown-item">হিসাব নিকাশ</p>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/incomeExpenceEntry.html"
-                                >
-                                  আয়-ব্যয় এন্ট্রি
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="/pages/income-entry.html"
-                                >
+                                <Link to="/income-expence-entry">
                                   {" "}
-                                  আয় এন্ট্রি
-                                </a>
+                                  <a
+                                    class="dropdown-item"
+                                    href="./pages/incomeExpenceEntry.html"
+                                  >
+                                    আয়-ব্যয় এন্ট্রি
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="/pages/expenceEntry.html"
-                                >
-                                  ব্যায় এন্ট্রি
-                                </a>
+                                <Link to="/income-entry">
+                                  <p
+                                    class="dropdown-item"
+                                    // href="/pages/income-entry.html"
+                                  >
+                                    {" "}
+                                    আয় এন্ট্রি
+                                  </p>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item menu-item"
-                                  href="./pages/fees-determination.html"
-                                >
-                                  <span>ফি নির্ধারণ</span>
-                                  <span>CTRL+N</span>
-                                </a>
+                                <Link to="/expence-entry">
+                                  {" "}
+                                  <p
+                                    class="dropdown-item"
+                                    // href="/pages/expenceEntry.html"
+                                  >
+                                    ব্যায় এন্ট্রি
+                                  </p>
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to="fees-determination">
+                                  <p
+                                    class="dropdown-item menu-item"
+                                    // href="./pages/fees-determination.html"
+                                  >
+                                    <span>ফি নির্ধারণ</span>
+                                    <span>CTRL+N</span>
+                                  </p>
+                                </Link>
                               </li>
                               <li>
                                 <a class="dropdown-item menu-item" href="#">
@@ -151,18 +158,22 @@ const Layout = ({ children }) => {
                                 </a>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item menu-item"
-                                  href="./pages/report.html"
-                                >
-                                  <span>মাসিক ফির রিপোর্ট</span>
-                                </a>
-                                <a
-                                  class="dropdown-item menu-item"
-                                  href="./pages/Accounting/monthly-fees.html"
-                                >
-                                  <span>মাসিক ফি গ্রহণ</span>
-                                </a>
+                                <Link to="/report">
+                                  <p
+                                    class="dropdown-item menu-item"
+                                    // href="./pages/report.html"
+                                  >
+                                    <span>মাসিক ফির রিপোর্ট</span>
+                                  </p>
+                                </Link>
+                                <Link to="/accounting/monthly-fees">
+                                  <p
+                                    class="dropdown-item menu-item"
+                                    // href="./pages/Accounting/monthly-fees.html"
+                                  >
+                                    <span>মাসিক ফি গ্রহণ</span>
+                                  </p>
+                                </Link>
                               </li>
                             </ul>
                           </li>
@@ -178,21 +189,20 @@ const Layout = ({ children }) => {
                             </a>
                             <ul class="dropdown-menu">
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/students.html"
-                                >
-                                  শিক্ষাবর্ষ
-                                </a>
+                                <Link to="/students">
+                                  <div class="dropdown-item">শিক্ষাবর্ষ</div>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/classEntry.html"
-                                >
-                                  {" "}
-                                  মারহালা/ শ্রেণী
-                                </a>
+                                <Link to="/class-entry">
+                                  <div
+                                    class="dropdown-item"
+                                    // href="./pages/classEntry.html"
+                                  >
+                                    {" "}
+                                    মারহালা/ শ্রেণী
+                                  </div>
+                                </Link>
                               </li>
                               <li>
                                 <a class="dropdown-item" href="#">
@@ -205,44 +215,55 @@ const Layout = ({ children }) => {
                                 </a>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/students-info.html"
-                                >
-                                  শিক্ষার্থীর তথ্য
-                                </a>
+                                <Link to="/student-info">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/students-info.html"
+                                  >
+                                    শিক্ষার্থীর তথ্য
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/class-migration.html"
-                                >
-                                  শিক্ষার্থীর ক্লাস পরিবর্তন
-                                </a>
+                                <Link to="/class-migration">
+                                  <a
+                                    class="dropdown-item"
+                                    href="./pages/class-migration.html"
+                                  >
+                                    শিক্ষার্থীর ক্লাস পরিবর্তন
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Report/studentID-card.html"
-                                >
-                                  আলাদা আইডি কার্ড গেইট পাস ও ছুটি
-                                </a>
+                                <Link to="student-idcard">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Report/studentID-card.html"
+                                  >
+                                    আলাদা আইডি কার্ড গেইট পাস ও ছুটি
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Attendance/stuattendence.html"
-                                >
-                                  শিক্ষার্থীর হাজিরা
-                                </a>
+                                <Link to="/student-attandence">
+                                  {" "}
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Attendance/stuattendence.html"
+                                  >
+                                    শিক্ষার্থীর হাজিরা
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/report.html"
-                                >
-                                  রিপোর্ট
-                                </a>
+                                <Link to="student-report">
+                                  <a
+                                    class="dropdown-item"
+                                    href="./pages/report.html"
+                                  >
+                                    রিপোর্ট
+                                  </a>
+                                </Link>
                               </li>
                             </ul>
                           </li>
@@ -258,49 +279,61 @@ const Layout = ({ children }) => {
                             </a>
                             <ul class="dropdown-menu">
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Exam/exam-entry.html"
-                                >
-                                  পরীক্ষার নাম এন্ট্রি
-                                </a>
+                                <Link to="/exam-entry">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Exam/exam-entry.html"
+                                  >
+                                    পরীক্ষার নাম এন্ট্রি
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Exam/exam-fees-dertimation.html"
-                                >
-                                  পরীক্ষার ফি নির্ধাণ
-                                </a>
+                                <Link to="/exam-fees-determination">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Exam/exam-fees-dertimation.html"
+                                  >
+                                    পরীক্ষার ফি নির্ধাণ
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Exam/result-condition.html"
-                                >
-                                  ফলাফল কন্ডিশন
-                                </a>
+                                <Link to="/result-condition">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Exam/result-condition.html"
+                                  >
+                                    ফলাফল কন্ডিশন
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a class="dropdown-item" href="#">
-                                  পরীক্ষার আয় ব্যায়
-                                </a>
+                                <Link to="/hishab-nikash">
+                                  <a class="dropdown-item">
+                                    পরীক্ষার আয় ব্যায়
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Report/admitcard-print.html"
-                                >
-                                  আলাদা প্রবেশপত্র
-                                </a>
+                                <Link to="/admitcard-print">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Report/admitcard-print.html"
+                                  >
+                                    আলাদা প্রবেশপত্র
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Report/exam-report.html"
-                                >
-                                  পরীক্ষার রিপোর্ট
-                                </a>
+                                <Link to="exam-report">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Report/exam-report.html"
+                                  >
+                                    পরীক্ষার রিপোর্ট
+                                  </a>
+                                </Link>
                               </li>
                             </ul>
                           </li>
@@ -316,20 +349,26 @@ const Layout = ({ children }) => {
                             </a>
                             <ul class="dropdown-menu">
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Exam/marks-entry.html"
-                                >
-                                  ফলাফল এন্ট্রি
-                                </a>
+                                <Link to="marks-entry">
+                                  {" "}
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Exam/marks-entry.html"
+                                  >
+                                    ফলাফল এন্ট্রি
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Exam/mark-sheet.html"
-                                >
-                                  মার্কশিট
-                                </a>
+                                <Link to="mark-sheet">
+                                  {" "}
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Exam/mark-sheet.html"
+                                  >
+                                    মার্কশিট
+                                  </a>
+                                </Link>
                               </li>
                             </ul>
                           </li>
@@ -350,13 +389,15 @@ const Layout = ({ children }) => {
                                 </a>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/HR-Payroll/teachers-staff.html"
-                                >
-                                  {" "}
-                                  শিক্ষক ও কর্মচারী
-                                </a>
+                                <Link to="/teacher-staff">
+                                  <a
+                                    class="dropdown-item"
+                                    href="./pages/HR-Payroll/teachers-staff.html"
+                                  >
+                                    {" "}
+                                    শিক্ষক ও কর্মচারী
+                                  </a>
+                                </Link>
                               </li>
                               <li>
                                 <a class="dropdown-item" href="#">
@@ -364,44 +405,56 @@ const Layout = ({ children }) => {
                                 </a>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/HR-Payroll/month-entry.html"
-                                >
-                                  শিক্ষকদের মাস এন্ট্রি
-                                </a>
+                                <Link to="/monthly-entry">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/HR-Payroll/month-entry.html"
+                                  >
+                                    শিক্ষকদের মাস এন্ট্রি
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/HR-Payroll/sallary-sheet.html"
-                                >
-                                  বেতন শীট
-                                </a>
+                                <Link to="sallary-sheet">
+                                  {" "}
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/HR-Payroll/sallary-sheet.html"
+                                  >
+                                    বেতন শীট
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/HR-Payroll/pay-sallary.html"
-                                >
-                                  বেতন প্রদান
-                                </a>
+                                <Link to="/pay-sallary">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/HR-Payroll/pay-sallary.html"
+                                  >
+                                    বেতন প্রদান
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Report/salary-report.html"
-                                >
-                                  রিপোর্ট
-                                </a>
+                                <Link to="/salary-report">
+                                  {" "}
+                                  <a
+                                    class="dropdown-item"
+                                    href="./pages/Report/salary-report.html"
+                                  >
+                                    রিপোর্ট
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Report/individual-salary-sheet.html"
-                                >
-                                  শিক্ষকদের বেতন সিট প্রিন্ট
-                                </a>
+                                <Link to="/individual-salary-sheet">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Report/individual-salary-sheet.html"
+                                  >
+                                    শিক্ষকদের বেতন সিট প্রিন্ট
+                                  </a>
+                                </Link>
                               </li>
                             </ul>
                           </li>
@@ -417,12 +470,14 @@ const Layout = ({ children }) => {
                             </a>
                             <ul class="dropdown-menu">
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./Donor-Member/donor-member.html"
-                                >
-                                  দাতা সদস্যের তথ্য
-                                </a>
+                                <Link to="doner-member">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./Donor-Member/donor-member.html"
+                                  >
+                                    দাতা সদস্যের তথ্য
+                                  </a>
+                                </Link>
                               </li>
                               <li>
                                 <a class="dropdown-item" href="#">
@@ -430,17 +485,21 @@ const Layout = ({ children }) => {
                                 </a>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./Donor-Member/donat-receive.html"
-                                >
-                                  দাতা সদস্যের ফি গ্রহণ
-                                </a>
+                                <Link to="/donate-recive">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./Donor-Member/donat-receive.html"
+                                  >
+                                    দাতা সদস্যের ফি গ্রহণ
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a class="dropdown-item" href="./report.html">
-                                  রিপোর্ট
-                                </a>
+                                <Link to="/report">
+                                  <a class="dropdown-item" href="./report.html">
+                                    রিপোর্ট
+                                  </a>
+                                </Link>
                               </li>
                             </ul>
                           </li>
@@ -456,36 +515,45 @@ const Layout = ({ children }) => {
                             </a>
                             <ul class="dropdown-menu">
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Library/addbook.html"
-                                >
-                                  বই যোগ করুন
-                                </a>
+                                <Link to="/add-book">
+                                  {" "}
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Library/addbook.html"
+                                  >
+                                    বই যোগ করুন
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Library/new-sale.html"
-                                >
-                                  নতুন বিক্রি
-                                </a>
+                                <Link to="/new-sale">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Library/new-sale.html"
+                                  >
+                                    নতুন বিক্রি
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Library/manage-sale.html"
-                                >
-                                  ম্যনেজ সেল
-                                </a>
+                                <Link to="/manage-sell">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Library/manage-sale.html"
+                                  >
+                                    ম্যনেজ সেল
+                                  </a>
+                                </Link>
                               </li>
                               <li>
-                                <a
-                                  class="dropdown-item"
-                                  href="./pages/Library/invoice-details.html"
-                                >
-                                  ইনভয়েসের বিবরণ
-                                </a>
+                                <Link to="invoice-details">
+                                  <a
+                                    class="dropdown-item"
+                                    href="./pages/Library/invoice-details.html"
+                                  >
+                                    ইনভয়েসের বিবরণ
+                                  </a>
+                                </Link>
                               </li>
                             </ul>
                           </li>

@@ -369,7 +369,10 @@ const HishabNikash = () => {
                                   <td></td>
                                 </tr>
                                 <tr class="table-footer">
-                                  <td colspan="5" style="text-align: right;">
+                                  <td
+                                    colspan="5"
+                                    style={{ textAlign: "right" }}
+                                  >
                                     মোট
                                   </td>
                                   <td>৩০০ ৳</td>
