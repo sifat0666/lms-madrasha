@@ -49,11 +49,6 @@ function App() {
     <div>
       <QueryClientProvider client={queryClient}>
         <Toaster />
-        {/* <StudentInfo /> */}
-        {/* <ClassMigration /> */}
-        {/* <AdmitCardPrint /> */}
-        {/* */}
-        {/* <TeacherStaff /> */}
         <Layout>
           <Routes>
             <Route path="/" element={<Dasboard />} />
