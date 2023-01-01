@@ -41,6 +41,10 @@ import AddBook from "./pages/Store/AddBook";
 import NewSale from "./pages/Store/NewSale";
 import ManageSale from "./pages/Store/ManageSale";
 import InvoiceDetail from "./pages/Store/InvoiceDetail";
+import Login from "./pages/login";
+import axios from "axios";
+import { serverUrl } from "../utils/config";
+import { useForm } from "react-hook-form";
 
 const queryClient = new QueryClient();
 
@@ -51,7 +55,8 @@ function App() {
         <Toaster />
         <Layout>
           <Routes>
-            <Route path="/" element={<Dasboard />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/dashboard" element={<Dasboard />} />
             <Route path="/newuser" element={<NewUser />} />
             <Route path="/students" element={<Students />} />
             <Route

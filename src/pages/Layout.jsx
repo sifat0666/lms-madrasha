@@ -1,7 +1,27 @@
+import axios from "axios";
 import React from "react";
+import { useEffect } from "react";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+import { serverUrl } from "../../utils/config";
 
 const Layout = ({ children }) => {
+  const { data, isLoading } = useQuery(
+    ["me"],
+    () =>
+      axios.get(`${serverUrl}/api/user`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }),
+    {
+      refetchInterval: false,
+      refetchIntervalInBackground: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+  console.log(isLoading);
+  if (isLoading) return <div>loading</div>;
+  console.log(data?.data);
+
   return (
     <div>
       {/* <!-- Header Section Start--> */}

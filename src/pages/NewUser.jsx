@@ -8,11 +8,20 @@ import toast from "react-hot-toast";
 // import { useForm, SubmitHandler } from "react-hook-form";
 
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const NewUser = () => {
-  const { data } = useQuery("user", () =>
-    fetch(`${serverUrl}/api/users`).then((res) => res.json())
-  );
+  // const { data } = useQuery(
+  //   "user",
+  //   () => fetch(`${serverUrl}/api/users`).then((res) => res.json()),
+  //   {
+  //     refetchInterval: false,
+  //     refetchIntervalInBackground: false,
+  //     refetchOnWindowFocus: false,
+  //   }
+  // );
+
+  const data = [];
 
   // console.log("🚀 ~ file: NewUser.jsx:8 ~ NewUser ~ data", data);
 
@@ -28,14 +37,22 @@ const NewUser = () => {
       console.log(data.data);
     },
   });
+  const [array, setArray] = useState([]);
+  console.log(array);
 
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (value) => {
-    // mutation.mutate(value);
-    toast.success("user successfully successfully");
+    mutation.mutate({ ...value, permission: array });
+    // toast.success("user successfully successfully");
     // console.log(value);?
   };
+
+  function arrayRemove(arr, value) {
+    return arr.filter(function (x) {
+      return x != value;
+    });
+  }
 
   return (
     <div>
@@ -138,6 +155,7 @@ const NewUser = () => {
                             <span class="">সব নির্বাচন</span>
                           </div>
                         </div>
+                        {array}
                         <div class="user-permission">
                           <div class="user-permission-left">
                             <div class="input-group d-flex align-items-center gap-3">
@@ -147,8 +165,22 @@ const NewUser = () => {
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
+                                onClick={() => {
+                                  const findPermission = array.find(
+                                    (x) => x === "audit_permission"
+                                  );
+                                  if (findPermission) {
+                                    const newArray = arrayRemove(
+                                      array,
+                                      "audit_permission"
+                                    );
+                                    setArray(newArray);
+                                  } else {
+                                    setArray([...array, "audit_permission"]);
+                                  }
+                                }}
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span class="">হিসাব নিকাশ</span>
                             </div>
                             <div class="input-group d-flex align-items-center gap-3">
                               <input
@@ -157,8 +189,22 @@ const NewUser = () => {
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
+                                onClick={() => {
+                                  const findPermission = array.find(
+                                    (x) => x === "students_control"
+                                  );
+                                  if (findPermission) {
+                                    const newArray = arrayRemove(
+                                      array,
+                                      "students_control"
+                                    );
+                                    setArray(newArray);
+                                  } else {
+                                    setArray([...array, "students_control"]);
+                                  }
+                                }}
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span class="">শিক্ষার্থী</span>
                             </div>
                             <div class="input-group d-flex align-items-center gap-3">
                               <input
@@ -167,8 +213,118 @@ const NewUser = () => {
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
+                                onClick={() => {
+                                  const findPermission = array.find(
+                                    (x) => x === "exam_control"
+                                  );
+                                  if (findPermission) {
+                                    const newArray = arrayRemove(
+                                      array,
+                                      "exam_control"
+                                    );
+                                    setArray(newArray);
+                                  } else {
+                                    setArray([...array, "exam_control"]);
+                                  }
+                                }}
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span class="">পরীক্ষা</span>
+                            </div>{" "}
+                            <div class="input-group d-flex align-items-center gap-3">
+                              <input
+                                class="form-check-input mt-0"
+                                type="checkbox"
+                                value=""
+                                aria-label="Checkbox for following text input"
+                                name="checkbox"
+                                onClick={() => {
+                                  const findPermission = array.find(
+                                    (x) => x === "result_control"
+                                  );
+                                  if (findPermission) {
+                                    const newArray = arrayRemove(
+                                      array,
+                                      "result_control"
+                                    );
+                                    setArray(newArray);
+                                  } else {
+                                    setArray([...array, "result_control"]);
+                                  }
+                                }}
+                              />
+                              <span class="">ফলাফল</span>
+                            </div>{" "}
+                            <div class="input-group d-flex align-items-center gap-3">
+                              <input
+                                class="form-check-input mt-0"
+                                type="checkbox"
+                                value=""
+                                aria-label="Checkbox for following text input"
+                                name="checkbox"
+                                onClick={() => {
+                                  const findPermission = array.find(
+                                    (x) => x === "teacther_control"
+                                  );
+                                  if (findPermission) {
+                                    const newArray = arrayRemove(
+                                      array,
+                                      "teacther_control"
+                                    );
+                                    setArray(newArray);
+                                  } else {
+                                    setArray([...array, "teacther_control"]);
+                                  }
+                                }}
+                              />
+                              <span class="">শিক্ষক</span>
+                            </div>{" "}
+                            <div class="input-group d-flex align-items-center gap-3">
+                              <input
+                                class="form-check-input mt-0"
+                                type="checkbox"
+                                value=""
+                                aria-label="Checkbox for following text input"
+                                name="checkbox"
+                                onClick={() => {
+                                  const findPermission = array.find(
+                                    (x) => x === "doner_control"
+                                  );
+                                  if (findPermission) {
+                                    const newArray = arrayRemove(
+                                      array,
+                                      "doner_control"
+                                    );
+                                    setArray(newArray);
+                                  } else {
+                                    setArray([...array, "doner_control"]);
+                                  }
+                                }}
+                              />
+                              <span class="">দাতা সদস্য</span>
+                            </div>{" "}
+                            <div class="input-group d-flex align-items-center gap-3">
+                              <input
+                                class="form-check-input mt-0"
+                                type="checkbox"
+                                value=""
+                                aria-label="Checkbox for following text input"
+                                name="checkbox"
+                                onClick={() => {
+                                  const findPermission = array.find(
+                                    (x) => x === "library_control"
+                                  );
+                                  if (findPermission) {
+                                    const newArray = arrayRemove(
+                                      array,
+                                      "library_control"
+                                    );
+                                    setArray(newArray);
+                                  } else {
+                                    setArray([...array, "library_control"]);
+                                  }
+                                }}
+                              />
+                              <span class="">বই বিক্রি</span>
                             </div>
                             {/* <div class="input-group d-flex align-items-center gap-3">
                               <input
@@ -364,7 +520,7 @@ const NewUser = () => {
                               <th data-priority="1"> ইমেইল</th>
                             </tr>
                           </thead>
-                          <tbody>
+                          {/* <tbody>
                             {data?.data.map((user) => (
                               <>
                                 <tr>
@@ -385,7 +541,7 @@ const NewUser = () => {
                                 </tr>
                               </>
                             ))}
-                          </tbody>
+                          </tbody> */}
                         </table>
                       </div>
                     </div>
