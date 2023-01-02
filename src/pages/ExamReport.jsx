@@ -3,27 +3,27 @@ import React from "react";
 const ExamReport = () => {
   return (
     <div>
-      <section class="user-form-section">
-        <div class="section-bg">
-          <div class="row">
-            <div class="col-md-12 w-100">
-              <div class="main-container">
-                <div class="row d-print-none">
-                  <div class="col-12">
-                    <div class="section-title" style={{ marginTop: "2px" }}>
+      <section className="user-form-section">
+        <div className="section-bg">
+          <div className="row">
+            <div className="col-md-12 w-100">
+              <div className="main-container">
+                <div className="row d-print-none">
+                  <div className="col-12">
+                    <div className="section-title" style={{ marginTop: "2px" }}>
                       <h4>পরীক্ষার রিপোর্ট</h4>
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div className="row">
                   {/* <!--Filter Menu Section--> */}
-                  <div class="col-lg-4 col-12 col-md-12 d-print-none">
+                  <div className="col-lg-4 col-12 col-md-12 d-print-none">
                     <form>
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="filter-menu report-menu">
+                      <div className="row">
+                        <div className="col-12">
+                          <div className="filter-menu report-menu">
                             <select
-                              class="form-select"
+                              className="form-select"
                               size="5"
                               style={{ border: "none" }}
                             >
@@ -44,11 +44,11 @@ const ExamReport = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
-                          <div class="filter-menu">
+                      <div className="row mt-3">
+                        <div className="col-12">
+                          <div className="filter-menu">
                             <select
-                              class="form-select"
+                              className="form-select"
                               size="4"
                               style={{ border: "none" }}
                             >
@@ -65,11 +65,11 @@ const ExamReport = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
-                          <div class="filter-menu">
+                      <div className="row mt-3">
+                        <div className="col-12">
+                          <div className="filter-menu">
                             <select
-                              class="form-select"
+                              className="form-select"
                               size="4"
                               style={{ border: "none" }}
                             >
@@ -83,11 +83,11 @@ const ExamReport = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
-                          <div class="filter-menu">
+                      <div className="row mt-3">
+                        <div className="col-12">
+                          <div className="filter-menu">
                             <select
-                              class="form-select"
+                              className="form-select"
                               size="4"
                               style={{ border: "none" }}
                             >
@@ -100,11 +100,11 @@ const ExamReport = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
-                          <div class="filter-menu">
+                      <div className="row mt-3">
+                        <div className="col-12">
+                          <div className="filter-menu">
                             <select
-                              class="form-select"
+                              className="form-select"
                               size="3"
                               style={{ border: "none" }}
                             >
@@ -116,11 +116,11 @@ const ExamReport = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
+                      <div className="row mt-3">
+                        <div className="col-12">
                           <button
                             type="submit"
-                            class="custom-btn btn-primary d-block w-100"
+                            className="custom-btn btn-primary d-block w-100"
                           >
                             Preview
                           </button>
@@ -129,58 +129,58 @@ const ExamReport = () => {
                     </form>
                   </div>
                   {/* <!--Preview Page Section--> */}
-                  <div class="col-lg-8 col-12 col-md-12 mt-lg-0 mt-4">
+                  <div className="col-lg-8 col-12 col-md-12 mt-lg-0 mt-4">
                     <div
-                      class="preview-page d-print-block"
+                      className="preview-page d-print-block"
                       style={{ zIndex: 1 }}
                     >
                       <span
-                        class="print-button d-print-none"
+                        className="print-button d-print-none"
                         onclick="window.print()"
                       >
-                        <i class="bi bi-printer-fill"></i>
+                        <i className="bi bi-printer-fill"></i>
                       </span>
-                      <div class="pages-title d-print-none">
+                      <div className="pages-title d-print-none">
                         <h5>জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ</h5>
                         <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
                         <span>01832-061454 # 027440235</span>
                         <br />
-                        <span class="pages-subtitle">
+                        <span className="pages-subtitle">
                           পরীক্ষা ফি উত্তোলন তালিকা
                         </span>
                       </div>
-                      <div class="pages-content">
-                        <div class="row my-3 justify-content-center align-items-center d-print-none">
-                          <div class="col-5">
-                            <p class="my-2">
+                      <div className="pages-content">
+                        <div className="row my-3 justify-content-center align-items-center d-print-none">
+                          <div className="col-5">
+                            <p className="my-2">
                               <strong>শ্রেণী/মারহালাঃ</strong>
                               মিযান
                             </p>
                           </div>
-                          <div class="col-3">
-                            <p class="my-2">
+                          <div className="col-3">
+                            <p className="my-2">
                               <strong>শিক্ষবর্ষঃ</strong>
                               ২০২১-২০২২ইং
                             </p>
                           </div>
-                          <div class="col-4 d-flex justify-content-start justify-content-lg-end">
-                            <p class="my-2">
+                          <div className="col-4 d-flex justify-content-start justify-content-lg-end">
+                            <p className="my-2">
                               <strong>প্রিন্ট তারিখঃ</strong>
                               ০৪/০৩/২০২২ ইং
                             </p>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-12">
+                        <div className="row">
+                          <div className="col-12">
                             <div
-                              class="table-responsive"
+                              className="table-responsive"
                               data-pattern="priority-columns"
                             >
-                              <table class="table  bg-white table-bordered text-center report-table">
-                                <thead class="text-center">
+                              <table className="table  bg-white table-bordered text-center report-table">
+                                <thead className="text-center">
                                   <tr>
                                     <td colspan="4">
-                                      <div class="pages-title">
+                                      <div className="pages-title">
                                         <h5>
                                           জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ
                                         </h5>
@@ -190,7 +190,7 @@ const ExamReport = () => {
                                         </p>
                                         <span>01832-061454 # 027440235</span>
                                         <br />
-                                        <span class="pages-subtitle">
+                                        <span className="pages-subtitle">
                                           পরীক্ষা ফি উত্তোলন তালিকা
                                         </span>
                                       </div>
@@ -198,7 +198,7 @@ const ExamReport = () => {
                                   </tr>
                                   <tr>
                                     <td colspan="4">
-                                      <div class="d-flex justify-content-between">
+                                      <div className="d-flex justify-content-between">
                                         <div>
                                           <strong>মারহালাঃ</strong>
                                           মিযান
@@ -232,16 +232,16 @@ const ExamReport = () => {
                               </table>
                             </div>
                           </div>
-                          <div class="col-12 mt-3">
+                          <div className="col-12 mt-3">
                             <div
-                              class="table-responsive"
+                              className="table-responsive"
                               data-pattern="priority-columns"
                             >
-                              <table class="table  bg-white table-bordered text-center report-table">
-                                <thead class="text-center">
+                              <table className="table  bg-white table-bordered text-center report-table">
+                                <thead className="text-center">
                                   <tr>
                                     <td colspan="4">
-                                      <div class="pages-title">
+                                      <div className="pages-title">
                                         <h5>
                                           জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ
                                         </h5>
@@ -251,7 +251,7 @@ const ExamReport = () => {
                                         </p>
                                         <span>01832-061454 # 027440235</span>
                                         <br />
-                                        <span class="pages-subtitle">
+                                        <span className="pages-subtitle">
                                           পরীক্ষা ফি উত্তোলন তালিকা
                                         </span>
                                       </div>
@@ -259,7 +259,7 @@ const ExamReport = () => {
                                   </tr>
                                   <tr>
                                     <td colspan="4">
-                                      <div class="d-flex justify-content-between">
+                                      <div className="d-flex justify-content-between">
                                         <div>
                                           <strong>মারহালাঃ</strong>
                                           মিযান
@@ -305,59 +305,64 @@ const ExamReport = () => {
       </section>
       {/* <!-- Report Section END --> */}
       {/* <!--Admit Card Modal--> */}
-      <div class="modal fade" id="admitcard" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="section-title">
+      <div
+        className="modal fade"
+        id="admitcard"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>প্রবেশপত্র</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12 w-100">
-                    <div class="row">
-                      <div class="col-12 d-flex justify-content-center">
-                        <div class="entrytype-option">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12 w-100">
+                    <div className="row">
+                      <div className="col-12 d-flex justify-content-center">
+                        <div className="entrytype-option">
                           <div
-                            class="form-check"
+                            className="form-check"
                             style={{ paddingLeft: "1.5em" }}
                           >
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="radio"
                               name="options"
                             />
-                            <label class="form-check-label" for="options">
+                            <label className="form-check-label" for="options">
                               সকল শিক্ষার্থী
                             </label>
                           </div>
-                          <div class="form-check">
+                          <div className="form-check">
                             <input
-                              class="form-check-input"
+                              className="form-check-input"
                               type="radio"
                               name="options"
                             />
-                            <label class="form-check-label" for="options">
+                            <label className="form-check-label" for="options">
                               আলাদা এন্ট্রি
                             </label>
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="my-4">
-                          <div class="row">
-                            <div class="col-3">
-                              <div class="row mb-3">
-                                <div class="col-12">
-                                  <div class="row">
-                                    <label class="col-sm-12 col-form-label info-lable text-center">
+                      <div className="col-12">
+                        <div className="my-4">
+                          <div className="row">
+                            <div className="col-3">
+                              <div className="row mb-3">
+                                <div className="col-12">
+                                  <div className="row">
+                                    <label className="col-sm-12 col-form-label info-lable text-center">
                                       শিক্ষবর্ষ
                                       <i>*</i>
                                     </label>
                                   </div>
                                 </div>
-                                <div class="col-12">
-                                  <select class="form-select">
+                                <div className="col-12">
+                                  <select className="form-select">
                                     <option selected="">
                                       {" "}
                                       শিক্ষবর্ষ নির্বাচন করুন
@@ -374,18 +379,18 @@ const ExamReport = () => {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-3">
-                              <div class="row mb-3">
-                                <div class="col-12">
-                                  <div class="row">
-                                    <label class="col-sm-12 col-form-label info-lable text-center">
+                            <div className="col-3">
+                              <div className="row mb-3">
+                                <div className="col-12">
+                                  <div className="row">
+                                    <label className="col-sm-12 col-form-label info-lable text-center">
                                       পরীক্ষা
                                       <i>*</i>
                                     </label>
                                   </div>
                                 </div>
-                                <div class="col-12">
-                                  <select class="form-select">
+                                <div className="col-12">
+                                  <select className="form-select">
                                     <option selected="">
                                       পরীক্ষা নির্বাচন করুন
                                     </option>
@@ -398,18 +403,18 @@ const ExamReport = () => {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-3">
-                              <div class="row mb-3">
-                                <div class="col-12">
-                                  <div class="row">
-                                    <label class="col-sm-12 col-form-label info-lable text-center">
+                            <div className="col-3">
+                              <div className="row mb-3">
+                                <div className="col-12">
+                                  <div className="row">
+                                    <label className="col-sm-12 col-form-label info-lable text-center">
                                       মারহালা/শ্রেণী
                                       <i>*</i>
                                     </label>
                                   </div>
                                 </div>
-                                <div class="col-12">
-                                  <select class="form-select">
+                                <div className="col-12">
+                                  <select className="form-select">
                                     <option selected="">
                                       শ্রেণী নির্বাচন করুন
                                     </option>
@@ -423,18 +428,18 @@ const ExamReport = () => {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-3">
-                              <div class="row mb-3">
-                                <div class="col-12">
-                                  <div class="row">
-                                    <label class="col-sm-12 col-form-label info-lable text-center">
+                            <div className="col-3">
+                              <div className="row mb-3">
+                                <div className="col-12">
+                                  <div className="row">
+                                    <label className="col-sm-12 col-form-label info-lable text-center">
                                       রিপোর্টের ধরন
                                       <i>*</i>
                                     </label>
                                   </div>
                                 </div>
-                                <div class="col-12">
-                                  <select class="form-select">
+                                <div className="col-12">
+                                  <select className="form-select">
                                     <option selected="">নির্বাচন করুন</option>
                                     <option>A4 পেপারে বাংলা</option>
                                   </select>
@@ -442,32 +447,32 @@ const ExamReport = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="row">
-                            <div class="col-12">
-                              <div class="row">
-                                <div class="col-12">
-                                  <div class="row">
-                                    <label class="col-sm-2 col-form-label info-lable">
+                          <div className="row">
+                            <div className="col-12">
+                              <div className="row">
+                                <div className="col-12">
+                                  <div className="row">
+                                    <label className="col-sm-2 col-form-label info-lable">
                                       শিক্ষার্থীর আইডি
                                     </label>
-                                    <div class="col-6">
+                                    <div className="col-6">
                                       <input
                                         type="search"
-                                        class="form-control"
+                                        className="form-control"
                                         placeholder="শিক্ষার্থীর আইডি"
                                       />
                                     </div>
-                                    <div class="col-2">
+                                    <div className="col-2">
                                       <input
                                         type="button"
-                                        class="custom-btn btn-primary"
+                                        className="custom-btn btn-primary"
                                         value="Save"
                                       />
                                     </div>
-                                    <div class="col-2">
+                                    <div className="col-2">
                                       <input
                                         type="button"
-                                        class="custom-btn btn-danger"
+                                        className="custom-btn btn-danger"
                                         value="Close"
                                       />
                                     </div>
@@ -479,38 +484,40 @@ const ExamReport = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="row mt-4">
-                      <div class="col-12">
-                        <div class="migration-container">
-                          <div class="migration-title">কালার নির্বাচন করুন</div>
-                          <div class="migration-type">
-                            <div class="form-check">
+                    <div className="row mt-4">
+                      <div className="col-12">
+                        <div className="migration-container">
+                          <div className="migration-title">
+                            কালার নির্বাচন করুন
+                          </div>
+                          <div className="migration-type">
+                            <div className="form-check">
                               <input
-                                class="form-check-input"
+                                className="form-check-input"
                                 type="radio"
                                 name="options-2"
                               />
-                              <label class="form-check-label" for="options">
+                              <label className="form-check-label" for="options">
                                 রঙিন
                               </label>
                             </div>
-                            <div class="form-check">
+                            <div className="form-check">
                               <input
-                                class="form-check-input"
+                                className="form-check-input"
                                 type="radio"
                                 name="options-2"
                               />
-                              <label class="form-check-label" for="options">
+                              <label className="form-check-label" for="options">
                                 সাদা কালো
                               </label>
                             </div>
-                            <div class="form-check">
+                            <div className="form-check">
                               <input
-                                class="form-check-input"
+                                className="form-check-input"
                                 type="radio"
                                 name="options-2"
                               />
-                              <label class="form-check-label" for="options">
+                              <label className="form-check-label" for="options">
                                 প্রেসে ছাপানো কাগজে
                               </label>
                             </div>
@@ -518,41 +525,41 @@ const ExamReport = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="row mt-4">
-                      <div class="col-12 d-flex justify-content-center">
+                    <div className="row mt-4">
+                      <div className="col-12 d-flex justify-content-center">
                         <a
                           href="#"
-                          class="custom-btn btn-primary"
+                          className="custom-btn btn-primary"
                           onclick="javascript:void(0)"
                         >
-                          <i class="bi bi-printer"></i>
+                          <i className="bi bi-printer"></i>
                           প্রিন্ট
                         </a>
                       </div>
                     </div>
-                    <div class="row mt-4">
-                      <div class="col-12">
+                    <div className="row mt-4">
+                      <div className="col-12">
                         <div
-                          class="table-responsive accounts-table"
+                          className="table-responsive accounts-table"
                           data-pattern="priority-columns"
                         >
                           <table
                             id="tech-companies-1"
-                            class="table  bg-white text-center mb-0"
+                            className="table  bg-white text-center mb-0"
                           >
-                            <thead class="text-center accounts-table-head">
+                            <thead className="text-center accounts-table-head">
                               <tr>
                                 <th>দাখেলা</th>
                                 <th>শিক্ষার্থীর নাম</th>
                                 <th>ক্লাস</th>
                                 <th>
-                                  <span class="action-edit">
-                                    <i class="bi bi-pencil-square"></i>
+                                  <span className="action-edit">
+                                    <i className="bi bi-pencil-square"></i>
                                   </span>
                                 </th>
                                 <th>
-                                  <span class="action-delete">
-                                    <i class="bi bi-trash3"></i>
+                                  <span className="action-delete">
+                                    <i className="bi bi-trash3"></i>
                                   </span>
                                 </th>
                               </tr>
@@ -563,13 +570,13 @@ const ExamReport = () => {
                                 <td></td>
                                 <td></td>
                                 <td>
-                                  <span class="action-edit">
-                                    <i class="bi bi-pencil-square"></i>
+                                  <span className="action-edit">
+                                    <i className="bi bi-pencil-square"></i>
                                   </span>
                                 </td>
                                 <td>
-                                  <span class="action-delete">
-                                    <i class="bi bi-trash3"></i>
+                                  <span className="action-delete">
+                                    <i className="bi bi-trash3"></i>
                                   </span>
                                 </td>
                               </tr>
@@ -581,21 +588,21 @@ const ExamReport = () => {
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
-                <div class="button-group">
+              <div className="modal-footer">
+                <div className="button-group">
                   <button
-                    class="custom-btn btn-primary"
+                    className="custom-btn btn-primary"
                     type="submit"
                     data-bs-toggle="modal"
                     data-bs-target="#admissonfees"
                   >
                     Save
                   </button>
-                  <button class="custom-btn btn-dark" type="submit">
+                  <button className="custom-btn btn-dark" type="submit">
                     New
                   </button>
                   <button
-                    class="custom-btn btn-danger d-block"
+                    className="custom-btn btn-danger d-block"
                     type="button"
                     data-bs-dismiss="modal"
                     onclick="javascript:void(0)"

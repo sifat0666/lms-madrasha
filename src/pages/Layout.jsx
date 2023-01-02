@@ -1,11 +1,17 @@
 import axios from "axios";
 import React from "react";
+import { useContext } from "react";
 import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { serverUrl } from "../../utils/config";
 
 const Layout = ({ children }) => {
+  const navigate = useNavigate();
+  // import {navigate} = useNavigate()
+
   const { data, isLoading } = useQuery(
     ["me"],
     () =>
@@ -18,9 +24,9 @@ const Layout = ({ children }) => {
       refetchOnWindowFocus: false,
     }
   );
-  console.log(isLoading);
-  if (isLoading) return <div>loading</div>;
-  console.log(data?.data);
+
+  // if (isLoading) return <div>loading</div>;
+  // console.log(data?.data.roles[0]);
 
   return (
     <div>
@@ -63,7 +69,7 @@ const Layout = ({ children }) => {
                       <div class="offcanvas-body">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-between">
                           <li class="nav-item">
-                            <a class="nav-link" href="./index.html">
+                            <a class="nav-link" href="/dashboard">
                               <i class="bi bi-house-door-fill"></i>
                               ড্যাশবোর্ড
                             </a>
@@ -593,17 +599,38 @@ const Layout = ({ children }) => {
               <div class="user-menu">
                 {/* <!--Desktop--> */}
                 <ul class="list-unstyled d-none d-lg-inline-block">
+                  {data ? (
+                    <li class="user-menu-item">
+                      {/* <i class="bi bi-gear-fill"></i> */}
+                      <a href="">
+                        {isLoading ? "loading..." : data?.data.name}
+                      </a>
+                    </li>
+                  ) : (
+                    <></>
+                  )}
                   <li class="user-menu-item">
                     <i class="bi bi-gear-fill"></i>
                     <a href="">সেটিংস</a>
-                  </li>
+                  </li>{" "}
                   <li class="user-menu-item">
                     <i class="bi bi-info-circle-fill"></i>
                     <a href="">সাহায্য</a>
                   </li>
                   <li class="user-menu-item">
                     <i class="bi bi-box-arrow-in-right"></i>
-                    <a href=""> লগ আউট</a>
+                    <div
+                      onClick={() => {
+                        localStorage.clear();
+                        window.location.reload();
+                        // toast.success("logged out");
+
+                        navigate("/");
+                      }}
+                    >
+                      {" "}
+                      লগ আউট
+                    </div>
                   </li>
                 </ul>
                 {/* <!-- Mobile & Tab --> */}
@@ -625,6 +652,13 @@ const Layout = ({ children }) => {
                         প্রোপাইল
                       </a>
                     </li>
+                    {/* data?.data.name */}
+                    <li class="dropdown-item">
+                      <a href="">
+                        <i class="bi bi-gear-fill"></i>
+                        {data?.data.name}
+                      </a>
+                    </li>
                     <li class="dropdown-item">
                       <a href="">
                         <i class="bi bi-gear-fill"></i>
@@ -638,10 +672,17 @@ const Layout = ({ children }) => {
                       </a>
                     </li>
                     <li class="dropdown-item">
-                      <a href="">
+                      <div
+                        onClick={() => {
+                          localStorage.clear();
+                          // window.location.reload();
+                          // toast.success("logged out");
+                          navigate("/");
+                        }}
+                      >
                         <i class="bi bi-box-arrow-in-right"></i>
                         লগ আউট
-                      </a>
+                      </div>
                     </li>
                   </ul>
                 </li>

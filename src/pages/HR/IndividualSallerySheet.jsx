@@ -3,27 +3,27 @@ import React from "react";
 const IndividualSallerySheet = () => {
   return (
     <div>
-      <section class="user-form-section">
-        <div class="section-bg">
-          <div class="row">
-            <div class="col-md-12 w-100">
-              <div class="main-container">
-                <div class="row d-print-none">
-                  <div class="col-12">
-                    <div class="section-title" style={{ marginTop: "2px" }}>
+      <section className="user-form-section">
+        <div className="section-bg">
+          <div className="row">
+            <div className="col-md-12 w-100">
+              <div className="main-container">
+                <div className="row d-print-none">
+                  <div className="col-12">
+                    <div className="section-title" style={{ marginTop: "2px" }}>
                       <h4>রিপোর্ট</h4>
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div className="row">
                   {/* <!--Filter Menu Section--> */}
-                  <div class="col-lg-4 col-12 col-md-12 d-print-none">
+                  <div className="col-lg-4 col-12 col-md-12 d-print-none">
                     <form>
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="filter-menu report-menu">
+                      <div className="row">
+                        <div className="col-12">
+                          <div className="filter-menu report-menu">
                             <select
-                              class="form-select"
+                              className="form-select"
                               size="4"
                               style={{ border: "none" }}
                             >
@@ -39,11 +39,11 @@ const IndividualSallerySheet = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
-                          <div class="filter-menu report-menu">
+                      <div className="row mt-3">
+                        <div className="col-12">
+                          <div className="filter-menu report-menu">
                             <select
-                              class="form-select"
+                              className="form-select"
                               size="4"
                               style={{ border: "none" }}
                             >
@@ -58,26 +58,26 @@ const IndividualSallerySheet = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
-                          <div class="row">
-                            <div class="col-12 col-lg-5 col-md-12">
-                              <input type="date" class="form-control" />
+                      <div className="row mt-3">
+                        <div className="col-12">
+                          <div className="row">
+                            <div className="col-12 col-lg-5 col-md-12">
+                              <input type="date" className="form-control" />
                             </div>
-                            <label class="col-lg-2 col-12 col-form-label info-lable">
+                            <label className="col-lg-2 col-12 col-form-label info-lable">
                               হতে
                             </label>
-                            <div class="col-12 col-lg-5 col-md-12">
-                              <input type="date" class="form-control" />
+                            <div className="col-12 col-lg-5 col-md-12">
+                              <input type="date" className="form-control" />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
+                      <div className="row mt-3">
+                        <div className="col-12">
                           <button
                             type="submit"
-                            class="custom-btn btn-primary d-block w-100"
+                            className="custom-btn btn-primary d-block w-100"
                           >
                             Preview
                           </button>
@@ -86,43 +86,43 @@ const IndividualSallerySheet = () => {
                     </form>
                   </div>
                   {/* <!--Preview Page Section--> */}
-                  <div class="col-lg-8 col-12 col-md-12 mt-lg-0 mt-4">
-                    <div class="preview-page d-print-block">
+                  <div className="col-lg-8 col-12 col-md-12 mt-lg-0 mt-4">
+                    <div className="preview-page d-print-block">
                       <span
-                        class="print-button d-print-none"
+                        className="print-button d-print-none"
                         onclick="window.print()"
                       >
-                        <i class="bi bi-printer-fill"></i>
+                        <i className="bi bi-printer-fill"></i>
                       </span>
-                      <div class="pages-title">
+                      <div className="pages-title">
                         <h5>জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ</h5>
                         <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
                         <span>01832-061454 # 027440235</span>
                         <br />
-                        <span class="pages-subtitle">সেলারী শীট</span>
+                        <span className="pages-subtitle">সেলারী শীট</span>
                         <br />
                       </div>
-                      <div class="pages-content">
-                        <div class="row my-3 justify-content-center align-items-center">
-                          <div class="col-5">
-                            <p class="my-2">
+                      <div className="pages-content">
+                        <div className="row my-3 justify-content-center align-items-center">
+                          <div className="col-5">
+                            <p className="my-2">
                               শিক্ষক/স্টাফের নামঃ নাহিদুল ইসলাম
                             </p>
                           </div>
-                          <div class="col-3"></div>
-                          <div class="col-4 d-flex justify-content-end">
-                            <p class="my-2">
+                          <div className="col-3"></div>
+                          <div className="col-4 d-flex justify-content-end">
+                            <p className="my-2">
                               <span>শিক্ষাবর্ষঃ</span>
                               ২০২১-২২ ইং
                             </p>
                           </div>
                         </div>
                         <div
-                          class="table-responsive"
+                          className="table-responsive"
                           data-pattern="priority-columns"
                         >
-                          <table class="table  bg-white table-bordered text-center report-table">
-                            <thead class="text-center">
+                          <table className="table  bg-white table-bordered text-center report-table">
+                            <thead className="text-center">
                               <tr>
                                 <th>ক্রমিক নং</th>
                                 <th>মাসের নাম</th>
@@ -188,14 +188,14 @@ const IndividualSallerySheet = () => {
                               </tr>
                             </tbody>
                           </table>
-                          <div class="short-report">
-                            <div class="report-item">
-                              <div class="items">
-                                <span class="report-text">সর্বমোট =</span>
-                                <span class="report-amount">০০০.০০</span>
+                          <div className="short-report">
+                            <div className="report-item">
+                              <div className="items">
+                                <span className="report-text">সর্বমোট =</span>
+                                <span className="report-amount">০০০.০০</span>
                               </div>
-                              <hr class="lines" />
-                              <div class="items">
+                              <hr className="lines" />
+                              <div className="items">
                                 <span>উদ্ধৃত্ব</span>
                                 <span>৬৫৪৬.০০</span>
                               </div>

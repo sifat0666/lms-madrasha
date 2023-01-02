@@ -3,40 +3,40 @@ import React from "react";
 const StudentInfo = () => {
   return (
     <div>
-      <section class="user-form-section">
-        <div class="section-bg">
-          <div class="row">
-            <div class="col-md-12 w-100">
-              <div class="main-container">
-                <div class="row">
-                  <div class="col-lg-7 col-md-12 col-sm-12">
-                    <div class="section-title">
+      <section className="user-form-section">
+        <div className="section-bg">
+          <div className="row">
+            <div className="col-md-12 w-100">
+              <div className="main-container">
+                <div className="row">
+                  <div className="col-lg-7 col-md-12 col-sm-12">
+                    <div className="section-title">
                       <h4>শিক্ষার্থীর তথ্য</h4>
                     </div>
-                    <div class="my-4">
-                      <form class="studentsinfo-form">
-                        <div class="row">
-                          <div class="col-lg-7 col-md-10 col-10">
-                            <div class="row mb-3">
-                              <label class="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                    <div className="my-4">
+                      <form className="studentsinfo-form">
+                        <div className="row">
+                          <div className="col-lg-7 col-md-10 col-10">
+                            <div className="row mb-3">
+                              <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                                 শিক্ষাবর্ষঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-sm-12 col-md-12">
+                              <div className="col-lg-8 col-sm-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="শিক্ষাবর্ষ"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-md-2 col-2">
-                            <div class="row mb-3">
-                              <div class="option-icon">
+                          <div className="col-lg-5 col-md-2 col-2">
+                            <div className="row mb-3">
+                              <div className="option-icon">
                                 <span>
                                   <a href="#">
-                                    <i class="bi bi-info-circle-fill"></i>
+                                    <i className="bi bi-info-circle-fill"></i>
                                   </a>
                                 </span>
                                 <span>
@@ -45,161 +45,161 @@ const StudentInfo = () => {
                                     data-bs-toggle="modal"
                                     data-bs-target="#admissonModal"
                                   >
-                                    <i class="bi bi-gear-fill"></i>
+                                    <i className="bi bi-gear-fill"></i>
                                   </a>
                                 </span>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-12 col-md-12 col-lg-7">
-                            <div class="row mb-3">
-                              <label class="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-12 col-md-12 col-lg-7">
+                            <div className="row mb-3">
+                              <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                                 ক্লাশঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-12 col-md-12 col-lg-8">
+                              <div className="col-12 col-md-12 col-lg-8">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="ক্লাশ"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-12 col-md-12 col-lg-5">
-                            <div class="row">
-                              <div class="option-subtext">
+                          <div className="col-12 col-md-12 col-lg-5">
+                            <div className="row">
+                              <div className="option-subtext">
                                 <h6>স্থায়ী ঠিকানা</h6>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-md-12 col-12">
-                            <div class="row mb-3">
-                              <label class="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-md-12 col-12">
+                            <div className="row mb-3">
+                              <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                                 নতুন/পুরাতনঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="নতুন/পুরাতন"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-md-12 col-12">
-                            <div class="row mb-3">
-                              <label class="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                          <div className="col-lg-5 col-md-12 col-12">
+                            <div className="row mb-3">
+                              <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                                 গ্রামঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="গ্রাম"
                                 />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-md-12 col-12">
-                            <div class="row mb-1 mb-lg-3">
-                              <label class="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-md-12 col-12">
+                            <div className="row mb-1 mb-lg-3">
+                              <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                                 ছাত্রের আইডিঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="ছাত্রের আইডি"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-md-12 col-12">
-                            <div class="row mb-1 mb-lg-3">
-                              <label class="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                          <div className="col-lg-5 col-md-12 col-12">
+                            <div className="row mb-1 mb-lg-3">
+                              <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                                 ডাকঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="ডাক"
                                 />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-md-12 col-12">
-                            <div class="row mb-3">
-                              <label class="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-md-12 col-12">
+                            <div className="row mb-3">
+                              <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                                 রোল নংঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="রোল নং"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-md-12 col-12">
-                            <div class="row mb-3">
-                              <label class="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                          <div className="col-lg-5 col-md-12 col-12">
+                            <div className="row mb-3">
+                              <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                                 থানাঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="থানা"
                                 />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-md-12 col-12">
-                            <div class="row mb-3">
-                              <div class="col-lg-7 col-md-12 col-12">
-                                <div class="row">
-                                  <label class="col-lg-7 col-12 col-md-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-md-12 col-12">
+                            <div className="row mb-3">
+                              <div className="col-lg-7 col-md-12 col-12">
+                                <div className="row">
+                                  <label className="col-lg-7 col-12 col-md-12 col-form-label info-lable">
                                     ছাত্র/ছাত্রীঃ
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-5 col-12 col-md-12">
+                                  <div className="col-lg-5 col-12 col-md-12">
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder="ছাত্র/ছাত্রী"
                                     />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-5 col-md-12 col-12">
-                                <div class="row">
-                                  <label class="col-lg-5 col-12 col-md-12 col-form-label info-lable">
+                              <div className="col-lg-5 col-md-12 col-12">
+                                <div className="row">
+                                  <label className="col-lg-5 col-12 col-md-12 col-form-label info-lable">
                                     ফর্ম নাঃ
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-7 col-12 col-md-12">
+                                  <div className="col-lg-7 col-12 col-md-12">
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder="ফর্ম নাঃ"
                                     />
                                   </div>
@@ -207,218 +207,218 @@ const StudentInfo = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                          <div className="col-lg-5 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 জেলাঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="জেলা"
                                 />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-12 col-md-12">
-                            <div class="row">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-12 col-md-12">
+                            <div className="row">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 অনাবাসিক/অনাবাসিকঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="অনাবাসিক/অনাবাসিক"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <div class="option-subtext">
+                          <div className="col-lg-5 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <div className="option-subtext">
                                 <h6>বর্তমান ঠিকানা</h6>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 শিক্ষার্থী নামঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="শিক্ষার্থী নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                          <div className="col-lg-5 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 গ্রামঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="গ্রাম"
                                 />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 পিতার নামঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="পিতার নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                          <div className="col-lg-5 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 থানাঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="থানা"
                                 />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 মাতার নামঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাতার নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                          <div className="col-lg-5 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 জেলাঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="জেলা"
                                 />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 জন্ম তারিখঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="date"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাতার নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                          <div className="col-lg-5 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 মন্তব্যঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <textarea
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder=" মন্তব্য"
                                 ></textarea>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 NID/জন্ম নিবন্ধন
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="NID/জন্ম নিবন্ধন নং"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-12 col-md-12"></div>
+                          <div className="col-lg-5 col-12 col-md-12"></div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-sm-4 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-sm-4 col-form-label info-lable">
                                 জাতীয়তাঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="জাতীয়তা"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-12 col-md-12"></div>
+                          <div className="col-lg-5 col-12 col-md-12"></div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 রক্তের গ্রুপঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
-                                <select class="form-select">
+                              <div className="col-lg-8 col-12 col-md-12">
+                                <select className="form-select">
                                   <option selected>
                                     রক্তের গ্রুপ নির্বাচন করুন
                                   </option>
@@ -434,135 +434,141 @@ const StudentInfo = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-12 col-md-12"></div>
+                          <div className="col-lg-5 col-12 col-md-12"></div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-sm-4 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-sm-4 col-form-label info-lable">
                                 এস. এম. এস যাবেঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="এস. এম. এস যাবে"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-12 col-md-12"></div>
+                          <div className="col-lg-5 col-12 col-md-12"></div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-12 col-md-12">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-8 col-12 col-md-12">
+                              <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="এস. এম. এস যাবে"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-12 col-md-12">
-                            <div class="option-subtext">
+                          <div className="col-lg-5 col-12 col-md-12">
+                            <div className="option-subtext">
                               <h6>ডাটাবেজ তথ্য</h6>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-12 col-md-12 offset-lg-5 offset-0">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-7 col-12 col-md-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-12 col-md-12 offset-lg-5 offset-0">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-7 col-12 col-md-12 col-form-label info-lable">
                                 সর্বমোট ছাত্র সংখ্যাঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-5 col-12 col-md-12">
+                              <div className="col-lg-5 col-12 col-md-12">
                                 <input
                                   type="text"
                                   value="২০০"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="সর্বমোট ছাত্র সংখ্যা"
                                 />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-12 col-md offset-lg-5 offset-0">
-                            <div class="row mb-lg-3 mb-1">
-                              <label class="col-lg-7 col-12 col-md-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-12 col-md offset-lg-5 offset-0">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-lg-7 col-12 col-md-12 col-form-label info-lable">
                                 এই বছরের মোট ছাত্র সংখ্যাঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-5 col-12 col-md-12">
+                              <div className="col-lg-5 col-12 col-md-12">
                                 <input
                                   type="text"
                                   value="০৫"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="এই বছরের মোট ছাত্র সংখ্যা"
                                 />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="button-group my-4">
+                        <div className="button-group my-4">
                           <a
                             href="#"
-                            class="custom-btn btn-primary"
+                            className="custom-btn btn-primary"
                             data-bs-toggle="modal"
                             data-bs-target="#admissonfees"
                           >
                             Save
                           </a>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Show
                           </button>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Update
                           </button>
-                          <button class="custom-btn btn-primary" type="submit">
+                          <button
+                            className="custom-btn btn-primary"
+                            type="submit"
+                          >
                             New
                           </button>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Close
                           </button>
-                          <button class="custom-btn btn-danger" type="submit">
+                          <button
+                            className="custom-btn btn-danger"
+                            type="submit"
+                          >
                             Delete
                           </button>
                         </div>
                       </form>
                     </div>
                   </div>
-                  <div class="col-lg-5 col-12 col-md-12">
-                    <div class="table-data mt-4">
-                      <div class="row form-group searchbar">
-                        <div class="col-sm-6 position-relative search">
-                          <i class="bi bi-search search-icon"></i>
+                  <div className="col-lg-5 col-12 col-md-12">
+                    <div className="table-data mt-4">
+                      <div className="row form-group searchbar">
+                        <div className="col-sm-6 position-relative search">
+                          <i className="bi bi-search search-icon"></i>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="search"
                             placeholder="Search"
                           />
                         </div>
                       </div>
                       <div
-                        class="table-responsive"
+                        className="table-responsive"
                         data-pattern="priority-columns"
                       >
                         <table
                           id="tech-companies-1"
-                          class="table  bg-white table-bordered text-center"
+                          className="table  bg-white table-bordered text-center"
                         >
-                          <thead class="text-center accounts-table-head">
+                          <thead className="text-center accounts-table-head">
                             <tr>
                               <th>
-                                <select class="form-select">
+                                <select className="form-select">
                                   <option value=""></option>
                                   <option>তাকমিল</option>
                                   <option>মক্তব</option>
@@ -571,7 +577,7 @@ const StudentInfo = () => {
                                 </select>
                               </th>
                               <th>
-                                <select class="form-select">
+                                <select className="form-select">
                                   <option value=""></option>
                                   <option>তাকমিল</option>
                                   <option>মক্তব</option>
@@ -580,7 +586,7 @@ const StudentInfo = () => {
                                 </select>
                               </th>
                               <th>
-                                <select class="form-select">
+                                <select className="form-select">
                                   <option value=""></option>
                                   <option>তাকমিল</option>
                                   <option>মক্তব</option>
@@ -589,7 +595,7 @@ const StudentInfo = () => {
                                 </select>
                               </th>
                               <th>
-                                <button class="btn btn-success btn-sm">
+                                <button className="btn btn-success btn-sm">
                                   খুজুন
                                 </button>
                               </th>
@@ -665,52 +671,52 @@ const StudentInfo = () => {
       {/* <!--Modal Section--> */}
       {/* <!--Admisson settings Releted Modal Start--> */}
       <div
-        class="modal fade"
+        className="modal fade"
         id="admissonModal"
         aria-hidden="true"
         tabindex="-1"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="section-title">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>ছাত্রের তথ্য এন্ট্রি সেটিংস</h4>
             </div>
-            <div class="modal-body">
-              <div class="settings-container">
-                <div class="settings-item">
+            <div className="modal-body">
+              <div className="settings-container">
+                <div className="settings-item">
                   <div>
                     <h6>ভর্তির রশিদ</h6>
                   </div>
-                  <div class="settings-options">
-                    <div class="options">
+                  <div className="settings-options">
+                    <div className="options">
                       <input
-                        class="form-check-input mt-0"
+                        className="form-check-input mt-0"
                         type="checkbox"
                         value=""
                         aria-label="Checkbox for following text input"
                         name="checkbox"
                       />
-                      <span class="">সেইভ এর সাথে সাথে রসিদ</span>
+                      <span className="">সেইভ এর সাথে সাথে রসিদ</span>
                     </div>
-                    <div class="options">
+                    <div className="options">
                       <input
-                        class="form-check-input mt-0"
+                        className="form-check-input mt-0"
                         type="checkbox"
                         value=""
                         aria-label="Checkbox for following text input"
                         name="checkbox"
                       />
-                      <span class="">পরে</span>
+                      <span className="">পরে</span>
                     </div>
-                    <div class="options">
+                    <div className="options">
                       <input
-                        class="form-check-input mt-0"
+                        className="form-check-input mt-0"
                         type="checkbox"
                         value=""
                         aria-label="Checkbox for following text input"
                         name="checkbox"
                       />
-                      <span class="">ভর্তি ফি বিহীন (ফ্রি)</span>
+                      <span className="">ভর্তি ফি বিহীন (ফ্রি)</span>
                     </div>
                   </div>
                   <p>
@@ -718,76 +724,76 @@ const StudentInfo = () => {
                     মনে হয় সেগুলোকে ঠিক চিহ্ন দিতে হবে।
                   </p>
                 </div>
-                <div class="entrytype-option">
-                  <div class="form-check">
+                <div className="entrytype-option">
+                  <div className="form-check">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="radio"
                       name="options"
                     />
-                    <label class="form-check-label" for="options">
+                    <label className="form-check-label" for="options">
                       রোল নাম্বার
                     </label>
                   </div>
-                  <div class="form-check">
+                  <div className="form-check">
                     <input
-                      class="form-check-input"
+                      className="form-check-input"
                       type="radio"
                       name="options"
                     />
-                    <label class="form-check-label" for="options">
+                    <label className="form-check-label" for="options">
                       ফরম নাম্বার
                     </label>
                   </div>
                 </div>
-                <div class="settings-item mt-3">
+                <div className="settings-item mt-3">
                   <div>
                     <h6>থাকা খাওয়ার অবস্থা</h6>
                   </div>
-                  <div class="settings-options">
-                    <div class="options">
+                  <div className="settings-options">
+                    <div className="options">
                       <input
-                        class="form-check-input mt-0"
+                        className="form-check-input mt-0"
                         type="checkbox"
                         value=""
                         aria-label="Checkbox for following text input"
                         name="checkbox"
                       />
-                      <span class="">আবাসিক</span>
+                      <span className="">আবাসিক</span>
                     </div>
-                    <div class="options">
+                    <div className="options">
                       <input
-                        class="form-check-input mt-0"
+                        className="form-check-input mt-0"
                         type="checkbox"
                         value=""
                         aria-label="Checkbox for following text input"
                         name="checkbox"
                       />
-                      <span class="">অনাবাসিক</span>
+                      <span className="">অনাবাসিক</span>
                     </div>
-                    <div class="options">
+                    <div className="options">
                       <input
-                        class="form-check-input mt-0"
+                        className="form-check-input mt-0"
                         type="checkbox"
                         value=""
                         aria-label="Checkbox for following text input"
                         name="checkbox"
                       />
-                      <span class="">এন্ট্রির মাধ্যমে</span>
+                      <span className="">এন্ট্রির মাধ্যমে</span>
                     </div>
                   </div>
-                  <p class="text-center my-2">
+                  <p className="text-center my-2">
                     "ক খ" মাদরাসায় আপনার সন্তানের ভর্তি সম্পন্ন করা হয়েছে।
                   </p>
                 </div>
               </div>
             </div>
-            <div class="modal-footer">
-              <div class="button-group">
-                <button class="custom-btn btn-primary" type="submit">
+            <div className="modal-footer">
+              <div className="button-group">
+                <button className="custom-btn btn-primary" type="submit">
                   Save
                 </button>
-                <button class="custom-btn btn-dark" data-bs-dismiss="modal">
+                <button className="custom-btn btn-dark" data-bs-dismiss="modal">
                   Close
                 </button>
               </div>
@@ -798,97 +804,97 @@ const StudentInfo = () => {
       {/* <!--Admisson settings Releted Modal End--> */}
       {/* <!--Admisson Fees Collect Modal Start--> */}
       <div
-        class="modal fade"
+        className="modal fade"
         id="admissonfees"
         aria-hidden="true"
         tabindex="-1"
       >
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="section-title">
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>ভর্তি ফি গ্রহণ</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12 w-100">
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="my-4">
-                          <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label info-lable">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12 w-100">
+                    <div className="row">
+                      <div className="col-6">
+                        <div className="my-4">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
                               ভাউচার নংঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="ভাউচার নং"
                               />
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label info-lable">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
                               ছাত্রের আইডিঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="ছাত্রের আইডি"
                               />
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label info-lable">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
                               কর্তনঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="কর্তন"
                               />
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label info-lable">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
                               পরিমাণঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="পরিমাণ"
                               />
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label info-lable">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
                               মন্তব্যঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মন্তব্য"
                               />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <div class="table-data mt-4">
+                      <div className="col-md-6">
+                        <div className="table-data mt-4">
                           <div
-                            class="table-responsive"
+                            className="table-responsive"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white table-bordered text-center"
+                              className="table  bg-white table-bordered text-center"
                             >
                               <thead
-                                class="text-center"
+                                className="text-center"
                                 style={{
                                   backgroundColor: "#62659B",
                                   color: "white",
@@ -930,13 +936,13 @@ const StudentInfo = () => {
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
-                <div class="button-group">
-                  <button class="custom-btn btn-primary" type="submit">
+              <div className="modal-footer">
+                <div className="button-group">
+                  <button className="custom-btn btn-primary" type="submit">
                     Save
                   </button>
                   <button
-                    class="custom-btn btn-dark"
+                    className="custom-btn btn-dark"
                     data-bs-dismiss="modal"
                     onclick="javascript:void(0)"
                     type="button"
@@ -952,93 +958,93 @@ const StudentInfo = () => {
       {/* <!--Admisson Fees Collect Modal End--> */}
       {/* <!--Class Migration  Modal Start--> */}
       <div
-        class="modal fade"
+        className="modal fade"
         id="stdentmigrattion"
         aria-hidden="true"
         tabindex="-1"
       >
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="section-title">
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>শিক্ষার্থীর ক্লাস পরিবর্তন</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12 w-100">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="my-4">
-                          <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label info-lable">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12 w-100">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="my-4">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
                               সিরিয়াল নংঃ
                               <i>*</i>
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="সিরিয়াল নং"
                                 required
                               />
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label info-lable">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
                               ছাত্র/ছাত্রীর নামঃ
                               <i>*</i>
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="ছাত্র/ছাত্রীর নাম"
                               />
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label info-lable">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
                               পিতার নামঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="পিতার নাম"
                               />
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label info-lable">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
                               শ্রেণী/মারহালাঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="শ্রেণী/মারহালা"
                               />
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label info-lable">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
                               শিক্ষার্থীর আইডিঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="শিক্ষার্থীর আইডি"
                               />
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label info-lable">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
                               যে ক্লাশে স্থানান্তরিত হবেঃ
                               <i>*</i>
                             </label>
-                            <div class="col-8">
-                              <select class="form-select">
+                            <div className="col-8">
+                              <select className="form-select">
                                 <option selected>শ্রেণী নির্বাচন করুন</option>
                                 <option>নাযেরা</option>
                                 <option>হিফযুল কুরআন</option>
@@ -1057,14 +1063,14 @@ const StudentInfo = () => {
                               </select>
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-4 col-form-label info-lable">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
                               নতুন আইডিঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder=" নতুন আইডি"
                               />
                             </div>
@@ -1072,30 +1078,30 @@ const StudentInfo = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="row mt-4">
-                      <div class="col-12">
-                        <div class="migration-container">
-                          <div class="migration-title">
+                    <div className="row mt-4">
+                      <div className="col-12">
+                        <div className="migration-container">
+                          <div className="migration-title">
                             ক্লাস পরিবর্তনের ধরন
                           </div>
-                          <div class="migration-type">
-                            <div class="form-check">
+                          <div className="migration-type">
+                            <div className="form-check">
                               <input
-                                class="form-check-input"
+                                className="form-check-input"
                                 type="radio"
                                 name="options"
                               />
-                              <label class="form-check-label" for="options">
+                              <label className="form-check-label" for="options">
                                 আইডি পরিবর্তন না করে ক্লাস স্থানান্তর
                               </label>
                             </div>
-                            <div class="form-check">
+                            <div className="form-check">
                               <input
-                                class="form-check-input"
+                                className="form-check-input"
                                 type="radio"
                                 name="options"
                               />
-                              <label class="form-check-label" for="options">
+                              <label className="form-check-label" for="options">
                                 আইডি পরিবর্তন করে ক্লাস স্থানান্তর
                               </label>
                             </div>
@@ -1106,21 +1112,21 @@ const StudentInfo = () => {
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
-                <div class="button-group">
+              <div className="modal-footer">
+                <div className="button-group">
                   <button
-                    class="custom-btn btn-primary"
+                    className="custom-btn btn-primary"
                     type="submit"
                     data-bs-toggle="modal"
                     data-bs-target="#admissonfees"
                   >
                     Save
                   </button>
-                  <button class="custom-btn btn-dark" type="submit">
+                  <button className="custom-btn btn-dark" type="submit">
                     New
                   </button>
                   <button
-                    class="custom-btn btn-danger d-block"
+                    className="custom-btn btn-danger d-block"
                     type="button"
                     data-bs-dismiss="modal"
                     onclick="javascript:void(0)"

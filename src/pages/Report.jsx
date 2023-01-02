@@ -3,27 +3,27 @@ import React from "react";
 const Report = () => {
   return (
     <div>
-      <section class="user-form-section">
-        <div class="section-bg">
-          <div class="row">
-            <div class="col-md-12 w-100">
-              <div class="main-container">
-                <div class="row d-print-none">
-                  <div class="col-12">
-                    <div class="section-title" style={{ marginTop: "2px" }}>
+      <section className="user-form-section">
+        <div className="section-bg">
+          <div className="row">
+            <div className="col-md-12 w-100">
+              <div className="main-container">
+                <div className="row d-print-none">
+                  <div className="col-12">
+                    <div className="section-title" style={{ marginTop: "2px" }}>
                       <h4>রিপোর্ট</h4>
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div className="row">
                   {/* <!--Filter Menu Section--> */}
-                  <div class="col-lg-4 col-12 col-md-12 d-print-none">
+                  <div className="col-lg-4 col-12 col-md-12 d-print-none">
                     <form>
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="filter-menu">
+                      <div className="row">
+                        <div className="col-12">
+                          <div className="filter-menu">
                             <select
-                              class="form-select"
+                              className="form-select"
                               size="9"
                               aria-label="size 3 select example"
                             >
@@ -54,11 +54,11 @@ const Report = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
-                          <div class="filter-menu">
+                      <div className="row mt-3">
+                        <div className="col-12">
+                          <div className="filter-menu">
                             <select
-                              class="form-select"
+                              className="form-select"
                               size="4"
                               aria-label="size 3 select example"
                             >
@@ -75,11 +75,11 @@ const Report = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
-                          <div class="filter-menu">
+                      <div className="row mt-3">
+                        <div className="col-12">
+                          <div className="filter-menu">
                             <select
-                              class="form-select"
+                              className="form-select"
                               size="4"
                               aria-label="size 3 select example"
                             >
@@ -92,11 +92,11 @@ const Report = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
-                          <div class="filter-menu">
+                      <div className="row mt-3">
+                        <div className="col-12">
+                          <div className="filter-menu">
                             <select
-                              class="form-select"
+                              className="form-select"
                               size="4"
                               aria-label="size 3 select example"
                             >
@@ -110,11 +110,11 @@ const Report = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
+                      <div className="row mt-3">
+                        <div className="col-12">
                           <button
                             type="submit"
-                            class="custom-btn btn-primary d-block w-100"
+                            className="custom-btn btn-primary d-block w-100"
                           >
                             Preview
                           </button>
@@ -123,31 +123,31 @@ const Report = () => {
                     </form>
                   </div>
                   {/* <!--Preview Page Section--> */}
-                  <div class="col-lg-8 col-12 col-md-12 mt-lg-0 mt-4">
-                    <div class="preview-page d-print-block">
+                  <div className="col-lg-8 col-12 col-md-12 mt-lg-0 mt-4">
+                    <div className="preview-page d-print-block">
                       <span
-                        class="print-button d-print-none"
+                        className="print-button d-print-none"
                         onclick="window.print()"
                       >
-                        <i class="bi bi-printer-fill"></i>
+                        <i className="bi bi-printer-fill"></i>
                       </span>
-                      <div class="pages-title">
+                      <div className="pages-title">
                         <h5>জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ</h5>
                         <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
                         <span>01832-061454 # 027440235</span>
                         <br />
-                        <span class="pages-subtitle">
+                        <span className="pages-subtitle">
                           ভর্তি রেজিস্টার: ২০২২
                         </span>
                       </div>
-                      <div class="pages-content">
-                        <p class="my-2">জামাত/ক্লাশ : তাকমীল (ক)</p>
+                      <div className="pages-content">
+                        <p className="my-2">জামাত/ক্লাশ : তাকমীল (ক)</p>
                         <div
-                          class="table-responsive"
+                          className="table-responsive"
                           data-pattern="priority-columns"
                         >
-                          <table class="table  bg-white table-bordered text-center report-table">
-                            <thead class="text-center">
+                          <table className="table  bg-white table-bordered text-center report-table">
+                            <thead className="text-center">
                               <tr>
                                 <th>দাখেল</th>
                                 <th>নাম</th>

@@ -3,38 +3,38 @@ import React from "react";
 const ManageSale = () => {
   return (
     <div>
-      <section class="user-form-section d-print-none">
-        <div class="section-bg">
-          <div class="row">
-            <div class="col-md-12 w-100">
-              <div class="main-container">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="section-title">
+      <section className="user-form-section d-print-none">
+        <div className="section-bg">
+          <div className="row">
+            <div className="col-md-12 w-100">
+              <div className="main-container">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="section-title">
                       <h4>Manage Sale</h4>
                     </div>
                   </div>
-                  <div class="col-12">
-                    <div class="table-data mt-4">
-                      <div class="row form-group searchbar">
-                        <div class="col-sm-6 position-relative search">
-                          <i class="bi bi-search search-icon"></i>
+                  <div className="col-12">
+                    <div className="table-data mt-4">
+                      <div className="row form-group searchbar">
+                        <div className="col-sm-6 position-relative search">
+                          <i className="bi bi-search search-icon"></i>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="search"
                             placeholder="Search"
                           />
                         </div>
                       </div>
                       <div
-                        class="table-responsive"
+                        className="table-responsive"
                         data-pattern="priority-columns"
                       >
                         <table
                           id="tech-companies-1"
-                          class="table  bg-white table-bordered text-center"
+                          className="table  bg-white table-bordered text-center"
                         >
-                          <thead class="text-center accounts-table-head">
+                          <thead className="text-center accounts-table-head">
                             <tr>
                               <th>SL.</th>
                               <th>Invoice No</th>
@@ -51,7 +51,7 @@ const ManageSale = () => {
                               <td>
                                 <a
                                   href="./invoice-details.html"
-                                  class="text-decoration-none text-success"
+                                  className="text-decoration-none text-success"
                                 >
                                   1000
                                 </a>
@@ -61,20 +61,20 @@ const ManageSale = () => {
                               <td>08-Aug-2022</td>
                               <td>$13,352.00</td>
                               <td>
-                                <span class="action-view">
-                                  <i class="bi bi-eye"></i>
+                                <span className="action-view">
+                                  <i className="bi bi-eye"></i>
                                 </span>
                                 <span
-                                  class="action-print"
+                                  className="action-print"
                                   onclick="window.print()"
                                 >
-                                  <i class="bi bi-printer-fill"></i>
+                                  <i className="bi bi-printer-fill"></i>
                                 </span>
-                                <span class="action-edit">
-                                  <i class="bi bi-pencil-fill"></i>
+                                <span className="action-edit">
+                                  <i className="bi bi-pencil-fill"></i>
                                 </span>
-                                <span class="action-delete">
-                                  <i class="bi bi-trash3"></i>
+                                <span className="action-delete">
+                                  <i className="bi bi-trash3"></i>
                                 </span>
                               </td>
                             </tr>
@@ -91,76 +91,76 @@ const ManageSale = () => {
       </section>
       {/* <!-- Employe Add Section End -->
             <!--রির্পোট প্রিন্ট সেকশন--> */}
-      <div class="preview-page d-print-block d-none" style={{ zIndex: 1 }}>
-        <span class="print-button d-print-none" onclick="window.print()">
-          <i class="bi bi-printer-fill"></i>
+      <div className="preview-page d-print-block d-none" style={{ zIndex: 1 }}>
+        <span className="print-button d-print-none" onclick="window.print()">
+          <i className="bi bi-printer-fill"></i>
         </span>
-        <div class="pages-title">
+        <div className="pages-title">
           <h5>জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ</h5>
           <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
           <span>01832-061454 # 027440235</span>
         </div>
-        <div class="row my-3">
-          <div class="col-4 d-flex align-items-center">
-            <div class="slip-no">
+        <div className="row my-3">
+          <div className="col-4 d-flex align-items-center">
+            <div className="slip-no">
               <strong>ইনভয়েস নং</strong>
-              <span class=""> ০০৪</span>
+              <span className=""> ০০৪</span>
             </div>
           </div>
-          <div class="col-4 d-flex justify-content-center align-items-center">
-            <span class="pages-subtitle-slip">ইনভয়েস</span>
+          <div className="col-4 d-flex justify-content-center align-items-center">
+            <span className="pages-subtitle-slip">ইনভয়েস</span>
           </div>
-          <div class="col-4 d-flex align-items-center justify-content-end">
-            <div class="slip-date">
+          <div className="col-4 d-flex align-items-center justify-content-end">
+            <div className="slip-date">
               <strong>তারিখঃ</strong>
-              <span class="">৩০/১২/২০২২ ইং</span>
+              <span className="">৩০/১২/২০২২ ইং</span>
             </div>
           </div>
         </div>
-        <div class="pages-content">
-          <div class="row mb-1">
-            <div class="col-6 d-flex flex-wrap align-content-center">
-              <div class="donor-name">
-                <strong class="dtitle">কাস্টমারের নামঃ</strong>
-                <div class="border-line w-100">মুহাঃ ইমদাদুল</div>
+        <div className="pages-content">
+          <div className="row mb-1">
+            <div className="col-6 d-flex flex-wrap align-content-center">
+              <div className="donor-name">
+                <strong className="dtitle">কাস্টমারের নামঃ</strong>
+                <div className="border-line w-100">মুহাঃ ইমদাদুল</div>
               </div>
-              <div class="donor-name">
-                <strong class="dtitle">পিতার নামঃ</strong>
-                <div class="border-line w-100">মুহাঃ আব্দুল্লাহ</div>
+              <div className="donor-name">
+                <strong className="dtitle">পিতার নামঃ</strong>
+                <div className="border-line w-100">মুহাঃ আব্দুল্লাহ</div>
               </div>
-              <div class="donor-name">
-                <strong class="dtitle">ঠিকানাঃ</strong>
-                <div class="border-line w-100">বাংলাদেশ</div>
+              <div className="donor-name">
+                <strong className="dtitle">ঠিকানাঃ</strong>
+                <div className="border-line w-100">বাংলাদেশ</div>
               </div>
-              <div class="donor-name mt-1">
-                <strong class="dtitle">টাকাঃ</strong>
-                <div class="border-all w-100">৫০০.০০ টাকা</div>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="donor-name">
-                <strong class="dtitle">মোবাইলঃ</strong>
-                <div class="border-line w-100">01853569311</div>
-              </div>
-              <div class="donor-name">
-                <strong class="dtitle">শ্রেণীঃ</strong>
-                <div class="border-line w-100">মিযান</div>
+              <div className="donor-name mt-1">
+                <strong className="dtitle">টাকাঃ</strong>
+                <div className="border-all w-100">৫০০.০০ টাকা</div>
               </div>
             </div>
-          </div>
-          <div class="row mb-2">
-            <div class="col-12">
-              <div class="donor-name">
-                <strong class="dtitle">কথায়ঃ</strong>
-                <div class="border-line w-100">পাচশত টাকা মাত্র।</div>
+            <div className="col-6">
+              <div className="donor-name">
+                <strong className="dtitle">মোবাইলঃ</strong>
+                <div className="border-line w-100">01853569311</div>
+              </div>
+              <div className="donor-name">
+                <strong className="dtitle">শ্রেণীঃ</strong>
+                <div className="border-line w-100">মিযান</div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="table-responsive" data-pattern="priority-columns">
-                <table class="table  bg-white table-bordered text-center report-table">
-                  <thead class="text-center">
+          <div className="row mb-2">
+            <div className="col-12">
+              <div className="donor-name">
+                <strong className="dtitle">কথায়ঃ</strong>
+                <div className="border-line w-100">পাচশত টাকা মাত্র।</div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-12">
+              <div className="table-responsive" data-pattern="priority-columns">
+                <table className="table  bg-white table-bordered text-center report-table">
+                  <thead className="text-center">
                     <tr>
                       <th>ক্রঃ</th>
                       <th>বইয়ের নাম</th>
@@ -180,19 +180,19 @@ const ManageSale = () => {
                       <td>২০০.০০</td>
                     </tr>
                     <tr>
-                      <th colspan="5" class="text-right">
+                      <th colspan="5" className="text-right">
                         Total Price After Discount
                       </th>
                       <td>০.০০</td>
                     </tr>
                     <tr>
-                      <th colspan="5" class="text-right">
+                      <th colspan="5" className="text-right">
                         Grand Total
                       </th>
                       <td>০.০০</td>
                     </tr>
                     <tr>
-                      <th colspan="5" class="text-right">
+                      <th colspan="5" className="text-right">
                         Paid Amount
                       </th>
                       <td>০.০০</td>
@@ -201,22 +201,22 @@ const ManageSale = () => {
                 </table>
               </div>
             </div>
-            <div class="col-12">
-              <div class="row mt-5">
-                <div class="col-4 d-flex justify-content-start">
-                  <div class="marksheet-sing">
+            <div className="col-12">
+              <div className="row mt-5">
+                <div className="col-4 d-flex justify-content-start">
+                  <div className="marksheet-sing">
                     <span>কাস্টমারের স্বাক্ষর</span>
                     <br />
                   </div>
                 </div>
-                <div class="col-4 d-flex justify-content-end">
-                  <div class="marksheet-sing">
+                <div className="col-4 d-flex justify-content-end">
+                  <div className="marksheet-sing">
                     <span>পরিচালকের স্বাক্ষর</span>
                     <br />
                   </div>
                 </div>
-                <div class="col-4 d-flex justify-content-end">
-                  <div class="marksheet-sing">
+                <div className="col-4 d-flex justify-content-end">
+                  <div className="marksheet-sing">
                     <span>আদায়কারীর স্বাক্ষর</span>
                     <br />
                   </div>
@@ -229,32 +229,32 @@ const ManageSale = () => {
       {/* <!--Modal Section-->
             <!--খাবার এন্ট্রি  Modal Start--> */}
       <div
-        class="modal fade"
+        className="modal fade"
         id="customerentry"
         aria-hidden="true"
         tabindex="-1"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="section-title">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>কাস্টমার এন্ট্রি</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12 w-100">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-12">
-                            <div class="row">
-                              <label class="col-sm-3 col-form-label info-lable">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12 w-100">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-12">
+                            <div className="row">
+                              <label className="col-sm-3 col-form-label info-lable">
                                 কাস্টমারের নাম
                               </label>
-                              <div class="col-8">
+                              <div className="col-8">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="কাস্টমারের নাম"
                                 />
                               </div>
@@ -262,17 +262,17 @@ const ManageSale = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-12">
-                            <div class="row">
-                              <label class="col-sm-3 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-12">
+                            <div className="row">
+                              <label className="col-sm-3 col-form-label info-lable">
                                 ই-মেইল
                               </label>
-                              <div class="col-8">
+                              <div className="col-8">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="কাস্টমারের ই-মেইল"
                                 />
                               </div>
@@ -280,17 +280,17 @@ const ManageSale = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-12">
-                            <div class="row">
-                              <label class="col-sm-3 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-12">
+                            <div className="row">
+                              <label className="col-sm-3 col-form-label info-lable">
                                 মোবাইল
                               </label>
-                              <div class="col-8">
+                              <div className="col-8">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="কাস্টমারের মোবাইল"
                                 />
                               </div>
@@ -298,16 +298,16 @@ const ManageSale = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-12">
-                            <div class="row">
-                              <label class="col-sm-3 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-12">
+                            <div className="row">
+                              <label className="col-sm-3 col-form-label info-lable">
                                 ঠিকানা
                               </label>
-                              <div class="col-8">
+                              <div className="col-8">
                                 <textarea
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="ঠিকানা"
                                 ></textarea>
                               </div>
@@ -315,19 +315,22 @@ const ManageSale = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12 addbank">
-                        <div class="button-group">
-                          <a href="#" class="custom-btn btn-primary">
+                      <div className="col-12 addbank">
+                        <div className="button-group">
+                          <a href="#" className="custom-btn btn-primary">
                             Save
                           </a>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Update
                           </button>
-                          <button class="custom-btn btn-primary" type="submit">
+                          <button
+                            className="custom-btn btn-primary"
+                            type="submit"
+                          >
                             New
                           </button>
                           <button
-                            class="custom-btn btn-danger"
+                            className="custom-btn btn-danger"
                             data-bs-dismiss="modal"
                             onclick="javascript:void(0)"
                             type="button"
@@ -337,18 +340,18 @@ const ManageSale = () => {
                         </div>
                       </div>
                       {/* <!--Table Area Start--> */}
-                      <div class="col-md-12">
-                        <div class="table-data mt-4">
+                      <div className="col-md-12">
+                        <div className="table-data mt-4">
                           <div
-                            class="table-responsive"
+                            className="table-responsive"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white table-bordered text-center"
+                              className="table  bg-white table-bordered text-center"
                             >
                               <thead
-                                class="text-center"
+                                className="text-center"
                                 style={{
                                   backgroundColor: "#62659B",
                                   color: "white",
@@ -356,13 +359,13 @@ const ManageSale = () => {
                               >
                                 <tr>
                                   <th>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </th>
                                   <th>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </th>
                                   <th>ক্রমিক</th>
@@ -374,13 +377,13 @@ const ManageSale = () => {
                               <tbody>
                                 <tr>
                                   <td>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </td>
                                   <td>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </td>
                                   <td></td>

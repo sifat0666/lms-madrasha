@@ -24,6 +24,7 @@ const Login = () => {
       console.log(token);
       localStorage.setItem("token", token);
       navigate("/dashboard");
+      // console.log("first");
       //
     },
   });

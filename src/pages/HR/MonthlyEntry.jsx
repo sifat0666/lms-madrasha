@@ -3,27 +3,27 @@ import React from "react";
 const MonthlyEntry = () => {
   return (
     <div>
-      <section class="user-form-section d-print-none">
-        <div class="section-bg">
-          <div class="row">
-            <div class="col-md-12 w-100">
-              <div class="main-container">
-                <div class="col-12">
-                  <div class="row mb-3">
-                    <div class="col-12">
-                      <div class="section-title">
+      <section className="user-form-section d-print-none">
+        <div className="section-bg">
+          <div className="row">
+            <div className="col-md-12 w-100">
+              <div className="main-container">
+                <div className="col-12">
+                  <div className="row mb-3">
+                    <div className="col-12">
+                      <div className="section-title">
                         <h4>শিক্ষকদের মাসের নাম এন্ট্রি</h4>
                       </div>
                     </div>
-                    <div class="col-12">
-                      <div class="row mb-3">
-                        <div class="col-lg-4 col-12 col-md-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-12 col-md-12 col-form-label info-lable">
+                    <div className="col-12">
+                      <div className="row mb-3">
+                        <div className="col-lg-4 col-12 col-md-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-12 col-md-12 col-form-label info-lable">
                               শিক্ষাবর্ষ
                             </label>
-                            <div class="col-lg-7 col-12 col-md-12">
-                              <select class="form-select">
+                            <div className="col-lg-7 col-12 col-md-12">
+                              <select className="form-select">
                                 <option value="" selected>
                                   সিলেক্ট করুন
                                 </option>
@@ -37,45 +37,45 @@ const MonthlyEntry = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="col-12">
-                      <div class="row mb-3">
-                        <div class="col-lg-4 col-md-4 col-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                    <div className="col-12">
+                      <div className="row mb-3">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                               ১ম মাস
                             </label>
-                            <div class="col-lg-7 col-md-7 col-12">
+                            <div className="col-lg-7 col-md-7 col-12">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মাসের নাম"
                               />
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                               ২য় মাস
                             </label>
-                            <div class="col-lg-7 col-md-7 col-12">
+                            <div className="col-lg-7 col-md-7 col-12">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মাসের নাম"
                               />
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                               ৩য় মাস
                             </label>
-                            <div class="col-lg-7 col-md-7 col-12">
+                            <div className="col-lg-7 col-md-7 col-12">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মাসের নাম"
                               />
                             </div>
@@ -83,45 +83,45 @@ const MonthlyEntry = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="col-12">
-                      <div class="row mb-3">
-                        <div class="col-lg-4 col-md-4 col-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                    <div className="col-12">
+                      <div className="row mb-3">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                               ৪র্থ মাস
                             </label>
-                            <div class="col-lg-7 col-md-7 col-12">
+                            <div className="col-lg-7 col-md-7 col-12">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মাসের নাম"
                               />
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                               ৫ম মাস
                             </label>
-                            <div class="col-lg-7 col-md-7 col-12">
+                            <div className="col-lg-7 col-md-7 col-12">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মাসের নাম"
                               />
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                               ৬ষ্ঠ মাস
                             </label>
-                            <div class="col-lg-7 col-md-7 col-12">
+                            <div className="col-lg-7 col-md-7 col-12">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মাসের নাম"
                               />
                             </div>
@@ -129,45 +129,45 @@ const MonthlyEntry = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="col-12">
-                      <div class="row mb-3">
-                        <div class="col-lg-4 col-md-4 col-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                    <div className="col-12">
+                      <div className="row mb-3">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                               ৭ম মাস
                             </label>
-                            <div class="col-lg-7 col-md-7 col-12">
+                            <div className="col-lg-7 col-md-7 col-12">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মাসের নাম"
                               />
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                               ৮ম মাস
                             </label>
-                            <div class="col-lg-7 col-md-7 col-12">
+                            <div className="col-lg-7 col-md-7 col-12">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মাসের নাম"
                               />
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                               ৯ম মাস
                             </label>
-                            <div class="col-lg-7 col-md-7 col-12">
+                            <div className="col-lg-7 col-md-7 col-12">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মাসের নাম"
                               />
                             </div>
@@ -175,45 +175,45 @@ const MonthlyEntry = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="col-12">
-                      <div class="row mb-3">
-                        <div class="col-lg-4 col-md-4 col-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                    <div className="col-12">
+                      <div className="row mb-3">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                               ১০ম মাস
                             </label>
-                            <div class="col-lg-7 col-md-7 col-12">
+                            <div className="col-lg-7 col-md-7 col-12">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মাসের নাম"
                               />
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                               ১১তম মাস
                             </label>
-                            <div class="col-lg-7 col-md-7 col-12">
+                            <div className="col-lg-7 col-md-7 col-12">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মাসের নাম"
                               />
                             </div>
                           </div>
                         </div>
-                        <div class="col-lg-4 col-md-4 col-12">
-                          <div class="row">
-                            <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                               ১২তম মাস
                             </label>
-                            <div class="col-lg-7 col-md-7 col-12">
+                            <div className="col-lg-7 col-md-7 col-12">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মাসের নাম"
                               />
                             </div>
@@ -221,19 +221,22 @@ const MonthlyEntry = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="col-12 addbank">
-                      <div class="button-group">
-                        <a href="#" class="custom-btn btn-primary">
+                    <div className="col-12 addbank">
+                      <div className="button-group">
+                        <a href="#" className="custom-btn btn-primary">
                           Save
                         </a>
-                        <button class="custom-btn btn-dark" type="submit">
+                        <button className="custom-btn btn-dark" type="submit">
                           Edit
                         </button>
-                        <button class="custom-btn btn-primary" type="submit">
+                        <button
+                          className="custom-btn btn-primary"
+                          type="submit"
+                        >
                           New
                         </button>
                         <button
-                          class="custom-btn btn-danger"
+                          className="custom-btn btn-danger"
                           data-bs-dismiss="modal"
                           onclick="javascript:void(0)"
                           type="button"
@@ -243,17 +246,17 @@ const MonthlyEntry = () => {
                       </div>
                     </div>
                     {/* <!--Table Area Start--> */}
-                    <div class="col-md-12 mt-4">
+                    <div className="col-md-12 mt-4">
                       <div
-                        class="table-responsive"
+                        className="table-responsive"
                         data-pattern="priority-columns"
                       >
                         <table
                           id="tech-companies-1"
-                          class="table  bg-white table-bordered text-center"
+                          className="table  bg-white table-bordered text-center"
                         >
                           <thead
-                            class="text-center"
+                            className="text-center"
                             style={{
                               backgroundColor: "#62659B",
                               color: "white",
@@ -261,8 +264,8 @@ const MonthlyEntry = () => {
                           >
                             <tr>
                               <th>
-                                <span class="action-edit">
-                                  <i class="bi bi-pencil-square"></i>
+                                <span className="action-edit">
+                                  <i className="bi bi-pencil-square"></i>
                                 </span>
                               </th>
                               <th>শিক্ষাবর্ষ</th>
@@ -284,8 +287,8 @@ const MonthlyEntry = () => {
                           <tbody>
                             <tr>
                               <td>
-                                <span class="action-edit">
-                                  <i class="bi bi-pencil-square"></i>
+                                <span className="action-edit">
+                                  <i className="bi bi-pencil-square"></i>
                                 </span>
                               </td>
                               <td>২০২২</td>
@@ -318,36 +321,36 @@ const MonthlyEntry = () => {
       {/* <!-- Employe Add Section End -->
             <!--রির্পোট প্রিন্ট সেকশন-->
             <!--Preview Page Section--> */}
-      <div class="preview-page d-print-block d-none">
-        <span class="print-button d-print-none" onclick="window.print()">
-          <i class="bi bi-printer-fill"></i>
+      <div className="preview-page d-print-block d-none">
+        <span className="print-button d-print-none" onclick="window.print()">
+          <i className="bi bi-printer-fill"></i>
         </span>
-        <div class="pages-title">
+        <div className="pages-title">
           <h5>জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ</h5>
           <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
           <span>01832-061454 # 027440235</span>
           <br />
-          <span class="pages-subtitle">জমা-খরচ লেজার ভিত্তিক</span>
+          <span className="pages-subtitle">জমা-খরচ লেজার ভিত্তিক</span>
           <br />
         </div>
-        <div class="pages-content">
-          <div class="row my-3 justify-content-center align-items-center">
-            <div class="col-5">
-              <p class="my-2">২৯/০৯/২০২২ ইং থেকে ২৯/১০/২০২২ ইং</p>
+        <div className="pages-content">
+          <div className="row my-3 justify-content-center align-items-center">
+            <div className="col-5">
+              <p className="my-2">২৯/০৯/২০২২ ইং থেকে ২৯/১০/২০২২ ইং</p>
             </div>
-            <div class="col-3">
-              <span class="title-ladger">গোরাবা ফান্ড</span>
+            <div className="col-3">
+              <span className="title-ladger">গোরাবা ফান্ড</span>
             </div>
-            <div class="col-4 d-flex justify-content-end">
-              <p class="my-2">
+            <div className="col-4 d-flex justify-content-end">
+              <p className="my-2">
                 <span>রিপোর্ট প্রিন্ট তারিখঃ</span>
                 ০৩/১২/২০২২
               </p>
             </div>
           </div>
-          <div class="table-responsive" data-pattern="priority-columns">
-            <table class="table  bg-white table-bordered text-center report-table">
-              <thead class="text-center">
+          <div className="table-responsive" data-pattern="priority-columns">
+            <table className="table  bg-white table-bordered text-center report-table">
+              <thead className="text-center">
                 <tr>
                   <th>ক্রমিক নং</th>
                   <th>জেনারেল লেজার</th>
@@ -421,18 +424,18 @@ const MonthlyEntry = () => {
                 </tr>
               </tbody>
             </table>
-            <div class="short-report">
-              <div class="report-item">
-                <div class="items">
-                  <span class="report-text">সর্বমোট জমা =</span>
-                  <span class="report-amount">৩৪৫৪৩৫৪.০০</span>
+            <div className="short-report">
+              <div className="report-item">
+                <div className="items">
+                  <span className="report-text">সর্বমোট জমা =</span>
+                  <span className="report-amount">৩৪৫৪৩৫৪.০০</span>
                 </div>
-                <div class="items">
+                <div className="items">
                   <span>সর্বমোট খরচ =</span>
                   <span>৩৪৫৪৩৫৪.০০</span>
                 </div>
-                <hr class="lines" />
-                <div class="items">
+                <hr className="lines" />
+                <div className="items">
                   <span>উদ্ধৃত্ব</span>
                   <span>৬৫৪৬.০০</span>
                 </div>
@@ -443,54 +446,59 @@ const MonthlyEntry = () => {
       </div>
       {/* <!--Modal Section--> */}
       {/* <!--Month Name Add Modal Start--> */}
-      <div class="modal fade" id="makepayroll" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="section-title">
+      <div
+        className="modal fade"
+        id="makepayroll"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>পে-রোল তৈরি</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12 w-100">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12 w-100">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 আইডি
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="আইডি"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 মূল বেতন
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="number"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মূল বেতন"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 সেশন
                               </label>
-                              <div class="col-7">
-                                <select class="form-select">
+                              <div className="col-7">
+                                <select className="form-select">
                                   <option value="" selected>
                                     সিলেক্ট করুন
                                   </option>
@@ -503,44 +511,44 @@ const MonthlyEntry = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 শিক্ষক/স্টাফ
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="শিক্ষক/স্টাফ নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 বাড়ী ভাড়া
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="number"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="বাড়ী ভাড়া"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 মন্তব্য
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <textarea
-                                  class="form-control"
+                                  className="form-control"
                                   rows="1"
                                   placeholder="বেতনের মন্তব্য"
                                 ></textarea>
@@ -549,41 +557,41 @@ const MonthlyEntry = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 এন্ট্রির তারিখঃ
                               </label>
-                              <div class="col-7">
-                                <input type="date" class="form-control" />
+                              <div className="col-7">
+                                <input type="date" className="form-control" />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ইনক্রিমেন্ট
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="টাকা"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 মোট বেতন
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মোট বেতন"
                                 />
                               </div>
@@ -591,45 +599,45 @@ const MonthlyEntry = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 প্রারম্ভিক বেতন
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="number"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder=" প্রারম্ভিক বেতন"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 চিকিৎসা ভাতা
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="number"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="চিকিৎসা ভাতা"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 অন্যান্য ভাতা
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="number"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="অন্যান্য ভাতা"
                                 />
                               </div>
@@ -637,47 +645,47 @@ const MonthlyEntry = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-8">
-                            <div class="row">
-                              <label class="col-sm-3 col-form-label info-lable d-flex align-items-end">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-8">
+                            <div className="row">
+                              <label className="col-sm-3 col-form-label info-lable d-flex align-items-end">
                                 জৈষ্ঠতার বেতন
                               </label>
-                              <div class="col-3">
+                              <div className="col-3">
                                 <label for="">টাকা</label>
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="টাকা"
                                 />
                               </div>
-                              <div class="col-3">
+                              <div className="col-3">
                                 <label for="">সংখ্যা</label>
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="সংখ্যা"
                                 />
                               </div>
-                              <div class="col-3">
+                              <div className="col-3">
                                 <label for="">মোট</label>
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মোট"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 মন্তব্য
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <textarea
-                                  class="form-control"
+                                  className="form-control"
                                   rows="1"
                                 ></textarea>
                               </div>
@@ -685,19 +693,22 @@ const MonthlyEntry = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12 addbank">
-                        <div class="button-group">
-                          <a href="#" class="custom-btn btn-primary">
+                      <div className="col-12 addbank">
+                        <div className="button-group">
+                          <a href="#" className="custom-btn btn-primary">
                             Save
                           </a>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Edit
                           </button>
-                          <button class="custom-btn btn-primary" type="submit">
+                          <button
+                            className="custom-btn btn-primary"
+                            type="submit"
+                          >
                             New
                           </button>
                           <button
-                            class="custom-btn btn-danger"
+                            className="custom-btn btn-danger"
                             data-bs-dismiss="modal"
                             onclick="javascript:void(0)"
                             type="button"
@@ -707,18 +718,18 @@ const MonthlyEntry = () => {
                         </div>
                       </div>
                       {/* <!--Table Area Start--> */}
-                      <div class="col-md-12">
-                        <div class="table-data mt-4">
+                      <div className="col-md-12">
+                        <div className="table-data mt-4">
                           <div
-                            class="table-responsive"
+                            className="table-responsive"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white table-bordered text-center"
+                              className="table  bg-white table-bordered text-center"
                             >
                               <thead
-                                class="text-center"
+                                className="text-center"
                                 style={{
                                   backgroundColor: "#62659B",
                                   color: "white",
@@ -726,13 +737,13 @@ const MonthlyEntry = () => {
                               >
                                 <tr>
                                   <th>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </th>
                                   <th>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </th>
                                   <th>আইডি</th>
@@ -751,13 +762,13 @@ const MonthlyEntry = () => {
                               <tbody>
                                 <tr>
                                   <td>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </td>
                                   <td>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </td>
                                   <td>২০২২</td>
@@ -788,62 +799,65 @@ const MonthlyEntry = () => {
       {/* <!--Month Add Modal End--> */}
       {/* <!-- Add Desegnation  Modal Start--> */}
       <div
-        class="modal fade"
+        className="modal fade"
         id="adddesignation"
         aria-hidden="true"
         tabindex="-1"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="section-title">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>পদবীর নাম যোগ করুন</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12 w-100">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="my-4">
-                          <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label info-lable">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12 w-100">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="my-4">
+                          <div className="row mb-3">
+                            <label className="col-sm-3 col-form-label info-lable">
                               পদবীর নামঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="পদবীর নাম"
                               />
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label info-lable">
+                          <div className="row mb-3">
+                            <label className="col-sm-3 col-form-label info-lable">
                               মন্তব্যঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মন্তব্য"
                               />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-12 addbank">
-                        <div class="button-group">
-                          <a href="#" class="custom-btn btn-primary">
+                      <div className="col-12 addbank">
+                        <div className="button-group">
+                          <a href="#" className="custom-btn btn-primary">
                             Save
                           </a>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Update
                           </button>
-                          <button class="custom-btn btn-primary" type="submit">
+                          <button
+                            className="custom-btn btn-primary"
+                            type="submit"
+                          >
                             New
                           </button>
                           <button
-                            class="custom-btn btn-danger"
+                            className="custom-btn btn-danger"
                             data-bs-dismiss="modal"
                             onclick="javascript:void(0)"
                             type="button"
@@ -852,18 +866,18 @@ const MonthlyEntry = () => {
                           </button>
                         </div>
                       </div>
-                      <div class="col-md-12">
-                        <div class="table-data mt-4">
+                      <div className="col-md-12">
+                        <div className="table-data mt-4">
                           <div
-                            class="table-responsive"
+                            className="table-responsive"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white table-bordered text-center"
+                              className="table  bg-white table-bordered text-center"
                             >
                               <thead
-                                class="text-center"
+                                className="text-center"
                                 style={{
                                   backgroundColor: "#62659B",
                                   color: "white",
@@ -940,13 +954,13 @@ const MonthlyEntry = () => {
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
-                <div class="button-group">
-                  <button class="custom-btn btn-primary" type="submit">
+              <div className="modal-footer">
+                <div className="button-group">
+                  <button className="custom-btn btn-primary" type="submit">
                     Save
                   </button>
                   <button
-                    class="custom-btn btn-dark"
+                    className="custom-btn btn-dark"
                     data-bs-dismiss="modal"
                     onclick="javascript:void(0)"
                     type="button"

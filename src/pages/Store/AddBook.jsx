@@ -3,45 +3,45 @@ import React from "react";
 const AddBook = () => {
   return (
     <div>
-      <section class="user-form-section d-print-none">
-        <div class="section-bg">
-          <div class="row">
-            <div class="col-md-12 w-100">
-              <div class="main-container">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="section-title">
+      <section className="user-form-section d-print-none">
+        <div className="section-bg">
+          <div className="row">
+            <div className="col-md-12 w-100">
+              <div className="main-container">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="section-title">
                       <h4>বই যোগ করুন</h4>
                     </div>
                   </div>
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col-lg-5 col-md-4 col-12">
-                        <div class="row mb-3">
-                          <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                  <div className="col-12">
+                    <div className="row">
+                      <div className="col-lg-5 col-md-4 col-12">
+                        <div className="row mb-3">
+                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                             বইয়ের নাম
                             <i>*</i>
                           </label>
-                          <div class="col-lg-8 col-md-8 col-12">
+                          <div className="col-lg-8 col-md-8 col-12">
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               placeholder="বইয়ের নাম"
                             />
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-2 col-md-4 col-12"></div>
-                      <div class="col-lg-5 col-md-4 col-12">
-                        <div class="row mb-3">
-                          <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                      <div className="col-lg-2 col-md-4 col-12"></div>
+                      <div className="col-lg-5 col-md-4 col-12">
+                        <div className="row mb-3">
+                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                             সিরিয়াল নাম্বার
                             <i>*</i>
                           </label>
-                          <div class="col-lg-8 col-md-8 col-12">
+                          <div className="col-lg-8 col-md-8 col-12">
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               placeholder="সিরিয়াল নাম্বার"
                             />
                           </div>
@@ -49,16 +49,16 @@ const AddBook = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col-lg-5 col-md-4 col-12">
-                        <div class="row mb-3">
-                          <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                  <div className="col-12">
+                    <div className="row">
+                      <div className="col-lg-5 col-md-4 col-12">
+                        <div className="row mb-3">
+                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                             ক্যাটাগরি
                             <i>*</i>
                           </label>
-                          <div class="col-lg-8 col-md-8 col-12">
-                            <select name="" id="" class="form-select">
+                          <div className="col-lg-8 col-md-8 col-12">
+                            <select name="" id="" className="form-select">
                               <option value="">সিলেক্ট করুন</option>
                               <option value="">পাঠ্য বই</option>
                               <option value="">সাহিত্য</option>
@@ -67,15 +67,15 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-2 col-md-4 col-12"></div>
-                      <div class="col-lg-5 col-md-4 col-12">
-                        <div class="row mb-3">
-                          <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                      <div className="col-lg-2 col-md-4 col-12"></div>
+                      <div className="col-lg-5 col-md-4 col-12">
+                        <div className="row mb-3">
+                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                             শ্রেনী/মারহালা
                             <i>*</i>
                           </label>
-                          <div class="col-lg-8 col-md-8 col-12">
-                            <select class="form-select">
+                          <div className="col-lg-8 col-md-8 col-12">
+                            <select className="form-select">
                               <option selected="">শ্রেণী নির্বাচন করুন</option>
                               <option>নাযেরা</option>
                               <option>হিফযুল কুরআন</option>
@@ -97,33 +97,33 @@ const AddBook = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col-lg-5 col-md-4 col-12">
-                        <div class="row mb-3">
-                          <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                  <div className="col-12">
+                    <div className="row">
+                      <div className="col-lg-5 col-md-4 col-12">
+                        <div className="row mb-3">
+                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                             বিক্রির মূল্য
                             <i>*</i>
                           </label>
-                          <div class="col-lg-8 col-md-8 col-12">
+                          <div className="col-lg-8 col-md-8 col-12">
                             <input
                               type="number"
-                              class="form-control"
+                              className="form-control"
                               value="0.00"
                               placeholder="বিক্রির মূল্য"
                             />
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-2 col-md-4 col-12"></div>
-                      <div class="col-lg-5 col-md-4 col-12">
-                        <div class="row mb-3">
-                          <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                      <div className="col-lg-2 col-md-4 col-12"></div>
+                      <div className="col-lg-5 col-md-4 col-12">
+                        <div className="row mb-3">
+                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                             ইউনিট
                             <i>*</i>
                           </label>
-                          <div class="col-lg-8 col-md-8 col-12">
-                            <select name="" id="" class="form-select">
+                          <div className="col-lg-8 col-md-8 col-12">
+                            <select name="" id="" className="form-select">
                               <option value="">সিলেক্ট করুন</option>
                               <option value="">পিচ</option>
                               <option value="">সেট</option>
@@ -133,60 +133,60 @@ const AddBook = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col-lg-5 col-md-4 col-12">
-                        <div class="row mb-3">
-                          <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                  <div className="col-12">
+                    <div className="row">
+                      <div className="col-lg-5 col-md-4 col-12">
+                        <div className="row mb-3">
+                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                             কেনা মূল্য
                             <i>*</i>
                           </label>
-                          <div class="col-lg-8 col-md-8 col-12">
+                          <div className="col-lg-8 col-md-8 col-12">
                             <input
                               type="number"
-                              class="form-control"
+                              className="form-control"
                               value="0.00"
                               placeholder="বিক্রির মূল্য"
                             />
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-2 col-md-4 col-12"></div>
-                      <div class="col-lg-5 col-md-4 col-12">
-                        <div class="row mb-3">
-                          <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                      <div className="col-lg-2 col-md-4 col-12"></div>
+                      <div className="col-lg-5 col-md-4 col-12">
+                        <div className="row mb-3">
+                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                             বইয়ের ডিটেইলস
                             <i>*</i>
                           </label>
-                          <div class="col-lg-8 col-md-8 col-12">
-                            <textarea class="form-control"></textarea>
+                          <div className="col-lg-8 col-md-8 col-12">
+                            <textarea className="form-control"></textarea>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col-lg-5 col-md-4 col-12">
-                        <div class="row mb-3">
-                          <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                  <div className="col-12">
+                    <div className="row">
+                      <div className="col-lg-5 col-md-4 col-12">
+                        <div className="row mb-3">
+                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                             ছবি
                             <i>*</i>
                           </label>
-                          <div class="col-lg-8 col-md-8 col-12">
-                            <input type="file" class="form-control" />
+                          <div className="col-lg-8 col-md-8 col-12">
+                            <input type="file" className="form-control" />
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-2 col-md-4 col-12"></div>
-                      <div class="col-lg-5 col-md-4 col-12">
-                        <div class="row mb-3">
-                          <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                      <div className="col-lg-2 col-md-4 col-12"></div>
+                      <div className="col-lg-5 col-md-4 col-12">
+                        <div className="row mb-3">
+                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                             সাপ্লাইয়ার
                             <i>*</i>
                           </label>
-                          <div class="col-lg-8 col-md-8 col-12">
-                            <select name="" id="" class="form-select">
+                          <div className="col-lg-8 col-md-8 col-12">
+                            <select name="" id="" className="form-select">
                               <option value="">সিলেক্ট করুন</option>
                               <option value="">লেকচার পাবলিকেশন</option>
                               <option value="">সাইমুম প্রকাশনী</option>
@@ -196,24 +196,24 @@ const AddBook = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="col-6 d-flex justify-content-center w-100 payroll">
-                    <div class="button-group w-100">
-                      <button class="custom-btn btn-primary">Save</button>
-                      <button class="custom-btn btn-dark">New</button>
+                  <div className="col-6 d-flex justify-content-center w-100 payroll">
+                    <div className="button-group w-100">
+                      <button className="custom-btn btn-primary">Save</button>
+                      <button className="custom-btn btn-dark">New</button>
                     </div>
                   </div>
                 </div>
-                <div class="row my-3">
-                  <div class="col-12">
+                <div className="row my-3">
+                  <div className="col-12">
                     <div
-                      class="table-responsive accounts-table"
+                      className="table-responsive accounts-table"
                       data-pattern="priority-columns"
                     >
                       <table
                         id="tech-companies-1"
-                        class="table  bg-white text-center mb-0"
+                        className="table  bg-white text-center mb-0"
                       >
-                        <thead class="text-center accounts-table-head">
+                        <thead className="text-center accounts-table-head">
                           <tr>
                             <th>ক্রঃ</th>
                             <th>বইয়ের নাম</th>
@@ -222,13 +222,13 @@ const AddBook = () => {
                             <th>কেনা মূল্য</th>
                             <th>ছবি</th>
                             <th>
-                              <span class="action-edit">
-                                <i class="bi bi-pencil-square"></i>
+                              <span className="action-edit">
+                                <i className="bi bi-pencil-square"></i>
                               </span>
                             </th>
                             <th>
-                              <span class="action-delete">
-                                <i class="bi bi-trash3"></i>
+                              <span className="action-delete">
+                                <i className="bi bi-trash3"></i>
                               </span>
                             </th>
                           </tr>
@@ -247,13 +247,13 @@ const AddBook = () => {
                               />
                             </td>
                             <td>
-                              <span class="action-edit">
-                                <i class="bi bi-pencil-square"></i>
+                              <span className="action-edit">
+                                <i className="bi bi-pencil-square"></i>
                               </span>
                             </td>
                             <td>
-                              <span class="action-delete">
-                                <i class="bi bi-trash3"></i>
+                              <span className="action-delete">
+                                <i className="bi bi-trash3"></i>
                               </span>
                             </td>
                           </tr>
@@ -270,36 +270,36 @@ const AddBook = () => {
       {/* <!-- Employe Add Section End -->
             <!--রির্পোট প্রিন্ট সেকশন-->
             <!--Preview Page Section--> */}
-      <div class="preview-page d-print-block d-none">
-        <span class="print-button d-print-none" onclick="window.print()">
-          <i class="bi bi-printer-fill"></i>
+      <div className="preview-page d-print-block d-none">
+        <span className="print-button d-print-none" onclick="window.print()">
+          <i className="bi bi-printer-fill"></i>
         </span>
-        <div class="pages-title">
+        <div className="pages-title">
           <h5>জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ</h5>
           <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
           <span>01832-061454 # 027440235</span>
           <br />
-          <span class="pages-subtitle">জমা-খরচ লেজার ভিত্তিক</span>
+          <span className="pages-subtitle">জমা-খরচ লেজার ভিত্তিক</span>
           <br />
         </div>
-        <div class="pages-content">
-          <div class="row my-3 justify-content-center align-items-center">
-            <div class="col-5">
-              <p class="my-2">২৯/০৯/২০২২ ইং থেকে ২৯/১০/২০২২ ইং</p>
+        <div className="pages-content">
+          <div className="row my-3 justify-content-center align-items-center">
+            <div className="col-5">
+              <p className="my-2">২৯/০৯/২০২২ ইং থেকে ২৯/১০/২০২২ ইং</p>
             </div>
-            <div class="col-3">
-              <span class="title-ladger">গোরাবা ফান্ড</span>
+            <div className="col-3">
+              <span className="title-ladger">গোরাবা ফান্ড</span>
             </div>
-            <div class="col-4 d-flex justify-content-end">
-              <p class="my-2">
+            <div className="col-4 d-flex justify-content-end">
+              <p className="my-2">
                 <span>রিপোর্ট প্রিন্ট তারিখঃ</span>
                 ০৩/১২/২০২২
               </p>
             </div>
           </div>
-          <div class="table-responsive" data-pattern="priority-columns">
-            <table class="table  bg-white table-bordered text-center report-table">
-              <thead class="text-center">
+          <div className="table-responsive" data-pattern="priority-columns">
+            <table className="table  bg-white table-bordered text-center report-table">
+              <thead className="text-center">
                 <tr>
                   <th>ক্রমিক নং</th>
                   <th>জেনারেল লেজার</th>
@@ -373,18 +373,18 @@ const AddBook = () => {
                 </tr>
               </tbody>
             </table>
-            <div class="short-report">
-              <div class="report-item">
-                <div class="items">
-                  <span class="report-text">সর্বমোট জমা =</span>
-                  <span class="report-amount">৩৪৫৪৩৫৪.০০</span>
+            <div className="short-report">
+              <div className="report-item">
+                <div className="items">
+                  <span className="report-text">সর্বমোট জমা =</span>
+                  <span className="report-amount">৩৪৫৪৩৫৪.০০</span>
                 </div>
-                <div class="items">
+                <div className="items">
                   <span>সর্বমোট খরচ =</span>
                   <span>৩৪৫৪৩৫৪.০০</span>
                 </div>
-                <hr class="lines" />
-                <div class="items">
+                <hr className="lines" />
+                <div className="items">
                   <span>উদ্ধৃত্ব</span>
                   <span>৬৫৪৬.০০</span>
                 </div>
@@ -395,92 +395,97 @@ const AddBook = () => {
       </div>
       {/* <!--Modal Section-->
             <!-- Monthly Fees Collection Defualt Modal Start--> */}
-      <div class="modal fade" id="monthly-fee" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="section-title">
+      <div
+        className="modal fade"
+        id="monthly-fee"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <div className="modal-dialog modal-xl">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>মাসিক ফি কালেকশান</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-7">
-                    <div class="section-title">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-7">
+                    <div className="section-title">
                       <h4>মাসিক ফি গ্রহণ</h4>
                     </div>
-                    <div class="my-4">
-                      <form class="accounts-form">
-                        <div class="row">
-                          <div class="col-4">
-                            <div class="row mb-3">
-                              <label class="col-sm-6 col-form-label info-lable">
+                    <div className="my-4">
+                      <form className="accounts-form">
+                        <div className="row">
+                          <div className="col-4">
+                            <div className="row mb-3">
+                              <label className="col-sm-6 col-form-label info-lable">
                                 অর্ডার নং
                                 <i>*</i>
                               </label>
-                              <div class="col-6">
-                                <input type="text" class="form-control" />
+                              <div className="col-6">
+                                <input type="text" className="form-control" />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row mb-3">
-                              <label class="col-sm-2 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row mb-3">
+                              <label className="col-sm-2 col-form-label info-lable">
                                 নামঃ
                               </label>
-                              <div class="col-10">
+                              <div className="col-10">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row mb-3">
-                              <label class="col-sm-2 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row mb-3">
+                              <label className="col-sm-2 col-form-label info-lable">
                                 তারিখ
                               </label>
-                              <div class="col-10">
-                                <input type="date" class="form-control" />
+                              <div className="col-10">
+                                <input type="date" className="form-control" />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <div class="row mb-3">
-                              <label class="col-sm-6 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-4">
+                            <div className="row mb-3">
+                              <label className="col-sm-6 col-form-label info-lable">
                                 আইডি
                               </label>
-                              <div class="col-6">
-                                <input type="text" class="form-control" />
+                              <div className="col-6">
+                                <input type="text" className="form-control" />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row mb-3">
-                              <label class="col-sm-2 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row mb-3">
+                              <label className="col-sm-2 col-form-label info-lable">
                                 পিতা
                               </label>
-                              <div class="col-10">
+                              <div className="col-10">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row mb-3">
-                              <label class="col-sm-2 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row mb-3">
+                              <label className="col-sm-2 col-form-label info-lable">
                                 শ্রেণী
                               </label>
-                              <div class="col-10">
+                              <div className="col-10">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="জামাত"
                                   readonly
                                 />
@@ -488,30 +493,30 @@ const AddBook = () => {
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-4 offset-4">
-                            <div class="row mb-3">
-                              <label class="col-sm-4 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-4 offset-4">
+                            <div className="row mb-3">
+                              <label className="col-sm-4 col-form-label info-lable">
                                 মোবাইল
                               </label>
-                              <div class="col-8">
+                              <div className="col-8">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মোবাইল"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row mb-3">
-                              <label class="col-sm-6 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row mb-3">
+                              <label className="col-sm-6 col-form-label info-lable">
                                 শিক্ষার্থী অবস্থা
                               </label>
-                              <div class="col-6">
+                              <div className="col-6">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   value="সক্রিয়"
                                   readonly
                                 />
@@ -521,27 +526,27 @@ const AddBook = () => {
                         </div>
                       </form>
                     </div>
-                    <div class="my-4">
-                      <div class="row">
-                        <div class="col-12">
+                    <div className="my-4">
+                      <div className="row">
+                        <div className="col-12">
                           <div
-                            class="table-responsive accounts-table"
+                            className="table-responsive accounts-table"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white text-center mb-0"
+                              className="table  bg-white text-center mb-0"
                             >
-                              <thead class="text-center accounts-table-head">
+                              <thead className="text-center accounts-table-head">
                                 <tr>
                                   <th>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </th>
                                   <th>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </th>
                                   <th>মাস</th>
@@ -554,13 +559,13 @@ const AddBook = () => {
                               <tbody>
                                 <tr>
                                   <td>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </td>
                                   <td>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </td>
                                   <td>জুলাই</td>
@@ -575,64 +580,70 @@ const AddBook = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="my-2">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="filter-container py-2">
-                            <div class="row">
-                              <div class="col-3">
-                                <div class="row">
-                                  <label class="col-sm-3 col-form-label info-lable">
-                                    <i class="bi bi-search text-white"></i>
+                    <div className="my-2">
+                      <div className="row">
+                        <div className="col-12">
+                          <div className="filter-container py-2">
+                            <div className="row">
+                              <div className="col-3">
+                                <div className="row">
+                                  <label className="col-sm-3 col-form-label info-lable">
+                                    <i className="bi bi-search text-white"></i>
                                   </label>
-                                  <div class="col-9">
-                                    <input type="date" class="form-control" />
+                                  <div className="col-9">
+                                    <input
+                                      type="date"
+                                      className="form-control"
+                                    />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-5">
-                                <div class="row">
-                                  <div class="col-8 d-flex align-items-center justify-content-between">
-                                    <div class="form-check">
+                              <div className="col-5">
+                                <div className="row">
+                                  <div className="col-8 d-flex align-items-center justify-content-between">
+                                    <div className="form-check">
                                       <input
-                                        class="form-check-input"
+                                        className="form-check-input"
                                         type="radio"
                                         name="options"
                                       />
                                       <label
-                                        class="form-check-label"
+                                        className="form-check-label"
                                         for="options"
                                       >
                                         আইডি
                                       </label>
                                     </div>
-                                    <div class="form-check">
+                                    <div className="form-check">
                                       <input
-                                        class="form-check-input"
+                                        className="form-check-input"
                                         type="radio"
                                         name="options"
                                       />
                                       <label
-                                        class="form-check-label"
+                                        className="form-check-label"
                                         for="options"
                                       >
                                         অর্ডার
                                       </label>
                                     </div>
                                   </div>
-                                  <div class="col-4">
-                                    <input type="text" class="form-control" />
+                                  <div className="col-4">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                    />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-4">
-                                <div class="row">
-                                  <label class="col-sm-9 col-form-label info-lable">
+                              <div className="col-4">
+                                <div className="row">
+                                  <label className="col-sm-9 col-form-label info-lable">
                                     আজকের গ্রহন: ২৭০০
                                   </label>
-                                  <div class="col-3 d-flex align-items-center">
+                                  <div className="col-3 d-flex align-items-center">
                                     <i
-                                      class="bi bi-gear-fill"
+                                      className="bi bi-gear-fill"
                                       style={{ cursor: "pointer" }}
                                     ></i>
                                   </div>
@@ -643,27 +654,27 @@ const AddBook = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="my-2">
-                      <div class="row">
-                        <div class="col-12">
+                    <div className="my-2">
+                      <div className="row">
+                        <div className="col-12">
                           <div
-                            class="table-responsive accounts-table"
+                            className="table-responsive accounts-table"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white text-center mb-0"
+                              className="table  bg-white text-center mb-0"
                             >
-                              <thead class="text-center accounts-table-head">
+                              <thead className="text-center accounts-table-head">
                                 <tr>
                                   <th>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </th>
                                   <th>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </th>
                                   <th>অর্ডার নং</th>
@@ -677,13 +688,13 @@ const AddBook = () => {
                               <tbody>
                                 <tr>
                                   <td>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </td>
                                   <td>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </td>
                                   <td>৪৩৪৩</td>
@@ -700,19 +711,19 @@ const AddBook = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-5">
-                    <div class="section-title">
+                  <div className="col-md-5">
+                    <div className="section-title">
                       <h4>খাবারের ফি গ্রহণ</h4>
                     </div>
                     {/* <!--Right Site top Table--> */}
-                    <div class="row">
-                      <div class="col-7">
-                        <div class="row mt-3">
-                          <div class="col-12">
-                            <div class="row">
-                              <div class="col-6">
-                                <div class="student-image">
-                                  <span class="student-image-title">
+                    <div className="row">
+                      <div className="col-7">
+                        <div className="row mt-3">
+                          <div className="col-12">
+                            <div className="row">
+                              <div className="col-6">
+                                <div className="student-image">
+                                  <span className="student-image-title">
                                     শিক্ষার্থীর ছবি
                                   </span>
                                   <img
@@ -721,12 +732,12 @@ const AddBook = () => {
                                   />
                                 </div>
                               </div>
-                              <div class="col-6 meal-fee-btn">
-                                <div class="button-group">
-                                  <button class="custom-btn btn-primary">
+                              <div className="col-6 meal-fee-btn">
+                                <div className="button-group">
+                                  <button className="custom-btn btn-primary">
                                     Save
                                   </button>
-                                  <button class="custom-btn btn-danger">
+                                  <button className="custom-btn btn-danger">
                                     Print
                                   </button>
                                 </div>
@@ -734,16 +745,16 @@ const AddBook = () => {
                             </div>
                           </div>
                         </div>
-                        <div class="mt-3">
+                        <div className="mt-3">
                           <div
-                            class="table-responsive accounts-table"
+                            className="table-responsive accounts-table"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white text-center mb-0"
+                              className="table  bg-white text-center mb-0"
                             >
-                              <thead class="text-center accounts-table-head">
+                              <thead className="text-center accounts-table-head">
                                 <tr>
                                   <th>মাস</th>
                                   <th>ফি</th>
@@ -776,49 +787,49 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-5">
-                        <div class="row">
+                      <div className="col-5">
+                        <div className="row">
                           <label
-                            class="col-12 col-form-label info-lable"
+                            className="col-12 col-form-label info-lable"
                             style={{ textAlign: "left" }}
                           >
                             মন্তব্য
                           </label>
-                          <div class="col-12">
+                          <div className="col-12">
                             <textarea
-                              class="form-control"
+                              className="form-control"
                               placeholder="মন্তব্য লিখুন"
                               rows="3"
                             ></textarea>
                           </div>
-                          <div class="col-12 meal-fee">
-                            <div class="button-group">
-                              <a class="custom-btn btn-primary" href="#">
+                          <div className="col-12 meal-fee">
+                            <div className="button-group">
+                              <a className="custom-btn btn-primary" href="#">
                                 Edit
                               </a>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-12 others-menu">
-                            <div class="section-title">
+                        <div className="row">
+                          <div className="col-12 others-menu">
+                            <div className="section-title">
                               <h4>গুরুত্বপূর্ণ লিংক</h4>
                             </div>
                           </div>
-                          <div class="col-12 others-navigation">
-                            <ul class="navbar-nav">
-                              <li class="others-nav-item">
-                                <i class="bi bi-gear-fill"></i>
-                                <a href="" class="others-nav-link">
+                          <div className="col-12 others-navigation">
+                            <ul className="navbar-nav">
+                              <li className="others-nav-item">
+                                <i className="bi bi-gear-fill"></i>
+                                <a href="" className="others-nav-link">
                                   {" "}
                                   অর্ডার নং সেটিংস
                                 </a>
                               </li>
-                              <li class="others-nav-item">
-                                <i class="bi bi-calendar-month"></i>
+                              <li className="others-nav-item">
+                                <i className="bi bi-calendar-month"></i>
                                 <a
                                   href="#"
-                                  class="others-nav-link"
+                                  className="others-nav-link"
                                   data-bs-toggle="modal"
                                   data-bs-target="#monthname"
                                 >
@@ -826,64 +837,66 @@ const AddBook = () => {
                                   মাসের নাম
                                 </a>
                               </li>
-                              <li class="others-nav-title my-1">
-                                <i class="bi bi-arrow-down-square"></i>
-                                <a href="#" class="others-nav-link px-1">
+                              <li className="others-nav-title my-1">
+                                <i className="bi bi-arrow-down-square"></i>
+                                <a href="#" className="others-nav-link px-1">
                                   মাসিক ফি
                                 </a>
                               </li>
-                              <li class="others-nav-item">
-                                <i class="bi bi-cash-coin"></i>
-                                <a href="#" class="others-nav-link">
+                              <li className="others-nav-item">
+                                <i className="bi bi-cash-coin"></i>
+                                <a href="#" className="others-nav-link">
                                   {" "}
                                   ফি নির্ধারণ
                                 </a>
                               </li>
-                              <li class="others-nav-item">
-                                <i class="bi bi-card-checklist"></i>
-                                <a href="#" class="others-nav-link">
+                              <li className="others-nav-item">
+                                <i className="bi bi-card-checklist"></i>
+                                <a href="#" className="others-nav-link">
                                   {" "}
                                   তালিকা তৈরি
                                 </a>
-                                <li class="others-nav-item">
-                                  <i class="bi bi-arrow-down-up"></i>
-                                  <a href="#" class="others-nav-link">
+                                <li className="others-nav-item">
+                                  <i className="bi bi-arrow-down-up"></i>
+                                  <a href="#" className="others-nav-link">
                                     {" "}
                                     বাড়ানো কমানো
                                   </a>
                                 </li>
                               </li>
-                              <li class="others-nav-title my-1">
-                                <i class="bi bi-arrow-down-square"></i>
-                                <a href="#" class="others-nav-link px-1">
+                              <li className="others-nav-title my-1">
+                                <i className="bi bi-arrow-down-square"></i>
+                                <a href="#" className="others-nav-link px-1">
                                   মাসিক ফি
                                 </a>
                               </li>
-                              <li class="others-nav-item">
-                                <i class="bi bi-cash-coin"></i>
-                                <a href="#" class="others-nav-link">
+                              <li className="others-nav-item">
+                                <i className="bi bi-cash-coin"></i>
+                                <a href="#" className="others-nav-link">
                                   {" "}
                                   ফি নির্ধারণ
                                 </a>
                               </li>
-                              <li class="others-nav-item">
-                                <i class="bi bi-card-checklist"></i>
-                                <a href="#" class="others-nav-link">
+                              <li className="others-nav-item">
+                                <i className="bi bi-card-checklist"></i>
+                                <a href="#" className="others-nav-link">
                                   {" "}
                                   তালিকা তৈরি
                                 </a>
-                                <li class="others-nav-item">
-                                  <i class="bi bi-arrow-down-up"></i>
-                                  <a href="#" class="others-nav-link">
+                                <li className="others-nav-item">
+                                  <i className="bi bi-arrow-down-up"></i>
+                                  <a href="#" className="others-nav-link">
                                     {" "}
                                     বাড়ানো কমানো
                                   </a>
                                 </li>
                               </li>
                             </ul>
-                            <div class="button-group">
-                              <button class="custom-btn btn-info">Show</button>
-                              <button class="custom-btn btn-primary">
+                            <div className="button-group">
+                              <button className="custom-btn btn-info">
+                                Show
+                              </button>
+                              <button className="custom-btn btn-primary">
                                 Save
                               </button>
                             </div>
@@ -894,24 +907,24 @@ const AddBook = () => {
                     {/* <!--Right Site Top Table End--> */}
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="section-title">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="section-title">
                       <h4>মাসিক ফি গ্রহণ</h4>
                     </div>
                   </div>
-                  <div class="my-2">
-                    <div class="row">
-                      <div class="col-12">
+                  <div className="my-2">
+                    <div className="row">
+                      <div className="col-12">
                         <div
-                          class="table-responsive accounts-table"
+                          className="table-responsive accounts-table"
                           data-pattern="priority-columns"
                         >
                           <table
                             id="tech-companies-1"
-                            class="table  bg-white text-center mb-0"
+                            className="table  bg-white text-center mb-0"
                           >
-                            <thead class="text-center accounts-table-head">
+                            <thead className="text-center accounts-table-head">
                               <tr>
                                 <th>শিক্ষাবর্ষ</th>
                                 <th>জানুয়ারী</th>
@@ -952,13 +965,13 @@ const AddBook = () => {
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
-                <div class="button-group">
-                  <button class="custom-btn btn-primary" type="submit">
+              <div className="modal-footer">
+                <div className="button-group">
+                  <button className="custom-btn btn-primary" type="submit">
                     Save
                   </button>
                   <button
-                    class="custom-btn btn-dark"
+                    className="custom-btn btn-dark"
                     data-bs-dismiss="modal"
                     onclick="javascript:void(0)"
                     type="button"
@@ -973,26 +986,31 @@ const AddBook = () => {
       </div>
       {/* <!--Monthly Fees Collection Defualt  Modal End-->
             <!--Month Name Add Modal Start--> */}
-      <div class="modal fade" id="monthname" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="section-title">
+      <div
+        className="modal fade"
+        id="monthname"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>মাসের নাম এন্ট্রি</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12 w-100">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-5">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12 w-100">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-5">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 শিক্ষাবর্ষ
                               </label>
-                              <div class="col-7">
-                                <select class="form-select">
+                              <div className="col-7">
+                                <select className="form-select">
                                   <option value="" selected>
                                     সিলেক্ট করুন
                                   </option>
@@ -1003,13 +1021,13 @@ const AddBook = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-7">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-7">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 জামাত/শ্রেনী
                               </label>
-                              <div class="col-7">
-                                <select class="form-select">
+                              <div className="col-7">
+                                <select className="form-select">
                                   <option selected="">
                                     শ্রেণী নির্বাচন করুন
                                   </option>
@@ -1033,54 +1051,54 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-12">
-                            <div class="section-title special-bg">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-12">
+                            <div className="section-title special-bg">
                               <h4>মাসের নাম</h4>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ১ম মাস
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ২য় মাস
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ৩য় মাস
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
@@ -1088,45 +1106,45 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ৪র্থ মাস
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ৫ম মাস
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ৬ষ্ঠ মাস
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
@@ -1134,45 +1152,45 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ৭ম মাস
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ৮ম মাস
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ৯ম মাস
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
@@ -1180,45 +1198,45 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ১০ম মাস
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ১১তম মাস
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-4">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ১২তম মাস
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
@@ -1226,19 +1244,22 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12 addbank">
-                        <div class="button-group">
-                          <a href="#" class="custom-btn btn-primary">
+                      <div className="col-12 addbank">
+                        <div className="button-group">
+                          <a href="#" className="custom-btn btn-primary">
                             Save
                           </a>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Edit
                           </button>
-                          <button class="custom-btn btn-primary" type="submit">
+                          <button
+                            className="custom-btn btn-primary"
+                            type="submit"
+                          >
                             New
                           </button>
                           <button
-                            class="custom-btn btn-danger"
+                            className="custom-btn btn-danger"
                             data-bs-dismiss="modal"
                             onclick="javascript:void(0)"
                             type="button"
@@ -1248,18 +1269,18 @@ const AddBook = () => {
                         </div>
                       </div>
                       {/* <!--Table Area Start--> */}
-                      <div class="col-md-12">
-                        <div class="table-data mt-4">
+                      <div className="col-md-12">
+                        <div className="table-data mt-4">
                           <div
-                            class="table-responsive"
+                            className="table-responsive"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white table-bordered text-center"
+                              className="table  bg-white table-bordered text-center"
                             >
                               <thead
-                                class="text-center"
+                                className="text-center"
                                 style={{
                                   backgroundColor: "#62659B",
                                   color: "white",
@@ -1267,8 +1288,8 @@ const AddBook = () => {
                               >
                                 <tr>
                                   <th>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </th>
                                   <th>শিক্ষাবর্ষ</th>
@@ -1290,8 +1311,8 @@ const AddBook = () => {
                               <tbody>
                                 <tr>
                                   <td>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </td>
                                   <td>২০২২</td>
@@ -1325,26 +1346,26 @@ const AddBook = () => {
       </div>
       {/* <!--Month Add Modal End-->
             <!--ছুটি বা দিন Add Modal Start--> */}
-      <div class="modal fade" id="holiday" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="section-title">
+      <div className="modal fade" id="holiday" aria-hidden="true" tabindex="-1">
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>ছুটি বা দিন এন্ট্রি</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12 w-100">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-5">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12 w-100">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-5">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 শিক্ষাবর্ষ
                               </label>
-                              <div class="col-7">
-                                <select class="form-select">
+                              <div className="col-7">
+                                <select className="form-select">
                                   <option value="" selected>
                                     সিলেক্ট করুন
                                   </option>
@@ -1355,13 +1376,13 @@ const AddBook = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-7">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-7">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 জামাত/শ্রেনী
                               </label>
-                              <div class="col-7">
-                                <select class="form-select">
+                              <div className="col-7">
+                                <select className="form-select">
                                   <option selected="">
                                     শ্রেণী নির্বাচন করুন
                                   </option>
@@ -1385,54 +1406,54 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-8">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-8">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 ছাত্রের আইডি দিয়ে এন্টার
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-4">
-                            <button class="custom-btn btn-primary">
+                          <div className="col-4">
+                            <button className="custom-btn btn-primary">
                               খুজুন
                             </button>
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-6">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-6">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 মাসের নাম
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের নাম"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-6">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-6">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 মাসের মোট দিন
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসের মোট দিন"
                                 />
                               </div>
@@ -1440,17 +1461,17 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-6">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-6">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 মাসে মোট বন্ধ
                               </label>
-                              <div class="col-7">
+                              <div className="col-7">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="মাসে মোট বন্ধ"
                                 />
                               </div>
@@ -1458,19 +1479,22 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12 addbank">
-                        <div class="button-group">
-                          <a href="#" class="custom-btn btn-primary">
+                      <div className="col-12 addbank">
+                        <div className="button-group">
+                          <a href="#" className="custom-btn btn-primary">
                             Save
                           </a>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Edit
                           </button>
-                          <button class="custom-btn btn-primary" type="submit">
+                          <button
+                            className="custom-btn btn-primary"
+                            type="submit"
+                          >
                             New
                           </button>
                           <button
-                            class="custom-btn btn-danger"
+                            className="custom-btn btn-danger"
                             data-bs-dismiss="modal"
                             onclick="javascript:void(0)"
                             type="button"
@@ -1480,18 +1504,18 @@ const AddBook = () => {
                         </div>
                       </div>
                       {/* <!--Table Area Start--> */}
-                      <div class="col-md-12">
-                        <div class="table-data mt-4">
+                      <div className="col-md-12">
+                        <div className="table-data mt-4">
                           <div
-                            class="table-responsive"
+                            className="table-responsive"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white table-bordered text-center"
+                              className="table  bg-white table-bordered text-center"
                             >
                               <thead
-                                class="text-center"
+                                className="text-center"
                                 style={{
                                   backgroundColor: "#62659B",
                                   color: "white",
@@ -1499,8 +1523,8 @@ const AddBook = () => {
                               >
                                 <tr>
                                   <th>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </th>
                                   <th>শিক্ষাবর্ষ</th>
@@ -1522,8 +1546,8 @@ const AddBook = () => {
                               <tbody>
                                 <tr>
                                   <td>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </td>
                                   <td>২০২২</td>
@@ -1558,41 +1582,41 @@ const AddBook = () => {
       {/* <!--ছুটি বা দিন Add Modal End-->
             <!--খাবারের খরচ বাড়ানো কমানো Modal Start--> */}
       <div
-        class="modal fade"
+        className="modal fade"
         id="mealfeeincrase"
         aria-hidden="true"
         tabindex="-1"
       >
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="section-title">
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>ছাত্রের খাবারের খরচ বাড়ানো কমানো</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12 w-100">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-12">
-                            <div class="row mb-3">
-                              <div class="col-8">
-                                <div class="row">
-                                  <label class="col-sm-5 col-form-label info-lable">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12 w-100">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-12">
+                            <div className="row mb-3">
+                              <div className="col-8">
+                                <div className="row">
+                                  <label className="col-sm-5 col-form-label info-lable">
                                     ছাত্রের আইডি দিয়ে এন্টার
                                   </label>
-                                  <div class="col-7">
+                                  <div className="col-7">
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder="ছাত্রের আইডি দিন"
                                     />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-4">
-                                <button class="custom-btn btn-primary">
+                              <div className="col-4">
+                                <button className="custom-btn btn-primary">
                                   খুজুন
                                 </button>
                               </div>
@@ -1600,13 +1624,13 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row my-3">
-                          <label class="col-sm-3 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row my-3">
+                          <label className="col-sm-3 col-form-label info-lable">
                             খাবারের ধরন
                           </label>
-                          <div class="col-6">
-                            <select class="form-select">
+                          <div className="col-6">
+                            <select className="form-select">
                               <option selected="">শ্রেণী নির্বাচন করুন</option>
                               <option>নাযেরা</option>
                               <option>হিফযুল কুরআন</option>
@@ -1624,30 +1648,30 @@ const AddBook = () => {
                               <option>ইফতা ১ম</option>
                             </select>
                           </div>
-                          <div class="col-3">
-                            <span class="addbutton">
+                          <div className="col-3">
+                            <span className="addbutton">
                               <a
                                 href="#"
                                 data-bs-toggle="modal"
                                 data-bs-target="#foodentry"
                               >
-                                <i class="bi bi-plus-circle-fill"></i>
+                                <i className="bi bi-plus-circle-fill"></i>
                               </a>
                             </span>
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-12">
-                            <div class="row">
-                              <label class="col-sm-3 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-12">
+                            <div className="row">
+                              <label className="col-sm-3 col-form-label info-lable">
                                 নির্ধারিত খাবারের ফি
                               </label>
-                              <div class="col-6">
+                              <div className="col-6">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="নির্ধারিত খাবারের ফি"
                                 />
                               </div>
@@ -1655,19 +1679,22 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12 addbank">
-                        <div class="button-group">
-                          <a href="#" class="custom-btn btn-primary">
+                      <div className="col-12 addbank">
+                        <div className="button-group">
+                          <a href="#" className="custom-btn btn-primary">
                             Save
                           </a>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Update
                           </button>
-                          <button class="custom-btn btn-primary" type="submit">
+                          <button
+                            className="custom-btn btn-primary"
+                            type="submit"
+                          >
                             New
                           </button>
                           <button
-                            class="custom-btn btn-danger"
+                            className="custom-btn btn-danger"
                             data-bs-dismiss="modal"
                             onclick="javascript:void(0)"
                             type="button"
@@ -1677,18 +1704,18 @@ const AddBook = () => {
                         </div>
                       </div>
                       {/* <!--Table Area Start--> */}
-                      <div class="col-md-12">
-                        <div class="table-data mt-4">
+                      <div className="col-md-12">
+                        <div className="table-data mt-4">
                           <div
-                            class="table-responsive"
+                            className="table-responsive"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white table-bordered text-center"
+                              className="table  bg-white table-bordered text-center"
                             >
                               <thead
-                                class="text-center"
+                                className="text-center"
                                 style={{
                                   backgroundColor: "#62659B",
                                   color: "white",
@@ -1696,13 +1723,13 @@ const AddBook = () => {
                               >
                                 <tr>
                                   <th>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </th>
                                   <th>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </th>
                                   <th>মাসের নাম</th>
@@ -1713,60 +1740,60 @@ const AddBook = () => {
                               <tbody>
                                 <tr>
                                   <td>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </td>
                                   <td>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </td>
                                   <td>জানুয়ারী</td>
                                   <td>২৩০০</td>
                                   <td>
                                     <input
-                                      class="form-check-input mt-0"
+                                      className="form-check-input mt-0"
                                       type="checkbox"
                                     />
                                   </td>
                                 </tr>
                                 <tr>
                                   <td>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </td>
                                   <td>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </td>
                                   <td>ফেব্রুয়ারী</td>
                                   <td>২৩০০</td>
                                   <td>
                                     <input
-                                      class="form-check-input mt-0"
+                                      className="form-check-input mt-0"
                                       type="checkbox"
                                     />
                                   </td>
                                 </tr>
                                 <tr>
                                   <td>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </td>
                                   <td>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </td>
                                   <td>মার্চ</td>
                                   <td>২৭০০</td>
                                   <td>
                                     <input
-                                      class="form-check-input mt-0"
+                                      className="form-check-input mt-0"
                                       type="checkbox"
                                     />
                                   </td>
@@ -1787,26 +1814,31 @@ const AddBook = () => {
       </div>
       {/* <!--খাবারের খরচ বাড়ানো কমানো Modal End-->
             <!--খাবার এন্ট্রি  Modal Start--> */}
-      <div class="modal fade" id="foodentry" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="section-title">
+      <div
+        className="modal fade"
+        id="foodentry"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>খাবার এন্ট্রি</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12 w-100">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-6">
-                            <div class="row">
-                              <label class="col-sm-3 col-form-label info-lable">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12 w-100">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-6">
+                            <div className="row">
+                              <label className="col-sm-3 col-form-label info-lable">
                                 শিক্ষাবর্ষ
                               </label>
-                              <div class="col-9">
-                                <select class="form-select">
+                              <div className="col-9">
+                                <select className="form-select">
                                   <option selected="">নির্বাচন করুন</option>
                                   <option>২০২২</option>
                                   <option>২০২৩</option>
@@ -1816,15 +1848,15 @@ const AddBook = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-6">
-                            <div class="row">
-                              <label class="col-sm-3 col-form-label info-lable">
+                          <div className="col-6">
+                            <div className="row">
+                              <label className="col-sm-3 col-form-label info-lable">
                                 আইডি
                               </label>
-                              <div class="col-9">
+                              <div className="col-9">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="আইডি"
                                 />
                               </div>
@@ -1832,31 +1864,31 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12">
-                        <div class="row mb-3">
-                          <div class="col-6">
-                            <div class="row">
-                              <label class="col-sm-3 col-form-label info-lable">
+                      <div className="col-12">
+                        <div className="row mb-3">
+                          <div className="col-6">
+                            <div className="row">
+                              <label className="col-sm-3 col-form-label info-lable">
                                 খাবারের নাম
                               </label>
-                              <div class="col-9">
+                              <div className="col-9">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="আইডি"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-6">
-                            <div class="row">
-                              <label class="col-sm-3 col-form-label info-lable">
+                          <div className="col-6">
+                            <div className="row">
+                              <label className="col-sm-3 col-form-label info-lable">
                                 খাবারের ফি
                               </label>
-                              <div class="col-9">
+                              <div className="col-9">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="নির্ধারিত খাবারের ফি"
                                 />
                               </div>
@@ -1864,19 +1896,22 @@ const AddBook = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-12 addbank">
-                        <div class="button-group">
-                          <a href="#" class="custom-btn btn-primary">
+                      <div className="col-12 addbank">
+                        <div className="button-group">
+                          <a href="#" className="custom-btn btn-primary">
                             Save
                           </a>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Update
                           </button>
-                          <button class="custom-btn btn-primary" type="submit">
+                          <button
+                            className="custom-btn btn-primary"
+                            type="submit"
+                          >
                             New
                           </button>
                           <button
-                            class="custom-btn btn-danger"
+                            className="custom-btn btn-danger"
                             data-bs-dismiss="modal"
                             onclick="javascript:void(0)"
                             type="button"
@@ -1886,18 +1921,18 @@ const AddBook = () => {
                         </div>
                       </div>
                       {/* <!--Table Area Start--> */}
-                      <div class="col-md-12">
-                        <div class="table-data mt-4">
+                      <div className="col-md-12">
+                        <div className="table-data mt-4">
                           <div
-                            class="table-responsive"
+                            className="table-responsive"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white table-bordered text-center"
+                              className="table  bg-white table-bordered text-center"
                             >
                               <thead
-                                class="text-center"
+                                className="text-center"
                                 style={{
                                   backgroundColor: "#62659B",
                                   color: "white",
@@ -1905,13 +1940,13 @@ const AddBook = () => {
                               >
                                 <tr>
                                   <th>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </th>
                                   <th>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </th>
                                   <th>আইডি</th>
@@ -1923,13 +1958,13 @@ const AddBook = () => {
                               <tbody>
                                 <tr>
                                   <td>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </td>
                                   <td>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </td>
                                   <td></td>
@@ -1954,62 +1989,65 @@ const AddBook = () => {
       {/* <!--খাবার এন্ট্রি Modal End-->
             <!-- Add Desegnation  Modal Start--> */}
       <div
-        class="modal fade"
+        className="modal fade"
         id="adddesignation"
         aria-hidden="true"
         tabindex="-1"
       >
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="section-title">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>পদবীর নাম যোগ করুন</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12 w-100">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="my-4">
-                          <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label info-lable">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12 w-100">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="my-4">
+                          <div className="row mb-3">
+                            <label className="col-sm-3 col-form-label info-lable">
                               পদবীর নামঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="পদবীর নাম"
                               />
                             </div>
                           </div>
-                          <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label info-lable">
+                          <div className="row mb-3">
+                            <label className="col-sm-3 col-form-label info-lable">
                               মন্তব্যঃ
                             </label>
-                            <div class="col-8">
+                            <div className="col-8">
                               <input
                                 type="text"
-                                class="form-control"
+                                className="form-control"
                                 placeholder="মন্তব্য"
                               />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div class="col-12 addbank">
-                        <div class="button-group">
-                          <a href="#" class="custom-btn btn-primary">
+                      <div className="col-12 addbank">
+                        <div className="button-group">
+                          <a href="#" className="custom-btn btn-primary">
                             Save
                           </a>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Update
                           </button>
-                          <button class="custom-btn btn-primary" type="submit">
+                          <button
+                            className="custom-btn btn-primary"
+                            type="submit"
+                          >
                             New
                           </button>
                           <button
-                            class="custom-btn btn-danger"
+                            className="custom-btn btn-danger"
                             data-bs-dismiss="modal"
                             onclick="javascript:void(0)"
                             type="button"
@@ -2018,18 +2056,18 @@ const AddBook = () => {
                           </button>
                         </div>
                       </div>
-                      <div class="col-md-12">
-                        <div class="table-data mt-4">
+                      <div className="col-md-12">
+                        <div className="table-data mt-4">
                           <div
-                            class="table-responsive"
+                            className="table-responsive"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white table-bordered text-center"
+                              className="table  bg-white table-bordered text-center"
                             >
                               <thead
-                                class="text-center"
+                                className="text-center"
                                 style={{
                                   backgroundColor: "#62659B",
                                   color: "white",
@@ -2106,13 +2144,13 @@ const AddBook = () => {
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
-                <div class="button-group">
-                  <button class="custom-btn btn-primary" type="submit">
+              <div className="modal-footer">
+                <div className="button-group">
+                  <button className="custom-btn btn-primary" type="submit">
                     Save
                   </button>
                   <button
-                    class="custom-btn btn-dark"
+                    className="custom-btn btn-dark"
                     data-bs-dismiss="modal"
                     onclick="javascript:void(0)"
                     type="button"
@@ -2127,36 +2165,41 @@ const AddBook = () => {
       </div>
       {/* <!--Add Desegnation  Modal End-->
             <!-- Salary Sheet  Modal Start--> */}
-      <div class="modal fade" id="salarysheet" aria-hidden="true" tabindex="-1">
-        <div class="modal-dialog modal-xl">
-          <div class="modal-content">
-            <div class="section-title">
+      <div
+        className="modal fade"
+        id="salarysheet"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <div className="modal-dialog modal-xl">
+          <div className="modal-content">
+            <div className="section-title">
               <h4>বেতন শীট</h4>
             </div>
             <form>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12 w-100">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="row">
-                          <div class="col-3">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-12 w-100">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="row">
+                          <div className="col-3">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 এন্ট্রি তারিথ
                               </label>
-                              <div class="col-7">
-                                <input type="date" class="form-control" />
+                              <div className="col-7">
+                                <input type="date" className="form-control" />
                               </div>
                             </div>
                           </div>
-                          <div class="col-3">
-                            <div class="row">
-                              <label class="col-sm-5 col-form-label info-lable">
+                          <div className="col-3">
+                            <div className="row">
+                              <label className="col-sm-5 col-form-label info-lable">
                                 শিক্ষাবর্ষ
                               </label>
-                              <div class="col-7">
-                                <select class="form-select">
+                              <div className="col-7">
+                                <select className="form-select">
                                   <option value="" selected="">
                                     সিলেক্ট করুন
                                   </option>
@@ -2168,13 +2211,13 @@ const AddBook = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-6">
-                            <div class="row">
-                              <label class="col-sm-2 col-form-label info-lable">
+                          <div className="col-6">
+                            <div className="row">
+                              <label className="col-sm-2 col-form-label info-lable">
                                 মাস
                               </label>
-                              <div class="col-5">
-                                <select class="form-select">
+                              <div className="col-5">
+                                <select className="form-select">
                                   <option value="" selected="">
                                     সিলেক্ট করুন
                                   </option>
@@ -2184,10 +2227,10 @@ const AddBook = () => {
                                   <option value="">এপ্রিল</option>
                                 </select>
                               </div>
-                              <div class="col-5">
+                              <div className="col-5">
                                 <button
                                   type="submit"
-                                  class="custom-btn btn-primary d-block w-100"
+                                  className="custom-btn btn-primary d-block w-100"
                                 >
                                   Save
                                 </button>
@@ -2197,21 +2240,21 @@ const AddBook = () => {
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-lg-5 d-print-none">
+                    <div className="row">
+                      <div className="col-lg-5 d-print-none">
                         <form>
-                          <div class="row mt-3">
-                            <div class="col-12">
+                          <div className="row mt-3">
+                            <div className="col-12">
                               <div
-                                class="table-responsive"
+                                className="table-responsive"
                                 data-pattern="priority-columns"
                               >
                                 <table
                                   id="tech-companies-1"
-                                  class="table  bg-white table-bordered text-center"
+                                  className="table  bg-white table-bordered text-center"
                                 >
                                   <thead
-                                    class="text-center"
+                                    className="text-center"
                                     style={{
                                       backgroundColor: "#62659B",
                                       color: "white",
@@ -2221,7 +2264,7 @@ const AddBook = () => {
                                       <th>
                                         <input
                                           type="checkbox"
-                                          class=" form-check-input"
+                                          className=" form-check-input"
                                           name="checkbox"
                                           onclick="allSelect(this)"
                                         />
@@ -2236,7 +2279,7 @@ const AddBook = () => {
                                       <th>
                                         <input
                                           type="checkbox"
-                                          class=" form-check-input"
+                                          className=" form-check-input"
                                           name="checkbox"
                                         />
                                       </th>
@@ -2248,7 +2291,7 @@ const AddBook = () => {
                                       <th>
                                         <input
                                           type="checkbox"
-                                          class=" form-check-input"
+                                          className=" form-check-input"
                                           name="checkbox"
                                         />
                                       </th>
@@ -2261,11 +2304,11 @@ const AddBook = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="row mt-3">
-                            <div class="col-12">
+                          <div className="row mt-3">
+                            <div className="col-12">
                               <button
                                 type="submit"
-                                class="custom-btn btn-primary d-block w-100"
+                                className="custom-btn btn-primary d-block w-100"
                               >
                                 Generate Salary
                               </button>
@@ -2273,19 +2316,19 @@ const AddBook = () => {
                           </div>
                         </form>
                       </div>
-                      <div class="col-md-7 col-sm-12 d-print-none">
-                        <div class="row mt-3">
-                          <div class="col-12">
+                      <div className="col-md-7 col-sm-12 d-print-none">
+                        <div className="row mt-3">
+                          <div className="col-12">
                             <div
-                              class="table-responsive"
+                              className="table-responsive"
                               data-pattern="priority-columns"
                             >
                               <table
                                 id="tech-companies-1"
-                                class="table  bg-white table-bordered text-center"
+                                className="table  bg-white table-bordered text-center"
                               >
                                 <thead
-                                  class="text-center"
+                                  className="text-center"
                                   style={{
                                     backgroundColor: "#62659B",
                                     color: "white",
@@ -2293,8 +2336,8 @@ const AddBook = () => {
                                 >
                                   <tr>
                                     <th>
-                                      <span class="action-edit">
-                                        <i class="bi bi-pencil-square"></i>
+                                      <span className="action-edit">
+                                        <i className="bi bi-pencil-square"></i>
                                       </span>
                                     </th>
                                     <th>শিক্ষকের নাম</th>
@@ -2311,8 +2354,8 @@ const AddBook = () => {
                                 <tbody>
                                   <tr>
                                     <th>
-                                      <span class="action-edit">
-                                        <i class="bi bi-pencil-square"></i>
+                                      <span className="action-edit">
+                                        <i className="bi bi-pencil-square"></i>
                                       </span>
                                     </th>
                                     <td></td>
@@ -2335,13 +2378,13 @@ const AddBook = () => {
                   </div>
                 </div>
               </div>
-              <div class="modal-footer">
-                <div class="button-group">
-                  <button class="custom-btn btn-primary" type="submit">
+              <div className="modal-footer">
+                <div className="button-group">
+                  <button className="custom-btn btn-primary" type="submit">
                     Save
                   </button>
                   <button
-                    class="custom-btn btn-dark"
+                    className="custom-btn btn-dark"
                     data-bs-dismiss="modal"
                     onclick="javascript:void(0)"
                     type="button"

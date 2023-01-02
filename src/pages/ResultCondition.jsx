@@ -3,21 +3,21 @@ import React from "react";
 const ResultCondition = () => {
   return (
     <div>
-      <section class="user-form-section">
-        <div class="section-bg">
-          <div class="row">
-            <div class="col-md-12 w-100">
-              <div class="main-container">
-                <div class="row">
-                  <div class="col-12">
+      <section className="user-form-section">
+        <div className="section-bg">
+          <div className="row">
+            <div className="col-md-12 w-100">
+              <div className="main-container">
+                <div className="row">
+                  <div className="col-12">
                     <ul
-                      class="nav nav-pills mb-3 justify-content-center"
+                      className="nav nav-pills mb-3 justify-content-center"
                       id="pills-tab"
                       role="tablist"
                     >
-                      <li class="nav-item" role="presentation">
+                      <li className="nav-item" role="presentation">
                         <button
-                          class="nav-link active"
+                          className="nav-link active"
                           data-bs-toggle="pill"
                           data-bs-target="#pills-home"
                           type="button"
@@ -28,9 +28,9 @@ const ResultCondition = () => {
                           গড় নির্নয়
                         </button>
                       </li>
-                      <li class="nav-item" role="presentation">
+                      <li className="nav-item" role="presentation">
                         <button
-                          class="nav-link"
+                          className="nav-link"
                           id="pills-profile-tab"
                           data-bs-toggle="pill"
                           data-bs-target="#pills-profile"
@@ -42,9 +42,9 @@ const ResultCondition = () => {
                           বিষয় ও পাশ নাম্বার
                         </button>
                       </li>
-                      <li class="nav-item" role="presentation">
+                      <li className="nav-item" role="presentation">
                         <button
-                          class="nav-link"
+                          className="nav-link"
                           id="pills-contact-tab"
                           data-bs-toggle="pill"
                           data-bs-target="#pills-contact"
@@ -57,59 +57,59 @@ const ResultCondition = () => {
                         </button>
                       </li>
                     </ul>
-                    <div class="tab-content" id="pills-tabContent">
+                    <div className="tab-content" id="pills-tabContent">
                       <div
-                        class="tab-pane fade show active"
+                        className="tab-pane fade show active"
                         id="pills-home"
                         role="tabpanel"
                         tabindex="0"
                       >
-                        <div class="row">
-                          <div class="col-12">
-                            <div class="sperator mb-2"></div>
-                            <div class="row">
-                              <div class="col-lg-3 col-md-3 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="sperator mb-2"></div>
+                            <div className="row">
+                              <div className="col-lg-3 col-md-3 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                     আইডি
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-8 col-md-8 col-12">
+                                  <div className="col-lg-8 col-md-8 col-12">
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder="আইডি"
                                     />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-3 col-md-3 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                              <div className="col-lg-3 col-md-3 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
                                     সর্বোচ্চ নম্বর
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-12">
+                                  <div className="col-lg-6 col-md-6 col-12">
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder="১০০"
                                     />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                  <div class="col-lg-4 col-md-4 col-6 offset-lg-4 offset-0">
-                                    <div class="row mb-3">
-                                      <label class="col-sm-12 col-form-label info-lable text-center">
+                              <div className="col-lg-6 col-md-6 col-12">
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-6 offset-lg-4 offset-0">
+                                    <div className="row mb-3">
+                                      <label className="col-sm-12 col-form-label info-lable text-center">
                                         বাংলা
                                       </label>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-md-4 col-6">
-                                    <div class="row mb-3">
-                                      <label class="col-sm-12 col-form-label info-lable text-center">
+                                  <div className="col-lg-4 col-md-4 col-6">
+                                    <div className="row mb-3">
+                                      <label className="col-sm-12 col-form-label info-lable text-center">
                                         আরবি
                                       </label>
                                     </div>
@@ -117,15 +117,15 @@ const ResultCondition = () => {
                                 </div>
                               </div>
                             </div>
-                            <div class="row">
-                              <div class="col-lg-3 col-md-3 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                            <div className="row">
+                              <div className="col-lg-3 col-md-3 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                     শিক্ষাবর্ষ
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-10">
-                                    <select class="form-select">
+                                  <div className="col-lg-6 col-md-6 col-10">
+                                    <select className="form-select">
                                       <option value="" selected="">
                                         সিলেক্ট করুন
                                       </option>
@@ -135,54 +135,57 @@ const ResultCondition = () => {
                                       <option value="">২০২৫</option>
                                     </select>
                                   </div>
-                                  <div class="col-2">
-                                    <span class="addbutton">
+                                  <div className="col-2">
+                                    <span className="addbutton">
                                       <a
                                         href="#"
                                         data-bs-toggle="modal"
                                         data-bs-target="#membertype"
                                       >
-                                        <i class="bi bi-plus-circle-fill"></i>
+                                        <i className="bi bi-plus-circle-fill"></i>
                                       </a>
                                     </span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-3 col-md-3 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                              <div className="col-lg-3 col-md-3 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
                                     যদি --
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-12">
-                                    <input type="number" class="form-control" />
+                                  <div className="col-lg-6 col-md-6 col-12">
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                    />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                  <div class="col-4">
-                                    <div class="row mb-3">
-                                      <label class="col-sm-12 col-form-label info-lable">
+                              <div className="col-lg-6 col-md-6 col-12">
+                                <div className="row">
+                                  <div className="col-4">
+                                    <div className="row mb-3">
+                                      <label className="col-sm-12 col-form-label info-lable">
                                         তাহলে ডিভিশন
                                       </label>
                                     </div>
                                   </div>
-                                  <div class="col-4">
-                                    <div class="row mb-3">
-                                      <div class="col-sm-12">
+                                  <div className="col-4">
+                                    <div className="row mb-3">
+                                      <div className="col-sm-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="col-4">
-                                    <div class="row mb-3">
-                                      <div class="col-sm-12">
+                                  <div className="col-4">
+                                    <div className="row mb-3">
+                                      <div className="col-sm-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
                                     </div>
@@ -190,15 +193,15 @@ const ResultCondition = () => {
                                 </div>
                               </div>
                             </div>
-                            <div class="row">
-                              <div class="col-lg-3 col-md-3 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-lg-4 col-md-4 col-form-label info-lable">
+                            <div className="row">
+                              <div className="col-lg-3 col-md-3 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-lg-4 col-md-4 col-form-label info-lable">
                                     পরীক্ষা
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-10">
-                                    <select class="form-select">
+                                  <div className="col-lg-6 col-md-6 col-10">
+                                    <select className="form-select">
                                       <option selected="">
                                         শ্রেণী নির্বাচন করুন
                                       </option>
@@ -209,54 +212,57 @@ const ResultCondition = () => {
                                       <option>মাসিক পরীক্ষা</option>
                                     </select>
                                   </div>
-                                  <div class="col-2">
-                                    <span class="addbutton">
+                                  <div className="col-2">
+                                    <span className="addbutton">
                                       <a
                                         href="#"
                                         data-bs-toggle="modal"
                                         data-bs-target="#membertype"
                                       >
-                                        <i class="bi bi-plus-circle-fill"></i>
+                                        <i className="bi bi-plus-circle-fill"></i>
                                       </a>
                                     </span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-3 col-md-3 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                              <div className="col-lg-3 col-md-3 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
                                     অথবা যদি --
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-12">
-                                    <input type="number" class="form-control" />
+                                  <div className="col-lg-6 col-md-6 col-12">
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                    />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-6">
-                                <div class="row">
-                                  <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="row mb-md-3 mb-1">
-                                      <label class="col-sm-12 col-form-label info-lable">
+                              <div className="col-lg-6">
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-12">
+                                    <div className="row mb-md-3 mb-1">
+                                      <label className="col-sm-12 col-form-label info-lable">
                                         তাহলে ডিভিশন
                                       </label>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-md-4 col-6">
-                                    <div class="row mb-md-3 mb-1">
-                                      <div class="col-sm-12">
+                                  <div className="col-lg-4 col-md-4 col-6">
+                                    <div className="row mb-md-3 mb-1">
+                                      <div className="col-sm-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-md-4 col-6">
-                                    <div class="row mb-3">
-                                      <div class="col-sm-12">
+                                  <div className="col-lg-4 col-md-4 col-6">
+                                    <div className="row mb-3">
+                                      <div className="col-sm-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
                                     </div>
@@ -264,15 +270,15 @@ const ResultCondition = () => {
                                 </div>
                               </div>
                             </div>
-                            <div class="row">
-                              <div class="col-lg-3 col-md-3 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                            <div className="row">
+                              <div className="col-lg-3 col-md-3 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                     মারহালা
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-10">
-                                    <select class="form-select">
+                                  <div className="col-lg-6 col-md-6 col-10">
+                                    <select className="form-select">
                                       <option selected="">
                                         শ্রেণী নির্বাচন করুন
                                       </option>
@@ -292,54 +298,57 @@ const ResultCondition = () => {
                                       <option>ইফতা ১ম</option>
                                     </select>
                                   </div>
-                                  <div class="col-2">
-                                    <span class="addbutton">
+                                  <div className="col-2">
+                                    <span className="addbutton">
                                       <a
                                         href="#"
                                         data-bs-toggle="modal"
                                         data-bs-target="#membertype"
                                       >
-                                        <i class="bi bi-plus-circle-fill"></i>
+                                        <i className="bi bi-plus-circle-fill"></i>
                                       </a>
                                     </span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-3 col-md-3 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-sm-6 col-form-label info-lable">
+                              <div className="col-lg-3 col-md-3 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-sm-6 col-form-label info-lable">
                                     অথবা যদি --
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-12">
-                                    <input type="number" class="form-control" />
+                                  <div className="col-lg-6 col-md-6 col-12">
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                    />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                  <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="row mb-3">
-                                      <label class="col-sm-12 col-form-label info-lable">
+                              <div className="col-lg-6 col-md-6 col-12">
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-12">
+                                    <div className="row mb-3">
+                                      <label className="col-sm-12 col-form-label info-lable">
                                         তাহলে ডিভিশন
                                       </label>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-md-4 col-6">
-                                    <div class="row mb-3">
-                                      <div class="col-sm-12">
+                                  <div className="col-lg-4 col-md-4 col-6">
+                                    <div className="row mb-3">
+                                      <div className="col-sm-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-md-4 col-6">
-                                    <div class="row mb-3">
-                                      <div class="col-sm-12">
+                                  <div className="col-lg-4 col-md-4 col-6">
+                                    <div className="row mb-3">
+                                      <div className="col-sm-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
                                     </div>
@@ -347,43 +356,46 @@ const ResultCondition = () => {
                                 </div>
                               </div>
                             </div>
-                            <div class="row">
-                              <div class="col-3 d-md-block d-none"></div>
-                              <div class="col-lg-3 col-md-3 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                            <div className="row">
+                              <div className="col-3 d-md-block d-none"></div>
+                              <div className="col-lg-3 col-md-3 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
                                     অথবা যদি --
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-12">
-                                    <input type="number" class="form-control" />
+                                  <div className="col-lg-6 col-md-6 col-12">
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                    />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                  <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="row mb-lg-3 mb-1">
-                                      <label class="col-sm-12 col-form-label info-lable">
+                              <div className="col-lg-6 col-md-6 col-12">
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-12">
+                                    <div className="row mb-lg-3 mb-1">
+                                      <label className="col-sm-12 col-form-label info-lable">
                                         তাহলে ডিভিশন
                                       </label>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-md-4 col-6">
-                                    <div class="row mb-lg-3 mb-1">
-                                      <div class="col-sm-12">
+                                  <div className="col-lg-4 col-md-4 col-6">
+                                    <div className="row mb-lg-3 mb-1">
+                                      <div className="col-sm-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-md-4 col-6">
-                                    <div class="row mb-lg-3 mb-1">
-                                      <div class="col-sm-12">
+                                  <div className="col-lg-4 col-md-4 col-6">
+                                    <div className="row mb-lg-3 mb-1">
+                                      <div className="col-sm-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
                                     </div>
@@ -391,43 +403,46 @@ const ResultCondition = () => {
                                 </div>
                               </div>
                             </div>
-                            <div class="row mt-lg-0 mt-2">
-                              <div class="col-3 d-md-block d-none"></div>
-                              <div class="col-lg-3 col-md-3 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                            <div className="row mt-lg-0 mt-2">
+                              <div className="col-3 d-md-block d-none"></div>
+                              <div className="col-lg-3 col-md-3 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
                                     অথবা যদি --
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-12">
-                                    <input type="number" class="form-control" />
+                                  <div className="col-lg-6 col-md-6 col-12">
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                    />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                  <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="row mb-3">
-                                      <label class="col-sm-12 col-form-label info-lable">
+                              <div className="col-lg-6 col-md-6 col-12">
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-12">
+                                    <div className="row mb-3">
+                                      <label className="col-sm-12 col-form-label info-lable">
                                         তাহলে ডিভিশন
                                       </label>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-md-4 col-6">
-                                    <div class="row mb-3">
-                                      <div class="col-sm-12">
+                                  <div className="col-lg-4 col-md-4 col-6">
+                                    <div className="row mb-3">
+                                      <div className="col-sm-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-md-4 col-6">
-                                    <div class="row mb-3">
-                                      <div class="col-sm-12">
+                                  <div className="col-lg-4 col-md-4 col-6">
+                                    <div className="row mb-3">
+                                      <div className="col-sm-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
                                     </div>
@@ -435,43 +450,46 @@ const ResultCondition = () => {
                                 </div>
                               </div>
                             </div>
-                            <div class="row">
-                              <div class="col-3 d-md-block d-none"></div>
-                              <div class="col-lg-3 col-md-3 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                            <div className="row">
+                              <div className="col-3 d-md-block d-none"></div>
+                              <div className="col-lg-3 col-md-3 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
                                     অথবা যদি --
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-12">
-                                    <input type="number" class="form-control" />
+                                  <div className="col-lg-6 col-md-6 col-12">
+                                    <input
+                                      type="number"
+                                      className="form-control"
+                                    />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-6 col-md-6 col-12">
-                                <div class="row">
-                                  <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="row mb-md-3 mb-1">
-                                      <label class="col-sm-12 col-form-label info-lable">
+                              <div className="col-lg-6 col-md-6 col-12">
+                                <div className="row">
+                                  <div className="col-lg-4 col-md-4 col-12">
+                                    <div className="row mb-md-3 mb-1">
+                                      <label className="col-sm-12 col-form-label info-lable">
                                         তাহলে ডিভিশন
                                       </label>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-md-4 col-6">
-                                    <div class="row mb-3">
-                                      <div class="col-sm-12">
+                                  <div className="col-lg-4 col-md-4 col-6">
+                                    <div className="row mb-3">
+                                      <div className="col-sm-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-md-4 col-6">
-                                    <div class="row mb-3">
-                                      <div class="col-sm-12">
+                                  <div className="col-lg-4 col-md-4 col-6">
+                                    <div className="row mb-3">
+                                      <div className="col-sm-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
                                     </div>
@@ -480,30 +498,34 @@ const ResultCondition = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-6 d-flex justify-content-center w-100 payroll">
-                            <div class="button-group w-100">
-                              <button class="custom-btn btn-primary">
+                          <div className="col-6 d-flex justify-content-center w-100 payroll">
+                            <div className="button-group w-100">
+                              <button className="custom-btn btn-primary">
                                 Save
                               </button>
-                              <button class="custom-btn btn-info">Show</button>
-                              <button class="custom-btn btn-dark">New</button>
-                              <button class="custom-btn btn-danger">
+                              <button className="custom-btn btn-info">
+                                Show
+                              </button>
+                              <button className="custom-btn btn-dark">
+                                New
+                              </button>
+                              <button className="custom-btn btn-danger">
                                 Delete
                               </button>
                             </div>
                           </div>
                         </div>
-                        <div class="row my-3">
-                          <div class="col-12">
+                        <div className="row my-3">
+                          <div className="col-12">
                             <div
-                              class="table-responsive accounts-table"
+                              className="table-responsive accounts-table"
                               data-pattern="priority-columns"
                             >
                               <table
                                 id="tech-companies-1"
-                                class="table  bg-white text-center mb-0"
+                                className="table  bg-white text-center mb-0"
                               >
-                                <thead class="text-center accounts-table-head">
+                                <thead className="text-center accounts-table-head">
                                   <tr>
                                     <th>পরীক্ষার নাম</th>
                                     <th>মারহালা/ক্লাশ</th>
@@ -517,13 +539,13 @@ const ResultCondition = () => {
                                     <th>ডিভিশন-৩</th>
                                     <th>ডিভিশন আরবী-৩</th>
                                     <th>
-                                      <span class="action-edit">
-                                        <i class="bi bi-pencil-square"></i>
+                                      <span className="action-edit">
+                                        <i className="bi bi-pencil-square"></i>
                                       </span>
                                     </th>
                                     <th>
-                                      <span class="action-delete">
-                                        <i class="bi bi-trash3"></i>
+                                      <span className="action-delete">
+                                        <i className="bi bi-trash3"></i>
                                       </span>
                                     </th>
                                   </tr>
@@ -542,13 +564,13 @@ const ResultCondition = () => {
                                     <td></td>
                                     <td></td>
                                     <td>
-                                      <span class="action-edit">
-                                        <i class="bi bi-pencil-square"></i>
+                                      <span className="action-edit">
+                                        <i className="bi bi-pencil-square"></i>
                                       </span>
                                     </td>
                                     <td>
-                                      <span class="action-delete">
-                                        <i class="bi bi-trash3"></i>
+                                      <span className="action-delete">
+                                        <i className="bi bi-trash3"></i>
                                       </span>
                                     </td>
                                   </tr>
@@ -559,23 +581,23 @@ const ResultCondition = () => {
                         </div>
                       </div>
                       <div
-                        class="tab-pane fade"
+                        className="tab-pane fade"
                         id="pills-profile"
                         role="tabpanel"
                         aria-labelledby="pills-profile-tab"
                         tabindex="0"
                       >
-                        <div class="row">
-                          <div class="col-12">
-                            <div class="row">
-                              <div class="col-lg-4 col-md-12 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="row">
+                              <div className="col-lg-4 col-md-12 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                     শিক্ষাবর্ষ
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-10">
-                                    <select class="form-select">
+                                  <div className="col-lg-6 col-md-6 col-10">
+                                    <select className="form-select">
                                       <option value="" selected="">
                                         সিলেক্ট করুন
                                       </option>
@@ -585,25 +607,25 @@ const ResultCondition = () => {
                                       <option value="">২০২৫</option>
                                     </select>
                                   </div>
-                                  <div class="col-2">
-                                    <span class="addbutton">
+                                  <div className="col-2">
+                                    <span className="addbutton">
                                       <a
                                         href="#"
                                         data-bs-toggle="modal"
                                         data-bs-target="#membertype"
                                       >
-                                        <i class="bi bi-plus-circle-fill"></i>
+                                        <i className="bi bi-plus-circle-fill"></i>
                                       </a>
                                     </span>
                                   </div>
                                 </div>
-                                <div class="row mb-3">
-                                  <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                                <div className="row mb-3">
+                                  <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                     পরীক্ষার নাম
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-10">
-                                    <select class="form-select">
+                                  <div className="col-lg-6 col-md-6 col-10">
+                                    <select className="form-select">
                                       <option selected="">
                                         শ্রেণী নির্বাচন করুন
                                       </option>
@@ -614,25 +636,25 @@ const ResultCondition = () => {
                                       <option>মাসিক পরীক্ষা</option>
                                     </select>
                                   </div>
-                                  <div class="col-2">
-                                    <span class="addbutton">
+                                  <div className="col-2">
+                                    <span className="addbutton">
                                       <a
                                         href="#"
                                         data-bs-toggle="modal"
                                         data-bs-target="#membertype"
                                       >
-                                        <i class="bi bi-plus-circle-fill"></i>
+                                        <i className="bi bi-plus-circle-fill"></i>
                                       </a>
                                     </span>
                                   </div>
                                 </div>
-                                <div class="row mb-3">
-                                  <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                                <div className="row mb-3">
+                                  <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                     মারহালা
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-10">
-                                    <select class="form-select">
+                                  <div className="col-lg-6 col-md-6 col-10">
+                                    <select className="form-select">
                                       <option selected="">
                                         শ্রেণী নির্বাচন করুন
                                       </option>
@@ -652,25 +674,25 @@ const ResultCondition = () => {
                                       <option>ইফতা ১ম</option>
                                     </select>
                                   </div>
-                                  <div class="col-2">
-                                    <span class="addbutton">
+                                  <div className="col-2">
+                                    <span className="addbutton">
                                       <a
                                         href="#"
                                         data-bs-toggle="modal"
                                         data-bs-target="#membertype"
                                       >
-                                        <i class="bi bi-plus-circle-fill"></i>
+                                        <i className="bi bi-plus-circle-fill"></i>
                                       </a>
                                     </span>
                                   </div>
                                 </div>
-                                <div class="row mb-3">
-                                  <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                                <div className="row mb-3">
+                                  <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                     কিতাব
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-10">
-                                    <select class="form-select">
+                                  <div className="col-lg-6 col-md-6 col-10">
+                                    <select className="form-select">
                                       <option selected="">
                                         শ্রেণী নির্বাচন করুন
                                       </option>
@@ -690,80 +712,80 @@ const ResultCondition = () => {
                                       <option>ইফতা ১ম</option>
                                     </select>
                                   </div>
-                                  <div class="col-2">
-                                    <span class="addbutton">
+                                  <div className="col-2">
+                                    <span className="addbutton">
                                       <a
                                         href="#"
                                         data-bs-toggle="modal"
                                         data-bs-target="#membertype"
                                       >
-                                        <i class="bi bi-plus-circle-fill"></i>
+                                        <i className="bi bi-plus-circle-fill"></i>
                                       </a>
                                     </span>
                                   </div>
                                 </div>
-                                <div class="row mb-3">
-                                  <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                                <div className="row mb-3">
+                                  <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                     বিষয় আরবি
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-12">
+                                  <div className="col-lg-6 col-md-6 col-12">
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder="বিষয় আরবি"
                                     />
                                   </div>
-                                  <div class="col-2"></div>
+                                  <div className="col-2"></div>
                                 </div>
-                                <div class="row mb-3">
-                                  <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                                <div className="row mb-3">
+                                  <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                     পাশ নাম্বার
                                     <i>*</i>
                                   </label>
-                                  <div class="col-lg-6 col-md-6 col-12">
+                                  <div className="col-lg-6 col-md-6 col-12">
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder=" পাশ নাম্বার"
                                     />
                                   </div>
-                                  <div class="col-2"></div>
+                                  <div className="col-2"></div>
                                 </div>
-                                <div class="row mb-3">
-                                  <div class="col-12 result-btn">
-                                    <div class="button-group">
-                                      <button class="custom-btn btn-primary">
+                                <div className="row mb-3">
+                                  <div className="col-12 result-btn">
+                                    <div className="button-group">
+                                      <button className="custom-btn btn-primary">
                                         Save
                                       </button>
-                                      <button class="custom-btn btn-info">
+                                      <button className="custom-btn btn-info">
                                         New
                                       </button>
                                     </div>
                                   </div>
-                                  <div class="col-2"></div>
+                                  <div className="col-2"></div>
                                 </div>
-                                <div class="row mb-3">
-                                  <div class="col-12 my-2">
+                                <div className="row mb-3">
+                                  <div className="col-12 my-2">
                                     <p>
                                       উল্লেখিত সংখ্যা ব্যতিত অন্য সংথ্যা দ্বারা
                                       যদি মোট নাম্বার ভাগ দেয়ার প্রয়োজন হয় তাহলে
                                       নিচের বক্সে তা লিখে সেইভ বাটনে চাপ দিন।
                                     </p>
                                   </div>
-                                  <div class="col-12">
-                                    <div class="row">
-                                      <div class="col-8">
+                                  <div className="col-12">
+                                    <div className="row">
+                                      <div className="col-8">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                           placeholder=""
                                         />
                                       </div>
-                                      <div class="col-4">
+                                      <div className="col-4">
                                         <input
                                           type="button"
-                                          class="custom-btn btn-primary d-block w-100"
+                                          className="custom-btn btn-primary d-block w-100"
                                           value="Save"
                                           placeholder=""
                                         />
@@ -772,16 +794,16 @@ const ResultCondition = () => {
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-8 col-md-12 col-12">
+                              <div className="col-lg-8 col-md-12 col-12">
                                 <div
-                                  class="table-responsive accounts-table"
+                                  className="table-responsive accounts-table"
                                   data-pattern="priority-columns"
                                 >
                                   <table
                                     id="tech-companies-1"
-                                    class="table  bg-white text-center mb-0"
+                                    className="table  bg-white text-center mb-0"
                                   >
-                                    <thead class="text-center accounts-table-head">
+                                    <thead className="text-center accounts-table-head">
                                       <tr>
                                         <th>শিক্ষাবর্ষ</th>
                                         <th>পরীক্ষার নাম</th>
@@ -791,13 +813,13 @@ const ResultCondition = () => {
                                         <th>কিতাব আরাবী</th>
                                         <th>পাশ নাম্বার</th>
                                         <th>
-                                          <span class="action-edit">
-                                            <i class="bi bi-pencil-square"></i>
+                                          <span className="action-edit">
+                                            <i className="bi bi-pencil-square"></i>
                                           </span>
                                         </th>
                                         <th>
-                                          <span class="action-delete">
-                                            <i class="bi bi-trash3"></i>
+                                          <span className="action-delete">
+                                            <i className="bi bi-trash3"></i>
                                           </span>
                                         </th>
                                       </tr>
@@ -812,13 +834,13 @@ const ResultCondition = () => {
                                         <td></td>
                                         <td></td>
                                         <td>
-                                          <span class="action-edit">
-                                            <i class="bi bi-pencil-square"></i>
+                                          <span className="action-edit">
+                                            <i className="bi bi-pencil-square"></i>
                                           </span>
                                         </td>
                                         <td>
-                                          <span class="action-delete">
-                                            <i class="bi bi-trash3"></i>
+                                          <span className="action-delete">
+                                            <i className="bi bi-trash3"></i>
                                           </span>
                                         </td>
                                       </tr>
@@ -831,13 +853,13 @@ const ResultCondition = () => {
                                         <td></td>
                                         <td></td>
                                         <td>
-                                          <span class="action-edit">
-                                            <i class="bi bi-pencil-square"></i>
+                                          <span className="action-edit">
+                                            <i className="bi bi-pencil-square"></i>
                                           </span>
                                         </td>
                                         <td>
-                                          <span class="action-delete">
-                                            <i class="bi bi-trash3"></i>
+                                          <span className="action-delete">
+                                            <i className="bi bi-trash3"></i>
                                           </span>
                                         </td>
                                       </tr>
@@ -850,23 +872,23 @@ const ResultCondition = () => {
                         </div>
                       </div>
                       <div
-                        class="tab-pane fade"
+                        className="tab-pane fade"
                         id="pills-contact"
                         role="tabpanel"
                         aria-labelledby="pills-contact-tab"
                         tabindex="0"
                       >
-                        <div class="row">
-                          <div class="col-12">
-                            <div class="row">
-                              <div class="col-lg-4 col-md-6 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-md-4 col-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="row">
+                              <div className="col-lg-4 col-md-6 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-md-4 col-12 col-form-label info-lable">
                                     পরীক্ষার নাম
                                     <i>*</i>
                                   </label>
-                                  <div class="col-md-6 col-10">
-                                    <select class="form-select">
+                                  <div className="col-md-6 col-10">
+                                    <select className="form-select">
                                       <option selected="">
                                         শ্রেণী নির্বাচন করুন
                                       </option>
@@ -877,27 +899,27 @@ const ResultCondition = () => {
                                       <option>মাসিক পরীক্ষা</option>
                                     </select>
                                   </div>
-                                  <div class="col-2">
-                                    <span class="addbutton">
+                                  <div className="col-2">
+                                    <span className="addbutton">
                                       <a
                                         href="#"
                                         data-bs-toggle="modal"
                                         data-bs-target="#membertype"
                                       >
-                                        <i class="bi bi-plus-circle-fill"></i>
+                                        <i className="bi bi-plus-circle-fill"></i>
                                       </a>
                                     </span>
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-4 col-md-6 col-12">
-                                <div class="row mb-3">
-                                  <label class="col-md-4 col-12 col-form-label info-lable">
+                              <div className="col-lg-4 col-md-6 col-12">
+                                <div className="row mb-3">
+                                  <label className="col-md-4 col-12 col-form-label info-lable">
                                     মারহালা
                                     <i>*</i>
                                   </label>
-                                  <div class="col-md-6 col-10">
-                                    <select class="form-select">
+                                  <div className="col-md-6 col-10">
+                                    <select className="form-select">
                                       <option selected="">
                                         শ্রেণী নির্বাচন করুন
                                       </option>
@@ -917,14 +939,14 @@ const ResultCondition = () => {
                                       <option>ইফতা ১ম</option>
                                     </select>
                                   </div>
-                                  <div class="col-2">
-                                    <span class="addbutton">
+                                  <div className="col-2">
+                                    <span className="addbutton">
                                       <a
                                         href="#"
                                         data-bs-toggle="modal"
                                         data-bs-target="#membertype"
                                       >
-                                        <i class="bi bi-plus-circle-fill"></i>
+                                        <i className="bi bi-plus-circle-fill"></i>
                                       </a>
                                     </span>
                                   </div>
@@ -932,30 +954,30 @@ const ResultCondition = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="sperator"></div>
-                          <div class="col-12">
-                            <div class="row">
-                              <div class="col-lg-6 col-md-12 col-12">
-                                <div class="row my-2">
-                                  <div class="col-12">
-                                    <div class="input-group d-flex align-items-center gap-lg-3 gap-1">
+                          <div className="sperator"></div>
+                          <div className="col-12">
+                            <div className="row">
+                              <div className="col-lg-6 col-md-12 col-12">
+                                <div className="row my-2">
+                                  <div className="col-12">
+                                    <div className="input-group d-flex align-items-center gap-lg-3 gap-1">
                                       <input
-                                        class="form-check-input mt-0"
+                                        className="form-check-input mt-0"
                                         type="checkbox"
                                       />
-                                      <span class="">
+                                      <span className="">
                                         কন্ডিশন ১ (মিয়ারী বিষয়ে ফেল সংক্রান্ত
                                       </span>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="row mb-3">
-                                  <label class="col-sm-2 col-form-label info-lable">
+                                <div className="row mb-3">
+                                  <label className="col-sm-2 col-form-label info-lable">
                                     কিতাব
                                     <i>*</i>
                                   </label>
-                                  <div class="col-md-4 col-12 mb-md-0 mb-2">
-                                    <select class="form-select">
+                                  <div className="col-md-4 col-12 mb-md-0 mb-2">
+                                    <select className="form-select">
                                       <option selected="">
                                         শ্রেণী নির্বাচন করুন
                                       </option>
@@ -975,30 +997,33 @@ const ResultCondition = () => {
                                       <option>ইফতা ১ম</option>
                                     </select>
                                   </div>
-                                  <div class="col-md-3 col-6">
-                                    <input type="text" class="form-control" />
+                                  <div className="col-md-3 col-6">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                    />
                                   </div>
-                                  <div class="col-md-3 col-6">
+                                  <div className="col-md-3 col-6">
                                     <input
                                       type="button"
-                                      class="custom-btn btn-primary d-block w-100"
+                                      className="custom-btn btn-primary d-block w-100"
                                       value="Save"
                                       placeholder=""
                                     />
                                   </div>
                                 </div>
-                                <div class="row">
-                                  <div class="col-12">
+                                <div className="row">
+                                  <div className="col-12">
                                     <div
-                                      class="table-responsive"
+                                      className="table-responsive"
                                       data-pattern="priority-columns"
                                     >
                                       <table
                                         id="tech-companies-1"
-                                        class="table  bg-white table-bordered text-center"
+                                        className="table  bg-white table-bordered text-center"
                                       >
                                         <thead
-                                          class="text-center"
+                                          className="text-center"
                                           style={{
                                             backgroundColor: "#62659B",
                                             color: "white",
@@ -1020,159 +1045,168 @@ const ResultCondition = () => {
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-4 col-md-12 col-12">
-                                <div class="row my-2">
-                                  <div class="col-12">
+                              <div className="col-lg-4 col-md-12 col-12">
+                                <div className="row my-2">
+                                  <div className="col-12">
                                     <p>
                                       যদি এ কিতাবগুলোর কোন এক বিষয়ে ফেল করে
                                       তাহলে ডিভিশন হবে
                                     </p>
                                   </div>
                                 </div>
-                                <div class="row mb-1">
-                                  <label class="col-md-2 col-12 col-form-label info-lable">
+                                <div className="row mb-1">
+                                  <label className="col-md-2 col-12 col-form-label info-lable">
                                     বাংলা
                                     <i>*</i>
                                   </label>
-                                  <div class="col-md-10 col-12">
-                                    <input type="text" class="form-control" />
+                                  <div className="col-md-10 col-12">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                    />
                                   </div>
                                 </div>
-                                <div class="row mb-3">
-                                  <label class="col-md-2 col-12 col-form-label info-lable">
+                                <div className="row mb-3">
+                                  <label className="col-md-2 col-12 col-form-label info-lable">
                                     আরাবী
                                     <i>*</i>
                                   </label>
-                                  <div class="col-md-10 col-12">
-                                    <input type="text" class="form-control" />
+                                  <div className="col-md-10 col-12">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                    />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-2 col-md-12 col-12 d-flex justify-content-center align-items-center">
-                                <div class="row my-2">
-                                  <div class="col-12">
-                                    <div class="input-group d-flex align-items-center gap-3">
+                              <div className="col-lg-2 col-md-12 col-12 d-flex justify-content-center align-items-center">
+                                <div className="row my-2">
+                                  <div className="col-12">
+                                    <div className="input-group d-flex align-items-center gap-3">
                                       <input
-                                        class="form-check-input mt-0"
+                                        className="form-check-input mt-0"
                                         type="checkbox"
                                       />
-                                      <span class="">Silver Color</span>
+                                      <span className="">Silver Color</span>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class="sperator"></div>
-                          <div class="col-12">
-                            <div class="row">
-                              <div class="col-lg-6 col-12">
-                                <div class="row my-2">
-                                  <div class="col-12">
-                                    <div class="input-group d-flex align-items-center gap-3">
+                          <div className="sperator"></div>
+                          <div className="col-12">
+                            <div className="row">
+                              <div className="col-lg-6 col-12">
+                                <div className="row my-2">
+                                  <div className="col-12">
+                                    <div className="input-group d-flex align-items-center gap-3">
                                       <input
-                                        class="form-check-input mt-0"
+                                        className="form-check-input mt-0"
                                         type="checkbox"
                                       />
-                                      <span class="">
+                                      <span className="">
                                         কন্ডিশন ২ (গড় মিয়ারী বিষয়ে ফেল সংক্রান্ত
                                       </span>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="row mb-3">
-                                  <label class="col-md-4 col-12 col-form-label info-lable">
+                                <div className="row mb-3">
+                                  <label className="col-md-4 col-12 col-form-label info-lable">
                                     গড় মিয়রীর যে কোন
                                   </label>
-                                  <div class="col-md-3 col-12">
-                                    <input type="text" class="form-control" />
+                                  <div className="col-md-3 col-12">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                    />
                                   </div>
-                                  <div class="col-md-5 col-12">
+                                  <div className="col-md-5 col-12">
                                     কিতাব অথবা এর চেয়ে ফেল করে তাহলে এর চেয়ে
                                     বেশী ফেল করলে
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-lg-6 col-md-12 col-12">
-                                <div class="row my-2">
-                                  <div class="col-lg-4 col-md-6 col-12">
-                                    <div class="row mb-lg-1 mb-md-1 mb-0">
-                                      <label class="col-sm-3 col-form-label info-lable">
+                              <div className="col-lg-6 col-md-12 col-12">
+                                <div className="row my-2">
+                                  <div className="col-lg-4 col-md-6 col-12">
+                                    <div className="row mb-lg-1 mb-md-1 mb-0">
+                                      <label className="col-sm-3 col-form-label info-lable">
                                         বাংলা
                                       </label>
-                                      <div class="col-lg-7 col-md-7 col-12">
+                                      <div className="col-lg-7 col-md-7 col-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
-                                      <label class="col-sm-2 col-form-label info-lable">
+                                      <label className="col-sm-2 col-form-label info-lable">
                                         হবে
                                       </label>
                                     </div>
-                                    <div class="row mb-lg-3 mb-1">
-                                      <label class="col-sm-3 col-form-label info-lable">
+                                    <div className="row mb-lg-3 mb-1">
+                                      <label className="col-sm-3 col-form-label info-lable">
                                         আরাবী
                                       </label>
-                                      <div class="col-lg-7 col-md-7 col-12">
+                                      <div className="col-lg-7 col-md-7 col-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
-                                      <label class="col-sm-2 col-form-label info-lable">
+                                      <label className="col-sm-2 col-form-label info-lable">
                                         হবে
                                       </label>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-md-6 col-12">
-                                    <div class="row mb-lg-1 mb-md-1 mb-0">
-                                      <label class="col-sm-3 col-form-label info-lable">
+                                  <div className="col-lg-4 col-md-6 col-12">
+                                    <div className="row mb-lg-1 mb-md-1 mb-0">
+                                      <label className="col-sm-3 col-form-label info-lable">
                                         বাংলা
                                       </label>
-                                      <div class="col-lg-7 col-md-7 col-12">
+                                      <div className="col-lg-7 col-md-7 col-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
-                                      <label class="col-sm-2 col-form-label info-lable">
+                                      <label className="col-sm-2 col-form-label info-lable">
                                         হবে
                                       </label>
                                     </div>
-                                    <div class="row mb-lg-3 mb-1">
-                                      <label class="col-sm-3 col-form-label info-lable">
+                                    <div className="row mb-lg-3 mb-1">
+                                      <label className="col-sm-3 col-form-label info-lable">
                                         আরাবী
                                       </label>
-                                      <div class="col-lg-7 col-md-7 col-12">
+                                      <div className="col-lg-7 col-md-7 col-12">
                                         <input
                                           type="text"
-                                          class="form-control"
+                                          className="form-control"
                                         />
                                       </div>
-                                      <label class="col-sm-2 col-form-label info-lable">
+                                      <label className="col-sm-2 col-form-label info-lable">
                                         হবে
                                       </label>
                                     </div>
                                   </div>
-                                  <div class="col-lg-4 col-12 d-flex justify-content-center align-items-center">
-                                    <div class="row my-2">
-                                      <div class="col-lg-12 col-md-6 col-6">
-                                        <div class="input-group d-flex align-items-center gap-3">
+                                  <div className="col-lg-4 col-12 d-flex justify-content-center align-items-center">
+                                    <div className="row my-2">
+                                      <div className="col-lg-12 col-md-6 col-6">
+                                        <div className="input-group d-flex align-items-center gap-3">
                                           <input
-                                            class="form-check-input mt-0"
+                                            className="form-check-input mt-0"
                                             type="checkbox"
                                           />
-                                          <span class="">Silver Color</span>
+                                          <span className="">Silver Color</span>
                                         </div>
                                       </div>
-                                      <div class="col-lg-12 col-md-6 col-6">
-                                        <div class="input-group d-flex align-items-center gap-3">
+                                      <div className="col-lg-12 col-md-6 col-6">
+                                        <div className="input-group d-flex align-items-center gap-3">
                                           <input
-                                            class="form-check-input mt-0"
+                                            className="form-check-input mt-0"
                                             type="checkbox"
                                           />
-                                          <span class="">Silver Color</span>
+                                          <span className="">Silver Color</span>
                                         </div>
                                       </div>
                                     </div>
@@ -1181,74 +1215,85 @@ const ResultCondition = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="sperator"></div>
-                          <div class="col-12">
-                            <div class="row">
-                              <div class="col-12">
-                                <div class="row my-2">
-                                  <div class="col-12">
-                                    <div class="input-group d-flex align-items-center gap-3">
+                          <div className="sperator"></div>
+                          <div className="col-12">
+                            <div className="row">
+                              <div className="col-12">
+                                <div className="row my-2">
+                                  <div className="col-12">
+                                    <div className="input-group d-flex align-items-center gap-3">
                                       <input
-                                        class="form-check-input mt-0"
+                                        className="form-check-input mt-0"
                                         type="checkbox"
                                       />
-                                      <span class="">
+                                      <span className="">
                                         কন্ডিশন ৩ (যদি কোন এক বিষয়ে নাম্বার
                                         এন্ট্রি না হয়)
                                       </span>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="row mb-3">
-                                  <label class="col-lg-4 col-12 col-form-label info-lable">
+                                <div className="row mb-3">
+                                  <label className="col-lg-4 col-12 col-form-label info-lable">
                                     যদি কোন এক বিষয়ে নাম্বার এন্ট্রি না হয় তাহলে
                                     ডিভিশন হবে
                                   </label>
-                                  <div class="col-lg-3 col-md-6 col-12 mb-md-0 mb-1">
-                                    <input type="text" class="form-control" />
+                                  <div className="col-lg-3 col-md-6 col-12 mb-md-0 mb-1">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                    />
                                   </div>
-                                  <div class="col-lg-3 col-md-6 col-12 mb-md-0 mb-1">
-                                    <input type="text" class="form-control" />
+                                  <div className="col-lg-3 col-md-6 col-12 mb-md-0 mb-1">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                    />
                                   </div>
-                                  <div class="col-lg-2 col-12 d-flex justify-content-center align-items-center">
-                                    <div class="input-group d-flex align-items-center gap-3">
+                                  <div className="col-lg-2 col-12 d-flex justify-content-center align-items-center">
+                                    <div className="input-group d-flex align-items-center gap-3">
                                       <input
-                                        class="form-check-input mt-0"
+                                        className="form-check-input mt-0"
                                         type="checkbox"
                                       />
-                                      <span class="">Silver Color</span>
+                                      <span className="">Silver Color</span>
                                     </div>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class="sperator"></div>
-                          <div class="col-12">
-                            <div class="row my-2">
-                              <div class="col-12">
-                                <div class="row mb-3">
-                                  <label class="col-lg-4 col-md-6 col-12 col-form-label info-lable">
+                          <div className="sperator"></div>
+                          <div className="col-12">
+                            <div className="row my-2">
+                              <div className="col-12">
+                                <div className="row mb-3">
+                                  <label className="col-lg-4 col-md-6 col-12 col-form-label info-lable">
                                     মেধার সংখ্যা কত হবে তা উল্ল্যেখ করুন
                                   </label>
-                                  <div class="col-lg-3 col-md-6 col-12">
-                                    <input type="text" class="form-control" />
+                                  <div className="col-lg-3 col-md-6 col-12">
+                                    <input
+                                      type="text"
+                                      className="form-control"
+                                    />
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div class="sperator"></div>
-                          <div class="col-6 my-2 d-flex justify-content-center w-100 payroll">
-                            <div class="button-group w-100">
-                              <button class="custom-btn btn-outline-info">
+                          <div className="sperator"></div>
+                          <div className="col-6 my-2 d-flex justify-content-center w-100 payroll">
+                            <div className="button-group w-100">
+                              <button className="custom-btn btn-outline-info">
                                 Update All
                               </button>
-                              <button class="custom-btn btn-primary">
+                              <button className="custom-btn btn-primary">
                                 Save All
                               </button>
-                              <button class="custom-btn btn-dark">New</button>
-                              <button class="custom-btn btn-danger">
+                              <button className="custom-btn btn-dark">
+                                New
+                              </button>
+                              <button className="custom-btn btn-danger">
                                 Delete
                               </button>
                             </div>

@@ -3,133 +3,133 @@ import React from "react";
 const FeesDetermination = () => {
   return (
     <div>
-      <section class="user-form-section">
-        <div class="section-bg">
-          <div class="row">
-            <div class="col-md-12 col-sm-12 col-lg-12 w-100">
-              <div class="main-container">
-                <div class="row">
-                  <div class="col-12 col-md-12 col-lg-7">
-                    <div class="section-title">
+      <section className="user-form-section">
+        <div className="section-bg">
+          <div className="row">
+            <div className="col-md-12 col-sm-12 col-lg-12 w-100">
+              <div className="main-container">
+                <div className="row">
+                  <div className="col-12 col-md-12 col-lg-7">
+                    <div className="section-title">
                       <h4>ফি নির্ধারণ</h4>
                     </div>
-                    <div class="my-4">
-                      <form class="feesdeterminationa-form">
-                        <div class="row mb-3">
-                          <div class="offset-lg-2 offset-sm-0 col-lg-4 col-6">
-                            <div class="input-group d-flex align-items-center gap-3">
-                              <span class="">ভর্তি ফি</span>
+                    <div className="my-4">
+                      <form className="feesdeterminationa-form">
+                        <div className="row mb-3">
+                          <div className="offset-lg-2 offset-sm-0 col-lg-4 col-6">
+                            <div className="input-group d-flex align-items-center gap-3">
+                              <span className="">ভর্তি ফি</span>
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 name="checkbox"
                               />
                             </div>
                           </div>
-                          <div class="offset-lg-2 offset-sm-0 col-lg-4 col-6">
-                            <div class="input-group d-flex align-items-center gap-3">
-                              <span class="">মাসিক ফি</span>
+                          <div className="offset-lg-2 offset-sm-0 col-lg-4 col-6">
+                            <div className="input-group d-flex align-items-center gap-3">
+                              <span className="">মাসিক ফি</span>
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 name="checkbox"
                               />
                             </div>
                           </div>
                         </div>
-                        <div class="row mb-3">
-                          <label class="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                        <div className="row mb-3">
+                          <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                             শিক্ষাবর্ষঃ
                           </label>
-                          <div class="col-12 col-md-12 col-lg-8">
+                          <div className="col-12 col-md-12 col-lg-8">
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               placeholder="শিক্ষাবর্ষ"
                             />
                           </div>
                         </div>
-                        <div class="row mb-3">
-                          <label class="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                        <div className="row mb-3">
+                          <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                             মারহালা/শ্রেণীঃ
                           </label>
-                          <div class="col-12 col-md-12 col-lg-8">
+                          <div className="col-12 col-md-12 col-lg-8">
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               placeholder="মারহালা/শ্রেণী"
                             />
                           </div>
                         </div>
-                        <div class="row mb-3">
-                          <label class="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                        <div className="row mb-3">
+                          <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                             ফি এর নামঃ
                           </label>
-                          <div class="col-12 col-md-12 col-lg-8">
+                          <div className="col-12 col-md-12 col-lg-8">
                             <input
                               type="text"
-                              class="form-control"
+                              className="form-control"
                               placeholder="ফি এর নাম"
                             />
                           </div>
                         </div>
                         {/* <!--Card Section--> */}
-                        <div class="group-card-container">
-                          <div class="row">
-                            <div class="col-sm-12 col-lg-6 col-md-6">
-                              <div class="custom-group-card">
-                                <div class="custom-card-title section-title">
+                        <div className="group-card-container">
+                          <div className="row">
+                            <div className="col-sm-12 col-lg-6 col-md-6">
+                              <div className="custom-group-card">
+                                <div className="custom-card-title section-title">
                                   <h4>ছাত্র</h4>
                                 </div>
-                                <div class="card-container">
-                                  <div class="custom-card">
-                                    <div class="custom-card-subtitle">
+                                <div className="card-container">
+                                  <div className="custom-card">
+                                    <div className="custom-card-subtitle">
                                       আবাসিক
                                     </div>
-                                    <div class="row">
-                                      <div class="col-6">
+                                    <div className="row">
+                                      <div className="col-6">
                                         <span>নতুন</span>
-                                        <div class="input-box">
+                                        <div className="input-box">
                                           <input
                                             type="text"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder=""
                                           />
                                         </div>
                                       </div>
-                                      <div class="col-6">
+                                      <div className="col-6">
                                         <span>পুরাতন</span>
-                                        <div class="input-box">
+                                        <div className="input-box">
                                           <input
                                             type="text"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder=""
                                           />
                                         </div>
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="custom-card">
-                                    <div class="custom-card-subtitle">
+                                  <div className="custom-card">
+                                    <div className="custom-card-subtitle">
                                       অনাবাসিক
                                     </div>
-                                    <div class="row">
-                                      <div class="col-6">
+                                    <div className="row">
+                                      <div className="col-6">
                                         <span>নতুন</span>
-                                        <div class="input-box">
+                                        <div className="input-box">
                                           <input
                                             type="text"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder=""
                                           />
                                         </div>
                                       </div>
-                                      <div class="col-6">
+                                      <div className="col-6">
                                         <span>পুরাতন</span>
-                                        <div class="input-box">
+                                        <div className="input-box">
                                           <input
                                             type="text"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder=""
                                           />
                                         </div>
@@ -139,60 +139,60 @@ const FeesDetermination = () => {
                                 </div>
                               </div>
                             </div>
-                            <div class="col-sm-12 col-lg-6 col-md-6">
-                              <div class="custom-group-card">
-                                <div class="custom-card-title section-title">
+                            <div className="col-sm-12 col-lg-6 col-md-6">
+                              <div className="custom-group-card">
+                                <div className="custom-card-title section-title">
                                   <h4>ছাত্রী</h4>
                                 </div>
-                                <div class="card-container">
-                                  <div class="custom-card">
-                                    <div class="custom-card-subtitle">
+                                <div className="card-container">
+                                  <div className="custom-card">
+                                    <div className="custom-card-subtitle">
                                       আবাসিক
                                     </div>
-                                    <div class="row">
-                                      <div class="col-6">
+                                    <div className="row">
+                                      <div className="col-6">
                                         <span>নতুন</span>
-                                        <div class="input-box">
+                                        <div className="input-box">
                                           <input
                                             type="text"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder=""
                                           />
                                         </div>
                                       </div>
-                                      <div class="col-6">
+                                      <div className="col-6">
                                         <span>পুরাতন</span>
-                                        <div class="input-box">
+                                        <div className="input-box">
                                           <input
                                             type="text"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder=""
                                           />
                                         </div>
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="custom-card">
-                                    <div class="custom-card-subtitle">
+                                  <div className="custom-card">
+                                    <div className="custom-card-subtitle">
                                       অনাবাসিক
                                     </div>
-                                    <div class="row">
-                                      <div class="col-6">
+                                    <div className="row">
+                                      <div className="col-6">
                                         <span>নতুন</span>
-                                        <div class="input-box">
+                                        <div className="input-box">
                                           <input
                                             type="text"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder=""
                                           />
                                         </div>
                                       </div>
-                                      <div class="col-6">
+                                      <div className="col-6">
                                         <span>পুরাতন</span>
-                                        <div class="input-box">
+                                        <div className="input-box">
                                           <input
                                             type="text"
-                                            class="form-control"
+                                            className="form-control"
                                             placeholder=""
                                           />
                                         </div>
@@ -205,15 +205,15 @@ const FeesDetermination = () => {
                           </div>
                         </div>
                         {/* <!-- ButtonGroup --> */}
-                        <div class="button-group">
+                        <div className="button-group">
                           <button
-                            class="custom-btn btn-primary d-sm-block"
+                            className="custom-btn btn-primary d-sm-block"
                             type="submit"
                           >
                             Save
                           </button>
                           <button
-                            class="custom-btn btn-dark d-sm-block"
+                            className="custom-btn btn-dark d-sm-block"
                             type="submit"
                           >
                             New
@@ -222,36 +222,36 @@ const FeesDetermination = () => {
                       </form>
                     </div>
                   </div>
-                  <div class="col-sm-12 col-md-12 col-lg-5">
-                    <div class="table-data mt-4">
-                      <div class="row form-group searchbar">
-                        <div class="col-sm-6 position-relative search">
-                          <i class="bi bi-search search-icon"></i>
+                  <div className="col-sm-12 col-md-12 col-lg-5">
+                    <div className="table-data mt-4">
+                      <div className="row form-group searchbar">
+                        <div className="col-sm-6 position-relative search">
+                          <i className="bi bi-search search-icon"></i>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="search"
                             placeholder="Search"
                           />
                         </div>
                       </div>
                       <div
-                        class="table-responsive"
+                        className="table-responsive"
                         data-pattern="priority-columns"
                       >
                         <table
                           id="tech-companies-1"
-                          class="table  bg-white table-bordered text-center"
+                          className="table  bg-white table-bordered text-center"
                         >
-                          <thead class="text-center accounts-table-head">
+                          <thead className="text-center accounts-table-head">
                             <tr>
                               <th>
-                                <span class="action-edit">
-                                  <i class="bi bi-pencil-square"></i>
+                                <span className="action-edit">
+                                  <i className="bi bi-pencil-square"></i>
                                 </span>
                               </th>
                               <th>
-                                <span class="action-delete">
-                                  <i class="bi bi-trash3"></i>
+                                <span className="action-delete">
+                                  <i className="bi bi-trash3"></i>
                                 </span>
                               </th>
                               <th>শিক্ষাবর্ষ</th>
@@ -262,28 +262,13 @@ const FeesDetermination = () => {
                           <tbody>
                             <tr>
                               <td>
-                                <span class="action-edit">
-                                  <i class="bi bi-pencil-square"></i>
+                                <span className="action-edit">
+                                  <i className="bi bi-pencil-square"></i>
                                 </span>
                               </td>
                               <td>
-                                <span class="action-delete">
-                                  <i class="bi bi-trash3"></i>
-                                </span>
-                              </td>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <span class="action-edit">
-                                  <i class="bi bi-pencil-square"></i>
-                                </span>
-                              </td>
-                              <td>
-                                <span class="action-delete">
-                                  <i class="bi bi-trash3"></i>
+                                <span className="action-delete">
+                                  <i className="bi bi-trash3"></i>
                                 </span>
                               </td>
                               <th></th>
@@ -292,13 +277,13 @@ const FeesDetermination = () => {
                             </tr>
                             <tr>
                               <td>
-                                <span class="action-edit">
-                                  <i class="bi bi-pencil-square"></i>
+                                <span className="action-edit">
+                                  <i className="bi bi-pencil-square"></i>
                                 </span>
                               </td>
                               <td>
-                                <span class="action-delete">
-                                  <i class="bi bi-trash3"></i>
+                                <span className="action-delete">
+                                  <i className="bi bi-trash3"></i>
                                 </span>
                               </td>
                               <th></th>
@@ -307,13 +292,28 @@ const FeesDetermination = () => {
                             </tr>
                             <tr>
                               <td>
-                                <span class="action-edit">
-                                  <i class="bi bi-pencil-square"></i>
+                                <span className="action-edit">
+                                  <i className="bi bi-pencil-square"></i>
                                 </span>
                               </td>
                               <td>
-                                <span class="action-delete">
-                                  <i class="bi bi-trash3"></i>
+                                <span className="action-delete">
+                                  <i className="bi bi-trash3"></i>
+                                </span>
+                              </td>
+                              <th></th>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <span className="action-edit">
+                                  <i className="bi bi-pencil-square"></i>
+                                </span>
+                              </td>
+                              <td>
+                                <span className="action-delete">
+                                  <i className="bi bi-trash3"></i>
                                 </span>
                               </td>
                               <th></th>

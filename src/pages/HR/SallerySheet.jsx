@@ -3,38 +3,38 @@ import React from "react";
 const SallerySheet = () => {
   return (
     <div>
-      <section class="user-form-section">
-        <div class="section-bg">
-          <div class="row">
-            <div class="col-md-12 w-100">
-              <div class="main-container">
-                <div class="row d-print-none">
-                  <div class="col-12">
-                    <div class="section-title" style={{ marginTop: "2px" }}>
+      <section className="user-form-section">
+        <div className="section-bg">
+          <div className="row">
+            <div className="col-md-12 w-100">
+              <div className="main-container">
+                <div className="row d-print-none">
+                  <div className="col-12">
+                    <div className="section-title" style={{ marginTop: "2px" }}>
                       <h4>বেতন শীট</h4>
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col-lg-3 col-md-6 col-12">
-                        <div class="row">
-                          <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                <div className="row">
+                  <div className="col-12">
+                    <div className="row">
+                      <div className="col-lg-3 col-md-6 col-12">
+                        <div className="row">
+                          <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                             এন্ট্রি তারিথ
                           </label>
-                          <div class="col-lg-7 col-md-7 col-12">
-                            <input type="date" class="form-control" />
+                          <div className="col-lg-7 col-md-7 col-12">
+                            <input type="date" className="form-control" />
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-3 col-md-6 col-12">
-                        <div class="row">
-                          <label class="col-lg-5 col-md-5 col-12 col-form-label info-lable">
+                      <div className="col-lg-3 col-md-6 col-12">
+                        <div className="row">
+                          <label className="col-lg-5 col-md-5 col-12 col-form-label info-lable">
                             শিক্ষাবর্ষ
                           </label>
-                          <div class="col-lg-7 col-md-7 col-12">
-                            <select class="form-select">
+                          <div className="col-lg-7 col-md-7 col-12">
+                            <select className="form-select">
                               <option value="" selected="">
                                 সিলেক্ট করুন
                               </option>
@@ -46,13 +46,13 @@ const SallerySheet = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="col-lg-6 col-md-12 col-12 mt-md-2">
-                        <div class="row">
-                          <label class="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                      <div className="col-lg-6 col-md-12 col-12 mt-md-2">
+                        <div className="row">
+                          <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
                             মাস
                           </label>
-                          <div class="col-lg-5 col-md-4 col-12">
-                            <select class="form-select">
+                          <div className="col-lg-5 col-md-4 col-12">
+                            <select className="form-select">
                               <option value="" selected="">
                                 সিলেক্ট করুন
                               </option>
@@ -62,10 +62,10 @@ const SallerySheet = () => {
                               <option value="">এপ্রিল</option>
                             </select>
                           </div>
-                          <div class="col-lg-5 col-md-4 col-12 mt-2 mt-md-0">
+                          <div className="col-lg-5 col-md-4 col-12 mt-2 mt-md-0">
                             <button
                               type="submit"
-                              class="custom-btn btn-primary d-block w-100"
+                              className="custom-btn btn-primary d-block w-100"
                             >
                               Save
                             </button>
@@ -75,21 +75,21 @@ const SallerySheet = () => {
                     </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-lg-5 col-md-12 col-12 d-print-none">
+                <div className="row">
+                  <div className="col-lg-5 col-md-12 col-12 d-print-none">
                     <form>
-                      <div class="row mt-3">
-                        <div class="col-12">
+                      <div className="row mt-3">
+                        <div className="col-12">
                           <div
-                            class="table-responsive"
+                            className="table-responsive"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white table-bordered text-center"
+                              className="table  bg-white table-bordered text-center"
                             >
                               <thead
-                                class="text-center"
+                                className="text-center"
                                 style={{
                                   backgroundColor: "#62659B",
                                   color: "white",
@@ -99,7 +99,7 @@ const SallerySheet = () => {
                                   <th>
                                     <input
                                       type="checkbox"
-                                      class=" form-check-input"
+                                      className=" form-check-input"
                                       name="checkbox"
                                       onclick="allSelect(this)"
                                     />
@@ -114,7 +114,7 @@ const SallerySheet = () => {
                                   <th>
                                     <input
                                       type="checkbox"
-                                      class=" form-check-input"
+                                      className=" form-check-input"
                                       name="checkbox"
                                     />
                                   </th>
@@ -126,7 +126,7 @@ const SallerySheet = () => {
                                   <th>
                                     <input
                                       type="checkbox"
-                                      class=" form-check-input"
+                                      className=" form-check-input"
                                       name="checkbox"
                                     />
                                   </th>
@@ -139,11 +139,11 @@ const SallerySheet = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="row mt-3">
-                        <div class="col-12">
+                      <div className="row mt-3">
+                        <div className="col-12">
                           <button
                             type="submit"
-                            class="custom-btn btn-primary d-block w-100"
+                            className="custom-btn btn-primary d-block w-100"
                           >
                             Generate Salary
                           </button>
@@ -151,19 +151,19 @@ const SallerySheet = () => {
                       </div>
                     </form>
                   </div>
-                  <div class="col-md-12 col-lg-7 col-12 d-print-none">
-                    <div class="row mt-3">
-                      <div class="col-12">
+                  <div className="col-md-12 col-lg-7 col-12 d-print-none">
+                    <div className="row mt-3">
+                      <div className="col-12">
                         <div
-                          class="table-responsive"
+                          className="table-responsive"
                           data-pattern="priority-columns"
                         >
                           <table
                             id="tech-companies-1"
-                            class="table  bg-white table-bordered text-center"
+                            className="table  bg-white table-bordered text-center"
                           >
                             <thead
-                              class="text-center"
+                              className="text-center"
                               style={{
                                 backgroundColor: "#62659B",
                                 color: "white",
@@ -171,8 +171,8 @@ const SallerySheet = () => {
                             >
                               <tr>
                                 <th>
-                                  <span class="action-edit">
-                                    <i class="bi bi-pencil-square"></i>
+                                  <span className="action-edit">
+                                    <i className="bi bi-pencil-square"></i>
                                   </span>
                                 </th>
                                 <th>শিক্ষকের নাম</th>
@@ -189,8 +189,8 @@ const SallerySheet = () => {
                             <tbody>
                               <tr>
                                 <th>
-                                  <span class="action-edit">
-                                    <i class="bi bi-pencil-square"></i>
+                                  <span className="action-edit">
+                                    <i className="bi bi-pencil-square"></i>
                                   </span>
                                 </th>
                                 <td></td>

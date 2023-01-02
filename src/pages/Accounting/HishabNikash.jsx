@@ -4,30 +4,30 @@ const HishabNikash = () => {
   return (
     <div>
       {/* <!-- হিসাব নিকাশ সেকশন শুরু --> */}
-      <section class="user-form-section d-print-none">
-        <div class="section-bg">
-          <div class="row">
-            <div class="col-md-12 w-100">
+      <section className="user-form-section d-print-none">
+        <div className="section-bg">
+          <div className="row">
+            <div className="col-md-12 w-100">
               <div
-                class="main-contai
+                className="main-contai
               ......................ner"
               >
-                <div class="row">
-                  <div class="col-lg-6 col-12">
-                    <div class="section-title">
+                <div className="row">
+                  <div className="col-lg-6 col-12">
+                    <div className="section-title">
                       <h4>হিসাব-নিকাশ</h4>
                     </div>
-                    <div class="my-4">
-                      <form class="accounts-form">
-                        <div class="row">
-                          <div class="col-lg-7 col-md-7 col-9">
-                            <div class="row mb-3">
-                              <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                    <div className="my-4">
+                      <form className="accounts-form">
+                        <div className="row">
+                          <div className="col-lg-7 col-md-7 col-9">
+                            <div className="row mb-3">
+                              <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                 ফান্ডঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-6 col-md-6 col-10">
-                                <select class="form-select">
+                              <div className="col-lg-6 col-md-6 col-10">
+                                <select className="form-select">
                                   <option selected>ফান্ড নির্বাচন করুন</option>
                                   <option>সাধারণ ফান্ড</option>
                                   <option>লিল্লাহ ফান্ড</option>
@@ -35,25 +35,25 @@ const HishabNikash = () => {
                                   <option>মাদরাসা ফান্ড</option>
                                 </select>
                               </div>
-                              <div class="col-2">
-                                <span class="addbutton">
+                              <div className="col-2">
+                                <span className="addbutton">
                                   <a
                                     href="#"
                                     data-bs-toggle="modal"
                                     data-bs-target="#addfund"
                                   >
-                                    <i class="bi bi-plus-circle-fill"></i>
+                                    <i className="bi bi-plus-circle-fill"></i>
                                   </a>
                                 </span>
                               </div>
                             </div>
                           </div>
-                          <div class="col-lg-5 col-md-5 col-3">
-                            <div class="row mb-3">
-                              <div class="option-icon">
+                          <div className="col-lg-5 col-md-5 col-3">
+                            <div className="row mb-3">
+                              <div className="option-icon">
                                 <span>
                                   <a href="#">
-                                    <i class="bi bi-info-circle-fill"></i>
+                                    <i className="bi bi-info-circle-fill"></i>
                                   </a>
                                 </span>
                                 <span>
@@ -62,48 +62,48 @@ const HishabNikash = () => {
                                     data-bs-toggle="modal"
                                     data-bs-target="#admissonModal"
                                   >
-                                    <i class="bi bi-gear-fill"></i>
+                                    <i className="bi bi-gear-fill"></i>
                                   </a>
                                 </span>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-md-7 col-12">
-                            <div class="row mb-3">
-                              <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-md-7 col-12">
+                            <div className="row mb-3">
+                              <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                 চার্ট অফ একাউন্ট
                                 <i>*</i>
                               </label>
-                              <div class="col-lg-6 col-md-6 col-10">
-                                <select class="form-select">
+                              <div className="col-lg-6 col-md-6 col-10">
+                                <select className="form-select">
                                   <option selected> সিলেক্ট করুন</option>
                                   <option>জমা</option>
                                   <option>খরচ</option>
                                 </select>
                               </div>
-                              <div class="col-2">
-                                <span class="addbutton">
+                              <div className="col-2">
+                                <span className="addbutton">
                                   <a
                                     href="#"
                                     data-bs-toggle="modal"
                                     data-bs-target="#addgenaralLadger"
                                   >
-                                    <i class="bi bi-plus-circle-fill"></i>
+                                    <i className="bi bi-plus-circle-fill"></i>
                                   </a>
                                 </span>
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-5 col-12">
-                            <div class="row mb-3">
-                              <label class="col-md-4 col-12 col-form-label info-lable">
+                          <div className="col-md-5 col-12">
+                            <div className="row mb-3">
+                              <label className="col-md-4 col-12 col-form-label info-lable">
                                 খাত
                                 <i>*</i>
                               </label>
-                              <div class="col-md-8 col-12">
-                                <select class="form-select">
+                              <div className="col-md-8 col-12">
+                                <select className="form-select">
                                   <option selected> সিলেক্ট করুন</option>
                                   <option>ভর্তি ফি</option>
                                   <option>বেতন</option>
@@ -112,77 +112,77 @@ const HishabNikash = () => {
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-md-7 col-12">
-                            <div class="row mb-3">
-                              <label class="col-md-4 col-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-md-7 col-12">
+                            <div className="row mb-3">
+                              <label className="col-md-4 col-12 col-form-label info-lable">
                                 ভাউচার রশিদঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-md-8 col-12">
+                              <div className="col-md-8 col-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="ভাউচার রশিদ"
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-5 col-12">
-                            <div class="row">
-                              <label class="col-md-4 col-12 col-form-label info-lable">
+                          <div className="col-md-5 col-12">
+                            <div className="row">
+                              <label className="col-md-4 col-12 col-form-label info-lable">
                                 বইঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-md-8 col-12">
+                              <div className="col-md-8 col-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="বই"
                                 />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-md-7 col-12">
-                            <div class="row mb-3">
-                              <label class="col-md-4 col-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-md-7 col-12">
+                            <div className="row mb-3">
+                              <label className="col-md-4 col-12 col-form-label info-lable">
                                 জমা/খরচ তারিখঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-md-8 col-12">
-                                <input type="date" class="form-control" />
+                              <div className="col-md-8 col-12">
+                                <input type="date" className="form-control" />
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-5 col-12">
-                            <div class="row mb-3">
-                              <label class="col-md-4 col-12 col-form-label info-lable">
+                          <div className="col-md-5 col-12">
+                            <div className="row mb-3">
+                              <label className="col-md-4 col-12 col-form-label info-lable">
                                 আরবি তারিখঃ
                                 <i>*</i>
                               </label>
-                              <div class="col-md-8 col-12">
+                              <div className="col-md-8 col-12">
                                 <input
                                   type="text"
-                                  class="form-control"
+                                  className="form-control"
                                   placeholder="আরবি(MM/DD/YY)"
                                 />
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-lg-7 col-md-7 col-12">
-                            <div class="row">
-                              <div class="col-6">
-                                <div class="row mb-3">
-                                  <label class="col-sm-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-lg-7 col-md-7 col-12">
+                            <div className="row">
+                              <div className="col-6">
+                                <div className="row mb-3">
+                                  <label className="col-sm-12 col-form-label info-lable">
                                     পেমেন্ট সিস্টেম
                                     <i>*</i>
                                   </label>
-                                  <div class="col-12">
-                                    <select class="form-select">
+                                  <div className="col-12">
+                                    <select className="form-select">
                                       <option selected>
                                         পেমেন্ট সিস্টেম সিলেক্ট
                                       </option>
@@ -193,14 +193,14 @@ const HishabNikash = () => {
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-6">
-                                <div class="row mb-3">
-                                  <label class="col-sm-12 col-form-label info-lable">
+                              <div className="col-6">
+                                <div className="row mb-3">
+                                  <label className="col-sm-12 col-form-label info-lable">
                                     একাউন্টের নামঃ
                                     <i>*</i>
                                   </label>
-                                  <div class="col-12">
-                                    <select class="form-select">
+                                  <div className="col-12">
+                                    <select className="form-select">
                                       <option selected>একাউন্ট সিলেক্ট</option>
                                       <option>মোহাম্মদ শহিদুল ইসলাম</option>
                                       <option>ইষলামি ব্যাংক</option>
@@ -211,36 +211,36 @@ const HishabNikash = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-5 col-12">
-                            <div class="row">
-                              <div class="col-7">
-                                <div class="row mb-3">
-                                  <label class="col-sm-12 col-form-label info-lable">
+                          <div className="col-md-5 col-12">
+                            <div className="row">
+                              <div className="col-7">
+                                <div className="row mb-3">
+                                  <label className="col-sm-12 col-form-label info-lable">
                                     পেমেন্ট মন্তব্যঃ
                                     <i>*</i>
                                   </label>
-                                  <div class="col-12">
+                                  <div className="col-12">
                                     <input
                                       type="text"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder="মন্তব্য লিখুন"
                                     />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-5">
-                                <div class="row mb-3">
-                                  <label class="col-sm-12 col-form-label info-lable">
+                              <div className="col-5">
+                                <div className="row mb-3">
+                                  <label className="col-sm-12 col-form-label info-lable">
                                     মেথড যোগঃ
                                   </label>
-                                  <div class="col-12">
-                                    <span class="addbutton">
+                                  <div className="col-12">
+                                    <span className="addbutton">
                                       <a
                                         href="#"
                                         data-bs-toggle="modal"
                                         data-bs-target="#bankadd"
                                       >
-                                        <i class="bi bi-plus-circle-fill"></i>
+                                        <i className="bi bi-plus-circle-fill"></i>
                                       </a>
                                     </span>
                                   </div>
@@ -249,34 +249,34 @@ const HishabNikash = () => {
                             </div>
                           </div>
                         </div>
-                        <div class="row">
-                          <div class="col-12">
-                            <div class="row">
-                              <div class="col-6">
-                                <div class="row mb-3">
-                                  <label class="col-sm-12 col-form-label info-lable">
+                        <div className="row">
+                          <div className="col-12">
+                            <div className="row">
+                              <div className="col-6">
+                                <div className="row mb-3">
+                                  <label className="col-sm-12 col-form-label info-lable">
                                     পার্টিকোলার্স বর্ণনা
                                     <i>*</i>
                                   </label>
-                                  <div class="col-12">
+                                  <div className="col-12">
                                     <input
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder="পার্টিকোলার্স বর্ণনা"
                                       type="text"
                                     />
                                   </div>
                                 </div>
                               </div>
-                              <div class="col-6">
-                                <div class="row mb-3">
-                                  <label class="col-sm-12 col-form-label info-lable">
+                              <div className="col-6">
+                                <div className="row mb-3">
+                                  <label className="col-sm-12 col-form-label info-lable">
                                     পরিমাণ
                                     <i>*</i>
                                   </label>
-                                  <div class="col-12">
+                                  <div className="col-12">
                                     <input
                                       type="number"
-                                      class="form-control"
+                                      className="form-control"
                                       placeholder="পরিমাণ"
                                     />
                                   </div>
@@ -285,39 +285,42 @@ const HishabNikash = () => {
                             </div>
                           </div>
                         </div>
-                        <div class="button-group my-4 hisab-btn">
+                        <div className="button-group my-4 hisab-btn">
                           <a
                             href="#"
-                            class="custom-btn btn-primary"
+                            className="custom-btn btn-primary"
                             data-bs-toggle="modal"
                             data-bs-target="#admissonfees"
                           >
                             Save
                           </a>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Show
                           </button>
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Close
                           </button>
-                          <button class="custom-btn btn-danger" type="submit">
+                          <button
+                            className="custom-btn btn-danger"
+                            type="submit"
+                          >
                             Delete
                           </button>
                         </div>
                       </form>
                     </div>
-                    <div class="my-4">
-                      <div class="row">
-                        <div class="col-12">
+                    <div className="my-4">
+                      <div className="row">
+                        <div className="col-12">
                           <div
-                            class="table-responsive accounts-table"
+                            className="table-responsive accounts-table"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white text-center mb-0"
+                              className="table  bg-white text-center mb-0"
                             >
-                              <thead class="text-center accounts-table-head">
+                              <thead className="text-center accounts-table-head">
                                 <tr>
                                   <th>জি.লেজার</th>
                                   <th>সা: আ</th>
@@ -368,7 +371,7 @@ const HishabNikash = () => {
                                   <td></td>
                                   <td></td>
                                 </tr>
-                                <tr class="table-footer">
+                                <tr className="table-footer">
                                   <td
                                     colspan="5"
                                     style={{ textAlign: "right" }}
@@ -384,14 +387,14 @@ const HishabNikash = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-6 col-12 mt-4">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="row">
-                          <div class="col-7">
-                            <div class="row">
-                              <div class="col-12">
-                                <select class="form-select">
+                  <div className="col-lg-6 col-12 mt-4">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="row">
+                          <div className="col-7">
+                            <div className="row">
+                              <div className="col-12">
+                                <select className="form-select">
                                   <option selected>ফান্ড নির্বাচন করুন</option>
                                   <option>সাধারণ ফান্ড</option>
                                   <option>লিল্লাহ ফান্ড</option>
@@ -401,45 +404,45 @@ const HishabNikash = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-5">
+                          <div className="col-5">
                             <input
                               type="text"
                               placeholder=""
-                              class="form-control"
+                              className="form-control"
                             />
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="row mt-3">
-                      <div class="col-12">
-                        <div class="row">
-                          <div class="col-md-6 col-12">
-                            <div class="row">
-                              <div class="col-md-9 col-12">
+                    <div className="row mt-3">
+                      <div className="col-12">
+                        <div className="row">
+                          <div className="col-md-6 col-12">
+                            <div className="row">
+                              <div className="col-md-9 col-12">
                                 <input
                                   type="date"
                                   placeholder=""
-                                  class="form-control"
+                                  className="form-control"
                                 />
                               </div>
-                              <label class="col-md-3 col-12 col-form-label info-lable">
+                              <label className="col-md-3 col-12 col-form-label info-lable">
                                 পর্যন্ত
                                 <i>*</i>
                               </label>
                             </div>
                           </div>
-                          <div class="col-md-6 col-12">
-                            <div class="row">
-                              <div class="col-md-7 col-8">
+                          <div className="col-md-6 col-12">
+                            <div className="row">
+                              <div className="col-md-7 col-8">
                                 <input
                                   type="date"
                                   placeholder=""
-                                  class="form-control"
+                                  className="form-control"
                                 />
                               </div>
-                              <div class="col-md-5 col-4">
-                                <button class="custom-btn btn-primary">
+                              <div className="col-md-5 col-4">
+                                <button className="custom-btn btn-primary">
                                   Show
                                 </button>
                               </div>
@@ -449,18 +452,18 @@ const HishabNikash = () => {
                       </div>
                     </div>
                     {/* <!--Right Site top Table--> */}
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="mt-4">
+                    <div className="row">
+                      <div className="col-12">
+                        <div className="mt-4">
                           <div
-                            class="table-responsive accounts-table"
+                            className="table-responsive accounts-table"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              class="table  bg-white text-center mb-0"
+                              className="table  bg-white text-center mb-0"
                             >
-                              <thead class="text-center accounts-table-head">
+                              <thead className="text-center accounts-table-head">
                                 <tr>
                                   <th>অর্ডার</th>
                                   <th>তারিখ</th>
@@ -639,18 +642,18 @@ const HishabNikash = () => {
                     </div>
                     {/* <!--Right Site Top Table End--> */}
                     {/* <!--Right Site Bottom Table Start--> */}
-                    <div class="row mt-4">
-                      <div class="col-6">
+                    <div className="row mt-4">
+                      <div className="col-6">
                         <div
-                          class="table-responsive accounts-table"
+                          className="table-responsive accounts-table"
                           data-pattern="priority-columns"
                         >
                           <table
                             id="tech-companies-1"
-                            class="table  bg-white text-center mb-0"
+                            className="table  bg-white text-center mb-0"
                           >
-                            <thead class="text-center ">
-                              <tr class="accounts-table-head">
+                            <thead className="text-center ">
+                              <tr className="accounts-table-head">
                                 <td colspan="2">আজকের তহবিল</td>
                               </tr>
                               <tr>
@@ -679,17 +682,17 @@ const HishabNikash = () => {
                           </table>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div className="col-6">
                         <div
-                          class="table-responsive accounts-table"
+                          className="table-responsive accounts-table"
                           data-pattern="priority-columns"
                         >
                           <table
                             id="tech-companies-1"
-                            class="table  bg-white text-center mb-0"
+                            className="table  bg-white text-center mb-0"
                           >
-                            <thead class="text-center ">
-                              <tr class="accounts-table-head">
+                            <thead className="text-center ">
+                              <tr className="accounts-table-head">
                                 <td colspan="2">আজকের তহবিল</td>
                               </tr>
                               <tr>

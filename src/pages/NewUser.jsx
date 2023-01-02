@@ -11,23 +11,17 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 
 const NewUser = () => {
-  // const { data } = useQuery(
-  //   "user",
-  //   () => fetch(`${serverUrl}/api/users`).then((res) => res.json()),
-  //   {
-  //     refetchInterval: false,
-  //     refetchIntervalInBackground: false,
-  //     refetchOnWindowFocus: false,
-  //   }
-  // );
+  const { data } = useQuery("user", () =>
+    fetch(`${serverUrl}/api/users`).then((res) => res.json())
+  );
 
-  const data = [];
+  // const data = [];
 
   // console.log("🚀 ~ file: NewUser.jsx:8 ~ NewUser ~ data", data);
 
   const mutation = useMutation({
     mutationFn: (newUser) => {
-      return axios.post(`${serverUrl}/api/users`, newUser);
+      return axios.post(`${serverUrl}/api/register`, newUser);
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);
@@ -35,6 +29,7 @@ const NewUser = () => {
     },
     onSuccess: (data) => {
       console.log(data.data);
+      window.location.reload(true);
     },
   });
   const [array, setArray] = useState([]);
@@ -44,6 +39,7 @@ const NewUser = () => {
 
   const onSubmit = async (value) => {
     mutation.mutate({ ...value, permission: array });
+    console.log({ ...value, permission: array });
     // toast.success("user successfully successfully");
     // console.log(value);?
   };
@@ -56,83 +52,83 @@ const NewUser = () => {
 
   return (
     <div>
-      <main class="page-bg">
+      <main className="page-bg">
         {/* <!-- Create New User form Start --> */}
-        <section class="user-form-section">
-          <div class="section-bg">
-            <div class="user-form">
-              <div class="">
-                <div class="row">
-                  <div class="col-md-12 col-lg-6 col-sm-12 user-form-create d-block">
+        <section className="user-form-section">
+          <div className="section-bg">
+            <div className="user-form">
+              <div className="">
+                <div className="row">
+                  <div className="col-md-12 col-lg-6 col-sm-12 user-form-create d-block">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                      <div class="row bottom-border">
-                        <div class="col-md-12 col-sm-12 col-lg-12 w-100">
-                          <div class="user-create-form">
-                            <div class="title">
+                      <div className="row bottom-border">
+                        <div className="col-md-12 col-sm-12 col-lg-12 w-100">
+                          <div className="user-create-form">
+                            <div className="title">
                               <span>
-                                <i class="bi bi-person-square"></i>
+                                <i className="bi bi-person-square"></i>
                               </span>
                               <span>ব্যবহারকারীর প্রোফাইল তৈরি</span>
                             </div>
-                            <div class="my-4">
-                              <div class="row form-group mb-3">
-                                <label class="col-sm-12 col-md-12 col-lg-3 col-form-label">
+                            <div className="my-4">
+                              <div className="row form-group mb-3">
+                                <label className="col-sm-12 col-md-12 col-lg-3 col-form-label">
                                   ইমেইল
                                 </label>
-                                <div class="col-sm-12 col-lg-7">
+                                <div className="col-sm-12 col-lg-7">
                                   <input
-                                    class="form-control"
+                                    className="form-control"
                                     type="email"
                                     placeholder="ইমেইল"
                                     {...register("email")}
                                   />
                                 </div>
                               </div>
-                              <div class="row form-group mb-3">
-                                <label class="col-sm-12 col-lg-3 col-form-label">
+                              <div className="row form-group mb-3">
+                                <label className="col-sm-12 col-lg-3 col-form-label">
                                   ইউজার নেমঃ
                                 </label>
-                                <div class="col-lg-7 col-sm-12">
+                                <div className="col-lg-7 col-sm-12">
                                   <input
-                                    class="form-control"
+                                    className="form-control"
                                     type="text"
                                     placeholder="ইউজার নেম"
                                     {...register("name")}
                                   />
                                 </div>
                               </div>
-                              <div class="row form-group mb-3">
-                                <label class="col-lg-3 col-sm-12 col-form-label">
+                              <div className="row form-group mb-3">
+                                <label className="col-lg-3 col-sm-12 col-form-label">
                                   পাসওয়ার্ডঃ
                                 </label>
-                                <div class="col-lg-7 col-sm-12 position-relative">
+                                <div className="col-lg-7 col-sm-12 position-relative">
                                   <input
-                                    class="form-control"
+                                    className="form-control"
                                     type="password"
                                     placeholder="পাসওয়ার্ড"
                                     id="password"
                                     {...register("password")}
                                   />
                                   <i
-                                    class="bi bi-eye pass-show"
+                                    className="bi bi-eye pass-show"
                                     onclick="passwordshowhide()"
                                   ></i>
                                 </div>
                               </div>
-                              <div class="row form-group mb-3">
-                                <label class="col-lg-3 col-sm-12 col-form-label">
+                              <div className="row form-group mb-3">
+                                <label className="col-lg-3 col-sm-12 col-form-label">
                                   কনফার্ম পাসওয়ার্ডঃ
                                 </label>
-                                <div class="col-lg-7 col-sm-12 position-relative">
+                                <div className="col-lg-7 col-sm-12 position-relative">
                                   <input
-                                    class="form-control"
+                                    className="form-control"
                                     type="password"
                                     placeholder=" কনফার্ম পাসওয়ার্ড"
                                     id="password_confirmation"
                                     {...register("password_confirmation")}
                                   />
                                   <i
-                                    class="bi bi-eye pass-show"
+                                    className="bi bi-eye pass-show"
                                     onclick="passwordshowhide()"
                                   ></i>
                                 </div>
@@ -141,26 +137,26 @@ const NewUser = () => {
                           </div>
                         </div>
                       </div>
-                      <div class="user-role position-relative">
-                        <div class="section-subtitle">ক্ষমতা প্রদান</div>
-                        <div class="role-all">
-                          <div class="input-group d-flex align-items-center gap-3">
+                      <div className="user-role position-relative">
+                        <div className="section-subtitle">ক্ষমতা প্রদান</div>
+                        <div className="role-all">
+                          <div className="input-group d-flex align-items-center gap-3">
                             <input
-                              class="form-check-input mt-0"
+                              className="form-check-input mt-0"
                               type="checkbox"
                               value=""
                               aria-label="Checkbox for following text input"
                               onclick="allSelect(this)"
                             />
-                            <span class="">সব নির্বাচন</span>
+                            <span className="">সব নির্বাচন</span>
                           </div>
                         </div>
                         {array}
-                        <div class="user-permission">
-                          <div class="user-permission-left">
-                            <div class="input-group d-flex align-items-center gap-3">
+                        <div className="user-permission">
+                          <div className="user-permission-left">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
@@ -180,11 +176,11 @@ const NewUser = () => {
                                   }
                                 }}
                               />
-                              <span class="">হিসাব নিকাশ</span>
+                              <span className="">হিসাব নিকাশ</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
@@ -204,11 +200,11 @@ const NewUser = () => {
                                   }
                                 }}
                               />
-                              <span class="">শিক্ষার্থী</span>
+                              <span className="">শিক্ষার্থী</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
@@ -228,11 +224,11 @@ const NewUser = () => {
                                   }
                                 }}
                               />
-                              <span class="">পরীক্ষা</span>
+                              <span className="">পরীক্ষা</span>
                             </div>{" "}
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
@@ -252,11 +248,11 @@ const NewUser = () => {
                                   }
                                 }}
                               />
-                              <span class="">ফলাফল</span>
+                              <span className="">ফলাফল</span>
                             </div>{" "}
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
@@ -276,11 +272,11 @@ const NewUser = () => {
                                   }
                                 }}
                               />
-                              <span class="">শিক্ষক</span>
+                              <span className="">শিক্ষক</span>
                             </div>{" "}
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
@@ -300,11 +296,11 @@ const NewUser = () => {
                                   }
                                 }}
                               />
-                              <span class="">দাতা সদস্য</span>
+                              <span className="">দাতা সদস্য</span>
                             </div>{" "}
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
@@ -324,224 +320,228 @@ const NewUser = () => {
                                   }
                                 }}
                               />
-                              <span class="">বই বিক্রি</span>
+                              <span className="">বই বিক্রি</span>
                             </div>
-                            {/* <div class="input-group d-flex align-items-center gap-3">
+                            {/* <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
                           </div>
-                          <div class="user-permission-right">
-                            <div class="input-group d-flex align-items-center gap-3">
+                          <div className="user-permission-right">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div>
-                            <div class="input-group d-flex align-items-center gap-3">
+                            <div className="input-group d-flex align-items-center gap-3">
                               <input
-                                class="form-check-input mt-0"
+                                className="form-check-input mt-0"
                                 type="checkbox"
                                 value=""
                                 aria-label="Checkbox for following text input"
                                 name="checkbox"
                               />
-                              <span class="">ক্ষমতার নাম</span>
+                              <span className="">ক্ষমতার নাম</span>
                             </div> */}
                           </div>
                         </div>
-                        <div class="button-group">
-                          {/* <button class="custom-btn btn-primary" type="submit">
+                        <div className="button-group">
+                          {/* <button className="custom-btn btn-primary" type="submit">
                             Save
                           </button> */}
-                          <button class="custom-btn btn-dark" type="submit">
+                          <button className="custom-btn btn-dark" type="submit">
                             Create New
                           </button>
-                          {/* <button class="custom-btn btn-danger">Delete</button> */}
+                          {/* <button className="custom-btn btn-danger">Delete</button> */}
                         </div>
                       </div>
                     </form>
                   </div>
-                  <div class="col-lg-6 col-sm-12">
-                    <div class="table-data">
-                      <div class="row form-group searchbar">
-                        <div class="col-sm-6 position-relative search">
-                          <i class="bi bi-search search-icon"></i>
+                  <div className="col-lg-6 col-sm-12">
+                    <div className="table-data">
+                      <div className="row form-group searchbar">
+                        <div className="col-sm-6 position-relative search">
+                          <i className="bi bi-search search-icon"></i>
                           <input
-                            class="form-control"
+                            className="form-control"
                             type="search"
                             placeholder="Search"
                           />
                         </div>
                       </div>
                       <div
-                        class="table-responsive"
+                        className="table-responsive"
                         data-pattern="priority-columns"
                       >
                         <table
                           id="tech-companies-1"
-                          class="table  bg-white table-bordered text-center"
+                          className="table  bg-white table-bordered text-center"
                         >
-                          <thead class="text-center accounts-table-head">
+                          <thead className="text-center accounts-table-head">
                             <tr>
                               <th></th>
                               <th>
-                                <span class="action-edit">
-                                  <i class="bi bi-pencil-square"></i>
+                                <span className="action-edit">
+                                  <i className="bi bi-pencil-square"></i>
                                 </span>
                               </th>
                               <th>
-                                <span class="action-delete">
-                                  <i class="bi bi-trash3"></i>
+                                <span className="action-delete">
+                                  <i className="bi bi-trash3"></i>
                                 </span>
                               </th>
-                              <th data-priority="1">আইডি</th>
+                              <th data-priority="1">ক্ষমতা</th>
                               <th data-priority="3">ইউজারনেম</th>
                               <th data-priority="1"> ইমেইল</th>
                             </tr>
                           </thead>
-                          {/* <tbody>
+                          <tbody>
                             {data?.data.map((user) => (
                               <>
                                 <tr>
                                   <td></td>
                                   <th>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </th>
                                   <th>
-                                    <span class="action-delete">
-                                      <i class="bi bi-trash3"></i>
+                                    <span className="action-delete">
+                                      <i className="bi bi-trash3"></i>
                                     </span>
                                   </th>
-                                  <td>{user.id}</td>
+                                  <td>
+                                    {user.permissions.map((permission) => (
+                                      <div>{permission}</div>
+                                    ))}
+                                  </td>
                                   <td>{user.name}</td>
                                   <td>{user.email}</td>
                                 </tr>
                               </>
                             ))}
-                          </tbody> */}
+                          </tbody>
                         </table>
                       </div>
                     </div>

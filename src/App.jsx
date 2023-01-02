@@ -45,78 +45,419 @@ import Login from "./pages/login";
 import axios from "axios";
 import { serverUrl } from "../utils/config";
 import { useForm } from "react-hook-form";
-
-const queryClient = new QueryClient();
+// import { useContext } from "react";
+import { useEffect } from "react";
+import NotAuthenticated from "./pages/NotAuthenticated";
 
 function App() {
+  const { data, isLoading } = useQuery(
+    ["me"],
+    () =>
+      axios.get(`${serverUrl}/api/user`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }),
+    {
+      refetchInterval: false,
+      refetchIntervalInBackground: false,
+      refetchOnWindowFocus: false,
+    }
+  );
+  // if (isLoading) return <div>Loading....</div>;
+  // console.log(data?.data);
+  // const [user, setUser] = useState();
+
+  const user = data?.data;
+
+  console.log("includes", user?.permissions.includes("students_control"));
+
+  // const user = userProxy?.data.data;
+
+  console.log(user);
+
   return (
     <div>
-      <QueryClientProvider client={queryClient}>
-        <Toaster />
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/dashboard" element={<Dasboard />} />
-            <Route path="/newuser" element={<NewUser />} />
-            <Route path="/students" element={<Students />} />
-            <Route
-              path="/accounting/hishab-nikash"
-              element={<HishabNikash />}
-            />
-            <Route
-              path="/income-expence-entry"
-              element={<IncomeExpenceEntry />}
-            />
-
-            <Route path="/income-entry" element={<IncomeEntry />} />
-            <Route path="/expence-entry" element={<ExpenceEntry />} />
-            <Route path="/fees-determination" element={<FeesDetermination />} />
-            <Route path="/report" element={<Report />} />
-            <Route path="/accounting/monthly-fees" element={<MonthlyFees />} />
-            <Route path="/class-entry" element={<ClassEntry />} />
-
-            <Route path="/student-info" element={<StudentInfo />} />
-            <Route path="/class-migration" element={<StudentInfo />} />
-            <Route path="/student-idcard" element={<StudentIDCard />} />
-            <Route path="/student-attandence" element={<StudentAttandance />} />
-            <Route path="/student-report" element={<Report />} />
-
-            <Route path="/exam-entry" element={<ExamEntry />} />
-            <Route
-              path="/exam-fees-determination"
-              element={<ExamFeesDetermination />}
-            />
-            <Route path="/result-condition" element={<ResultCondition />} />
-            <Route path="hishab-nikash" element={<HishabNikash />} />
-            <Route path="admitcard-print" element={<AdmitCardPrint />} />
-            <Route path="exam-report" element={<ExamReport />} />
-
-            <Route path="/class-migration" element={<ClassMigration />} />
-            <Route path="/institute-info" element={<InstituteInfo />} />
-
-            <Route path="marks-entry" element={<MarkEntry />} />
-            <Route path="mark-sheet" element={<MarkSheet />} />
-
-            <Route path="teacher-staff" element={<TeacherStaff />} />
-            <Route path="monthly-entry" element={<MonthlyEntry />} />
-            <Route path="sallary-sheet" element={<SallerySheet />} />
-            <Route path="pay-sallary" element={<PaySallary />} />
-            <Route path="salary-report" element={<SalaryReport />} />
-            <Route
-              path="individual-salary-sheet"
-              element={<IndividualSallerySheet />}
-            />
-
-            <Route path="doner-member" element={<DonerMember />} />
-            <Route path="donate-recive" element={<DonateRecive />} />
-
-            <Route path="add-book" element={<AddBook />} />
-            <Route path="new-sale" element={<NewSale />} />
-            <Route path="manage-sell" element={<ManageSale />} />
-            <Route path="invoice-details" element={<InvoiceDetail />} />
-          </Routes>
-        </Layout>
-      </QueryClientProvider>
+      <Toaster />
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/dashboard" element={<Dasboard />} />
+          <Route
+            path="/newuser"
+            element={
+              data?.data.roles.name === "admin" ? (
+                <NewUser />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/institute-info"
+            element={
+              data?.data.roles.name === "admin" ? (
+                <InstituteInfo />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          //audit
+          <Route
+            path="/accounting/hishab-nikash"
+            element={
+              user?.permissions.includes("audit_permission") ? (
+                <HishabNikash />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/income-expence-entry"
+            element={
+              user?.permissions.includes("audit_permission") ? (
+                <IncomeExpenceEntry />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/income-entry"
+            element={
+              user?.permissions.includes("audit_permission") ? (
+                <IncomeEntry />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/expence-entry"
+            element={
+              user?.permissions.includes("audit_permission") ? (
+                <ExpenceEntry />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/fees-determination"
+            element={
+              user?.permissions.includes("audit_permission") ? (
+                <FeesDetermination />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/report"
+            element={
+              user?.permissions.includes("audit_permission") ? (
+                <Report />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/accounting/monthly-fees"
+            element={
+              user?.permissions.includes("audit_permission") ? (
+                <MonthlyFees />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          //Student
+          <Route
+            path="/class-entry"
+            element={
+              user?.permissions.includes("students_control") ? (
+                <ClassEntry />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/student-info"
+            element={
+              user?.permissions.includes("students_control") ? (
+                <StudentInfo />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/class-migration"
+            element={
+              user?.permissions.includes("students_control") ? (
+                <ClassMigration />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/students"
+            element={
+              user?.permissions.includes("students_control") ? (
+                <Students />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/class-migration"
+            element={
+              user?.permissions.includes("students_control") ? (
+                <ClassMigration />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/student-idcard"
+            element={
+              user?.permissions.includes("students_control") ? (
+                <StudentIDCard />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/student-attandence"
+            element={
+              user?.permissions.includes("students_control") ? (
+                <StudentAttandance />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/student-report"
+            element={
+              user?.permissions.includes("students_control") ? (
+                <Report />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/exam-entry"
+            element={
+              user?.permissions.includes("exam_control") ? (
+                <ExamEntry />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/exam-fees-determination"
+            element={
+              user?.permissions.includes("exam_control") ? (
+                <ExamFeesDetermination />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="/result-condition"
+            element={
+              user?.permissions.includes("exam_control") ? (
+                <ResultCondition />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="hishab-nikash"
+            element={
+              user?.permissions.includes("exam_control") ? (
+                <HishabNikash />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="admitcard-print"
+            element={
+              user?.permissions.includes("exam_control") ? (
+                <AdmitCardPrint />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="exam-report"
+            element={
+              user?.permissions.includes("exam_control") ? (
+                <ExamReport />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          //result
+          <Route
+            path="marks-entry"
+            element={
+              user?.permissions.includes("result_control") ? (
+                <MarkEntry />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="mark-sheet"
+            element={
+              user?.permissions.includes("result_control") ? (
+                <MarkSheet />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          //teacher
+          <Route
+            path="teacher-staff"
+            element={
+              user?.permissions.includes("teacher_control") ? (
+                <TeacherStaff />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="monthly-entry"
+            element={
+              user?.permissions.includes("teacher_control") ? (
+                <MonthlyFees />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="sallary-sheet"
+            element={
+              user?.permissions.includes("teacher_control") ? (
+                <SallerySheet />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="pay-sallary"
+            element={
+              user?.permissions.includes("teacher_control") ? (
+                <PaySallary />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="salary-report"
+            element={
+              user?.permissions.includes("teacher_control") ? (
+                <SalaryReport />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="individual-salary-sheet"
+            element={
+              user?.permissions.includes("teacher_control") ? (
+                <IndividualSallerySheet />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="doner-member"
+            element={
+              user?.permissions.includes("doner_control") ? (
+                <DonerMember />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="donate-recive"
+            element={
+              user?.permissions.includes("doner_control") ? (
+                <DonateRecive />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          //need to add a doner report
+          <Route
+            path="add-book"
+            element={
+              user?.permissions.includes("library_control") ? (
+                <AddBook />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="new-sale"
+            element={
+              user?.permissions.includes("library_control") ? (
+                <NewSale />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="manage-sell"
+            element={
+              user?.permissions.includes("library_control") ? (
+                <ManageSale />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+          <Route
+            path="invoice-details"
+            element={
+              user?.permissions.includes("library_control") ? (
+                <InvoiceDetail />
+              ) : (
+                <NotAuthenticated />
+              )
+            }
+          />
+        </Routes>
+      </Layout>
     </div>
   );
 }
