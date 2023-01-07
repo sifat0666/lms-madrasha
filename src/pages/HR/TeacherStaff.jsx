@@ -1,93 +1,109 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
 const TeacherStaff = () => {
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (value) => {
+    console.log("first", value);
+  };
+
   return (
     <div>
-      <section className="user-form-section d-print-none">
-        <div className="section-bg">
-          <div className="row">
-            <div className="col-md-12 w-100">
-              <div className="main-container">
-                <div className="row">
-                  <div className="col-12">
-                    <div className="section-title">
-                      <h4>শিক্ষক এবং কর্মচারী এন্ট্রি</h4>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                            ধরণঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-10 col-md-10 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder=" ধরণ"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                            থানাঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-10 col-md-10 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder=" থানা"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            যোগদানের তারিখঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="date"
-                              className="form-control"
-                              placeholder=" যোগদানের তারিখ"
-                            />
-                          </div>
-                        </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <section className="user-form-section d-print-none">
+          <div className="section-bg">
+            <div className="row">
+              <div className="col-md-12 w-100">
+                <div className="main-container">
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="section-title">
+                        <h4>শিক্ষক এবং কর্মচারী এন্ট্রি</h4>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                            পদবীঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-5 col-md-5 col-6">
-                            <select className="form-select">
-                              <option selected>নির্বাচন করুন</option>
-                              <option>মুহতামিম</option>
-                              <option>নায়েবে মুহতামিম</option>
-                              <option>শায়খুল হাদীস</option>
-                              <option>প্রধান মুফতী কাম- শায়খে ছানী</option>
-                              <option>শিক্ষাসচিব কাম- সিনিয়র মুহাদ্দিস</option>
-                              <option>সিনিয়র মুহাদ্দিস</option>
-                              <option>মুহাদ্দিস সিনিয়র ইস্তাদ</option>
-                              <option>উস্তাদে মুহতারাম</option>
-                              <option>উস্তাদ হিফজ বিভাগ</option>
-                              <option>উস্তাদ নাজেরা বিভাগ</option>
-                              <option>উস্তাদ নূরানী বিভাগ</option>
-                            </select>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                              ধরণঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-10 col-md-10 col-12">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder=" ধরণ"
+                                {...register("type")}
+                              />
+                            </div>
                           </div>
-                          <div className="col-lg-5 col-md-5 col-6 d-flex align-items-center">
+                        </div>
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                              থানাঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-10 col-md-10 col-12">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder=" থানা"
+                                {...register("thana")}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              যোগদানের তারিখঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                type="date"
+                                className="form-control"
+                                placeholder=" যোগদানের তারিখ"
+                                {...register("data_of_joining")}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                              পদবীঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-5 col-md-5 col-6">
+                              <select
+                                className="form-select"
+                                {...register("position")}
+                              >
+                                {/* <option>নির্বাচন করুন</option> */}
+                                <option>মুহতামিম</option>
+                                <option>নায়েবে মুহতামিম</option>
+                                <option>শায়খুল হাদীস</option>
+                                <option>প্রধান মুফতী কাম- শায়খে ছানী</option>
+                                <option>
+                                  শিক্ষাসচিব কাম- সিনিয়র মুহাদ্দিস
+                                </option>
+                                <option>সিনিয়র মুহাদ্দিস</option>
+                                <option>মুহাদ্দিস সিনিয়র ইস্তাদ</option>
+                                <option>উস্তাদে মুহতারাম</option>
+                                <option>উস্তাদ হিফজ বিভাগ</option>
+                                <option>উস্তাদ নাজেরা বিভাগ</option>
+                                <option>উস্তাদ নূরানী বিভাগ</option>
+                              </select>
+                            </div>
+                            {/* <div className="col-lg-5 col-md-5 col-6 d-flex align-items-center">
                             <div className="input-group d-flex align-items-center gap-3">
                               <input
                                 className="form-check-input mt-0"
@@ -98,318 +114,291 @@ const TeacherStaff = () => {
                               />
                               <span className="">অবসরপ্রাপ্ত</span>
                             </div>
+                          </div> */}
                           </div>
                         </div>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            জেলাঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder=" জেলা"
-                            />
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              জেলাঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder=" জেলা"
+                                {...register("jela")}
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            পাশের বিভাগঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder=" পাশের বিভাগ"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                            আইডিঃ
-                          </label>
-                          <div className="col-lg-10 col-md-10 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="আইডি"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            জন্ম তারিখঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="date"
-                              className="form-control"
-                              placeholder=" জেলা"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-sm-4 col-form-label info-lable">
-                            পাশের সন তারিখঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="date"
-                              className="form-control"
-                              placeholder=" পাশের বিভাগ"
-                            />
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              পাশের বিভাগঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder=" পাশের বিভাগ"
+                                {...register("passing_district")}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                            আইডিঃ
-                          </label>
-                          <div className="col-lg-10 col-md-10 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="আইডি"
-                            />
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                              আইডিঃ
+                            </label>
+                            <div className="col-lg-10 col-md-10 col-12">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="আইডি"
+                                {...register("employee_id")}
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            জন্ম তারিখঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="date"
-                              className="form-control"
-                              placeholder=" জেলা"
-                            />
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              জন্ম তারিখঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                type="date"
+                                className="form-control"
+                                placeholder=" জেলা"
+                                {...register("jela")}
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            পাশের সন তারিখঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="date"
-                              className="form-control"
-                              placeholder=" পাশের বিভাগ"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                            পিতাঃ
-                          </label>
-                          <div className="col-lg-10 col-md-10 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="পিতা"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            রেজিঃনং
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder=" রেজিস্টশন নাম্বার"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            অভিজ্ঞতাঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <textarea
-                              className="form-control"
-                              rows="1"
-                              placeholder=" অভিজ্ঞতা"
-                            ></textarea>
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
+                              পাশের সন তারিখঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                type="date"
+                                className="form-control"
+                                placeholder=" পাশের বিভাগ"
+                                {...register("passing_year")}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                            মাতাঃ
-                          </label>
-                          <div className="col-lg-10 col-md-10 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="মাতা"
-                            />
+
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                              পিতাঃ
+                            </label>
+                            <div className="col-lg-10 col-md-10 col-12">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="পিতা"
+                                {...register("father_name")}
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            যোগ্যতা
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <textarea
-                              className="form-control"
-                              rows="1"
-                              placeholder="যোগ্যতা"
-                            ></textarea>
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              রেজিঃনং
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder=" রেজিস্টশন নাম্বার"
+                                {...register("reg_no")}
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                            গ্রামঃ
-                          </label>
-                          <div className="col-lg-10 col-md-10 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="গ্রাম"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            ডাকঃ
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="ডাক"
-                            />
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              অভিজ্ঞতাঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <textarea
+                                className="form-control"
+                                rows="1"
+                                placeholder=" অভিজ্ঞতা"
+                                {...register("exp")}
+                              ></textarea>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-6 d-flex justify-content-center w-100 payroll">
-                    <div className="button-group w-100">
-                      <button className="custom-btn btn-primary">Save</button>
-                      <button className="custom-btn btn-dark">New</button>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                              মাতাঃ
+                            </label>
+                            <div className="col-lg-10 col-md-10 col-12">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="মাতা"
+                                {...register("mother_name")}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              যোগ্যতা
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <textarea
+                                className="form-control"
+                                rows="1"
+                                placeholder="যোগ্যতা"
+                                {...register("qualification")}
+                              ></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                              গ্রামঃ
+                            </label>
+                            <div className="col-lg-10 col-md-10 col-12">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="গ্রাম"
+                                {...register("graam")}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              ডাকঃ
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="ডাক"
+                                {...register("daak")}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 d-flex justify-content-center w-100 payroll">
+                      <div className="button-group w-100">
+                        <button
+                          type="submit"
+                          className="custom-btn btn-primary"
+                        >
+                          Save
+                        </button>
+                        <button type="reset" className="custom-btn btn-dark">
+                          New
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="row my-3">
-                  <div className="col-12">
-                    <div
-                      className="table-responsive accounts-table"
-                      data-pattern="priority-columns"
-                    >
-                      <table
-                        id="tech-companies-1"
-                        className="table  bg-white text-center mb-0"
+                  <div className="row my-3">
+                    <div className="col-12">
+                      <div
+                        className="table-responsive accounts-table"
+                        data-pattern="priority-columns"
                       >
-                        <thead className="text-center accounts-table-head">
-                          <tr>
-                            <th>আইডি</th>
-                            <th>নাম</th>
-                            <th>গ্রাম</th>
-                            <th>থানা</th>
-                            <th>জেলা</th>
-                            <th>পদবী</th>
-                            <th>মোবাইল নাম্বার</th>
-                            <th>
-                              <span className="action-edit">
-                                <i className="bi bi-pencil-square"></i>
-                              </span>
-                            </th>
-                            <th>
-                              <span className="action-delete">
-                                <i className="bi bi-trash3"></i>
-                              </span>
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>২০২২</td>
-                            <td>৫০০.০০</td>
-                            <td>৬০০.০০</td>
-                            <td>০০.০০</td>
-                            <td>০০.০০</td>
-                            <td>০০.০০</td>
-                            <td>০০.০০</td>
-                            <td>
-                              <span className="action-edit">
-                                <i className="bi bi-pencil-square"></i>
-                              </span>
-                            </td>
-                            <td>
-                              <span className="action-delete">
-                                <i className="bi bi-trash3"></i>
-                              </span>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
+                        <table
+                          id="tech-companies-1"
+                          className="table  bg-white text-center mb-0"
+                        >
+                          <thead className="text-center accounts-table-head">
+                            <tr>
+                              <th>আইডি</th>
+                              <th>নাম</th>
+                              <th>গ্রাম</th>
+                              <th>থানা</th>
+                              <th>জেলা</th>
+                              <th>পদবী</th>
+                              <th>মোবাইল নাম্বার</th>
+                              <th>
+                                <span className="action-edit">
+                                  <i className="bi bi-pencil-square"></i>
+                                </span>
+                              </th>
+                              <th>
+                                <span className="action-delete">
+                                  <i className="bi bi-trash3"></i>
+                                </span>
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>২০২২</td>
+                              <td>৫০০.০০</td>
+                              <td>৬০০.০০</td>
+                              <td>০০.০০</td>
+                              <td>০০.০০</td>
+                              <td>০০.০০</td>
+                              <td>০০.০০</td>
+                              <td>
+                                <span className="action-edit">
+                                  <i className="bi bi-pencil-square"></i>
+                                </span>
+                              </td>
+                              <td>
+                                <span className="action-delete">
+                                  <i className="bi bi-trash3"></i>
+                                </span>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </form>
       {/* <!-- Employe Add Section End --> */}
       {/* <!--রির্পোট প্রিন্ট সেকশন--> */}
       {/* <!--Preview Page Section--> */}
@@ -1154,9 +1143,7 @@ const TeacherStaff = () => {
                               </label>
                               <div className="col-7">
                                 <select className="form-select">
-                                  <option value="" selected>
-                                    সিলেক্ট করুন
-                                  </option>
+                                  <option value="">সিলেক্ট করুন</option>
                                   <option>২০২২</option>
                                   <option>২০২৩</option>
                                   <option>২০২৪</option>
@@ -1171,9 +1158,7 @@ const TeacherStaff = () => {
                               </label>
                               <div className="col-7">
                                 <select className="form-select">
-                                  <option selected="">
-                                    শ্রেণী নির্বাচন করুন
-                                  </option>
+                                  <option>শ্রেণী নির্বাচন করুন</option>
                                   <option>নাযেরা</option>
                                   <option>হিফযুল কুরআন</option>
                                   <option>ই-দাদী</option>
@@ -1509,9 +1494,7 @@ const TeacherStaff = () => {
                               </label>
                               <div className="col-7">
                                 <select className="form-select">
-                                  <option value="" selected>
-                                    সিলেক্ট করুন
-                                  </option>
+                                  <option value="">সিলেক্ট করুন</option>
                                   <option>২০২২</option>
                                   <option>২০২৩</option>
                                   <option>২০২৪</option>
@@ -1526,9 +1509,7 @@ const TeacherStaff = () => {
                               </label>
                               <div className="col-7">
                                 <select className="form-select">
-                                  <option selected="">
-                                    শ্রেণী নির্বাচন করুন
-                                  </option>
+                                  <option>শ্রেণী নির্বাচন করুন</option>
                                   <option>নাযেরা</option>
                                   <option>হিফযুল কুরআন</option>
                                   <option>ই-দাদী</option>

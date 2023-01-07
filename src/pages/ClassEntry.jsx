@@ -1,6 +1,34 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import axios from "axios";
+import { serverUrl } from "../../utils/config";
 
 const ClassEntry = () => {
+  const { register, handleSubmit } = useForm();
+  const { data } = useQuery("marhalaclass", () =>
+    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+  );
+
+  // console.log(data);
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/marhalaclass`, data);
+    },
+    onError: (error, variable, context) => {
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      toast.success("student registered successfully");
+    },
+  });
+
+  const onSubmit = async (value) => {
+    mutation.mutate(value);
+    // console.log(value);
+  };
+
   return (
     <div>
       <section className="user-form-section">
@@ -14,8 +42,11 @@ const ClassEntry = () => {
                       <h4>জামাত /শ্রেণী তত্ত্ব</h4>
                     </div>
                     <div className="my-4">
-                      <form className="feesdeterminationa-form">
-                        <div className="row mb-3">
+                      <form
+                        className="feesdeterminationa-form"
+                        onSubmit={handleSubmit(onSubmit)}
+                      >
+                        {/* <div className="row mb-3">
                           <label className="col-sm-12 col-md-12 col-lg-4 col-form-label info-lable">
                             শিক্ষাবর্ষ নির্বাচন করুনঃ
                           </label>
@@ -32,8 +63,8 @@ const ClassEntry = () => {
                               <option>পরীক্ষামূলক মারহালা</option>
                             </select>
                           </div>
-                        </div>
-                        <div className="row mb-3">
+                        </div> */}
+                        {/* <div className="row mb-3">
                           <label className="col-sm-12 col-md-12 col-lg-4 col-form-label info-lable">
                             ক্লাস আইডি
                             <i>*</i>
@@ -46,7 +77,7 @@ const ClassEntry = () => {
                               required
                             />
                           </div>
-                        </div>
+                        </div> */}
                         <div className="row mb-3">
                           <label className="col-sm-12 col-md-12 col-lg-4 col-form-label info-lable">
                             ক্লাসের নাম
@@ -57,10 +88,11 @@ const ClassEntry = () => {
                               type="text"
                               className="form-control"
                               placeholder="ক্লাসের নাম"
+                              {...register("class_name")}
                             />
                           </div>
                         </div>
-                        <div className="row mb-3">
+                        {/* <div className="row mb-3">
                           <label className="col-sm-12 col-md-12 col-lg-4 col-form-label info-lable">
                             আরবী হিজরী
                           </label>
@@ -71,17 +103,22 @@ const ClassEntry = () => {
                               placeholder="আরবী হিজরী"
                             />
                           </div>
-                        </div>
+                        </div> */}
                         {/* <!-- ButtonGroup --> */}
                         <div className="button-container">
                           <div className="button-group">
+                            <input
+                              className="custom-btn btn-dark"
+                              type="reset"
+                            ></input>
                             <button
                               className="custom-btn btn-primary"
                               type="submit"
                             >
                               Save
                             </button>
-                            <button
+
+                            {/* <button
                               className="custom-btn btn-dark"
                               type="submit"
                             >
@@ -112,7 +149,7 @@ const ClassEntry = () => {
                               type="submit"
                             >
                               Delete
-                            </button>
+                            </button> */}
                           </div>
                         </div>
                       </form>
@@ -124,6 +161,22 @@ const ClassEntry = () => {
           </div>
         </div>
       </section>
+      <table class="table bg-white">
+        <thead>
+          <tr>
+            <th scope="col">আইডি</th>
+            <th scope="col">ক্লাসের নাম</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data?.data.map((item) => (
+            <tr key={item.id}>
+              <th scope="row">{item.id}</th>
+              <td>{item.class_name}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

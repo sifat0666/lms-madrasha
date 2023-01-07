@@ -48,6 +48,7 @@ import { useForm } from "react-hook-form";
 // import { useContext } from "react";
 import { useEffect } from "react";
 import NotAuthenticated from "./pages/NotAuthenticated";
+import TestPdf from "../pdf/TestPdf";
 
 function App() {
   const { data, isLoading } = useQuery(
@@ -79,6 +80,7 @@ function App() {
       <Toaster />
       <Layout>
         <Routes>
+          {/* <Route path="test" element={<TestPdf />} /> */}
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Dasboard />} />
           <Route

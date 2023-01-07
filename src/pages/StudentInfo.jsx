@@ -1,6 +1,102 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import axios from "axios";
+import { serverUrl } from "../../utils/config";
+import { useState } from "react";
+import { useRef } from "react";
+import ReactToPrint from "react-to-print";
 
 const StudentInfo = () => {
+  const ref = useRef();
+  const { register, handleSubmit } = useForm();
+  const mutation = useMutation({
+    mutationFn: (newUser) => {
+      return axios.post(`${serverUrl}/api/student`, newUser);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      toast.success("posted successfully");
+      console.log(data?.data.id);
+      setStudentids(data?.data.id);
+    },
+  });
+
+  const [fees, setFees] = useState("");
+  const [student_ids, setStudentids] = useState("");
+
+  const Fee = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/customfeecall`, data);
+    },
+    onError: (error, variable, context) => {
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      setFees(data?.data);
+    },
+  });
+
+  const submitFee = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/pay-fees`, data);
+    },
+    onError: (error, variable, context) => {
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log("data", data?.data);
+      toast.success("fee submitted");
+    },
+  });
+  const { data: me, isLoading } = useQuery(["me"]);
+
+  // console.log("student", me?.data);
+
+  console.log("first", fees);
+
+  const { data: marhalaClass } = useQuery("marhalaclass", () =>
+    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+  );
+  const { data: academicYear } = useQuery("academicyear", () =>
+    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+  );
+  const [value, setValue] = useState({});
+  const onSubmit = async (value) => {
+    console.log(value);
+    mutation.mutate({ ...value, notun_puraton: value.old_new });
+
+    const data = `${value.gender}_${value.abashik_onabashik}_${value.old_new}`;
+    const params = {
+      state: data,
+    };
+    params.academic_year = value.academic_year;
+    params.class_name = value.class_name;
+    console.log(params);
+    Fee.mutate(params);
+    setValue(value);
+  };
+
+  const { register: register2, handleSubmit: handleSubmit2 } = useForm();
+
+  const onSubmit2 = (value) => {
+    value.ammount = fees;
+    value.student_id = student_ids;
+    console.log(value);
+    submitFee.mutate(value);
+  };
+  const date = new Date();
+
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+
+  // This arrangement can be altered based on how we want the date's format to appear.
+  let currentDate = `${day}-${month}-${year}`;
   return (
     <div>
       <section className="user-form-section">
@@ -14,88 +110,94 @@ const StudentInfo = () => {
                       <h4>শিক্ষার্থীর তথ্য</h4>
                     </div>
                     <div className="my-4">
-                      <form className="studentsinfo-form">
+                      <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="studentsinfo-form"
+                      >
                         <div className="row">
-                          <div className="col-lg-7 col-md-10 col-10">
-                            <div className="row mb-3">
-                              <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
-                                শিক্ষাবর্ষঃ
-                                <i>*</i>
-                              </label>
-                              <div className="col-lg-8 col-sm-12 col-md-12">
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="শিক্ষাবর্ষ"
-                                />
-                              </div>
+                          <div className="row mb-3">
+                            <div className="section-title">
+                              <h4>শিক্ষাবর্ষঃ</h4>
                             </div>
-                          </div>
-                          <div className="col-lg-5 col-md-2 col-2">
-                            <div className="row mb-3">
-                              <div className="option-icon">
-                                <span>
-                                  <a href="#">
-                                    <i className="bi bi-info-circle-fill"></i>
-                                  </a>
-                                </span>
-                                <span>
-                                  <a
-                                    href="#"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#admissonModal"
-                                  >
-                                    <i className="bi bi-gear-fill"></i>
-                                  </a>
-                                </span>
-                              </div>
+                            <div className="filter-menu">
+                              <select
+                                className="form-select"
+                                size="3"
+                                style={{ border: "none" }}
+                                {...register("session")}
+                              >
+                                {academicYear?.data.map((item) => (
+                                  <option key={item.id}>
+                                    {item.academic_year}
+                                  </option>
+                                ))}
+                              </select>
                             </div>
                           </div>
                         </div>
-                        <div className="row">
-                          <div className="col-12 col-md-12 col-lg-7">
-                            <div className="row mb-3">
-                              <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
-                                ক্লাশঃ
-                                <i>*</i>
-                              </label>
-                              <div className="col-12 col-md-12 col-lg-8">
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="ক্লাশ"
-                                />
-                              </div>
-                            </div>
+                        <div className="row mb-3">
+                          <div className="section-title">
+                            <h4>মারহালা/শ্রেণীঃ</h4>
                           </div>
-                          <div className="col-12 col-md-12 col-lg-5">
-                            <div className="row">
-                              <div className="option-subtext">
-                                <h6>স্থায়ী ঠিকানা</h6>
-                              </div>
+                          <div className="filter-menu">
+                            <select
+                              className="form-select"
+                              size="4"
+                              style={{ border: "none" }}
+                              {...register("class")}
+                            >
+                              {marhalaClass?.data.map((item) => (
+                                <option
+                                  key={item.id}
+                                  // onClick={() => setClasss(item.academicYear)}
+                                >
+                                  {item.class_name}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+                        <div className="col-lg-5 col-md-2 col-2">
+                          <div className="row mb-3">
+                            <div className="option-icon">
+                              <span>
+                                <a href="#">
+                                  <i className="bi bi-info-circle-fill"></i>
+                                </a>
+                              </span>
+                              <span>
+                                <a
+                                  href="#"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#admissonModal"
+                                >
+                                  <i className="bi bi-gear-fill"></i>
+                                </a>
+                              </span>
                             </div>
                           </div>
                         </div>
+
                         <div className="row">
-                          <div className="col-lg-7 col-md-12 col-12">
-                            <div className="row mb-3">
-                              <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
-                                নতুন/পুরাতনঃ
-                                <i>*</i>
-                              </label>
-                              <div className="col-lg-8 col-12 col-md-12">
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="নতুন/পুরাতন"
-                                />
-                              </div>
-                            </div>
+                          <div className="col-lg-7 col-md-12 col-12 ">
+                            <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                              নতুন/পুরাতনঃ
+                              <i>*</i>
+                            </label>
+                            <select
+                              class="form-select form-select-sm mx-auto"
+                              aria-label=".form-select-sm example"
+                              {...register("old_new")}
+                            >
+                              {/* <option disabled>নতুন/পুরাতনঃ</option> */}
+                              <option value="new">নতুন</option>
+                              <option value="old">পুরাতনঃ</option>
+                            </select>
                           </div>
                           <div className="col-lg-5 col-md-12 col-12">
                             <div className="row mb-3">
                               <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
-                                গ্রামঃ
+                                স্থায়ী গ্রামঃ
                                 <i>*</i>
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
@@ -103,6 +205,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="গ্রাম"
+                                  {...register("perm_graam")}
                                 />
                               </div>
                             </div>
@@ -120,6 +223,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="ছাত্রের আইডি"
+                                  {...register("student_id")}
                                 />
                               </div>
                             </div>
@@ -127,7 +231,7 @@ const StudentInfo = () => {
                           <div className="col-lg-5 col-md-12 col-12">
                             <div className="row mb-1 mb-lg-3">
                               <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
-                                ডাকঃ
+                                স্থায়ী ডাকঃ
                                 <i>*</i>
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
@@ -135,6 +239,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="ডাক"
+                                  {...register("perm_daak")}
                                 />
                               </div>
                             </div>
@@ -152,6 +257,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="রোল নং"
+                                  {...register("roll")}
                                 />
                               </div>
                             </div>
@@ -159,7 +265,7 @@ const StudentInfo = () => {
                           <div className="col-lg-5 col-md-12 col-12">
                             <div className="row mb-3">
                               <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
-                                থানাঃ
+                                স্থায়ী থানাঃ
                                 <i>*</i>
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
@@ -167,6 +273,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="থানা"
+                                  {...register("perm_thana")}
                                 />
                               </div>
                             </div>
@@ -181,13 +288,15 @@ const StudentInfo = () => {
                                     ছাত্র/ছাত্রীঃ
                                     <i>*</i>
                                   </label>
-                                  <div className="col-lg-5 col-12 col-md-12">
-                                    <input
-                                      type="text"
-                                      className="form-control"
-                                      placeholder="ছাত্র/ছাত্রী"
-                                    />
-                                  </div>
+                                  <select
+                                    class="form-select form-select-sm mx-auto"
+                                    aria-label=".form-select-sm example"
+                                    {...register("gender")}
+                                  >
+                                    {/* <option disabled>নতুন/পুরাতনঃ</option> */}
+                                    <option value="boy">ছাত্র</option>
+                                    <option value="girl">ছাত্রীঃ</option>
+                                  </select>
                                 </div>
                               </div>
                               <div className="col-lg-5 col-md-12 col-12">
@@ -201,6 +310,7 @@ const StudentInfo = () => {
                                       type="text"
                                       className="form-control"
                                       placeholder="ফর্ম নাঃ"
+                                      {...register("form_number")}
                                     />
                                   </div>
                                 </div>
@@ -210,7 +320,7 @@ const StudentInfo = () => {
                           <div className="col-lg-5 col-12 col-md-12">
                             <div className="row mb-lg-3 mb-1">
                               <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
-                                জেলাঃ
+                                স্থায়ী জেলাঃ
                                 <i>*</i>
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
@@ -218,6 +328,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="জেলা"
+                                  {...register("perm_jela")}
                                 />
                               </div>
                             </div>
@@ -230,20 +341,15 @@ const StudentInfo = () => {
                                 অনাবাসিক/অনাবাসিকঃ
                                 <i>*</i>
                               </label>
-                              <div className="col-lg-8 col-12 col-md-12">
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="অনাবাসিক/অনাবাসিক"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-5 col-12 col-md-12">
-                            <div className="row mb-lg-3 mb-1">
-                              <div className="option-subtext">
-                                <h6>বর্তমান ঠিকানা</h6>
-                              </div>
+                              <select
+                                class="form-select form-select-sm"
+                                aria-label=".form-select-sm example"
+                                {...register("abashik_onabashik")}
+                              >
+                                {/* <option disabled>নতুন/পুরাতনঃ</option> */}
+                                <option value="resi">অবাসিক</option>
+                                <option value="unresi">অনাবাসিকঃ</option>
+                              </select>
                             </div>
                           </div>
                         </div>
@@ -259,6 +365,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="শিক্ষার্থী নাম"
+                                  {...register("student_name")}
                                 />
                               </div>
                             </div>
@@ -274,6 +381,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="গ্রাম"
+                                  {...register("graam")}
                                 />
                               </div>
                             </div>
@@ -291,6 +399,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="পিতার নাম"
+                                  {...register("father_name")}
                                 />
                               </div>
                             </div>
@@ -306,6 +415,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="থানা"
+                                  {...register("thana")}
                                 />
                               </div>
                             </div>
@@ -323,6 +433,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="মাতার নাম"
+                                  {...register("mother_name")}
                                 />
                               </div>
                             </div>
@@ -338,6 +449,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="জেলা"
+                                  {...register("jela")}
                                 />
                               </div>
                             </div>
@@ -355,6 +467,7 @@ const StudentInfo = () => {
                                   type="date"
                                   className="form-control"
                                   placeholder="মাতার নাম"
+                                  {...register("dob")}
                                 />
                               </div>
                             </div>
@@ -369,6 +482,7 @@ const StudentInfo = () => {
                                 <textarea
                                   className="form-control"
                                   placeholder=" মন্তব্য"
+                                  {...register("comment")}
                                 ></textarea>
                               </div>
                             </div>
@@ -386,6 +500,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="NID/জন্ম নিবন্ধন নং"
+                                  {...register("nid_no")}
                                 />
                               </div>
                             </div>
@@ -404,6 +519,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="জাতীয়তা"
+                                  {...register("nationality")}
                                 />
                               </div>
                             </div>
@@ -418,19 +534,12 @@ const StudentInfo = () => {
                                 <i>*</i>
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
-                                <select className="form-select">
-                                  <option selected>
-                                    রক্তের গ্রুপ নির্বাচন করুন
-                                  </option>
-                                  <option>A+</option>
-                                  <option>A-</option>
-                                  <option>B+</option>
-                                  <option>B-</option>
-                                  <option>O+</option>
-                                  <option>O-</option>
-                                  <option>AB+</option>
-                                  <option>AB-</option>
-                                </select>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  placeholder="রক্তের গ্রুপঃ"
+                                  {...register("blood_group")}
+                                />
                               </div>
                             </div>
                           </div>
@@ -448,6 +557,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="এস. এম. এস যাবে"
+                                  {...register("phn_no")}
                                 />
                               </div>
                             </div>
@@ -455,7 +565,7 @@ const StudentInfo = () => {
                           <div className="col-lg-5 col-12 col-md-12"></div>
                         </div>
                         <div className="row">
-                          <div className="col-lg-7 col-12 col-md-12">
+                          {/* <div className="col-lg-7 col-12 col-md-12">
                             <div className="row mb-lg-3 mb-1">
                               <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
                                 <i>*</i>
@@ -468,7 +578,7 @@ const StudentInfo = () => {
                                 />
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                           <div className="col-lg-5 col-12 col-md-12">
                             <div className="option-subtext">
                               <h6>ডাটাবেজ তথ্য</h6>
@@ -518,29 +628,29 @@ const StudentInfo = () => {
                             data-bs-toggle="modal"
                             data-bs-target="#admissonfees"
                           >
-                            Save
+                            Pay fees
                           </a>
                           <button className="custom-btn btn-dark" type="submit">
-                            Show
+                            Register Student
                           </button>
-                          <button className="custom-btn btn-dark" type="submit">
-                            Update
+                          <button className="custom-btn btn-dark" type="reset">
+                            Reset
                           </button>
-                          <button
+                          {/* <button
                             className="custom-btn btn-primary"
                             type="submit"
                           >
                             New
-                          </button>
-                          <button className="custom-btn btn-dark" type="submit">
+                          </button> */}
+                          {/* <button className="custom-btn btn-dark" type="submit">
                             Close
-                          </button>
-                          <button
+                          </button> */}
+                          {/* <button
                             className="custom-btn btn-danger"
                             type="submit"
                           >
                             Delete
-                          </button>
+                          </button> */}
                         </div>
                       </form>
                     </div>
@@ -670,7 +780,7 @@ const StudentInfo = () => {
       {/* <!-- Create Student Information form END --> */}
       {/* <!--Modal Section--> */}
       {/* <!--Admisson settings Releted Modal Start--> */}
-      <div
+      {/* <div
         className="modal fade"
         id="admissonModal"
         aria-hidden="true"
@@ -800,7 +910,7 @@ const StudentInfo = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <!--Admisson settings Releted Modal End--> */}
       {/* <!--Admisson Fees Collect Modal Start--> */}
       <div
@@ -814,7 +924,7 @@ const StudentInfo = () => {
             <div className="section-title">
               <h4>ভর্তি ফি গ্রহণ</h4>
             </div>
-            <form>
+            <form onSubmit={handleSubmit2(onSubmit2)}>
               <div className="modal-body">
                 <div className="row">
                   <div className="col-md-12 w-100">
@@ -830,6 +940,7 @@ const StudentInfo = () => {
                                 type="text"
                                 className="form-control"
                                 placeholder="ভাউচার নং"
+                                {...register2("voucher_no")}
                               />
                             </div>
                           </div>
@@ -842,10 +953,12 @@ const StudentInfo = () => {
                                 type="text"
                                 className="form-control"
                                 placeholder="ছাত্রের আইডি"
+                                value={student_ids}
+                                {...register2("student_id")}
                               />
                             </div>
                           </div>
-                          <div className="row mb-3">
+                          {/* <div className="row mb-3">
                             <label className="col-sm-4 col-form-label info-lable">
                               কর্তনঃ
                             </label>
@@ -856,7 +969,7 @@ const StudentInfo = () => {
                                 placeholder="কর্তন"
                               />
                             </div>
-                          </div>
+                          </div> */}
                           <div className="row mb-3">
                             <label className="col-sm-4 col-form-label info-lable">
                               পরিমাণঃ
@@ -865,7 +978,9 @@ const StudentInfo = () => {
                               <input
                                 type="text"
                                 className="form-control"
-                                placeholder="পরিমাণ"
+                                // placeholder={fees}
+                                value={fees}
+                                {...register2("ammount")}
                               />
                             </div>
                           </div>
@@ -878,12 +993,13 @@ const StudentInfo = () => {
                                 type="text"
                                 className="form-control"
                                 placeholder="মন্তব্য"
+                                {...register2("comment")}
                               />
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div className="col-md-6">
+                      {/* <div className="col-md-6">
                         <div className="table-data mt-4">
                           <div
                             className="table-responsive"
@@ -931,24 +1047,29 @@ const StudentInfo = () => {
                             </table>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>
               </div>
               <div className="modal-footer">
                 <div className="button-group">
-                  <button className="custom-btn btn-primary" type="submit">
-                    Save
-                  </button>
-                  <button
+                  <ReactToPrint
+                    trigger={() => (
+                      <button className="custom-btn btn-primary" type="submit">
+                        Save
+                      </button>
+                    )}
+                    content={() => ref.current}
+                  />
+                  {/* <button
                     className="custom-btn btn-dark"
                     data-bs-dismiss="modal"
                     onclick="javascript:void(0)"
                     type="button"
                   >
                     Close
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </form>
@@ -957,7 +1078,7 @@ const StudentInfo = () => {
       </div>
       {/* <!--Admisson Fees Collect Modal End--> */}
       {/* <!--Class Migration  Modal Start--> */}
-      <div
+      {/* <div
         className="modal fade"
         id="stdentmigrattion"
         aria-hidden="true"
@@ -1138,8 +1259,152 @@ const StudentInfo = () => {
             </form>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <!--Class Migration Modal End--> */}
+      <div style={{ display: "none" }} id="invoice">
+        <div
+          ref={ref}
+          className="preview-page d-print-block"
+          style={{ zIndex: 1 }}
+        >
+          <span className="print-button d-print-none" onclick="window.print()">
+            <i className="bi bi-printer-fill"></i>
+          </span>
+          <div className="pages-title">
+            <h5>জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ</h5>
+            <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
+            <span>01832-061454 # 027440235</span>
+          </div>
+          <div className="row my-3 invoice-title">
+            <div className="col-4 d-flex align-items-center">
+              {/* <div className="slip-no">
+                <strong>ইনভয়েস নং</strong>
+                <span className=""> ০০৪</span>
+              </div> */}
+            </div>
+            <div className="col-4 d-flex justify-content-center align-items-center">
+              <span className="pages-subtitle-slip">ইনভয়েস</span>
+            </div>
+            <div className="col-4 d-flex align-items-center justify-content-lg-end justify-content-start">
+              <div className="slip-date">
+                <strong>তারিখঃ</strong>
+                <span className="">{currentDate}</span>
+              </div>
+            </div>
+          </div>
+          <div className="pages-content">
+            <div className="row mb-1 customer-info">
+              <div className="col-6 d-flex flex-wrap align-content-center">
+                <div className="donor-name">
+                  <strong className="dtitle">কাস্টমারের নামঃ</strong>
+                  <div className="border-line w-100">{value?.student_name}</div>
+                </div>
+                <div className="donor-name">
+                  <strong className="dtitle">পিতার নামঃ</strong>
+                  <div className="border-line w-100">{value?.father_name}</div>
+                </div>
+                <div className="donor-name">
+                  <strong className="dtitle">ঠিকানাঃ</strong>
+                  <div className="border-line w-100">{value?.jela}</div>
+                </div>
+                {/* <div className="donor-name mt-1">
+                  <strong className="dtitle">টাকাঃ</strong>
+                  <div className="border-all w-100">৫০০.০০ টাকা</div>
+                </div> */}
+              </div>
+              <div className="col-6">
+                <div className="donor-name">
+                  <strong className="dtitle">মোবাইলঃ</strong>
+                  <div className="border-line w-100">{value?.phn_no}</div>
+                </div>
+                <div className="donor-name">
+                  <strong className="dtitle">শ্রেণীঃ</strong>
+                  <div className="border-line w-100">{value?.class}</div>
+                </div>
+              </div>
+            </div>
+            {/* <div className="row mb-2">
+              <div className="col-12">
+                <div className="donor-name">
+                  <strong className="dtitle">কথায়ঃ</strong>
+                  <div className="border-line w-100">পাচশত টাকা মাত্র।</div>
+                </div>
+              </div>
+            </div> */}
+            <div className="row">
+              <div className="col-12">
+                <div
+                  className="table-responsive"
+                  data-pattern="priority-columns"
+                >
+                  <table className="table  bg-white table-bordered text-center report-table">
+                    <thead className="text-center">
+                      <tr>
+                        <th>ক্রঃ</th>
+                        {/* <th>বইয়ের নাম</th> */}শ্রে ণ<th>নির্ধারিত ফি</th>
+                        {/* <th>সংখ্যা</th> */}
+                        {/* <th>মূল্য</th> */}
+                        <th>এমাউন্ট</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>০১</td>
+                        {/* <td>সহীহ বুখারি</td> */}
+                        <td>{fees}</td>
+                        {/* <td>০২</td> */}
+                        {/* <td>১০০</td> */}
+                        <td>{fees}</td>
+                      </tr>
+                      {/* <tr>
+                        <th colspan="5" className="text-right">
+                          Total Price After Discount
+                        </th>
+                        <td>০.০০</td>
+                      </tr>
+                      <tr>
+                        <th colspan="5" className="text-right">
+                          Grand Total
+                        </th>
+                        <td>০.০০</td>
+                      </tr> */}
+                      <tr>
+                        <th colspan="5" className="text-right">
+                          Paid Amount
+                        </th>
+                        <td>{fees}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="row mt-5">
+                  <div className="col-lg-4 col-12 d-flex justify-content-lg-start justify-content-center">
+                    <div className="marksheet-sing">
+                      <span>কাস্টমারের স্বাক্ষর</span>
+                      <br />
+                    </div>
+                  </div>
+                  <div className="col-lg-4 col-12 d-flex justify-content-lg-end justify-content-center mt-lg-0 mt-3">
+                    <div className="marksheet-sing">
+                      <span>পরিচালকের স্বাক্ষর</span>
+                      <br />
+                      <span>{me?.data.name}</span>
+                    </div>
+                  </div>
+                  <div className="col-lg-4 col-12 d-flex justify-content-lg-end justify-content-center mt-lg-0 mt-3">
+                    <div className="marksheet-sing">
+                      <span>আদায়কারীর স্বাক্ষর</span>
+                      <br />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

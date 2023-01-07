@@ -1,6 +1,33 @@
+import axios from "axios";
 import React from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation } from "react-query";
+import { serverUrl } from "../../utils/config";
 
 const InstituteInfo = () => {
+  const { register, handleSubmit } = useForm();
+
+  const mutation = useMutation({
+    mutationFn: (newUser) => {
+      return axios.post(`${serverUrl}/api/institute-info`, newUser);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      // toast.success("Institute info submitted");
+      console.log(data?.data);
+      // setStudentids(data?.data.id);
+    },
+  });
+
+  const onSubmit = (data) => {
+    // alert(JSON.stringify(data));
+    mutation.mutate(data);
+  };
+
   return (
     <div>
       <section className="instituteinfo-section user-form-section">
@@ -18,7 +45,10 @@ const InstituteInfo = () => {
                         <div className="custon-btn">বাংলা</div>
                         <div className="custon-btn">Arabic</div>
                       </div>
-                      <form className="intitute-form">
+                      <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="intitute-form"
+                      >
                         <div className="row mb-3">
                           <label className="col-sm-2 col-form-label info-lable">
                             প্রতিষ্ঠানের নামঃ
@@ -28,6 +58,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="বাংলা"
+                              {...register("name")}
                             />
                           </div>
                           <div className="col-6 col-lg-5 col-md-5">
@@ -35,6 +66,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="আরবি"
+                              {...register("namea")}
                             />
                           </div>
                         </div>
@@ -47,6 +79,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="বাংলা"
+                              {...register("address")}
                             />
                           </div>
                           <div className="col-6 col-lg-5 col-md-5">
@@ -54,6 +87,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="আরবি"
+                              {...register("addressa")}
                             />
                           </div>
                         </div>
@@ -66,6 +100,7 @@ const InstituteInfo = () => {
                               type="tel"
                               className="form-control"
                               placeholder="বাংলা"
+                              {...register("num")}
                             />
                           </div>
                           <div className="col-6 col-lg-5 col-md-5">
@@ -73,6 +108,7 @@ const InstituteInfo = () => {
                               type="tel"
                               className="form-control"
                               placeholder="আরবি"
+                              {...register("numa")}
                             />
                           </div>
                         </div>
@@ -85,6 +121,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="বাংলা"
+                              {...register("graam")}
                             />
                           </div>
                           <div className="col-6 col-lg-5 col-md-5">
@@ -92,6 +129,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="আরবি"
+                              {...register("graama")}
                             />
                           </div>
                         </div>
@@ -104,6 +142,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="বাংলা"
+                              {...register("daak")}
                             />
                           </div>
                           <div className="col-6 col-lg-5 col-md-5">
@@ -111,6 +150,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="আরবি"
+                              {...register("daaka")}
                             />
                           </div>
                         </div>
@@ -123,6 +163,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="বাংলা"
+                              {...register("thana")}
                             />
                           </div>
                           <div className="col-6 col-lg-5 col-md-5">
@@ -130,6 +171,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="আরবি"
+                              {...register("thanaa")}
                             />
                           </div>
                         </div>
@@ -142,6 +184,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="বাংলা"
+                              {...register("jela")}
                             />
                           </div>
                           <div className="col-6 col-lg-5 col-md-5">
@@ -149,6 +192,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="আরবি"
+                              {...register("jelaa")}
                             />
                           </div>
                         </div>
@@ -161,6 +205,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="বাংলা"
+                              {...register("ilhak")}
                             />
                           </div>
                           <div className="col-6 col-lg-5 col-md-5">
@@ -168,6 +213,7 @@ const InstituteInfo = () => {
                               type="text"
                               className="form-control"
                               placeholder="আরবি"
+                              {...register("ilhaka")}
                             />
                           </div>
                         </div>
@@ -179,7 +225,7 @@ const InstituteInfo = () => {
                             Save
                           </button>
                           <button className="custom-btn btn-dark" type="reset">
-                            Close
+                            reset
                           </button>
                         </div>
                       </form>

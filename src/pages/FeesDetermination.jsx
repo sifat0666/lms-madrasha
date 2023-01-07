@@ -1,6 +1,42 @@
 import React from "react";
+import { useState } from "react";
+import { useMutation, useQuery } from "react-query";
+import { serverUrl } from "../../utils/config";
+import Select from "react-select";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const FeesDetermination = () => {
+  const { data: marhalaClass } = useQuery("marhalaclass", () =>
+    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+  );
+  const { data: academicYear } = useQuery("academicyear", () =>
+    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+  );
+
+  const { data: fee } = useQuery("feesDitermination", () =>
+    fetch(`${serverUrl}/api/fees-determination`).then((res) => res.json())
+  );
+
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/fees-determination`, data);
+    },
+    onError: (error, variable, context) => {
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      toast.success("successfull");
+    },
+  });
+
+  const { register, handleSubmit } = useForm();
+  const onSubmit = async (value) => {
+    mutation.mutate(value);
+  };
+
+  // const options2 = academicYear?.data.map(item => [{`${item.academic_year}`: `${item.academic_year}`},])
   return (
     <div>
       <section className="user-form-section">
@@ -14,51 +50,64 @@ const FeesDetermination = () => {
                       <h4>ফি নির্ধারণ</h4>
                     </div>
                     <div className="my-4">
-                      <form className="feesdeterminationa-form">
-                        <div className="row mb-3">
-                          <div className="offset-lg-2 offset-sm-0 col-lg-4 col-6">
-                            <div className="input-group d-flex align-items-center gap-3">
-                              <span className="">ভর্তি ফি</span>
-                              <input
-                                className="form-check-input mt-0"
-                                type="checkbox"
-                                name="checkbox"
-                              />
-                            </div>
-                          </div>
-                          <div className="offset-lg-2 offset-sm-0 col-lg-4 col-6">
-                            <div className="input-group d-flex align-items-center gap-3">
-                              <span className="">মাসিক ফি</span>
-                              <input
-                                className="form-check-input mt-0"
-                                type="checkbox"
-                                name="checkbox"
-                              />
-                            </div>
-                          </div>
+                      <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="feesdeterminationa-form"
+                      >
+                        <div className="filter-menu">
+                          <select
+                            className="form-select"
+                            size="4"
+                            style={{ border: "none" }}
+                            {...register("fee_type")}
+                          >
+                            <option value="admission_fee"> ভর্তি ফি</option>
+                            <option value="monthly_fee"> মাসিক ফি</option>
+                          </select>
                         </div>
                         <div className="row mb-3">
-                          <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
-                            শিক্ষাবর্ষঃ
-                          </label>
-                          <div className="col-12 col-md-12 col-lg-8">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="শিক্ষাবর্ষ"
-                            />
+                          <div className="section-title">
+                            <h4>শিক্ষাবর্ষঃ</h4>
+                          </div>
+                          <div className="filter-menu">
+                            <select
+                              className="form-select"
+                              size="4"
+                              style={{ border: "none" }}
+                              {...register("academic_year")}
+                            >
+                              {academicYear?.data.map((item) => (
+                                <option
+                                  key={item.id}
+                                  // onClick={() => setClasss(item.academicYear)}
+                                >
+                                  {item.academic_year}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </div>
+
                         <div className="row mb-3">
-                          <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
-                            মারহালা/শ্রেণীঃ
-                          </label>
-                          <div className="col-12 col-md-12 col-lg-8">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="মারহালা/শ্রেণী"
-                            />
+                          <div className="section-title">
+                            <h4>মারহালা/শ্রেণীঃ</h4>
+                          </div>
+                          <div className="filter-menu">
+                            <select
+                              className="form-select"
+                              size="4"
+                              style={{ border: "none" }}
+                              {...register("class_name")}
+                            >
+                              {marhalaClass?.data.map((item) => (
+                                <option
+                                  key={item.id}
+                                  // onClick={() => setClasss(item.academicYear)}
+                                >
+                                  {item.class_name}
+                                </option>
+                              ))}
+                            </select>
                           </div>
                         </div>
                         <div className="row mb-3">
@@ -70,6 +119,7 @@ const FeesDetermination = () => {
                               type="text"
                               className="form-control"
                               placeholder="ফি এর নাম"
+                              {...register("fee_name")}
                             />
                           </div>
                         </div>
@@ -94,6 +144,7 @@ const FeesDetermination = () => {
                                             type="text"
                                             className="form-control"
                                             placeholder=""
+                                            {...register("boy_resi_new")}
                                           />
                                         </div>
                                       </div>
@@ -104,6 +155,7 @@ const FeesDetermination = () => {
                                             type="text"
                                             className="form-control"
                                             placeholder=""
+                                            {...register("boy_resi_old")}
                                           />
                                         </div>
                                       </div>
@@ -121,6 +173,7 @@ const FeesDetermination = () => {
                                             type="text"
                                             className="form-control"
                                             placeholder=""
+                                            {...register("boy_unresi_new")}
                                           />
                                         </div>
                                       </div>
@@ -131,6 +184,7 @@ const FeesDetermination = () => {
                                             type="text"
                                             className="form-control"
                                             placeholder=""
+                                            {...register("boy_unresi_old")}
                                           />
                                         </div>
                                       </div>
@@ -157,6 +211,7 @@ const FeesDetermination = () => {
                                             type="text"
                                             className="form-control"
                                             placeholder=""
+                                            {...register("girl_resi_new")}
                                           />
                                         </div>
                                       </div>
@@ -167,6 +222,7 @@ const FeesDetermination = () => {
                                             type="text"
                                             className="form-control"
                                             placeholder=""
+                                            {...register("girl_resi_old")}
                                           />
                                         </div>
                                       </div>
@@ -184,6 +240,7 @@ const FeesDetermination = () => {
                                             type="text"
                                             className="form-control"
                                             placeholder=""
+                                            {...register("girl_unresi_new")}
                                           />
                                         </div>
                                       </div>
@@ -194,6 +251,7 @@ const FeesDetermination = () => {
                                             type="text"
                                             className="form-control"
                                             placeholder=""
+                                            {...register("girl_unresi_old")}
                                           />
                                         </div>
                                       </div>
@@ -260,66 +318,23 @@ const FeesDetermination = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>
-                                <span className="action-edit">
-                                  <i className="bi bi-pencil-square"></i>
-                                </span>
-                              </td>
-                              <td>
-                                <span className="action-delete">
-                                  <i className="bi bi-trash3"></i>
-                                </span>
-                              </td>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <span className="action-edit">
-                                  <i className="bi bi-pencil-square"></i>
-                                </span>
-                              </td>
-                              <td>
-                                <span className="action-delete">
-                                  <i className="bi bi-trash3"></i>
-                                </span>
-                              </td>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <span className="action-edit">
-                                  <i className="bi bi-pencil-square"></i>
-                                </span>
-                              </td>
-                              <td>
-                                <span className="action-delete">
-                                  <i className="bi bi-trash3"></i>
-                                </span>
-                              </td>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <span className="action-edit">
-                                  <i className="bi bi-pencil-square"></i>
-                                </span>
-                              </td>
-                              <td>
-                                <span className="action-delete">
-                                  <i className="bi bi-trash3"></i>
-                                </span>
-                              </td>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                            </tr>
+                            {fee?.data.map((item) => (
+                              <tr key={item.id}>
+                                <td>
+                                  <span className="action-edit">
+                                    <i className="bi bi-pencil-square"></i>
+                                  </span>
+                                </td>
+                                <td>
+                                  <span className="action-delete">
+                                    <i className="bi bi-trash3"></i>
+                                  </span>
+                                </td>
+                                <th>{item.academic_year}</th>
+                                <td>{item.class_name}</td>
+                                <td>{item.fee_name}</td>
+                              </tr>
+                            ))}
                           </tbody>
                         </table>
                       </div>
