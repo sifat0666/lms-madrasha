@@ -12,7 +12,11 @@ const ExamEntry = () => {
   const { data: academicYear } = useQuery("academicyear", () =>
     fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
   );
+  const { data: examEntry } = useQuery("examEntry", () =>
+    fetch(`${serverUrl}/api/exam-entry`).then((res) => res.json())
+  );
 
+  console.log(examEntry);
   const { register, handleSubmit } = useForm();
 
   const mutation = useMutation({
@@ -56,7 +60,7 @@ const ExamEntry = () => {
                           <i>*</i>
                         </label>
                         <div className="col-lg-8 col-12">
-                          <input
+                          <input required
                             type="text"
                             className="form-control"
                             placeholder="আইডি"
@@ -248,7 +252,7 @@ const ExamEntry = () => {
                           <tr>
                             <th>আইডি</th>
                             <th>পরীক্ষার নাম</th>
-                            <th>পরীক্ষার নাম আরবী</th>
+                            <th>ফি</th>
                             <th>
                               <span className="action-edit">
                                 <i className="bi bi-pencil-square"></i>
@@ -262,21 +266,23 @@ const ExamEntry = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                              <span className="action-edit">
-                                <i className="bi bi-pencil-square"></i>
-                              </span>
-                            </td>
-                            <td>
-                              <span className="action-delete">
-                                <i className="bi bi-trash3"></i>
-                              </span>
-                            </td>
-                          </tr>
+                          {examEntry?.data.map((item) => (
+                            <tr key={item.id}>
+                              <td>{item.id}</td>
+                              <td>{item.exam_name}</td>
+                              <td>{item.fee}</td>
+                              <td>
+                                <span className="action-edit">
+                                  <i className="bi bi-pencil-square"></i>
+                                </span>
+                              </td>
+                              <td>
+                                <span className="action-delete">
+                                  <i className="bi bi-trash3"></i>
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
                         </tbody>
                       </table>
                     </div>

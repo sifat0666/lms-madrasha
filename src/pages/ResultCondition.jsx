@@ -18,6 +18,18 @@ const ResultCondition = () => {
     fetch(`${serverUrl}/api/exam-entry`).then((res) => res.json())
   );
 
+  const { data: passMarkData } = useQuery("passmark", () =>
+    fetch(`${serverUrl}/api/pass-mark`).then((res) => res.json())
+  );
+
+  const { data: divisionEntryData } = useQuery("divisionentry", () =>
+    fetch(`${serverUrl}/api/division-entry`).then((res) => res.json())
+  );
+
+  // console.log(divisionEntryData?.data);
+
+  console.log(passMarkData?.data);
+
   const { register, handleSubmit } = useForm();
   const { register: register2, handleSubmit: handleSubmit2 } = useForm();
 
@@ -52,7 +64,7 @@ const ResultCondition = () => {
   });
 
   const onSubmit = (value) => {
-    console.log(value);
+    console.log("division", value);
     divisionEntry.mutate(value);
   };
 
@@ -279,7 +291,7 @@ const ResultCondition = () => {
                                         className="form-select"
                                         size="3"
                                         style={{ border: "none" }}
-                                        {...register("session")}
+                                        {...register("exam")}
                                       >
                                         {examName?.data.map((item) => (
                                           <option key={item.id}>
@@ -287,17 +299,6 @@ const ResultCondition = () => {
                                           </option>
                                         ))}
                                       </select>
-                                    </div>
-                                    <div className="col-2">
-                                      {/* <span className="addbutton">
-                                      <a
-                                        href="#"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#membertype"
-                                      >
-                                        <i className="bi bi-plus-circle-fill"></i>
-                                      </a>
-                                    </span> */}
                                     </div>
                                   </div>
                                 </div>
@@ -638,15 +639,15 @@ const ResultCondition = () => {
                                   <tr>
                                     <th>পরীক্ষার নাম</th>
                                     <th>মারহালা/ক্লাশ</th>
-                                    <th>--</th>
+                                    <th>নাম্বার</th>
                                     <th>ডিভিশন-১</th>
-                                    <th>ডিভিশন আরবী-১</th>
-                                    <th>--1</th>
-                                    <th>ডিভিশন-২</th>
-                                    <th>ডিভিশন আরবী-২</th>
-                                    <th>--2</th>
+                                    <th>নাম্বার</th>
+                                    <th>ডিভিশন-2</th>
+                                    <th>নাম্বার</th>
                                     <th>ডিভিশন-৩</th>
-                                    <th>ডিভিশন আরবী-৩</th>
+                                    <th>নাম্বার</th>
+                                    <th>ডিভিশন-4</th>
+
                                     <th>
                                       <span className="action-edit">
                                         <i className="bi bi-pencil-square"></i>
@@ -660,29 +661,30 @@ const ResultCondition = () => {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                      <span className="action-edit">
-                                        <i className="bi bi-pencil-square"></i>
-                                      </span>
-                                    </td>
-                                    <td>
-                                      <span className="action-delete">
-                                        <i className="bi bi-trash3"></i>
-                                      </span>
-                                    </td>
-                                  </tr>
+                                  {divisionEntryData?.data.map((item) => (
+                                    <tr key={item.id}>
+                                      <td>{item.exam_name}</td>
+                                      <td>{item.class}</td>
+                                      <td>{item.case1}</td>
+                                      <td>{item.case1_div}</td>
+                                      <td>{item.case2}</td>
+                                      <td>{item.case2_div}</td>
+                                      <td>{item.case3}</td>
+                                      <td>{item.case3_div}</td>
+                                      <td>{item.case4}</td>
+                                      <td>{item.case4_div} </td>
+                                      <td>
+                                        <span className="action-edit">
+                                          <i className="bi bi-pencil-square"></i>
+                                        </span>
+                                      </td>
+                                      <td>
+                                        <span className="action-delete">
+                                          <i className="bi bi-trash3"></i>
+                                        </span>
+                                      </td>
+                                    </tr>
+                                  ))}
                                 </tbody>
                               </table>
                             </div>
@@ -827,7 +829,7 @@ const ResultCondition = () => {
                                       </select>
                                     </div>
                                     <div className="col-2">
-                                      <span className="addbutton">
+                                      {/* <span className="addbutton">
                                         <a
                                           href="#"
                                           data-bs-toggle="modal"
@@ -835,7 +837,7 @@ const ResultCondition = () => {
                                         >
                                           <i className="bi bi-plus-circle-fill"></i>
                                         </a>
-                                      </span>
+                                      </span> */}
                                     </div>
                                   </div>
                                   <div className="row mb-3">
@@ -935,7 +937,7 @@ const ResultCondition = () => {
                                           <th>মারহালা/ক্লাশ</th>
                                           <th>সিরিয়াল</th>
                                           <th>কিতাব</th>
-                                          <th>কিতাব আরাবী</th>
+                                          {/* <th>কিতাব আরাবী</th> */}
                                           <th>পাশ নাম্বার</th>
                                           <th>
                                             <span className="action-edit">
@@ -950,44 +952,27 @@ const ResultCondition = () => {
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td>
-                                            <span className="action-edit">
-                                              <i className="bi bi-pencil-square"></i>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span className="action-delete">
-                                              <i className="bi bi-trash3"></i>
-                                            </span>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td>
-                                            <span className="action-edit">
-                                              <i className="bi bi-pencil-square"></i>
-                                            </span>
-                                          </td>
-                                          <td>
-                                            <span className="action-delete">
-                                              <i className="bi bi-trash3"></i>
-                                            </span>
-                                          </td>
-                                        </tr>
+                                        {passMarkData?.data.map((item) => (
+                                          <tr>
+                                            <td>{item.session}</td>
+                                            <td>{item.exam_name}</td>
+                                            <td>{item.class}</td>
+                                            <td>{item.id}</td>
+                                            <td>{item.book}</td>
+                                            {/* <td>{item.exam_namea}</td> */}
+                                            <td>{item.pass_mark}</td>
+                                            <td>
+                                              <span className="action-edit">
+                                                <i className="bi bi-pencil-square"></i>
+                                              </span>
+                                            </td>
+                                            <td>
+                                              <span className="action-delete">
+                                                <i className="bi bi-trash3"></i>
+                                              </span>
+                                            </td>
+                                          </tr>
+                                        ))}
                                       </tbody>
                                     </table>
                                   </div>

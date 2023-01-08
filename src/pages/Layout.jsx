@@ -310,11 +310,11 @@ const Layout = ({ children }) => {
                                     class="dropdown-item"
                                     // href="./pages/Exam/exam-entry.html"
                                   >
-                                    পরীক্ষার নাম এন্ট্রি
+                                    পরীক্ষার নাম ফি এন্ট্রি
                                   </a>
                                 </Link>
                               </li>
-                              <li>
+                              {/* <li>
                                 <Link to="/exam-fees-determination">
                                   <a
                                     class="dropdown-item"
@@ -323,7 +323,7 @@ const Layout = ({ children }) => {
                                     পরীক্ষার ফি নির্ধাণ
                                   </a>
                                 </Link>
-                              </li>
+                              </li> */}
                               <li>
                                 <Link to="/result-condition">
                                   <a
