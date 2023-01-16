@@ -1,6 +1,56 @@
+import axios from "axios";
 import React from "react";
+import { useRef } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import ReactToPrint from "react-to-print";
+import { serverUrl } from "../../utils/config";
 
 const MarkSheet = () => {
+  const ref = useRef();
+
+  const { data: marhalaClass } = useQuery("marhalaclass", () =>
+    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+  );
+
+  const { data: academicYear } = useQuery("academicyear", () =>
+    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+  );
+
+  const { data: examName } = useQuery("examEnty", () =>
+    fetch(`${serverUrl}/api/exam-entry`).then((res) => res.json())
+  );
+
+  const [results, setResults] = useState();
+
+  const fetchResult = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/result`, data);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      // toast.error(error.response.data.message);
+      console.log(error);
+    },
+    onSuccess: (data) => {
+      console.log(data?.data);
+      setResults(data?.data);
+      // toast.success("posted successfully");
+    },
+  });
+
+  const { register, handleSubmit } = useForm();
+  const [value, setValue] = useState();
+  const onSubmit = (data) => {
+    console.log(data);
+    setValue(data);
+    fetchResult.mutate(data);
+  };
+
+  console.log("val", value);
+
   return (
     <div>
       <section className="user-form-section">
@@ -18,8 +68,8 @@ const MarkSheet = () => {
                 <div className="row">
                   {/* <!--Filter Menu Section--> */}
                   <div className="col-lg-4 col-md-12 col-12 d-print-none">
-                    <form>
-                      <div className="row mb-3">
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      {/* <div className="row mb-3">
                         <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                           রিপোর্ট
                           <i>*</i>
@@ -33,21 +83,27 @@ const MarkSheet = () => {
                             <option value="">Ligal Paper</option>
                           </select>
                         </div>
-                      </div>
+                      </div> */}
                       <div className="row mb-3">
                         <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                           শিক্ষাবর্ষ
                           <i>*</i>
                         </label>
                         <div className="col-lg-8 col-md-8 col-12">
-                          <select className="form-select">
-                            <option value="" selected="">
-                              সিলেক্ট করুন
-                            </option>
-                            <option value="">২০২২</option>
-                            <option value="">২০২৩</option>
-                            <option value="">২০২৪</option>
-                            <option value="">২০২৫</option>
+                          <select
+                            className="form-select"
+                            size="4"
+                            style={{ border: "none" }}
+                            {...register("session")}
+                          >
+                            {academicYear?.data.map((item) => (
+                              <option
+                                key={item.id}
+                                // onClick={() => setClasss(item.academicYear)}
+                              >
+                                {item.academic_year}
+                              </option>
+                            ))}
                           </select>
                         </div>
                       </div>
@@ -57,13 +113,16 @@ const MarkSheet = () => {
                           <i>*</i>
                         </label>
                         <div className="col-lg-8 col-md-8 col-12">
-                          <select className="form-select">
-                            <option selected="">শ্রেণী নির্বাচন করুন</option>
-                            <option>প্রথম সাময়িক পরীক্ষা</option>
-                            <option>দ্বিতীয় সাময়িক পরীক্ষা</option>
-                            <option>তৃতীয় সাময়িক পরীক্ষা</option>
-                            <option>বোর্ড পরীক্ষা</option>
-                            <option>মাসিক পরীক্ষা</option>
+                          <select
+                            required
+                            className="form-select"
+                            size="3"
+                            style={{ border: "none" }}
+                            {...register("exam")}
+                          >
+                            {examName?.data.map((item) => (
+                              <option key={item.id}>{item.exam_name}</option>
+                            ))}
                           </select>
                         </div>
                       </div>
@@ -73,26 +132,24 @@ const MarkSheet = () => {
                           <i>*</i>
                         </label>
                         <div className="col-lg-8 col-md-8 col-12">
-                          <select className="form-select">
-                            <option selected="">শ্রেণী নির্বাচন করুন</option>
-                            <option>নাযেরা</option>
-                            <option>হিফযুল কুরআন</option>
-                            <option>ই-দাদী</option>
-                            <option>ইবতিদায়ী আউয়াল</option>
-                            <option>ইবতিদায়ী নানী</option>
-                            <option>উস্তানী আউয়াল</option>
-                            <option>উস্তানী সানী</option>
-                            <option>সানাবী আউয়াল</option>
-                            <option>সানাবী আউয়াল</option>
-                            <option>সানাবী সানী</option>
-                            <option>নিহায়ী আউয়াল</option>
-                            <option>নিহায়ী সানী</option>
-                            <option>তাকমীল</option>
-                            <option>ইফতা ১ম</option>
+                          <select
+                            className="form-select"
+                            size="4"
+                            style={{ border: "none" }}
+                            {...register("class")}
+                          >
+                            {marhalaClass?.data.map((item) => (
+                              <option
+                                key={item.id}
+                                // onClick={() => setClasss(item.academicYear)}
+                              >
+                                {item.class_name}
+                              </option>
+                            ))}
                           </select>
                         </div>
                       </div>
-                      <div className="row mb-3">
+                      {/* <div className="row mb-3">
                         <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                           কিতাব
                           <i>*</i>
@@ -116,18 +173,18 @@ const MarkSheet = () => {
                             <option>ইফতা ১ম</option>
                           </select>
                         </div>
-                      </div>
+                      </div> */}
                       <div className="row mb-3">
                         <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                           আইডি
                           <i>*</i>
                         </label>
                         <div className="col-lg-3 col-md-3 col-5">
-                          <input type="text" className="form-control" />
-                        </div>
-                        <div className="col-2">থেকে</div>
-                        <div className="col-lg-3 col-md-3 col-5">
-                          <input type="text" className="form-control" />
+                          <input
+                            {...register("student_id")}
+                            type="text"
+                            className="form-control"
+                          />
                         </div>
                       </div>
                       <div className="row mt-3">
@@ -138,15 +195,28 @@ const MarkSheet = () => {
                           >
                             Preview
                           </button>
+                          <ReactToPrint
+                            trigger={() => (
+                              <button
+                                className="custom-btn btn-primary"
+                                type="submit"
+                              >
+                                Save
+                              </button>
+                            )}
+                            content={() => ref.current}
+                          />
                         </div>
                       </div>
                     </form>
                   </div>
                   {/* <!--Preview Page Section--> */}
-                  <div className="col-lg-8 col-md-12 col-12 mt-2 mt-lg-0">
+
+                  <div className="col-lg-8 col-md-12 col-12 mt-2 mt-lg-0 ">
                     <div
-                      className="preview-page d-print-block"
-                      style={{ zIndex: 1 }}
+                      className="  d-flex flex-column justify-content-center"
+                      style={{ zIndex: 1, background: "white" }}
+                      ref={ref}
                     >
                       <span
                         className="print-button d-print-none"
@@ -159,13 +229,13 @@ const MarkSheet = () => {
                         <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
                         <span>01832-061454 # 027440235</span>
                         <br />
-                        <span>শিক্ষবর্ষঃ ২০২১-২০২২ইং</span>
+                        <span>শিক্ষবর্ষঃ {value?.session}ইং</span>
                         <br />
                         <span
                           className="pages-subtitle"
                           style={{ marginTop: "11px" }}
                         >
-                          ২য় সাময়িক পরীক্ষা
+                          {value?.exam}
                         </span>
                       </div>
                       <div className="pages-content">
@@ -243,7 +313,7 @@ const MarkSheet = () => {
                               <table className="table  bg-white table-bordered text-center report-table">
                                 <thead className="text-center">
                                   <tr>
-                                    <th>ক্রঃ</th>
+                                    {/* <th>ক্রঃ</th> */}
                                     <th>বিষয়</th>
                                     <th>প্রাপ্ত নম্বর</th>
                                     <th>পাশ নম্বর</th>
@@ -251,27 +321,15 @@ const MarkSheet = () => {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td>১৮১</td>
-                                    <td>মিযানুস সরফ</td>
-                                    <td>৫০</td>
-                                    <td>৩৫</td>
-                                    <td>১০০</td>
-                                  </tr>
-                                  <tr>
-                                    <td>১৮১</td>
-                                    <td>পান্দেনামা</td>
-                                    <td>৫০</td>
-                                    <td>৩৫</td>
-                                    <td>১০০</td>
-                                  </tr>
-                                  <tr>
-                                    <td>১৮১</td>
-                                    <td>মিযানুস সরফ</td>
-                                    <td>৫০</td>
-                                    <td>৩৫</td>
-                                    <td>১০০</td>
-                                  </tr>
+                                  {results?.map((item) => (
+                                    <tr>
+                                      {/* <td>১৮১</td> */}
+                                      <td>{item.subject}</td>
+                                      <td>{item.number}</td>
+                                      <td>{item.pass_number}</td>
+                                      <td>{item.highest_number}</td>
+                                    </tr>
+                                  ))}
                                 </tbody>
                               </table>
                             </div>

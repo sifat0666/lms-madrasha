@@ -4,11 +4,24 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { useQuery } from "react-query";
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { serverUrl } from "../../utils/config";
 
+const withouSidebarRoutes = ["/login"];
+
 const Layout = ({ children }) => {
+  const { pathname } = useLocation();
+
+  console.log(pathname);
+
+  // Validates if the current pathname includes one the routes you want to hide the sidebar is present on the current url
+  // If that's true render null instead of the sidebar
+
+  // if (withouSidebarRoutes.some((item) => pathname.includes(item))) return null;
+  if (pathname === "/") return null;
+
   const navigate = useNavigate();
   // import {navigate} = useNavigate()
 
@@ -123,6 +136,18 @@ const Layout = ({ children }) => {
                             </a>
                             <ul class="dropdown-menu">
                               <li>
+                                <Link to="accounting/fund">
+                                  <p class="dropdown-item">ফান্ডঃ যোগঃ</p>
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to="accounting/payment-system">
+                                  <p class="dropdown-item">
+                                    পেমেন্ট সিস্টেম যোগঃ
+                                  </p>
+                                </Link>
+                              </li>
+                              <li>
                                 <Link to="/accounting/hishab-nikash">
                                   <p class="dropdown-item">হিসাব নিকাশ</p>
                                 </Link>
@@ -184,12 +209,20 @@ const Layout = ({ children }) => {
                                 </a>
                               </li>
                               <li>
-                                <Link to="/report">
+                                <Link to="/mashik-fee-report">
                                   <p
                                     class="dropdown-item menu-item"
                                     // href="./pages/report.html"
                                   >
                                     <span>মাসিক ফির রিপোর্ট</span>
+                                  </p>
+                                </Link>
+                                <Link to="/khabar-fee-report">
+                                  <p
+                                    class="dropdown-item menu-item"
+                                    // href="./pages/report.html"
+                                  >
+                                    <span>খাবারের ফির রিপোর্ট</span>
                                   </p>
                                 </Link>
                                 <Link to="/accounting/monthly-fees">

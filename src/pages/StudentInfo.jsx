@@ -37,6 +37,7 @@ const StudentInfo = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
+      console.log("fee", data?.data);
       setFees(data?.data);
     },
   });
@@ -67,16 +68,16 @@ const StudentInfo = () => {
   );
   const [value, setValue] = useState({});
   const onSubmit = async (value) => {
-    console.log(value);
+    console.log("studetn", value);
     mutation.mutate({ ...value, notun_puraton: value.old_new });
 
     const data = `${value.gender}_${value.abashik_onabashik}_${value.old_new}`;
     const params = {
       state: data,
     };
-    params.academic_year = value.academic_year;
-    params.class_name = value.class_name;
-    console.log(params);
+    params.academic_year = value.session;
+    params.class_name = value.class;
+    console.log("params", params);
     Fee.mutate(params);
     setValue(value);
   };

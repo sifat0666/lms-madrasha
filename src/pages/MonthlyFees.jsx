@@ -1,6 +1,95 @@
+import axios from "axios";
 import React from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import { serverUrl } from "../../utils/config";
 
 const MonthlyFees = () => {
+  const { data: marhalaClass } = useQuery("marhalaclass", () =>
+    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+  );
+  const { data: academicYear } = useQuery("academicyear", () =>
+    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+  );
+  const { data: months } = useQuery("months", () =>
+    fetch(`${serverUrl}/api/month-entry`).then((res) => res.json())
+  );
+  const { data: user } = useQuery("me");
+  const { data: monthlyFee } = useQuery("monthlyFee", () =>
+    fetch(`${serverUrl}/api/monthly-fee`).then((res) => res.json())
+  );
+  const { data: foodFee } = useQuery("FoodFee", () =>
+    fetch(`${serverUrl}/api/food-fee`).then((res) => res.json())
+  );
+
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/month-entry`, data);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log("userdata", data.data);
+      toast.success("success");
+      // setStudent(data.data);
+      // window.location.reload(true);
+    },
+  });
+
+  const monthlyFeeMutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/monthly-fee`, data);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error("every field is required");
+    },
+    onSuccess: (data) => {
+      // console.log("userdata", data.data);
+      toast.success("success");
+      // setStudent(data.data);
+      // window.location.reload(true);
+    },
+  });
+
+  const foodFeeMutaion = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/food-fee`, data);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error("every field is required");
+    },
+    onSuccess: (data) => {
+      // console.log("userdata", data.data);
+      toast.success("success");
+      // setStudent(data.data);
+      // window.location.reload(true);
+    },
+  });
+  const { register, handleSubmit } = useForm();
+  const { register: register2, handleSubmit: handleSubmit2 } = useForm();
+  const { register: register3, handleSubmit: handleSubmit3 } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    mutation.mutate(data);
+  };
+  const onSubmit2 = (data) => {
+    console.log(data);
+    monthlyFeeMutation.mutate({ ...data, receiver: user?.data.name });
+    // mutation.mutate(data);
+  };
+  const onSubmit3 = (data) => {
+    console.log(data);
+
+    foodFeeMutaion.mutate({ ...data, receiver: user?.data.name });
+    // mutation.mutate(data);
+  };
+
   return (
     <div>
       <section className="user-form-section d-print-none">
@@ -9,45 +98,117 @@ const MonthlyFees = () => {
             <div className="col-md-12 w-100">
               <div className="main-container">
                 <div className="row">
-                  <div className="col-lg-7 col-md-12 col-12">
+                  <div className="col-lg-6 col-md-12 col-12">
                     <div className="section-title">
                       <h4>মাসিক ফি গ্রহণ</h4>
                     </div>
                     <div className="my-4">
-                      <form className="accounts-form">
+                      <form
+                        onSubmit={handleSubmit2(onSubmit2)}
+                        className="accounts-form"
+                      >
                         <div className="row">
-                          <div className="col-md-4 col-lg-4 col-12">
+                          {/* <div className="col-md-4 col-lg-4 col-12">
                             <div className="row mb-3">
                               <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
                                 অর্ডার নং
                                 <i>*</i>
                               </label>
                               <div className="col-lg-6 col-md-6 col-12">
-                                <input type="text" className="form-control" />
+                                <input required type="text" className="form-control" />
                               </div>
                             </div>
-                          </div>
-                          <div className="col-md-4 col-lg-4 col-12">
+                          </div> */}
+                          {/* <div className="col-md-4 col-lg-4 col-12">
                             <div className="row mb-3">
                               <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
                                 নামঃ
                               </label>
                               <div className="col-lg-10 col-md-10 col-12">
-                                <input
+                                <input required
                                   type="text"
                                   className="form-control"
                                   placeholder="নাম"
                                 />
                               </div>
                             </div>
+                          </div> */}
+                          <div className="row mt-3">
+                            <div className="col-12">
+                              <div className="filter-menu">
+                                <select
+                                  className="form-select"
+                                  size="4"
+                                  style={{ border: "none" }}
+                                  {...register2("month")}
+                                >
+                                  <option disabled>মাস নির্বাচন করুন</option>
+                                  {/* {academicYear?.data.map((item) => (
+                                    <option
+                                      key={item.id}
+                                      // onClick={() => setClasss(item.academicYear)}
+                                    >
+                                      {item.academic_year}
+                                    </option>
+                                  ))} */}
+                                  <option>{months?.data[0].m1}</option>
+                                  <option>{months?.data[0].m2}</option>
+                                  <option>{months?.data[0].m3}</option>
+                                  <option>{months?.data[0].m4}</option>
+                                  <option>{months?.data[0].m5}</option>
+                                  <option>{months?.data[0].m6}</option>
+                                  <option>{months?.data[0].m7}</option>
+                                  <option>{months?.data[0].m8}</option>
+                                  <option>{months?.data[0].m9}</option>
+                                  <option>{months?.data[0].m10}</option>
+                                  <option>{months?.data[0].m11}</option>
+                                  <option>{months?.data[0].m12}</option>
+                                </select>
+                              </div>
+                            </div>
                           </div>
-                          <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                তারিখ
-                              </label>
-                              <div className="col-lg-10 col-md-10 col-12">
-                                <input type="date" className="form-control" />
+                          <div className="row mt-3">
+                            <div className="col-12">
+                              <div className="filter-menu">
+                                <select
+                                  className="form-select"
+                                  size="4"
+                                  style={{ border: "none" }}
+                                  {...register("session")}
+                                >
+                                  <option disabled>সাল নির্বাচন করুন</option>
+                                  {academicYear?.data.map((item) => (
+                                    <option
+                                      key={item.id}
+                                      // onClick={() => setClasss(item.academicYear)}
+                                      {...register2("session")}
+                                    >
+                                      {item.academic_year}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row mt-3">
+                            <div className="col-12">
+                              <div className="filter-menu">
+                                <select
+                                  className="form-select"
+                                  size="4"
+                                  style={{ border: "none" }}
+                                  {...register2("class")}
+                                >
+                                  <option disabled>শ্রেণী নির্বাচন করুন</option>
+                                  {marhalaClass?.data.map((item) => (
+                                    <option
+                                      key={item.id}
+                                      // onClick={() => setClasss(item.academicYear)}
+                                    >
+                                      {item.class_name}
+                                    </option>
+                                  ))}
+                                </select>
                               </div>
                             </div>
                           </div>
@@ -59,20 +220,11 @@ const MonthlyFees = () => {
                                 আইডি
                               </label>
                               <div className="col-lg-6 col-md-6 col-12">
-                                <input type="text" className="form-control" />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                পিতা
-                              </label>
-                              <div className="col-lg-10 col-md-10 col-12">
                                 <input
+                                  required
+                                  {...register2("student_id")}
                                   type="text"
                                   className="form-control"
-                                  placeholder="পিতার নাম"
                                 />
                               </div>
                             </div>
@@ -80,10 +232,25 @@ const MonthlyFees = () => {
                           <div className="col-md-4 col-lg-4 col-12">
                             <div className="row mb-3">
                               <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                শ্রেণী
+                                তারিখ
                               </label>
                               <div className="col-lg-10 col-md-10 col-12">
                                 <input
+                                  required
+                                  {...register2("date")}
+                                  type="date"
+                                  className="form-control"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          {/* <div className="col-md-4 col-lg-4 col-12">
+                            <div className="row mb-3">
+                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                                শ্রেণী
+                              </label>
+                              <div className="col-lg-10 col-md-10 col-12">
+                                <input required
                                   type="text"
                                   className="form-control"
                                   placeholder="জামাত"
@@ -91,16 +258,42 @@ const MonthlyFees = () => {
                                 />
                               </div>
                             </div>
+                          </div> */}
+                        </div>
+                        <div className="col-md-4 col-lg-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                              ফি
+                            </label>
+                            <div className="col-lg-6 col-md-6 col-12">
+                              <input
+                                required
+                                {...register2("fee")}
+                                type="text"
+                                className="form-control"
+                              />
+                            </div>
                           </div>
                         </div>
-                        <div className="row">
+                        <div>
+                          <button
+                            type="submit"
+                            className="custom-btn btn-primary"
+                          >
+                            Save
+                          </button>
+                          <button type="reset" className="custom-btn btn-info">
+                            reset
+                          </button>
+                        </div>
+                        {/* <div className="row">
                           <div className="col-lg-4 col-md-4 offset-md-4 offset-0">
                             <div className="row mb-3">
                               <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                 মোবাইল
                               </label>
                               <div className="col-lg-8 col-md-8 col-12">
-                                <input
+                                <input required
                                   type="text"
                                   className="form-control"
                                   placeholder="মোবাইল"
@@ -114,7 +307,7 @@ const MonthlyFees = () => {
                                 শিক্ষার্থী অবস্থা
                               </label>
                               <div className="col-lg-6 col-md-6 col-12">
-                                <input
+                                <input required
                                   type="text"
                                   className="form-control"
                                   value="সক্রিয়"
@@ -123,10 +316,10 @@ const MonthlyFees = () => {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                       </form>
                     </div>
-                    <div className="my-4">
+                    {/* <div className="my-4">
                       <div className="row">
                         <div className="col-12">
                           <div
@@ -179,8 +372,8 @@ const MonthlyFees = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="my-2">
+                    </div> */}
+                    {/* <div className="my-2">
                       <div className="row">
                         <div className="col-12">
                           <div className="filter-container py-2">
@@ -191,7 +384,7 @@ const MonthlyFees = () => {
                                     <i className="bi bi-search text-white"></i>
                                   </label>
                                   <div className="col-lg-9 col-md-9 col-12">
-                                    <input
+                                    <input required
                                       type="date"
                                       className="form-control"
                                     />
@@ -202,7 +395,7 @@ const MonthlyFees = () => {
                                 <div className="row">
                                   <div className="col-8 d-flex align-items-center justify-content-between">
                                     <div className="form-check">
-                                      <input
+                                      <input required
                                         className="form-check-input"
                                         type="radio"
                                         name="options"
@@ -215,7 +408,7 @@ const MonthlyFees = () => {
                                       </label>
                                     </div>
                                     <div className="form-check">
-                                      <input
+                                      <input required
                                         className="form-check-input"
                                         type="radio"
                                         name="options"
@@ -229,7 +422,7 @@ const MonthlyFees = () => {
                                     </div>
                                   </div>
                                   <div className="col-4">
-                                    <input
+                                    <input required
                                       type="text"
                                       className="form-control"
                                     />
@@ -253,10 +446,16 @@ const MonthlyFees = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="my-2">
                       <div className="row">
                         <div className="col-12">
+                          <li className="others-nav-title my-1">
+                            <i className="bi bi-arrow-down-square"></i>
+                            <a href="#" className="others-nav-link px-1">
+                              মাসিক ফি
+                            </a>
+                          </li>
                           <div
                             className="table-responsive accounts-table"
                             data-pattern="priority-columns"
@@ -267,43 +466,65 @@ const MonthlyFees = () => {
                             >
                               <thead className="text-center accounts-table-head">
                                 <tr>
-                                  <th>
-                                    <span className="action-edit">
-                                      <i className="bi bi-pencil-square"></i>
-                                    </span>
-                                  </th>
-                                  <th>
-                                    <span className="action-delete">
-                                      <i className="bi bi-trash3"></i>
-                                    </span>
-                                  </th>
                                   <th>অর্ডার নং</th>
                                   <th>শিক্ষার্থীর আইডি</th>
-                                  <th>নাম</th>
-                                  <th>পিতার নাম</th>
                                   <th>ফির পরিমান</th>
                                   <th>গ্রহিতা</th>
+                                  <th>Date</th>
                                 </tr>
                               </thead>
                               <tbody>
+                                {monthlyFee?.data.map((item) => (
+                                  <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.student_id}</td>
+                                    <td>{item.fee}</td>
+                                    <td>{item.receiver}</td>
+                                    <td>{item.date}</td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="my-2">
+                      <div className="row">
+                        <div className="col-12">
+                          <li className="others-nav-title my-1">
+                            <i className="bi bi-arrow-down-square"></i>
+                            <a href="#" className="others-nav-link px-1">
+                              খাবারের ফি
+                            </a>
+                          </li>
+                          <div
+                            className="table-responsive accounts-table"
+                            data-pattern="priority-columns"
+                          >
+                            <table
+                              id="tech-companies-1"
+                              className="table  bg-white text-center mb-0"
+                            >
+                              <thead className="text-center accounts-table-head">
                                 <tr>
-                                  <td>
-                                    <span className="action-edit">
-                                      <i className="bi bi-pencil-square"></i>
-                                    </span>
-                                  </td>
-                                  <td>
-                                    <span className="action-delete">
-                                      <i className="bi bi-trash3"></i>
-                                    </span>
-                                  </td>
-                                  <td>৪৩৪৩</td>
-                                  <td>৬৫৬</td>
-                                  <td>আশিকুর রহমান</td>
-                                  <td>আবু বক্কর</td>
-                                  <td>১৫০০.০০</td>
-                                  <td>এডমিন</td>
+                                  <th>অর্ডার নং</th>
+                                  <th>শিক্ষার্থীর আইডি</th>
+                                  <th>ফির পরিমান</th>
+                                  <th>গ্রহিতা</th>
+                                  <th>Date</th>
                                 </tr>
+                              </thead>
+                              <tbody>
+                                {foodFee?.data.map((item) => (
+                                  <tr>
+                                    <td>{item.id}</td>
+                                    <td>{item.student_id}</td>
+                                    <td>{item.fee}</td>
+                                    <td>{item.receiver}</td>
+                                    <td>{item.date}</td>
+                                  </tr>
+                                ))}
                               </tbody>
                             </table>
                           </div>
@@ -311,28 +532,241 @@ const MonthlyFees = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-lg-5 col-12">
+                  <div className="col-lg-6 col-12">
                     <div className="section-title">
                       <h4>খাবারের ফি গ্রহণ</h4>
                     </div>
                     {/* <!--Right Site top Table--> */}
                     <div className="row">
+                      <form
+                        onSubmit={handleSubmit3(onSubmit3)}
+                        className="accounts-form"
+                      >
+                        <div className="row">
+                          {/* <div className="col-md-4 col-lg-4 col-12">
+                            <div className="row mb-3">
+                              <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                                অর্ডার নং
+                                <i>*</i>
+                              </label>
+                              <div className="col-lg-6 col-md-6 col-12">
+                                <input required type="text" className="form-control" />
+                              </div>
+                            </div>
+                          </div> */}
+                          {/* <div className="col-md-4 col-lg-4 col-12">
+                            <div className="row mb-3">
+                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                                নামঃ
+                              </label>
+                              <div className="col-lg-10 col-md-10 col-12">
+                                <input required
+                                  type="text"
+                                  className="form-control"
+                                  placeholder="নাম"
+                                />
+                              </div>
+                            </div>
+                          </div> */}
+                          <div className="row mt-3">
+                            <div className="col-12">
+                              <div className="filter-menu">
+                                <select
+                                  className="form-select"
+                                  size="4"
+                                  style={{ border: "none" }}
+                                  {...register3("month")}
+                                >
+                                  <option disabled>মাস নির্বাচন করুন</option>
+                                  {/* {academicYear?.data.map((item) => (
+                                    <option
+                                      key={item.id}
+                                      // onClick={() => setClasss(item.academicYear)}
+                                    >
+                                      {item.academic_year}
+                                    </option>
+                                  ))} */}
+                                  <option>{months?.data[0].m1}</option>
+                                  <option>{months?.data[0].m2}</option>
+                                  <option>{months?.data[0].m3}</option>
+                                  <option>{months?.data[0].m4}</option>
+                                  <option>{months?.data[0].m5}</option>
+                                  <option>{months?.data[0].m6}</option>
+                                  <option>{months?.data[0].m7}</option>
+                                  <option>{months?.data[0].m8}</option>
+                                  <option>{months?.data[0].m9}</option>
+                                  <option>{months?.data[0].m10}</option>
+                                  <option>{months?.data[0].m11}</option>
+                                  <option>{months?.data[0].m12}</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row mt-3">
+                            <div className="col-12">
+                              <div className="filter-menu">
+                                <select
+                                  className="form-select"
+                                  size="4"
+                                  style={{ border: "none" }}
+                                  {...register3("session")}
+                                >
+                                  <option disabled>সাল নির্বাচন করুন</option>
+                                  {academicYear?.data.map((item) => (
+                                    <option
+                                      key={item.id}
+                                      // onClick={() => setClasss(item.academicYear)}
+                                    >
+                                      {item.academic_year}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row mt-3">
+                            <div className="col-12">
+                              <div className="filter-menu">
+                                <select
+                                  className="form-select"
+                                  size="4"
+                                  style={{ border: "none" }}
+                                  {...register3("class")}
+                                >
+                                  <option disabled>শ্রেণী নির্বাচন করুন</option>
+                                  {marhalaClass?.data.map((item) => (
+                                    <option
+                                      key={item.id}
+                                      // onClick={() => setClasss(item.academicYear)}
+                                    >
+                                      {item.class_name}
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-md-4 col-lg-4 col-12">
+                            <div className="row mb-3">
+                              <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                                আইডি
+                              </label>
+                              <div className="col-lg-6 col-md-6 col-12">
+                                <input
+                                  required
+                                  {...register3("student_id")}
+                                  type="text"
+                                  className="form-control"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-md-4 col-lg-4 col-12">
+                            <div className="row mb-3">
+                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                                তারিখ
+                              </label>
+                              <div className="col-lg-10 col-md-10 col-12">
+                                <input
+                                  required
+                                  {...register3("date")}
+                                  type="date"
+                                  className="form-control"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          {/* <div className="col-md-4 col-lg-4 col-12">
+                            <div className="row mb-3">
+                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                                শ্রেণী
+                              </label>
+                              <div className="col-lg-10 col-md-10 col-12">
+                                <input required
+                                  type="text"
+                                  className="form-control"
+                                  placeholder="জামাত"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+                          </div> */}
+                        </div>
+                        <div className="col-md-4 col-lg-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                              ফি
+                            </label>
+                            <div className="col-lg-6 col-md-6 col-12">
+                              <input
+                                required
+                                {...register3("fee")}
+                                type="text"
+                                className="form-control"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="">
+                          <button
+                            type="submit"
+                            className="custom-btn btn-primary"
+                          >
+                            Save
+                          </button>
+                          <button type="reset" className="custom-btn btn-info">
+                            reset
+                          </button>
+                        </div>
+                        {/* <div className="row">
+                          <div className="col-lg-4 col-md-4 offset-md-4 offset-0">
+                            <div className="row mb-3">
+                              <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                                মোবাইল
+                              </label>
+                              <div className="col-lg-8 col-md-8 col-12">
+                                <input required
+                                  type="text"
+                                  className="form-control"
+                                  placeholder="মোবাইল"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="col-lg-4 col-md-4 col-12">
+                            <div className="row mb-3">
+                              <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                                শিক্ষার্থী অবস্থা
+                              </label>
+                              <div className="col-lg-6 col-md-6 col-12">
+                                <input required
+                                  type="text"
+                                  className="form-control"
+                                  value="সক্রিয়"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div> */}
+                      </form>
+                      <div></div>
+
                       <div className="col-lg-7 col-md-7 col-12">
                         <div className="row mt-3">
                           <div className="col-12">
                             <div className="row">
-                              <div className="col-6">
+                              {/* <div className="col-6">
                                 <div className="student-image">
                                   <span className="student-image-title">
                                     শিক্ষার্থীর ছবি
                                   </span>
-                                  {/* <img
-                                    src="./src/assets/images/takrim.jpg"
-                                    alt=""
-                                  /> */}
+                             
                                 </div>
-                              </div>
-                              <div className="col-6 meal-fee-btn">
+                              </div> */}
+                              {/* <div className="col-6 meal-fee-btn">
                                 <div className="button-group">
                                   <button className="custom-btn btn-primary">
                                     Save
@@ -341,7 +775,7 @@ const MonthlyFees = () => {
                                     Print
                                   </button>
                                 </div>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         </div>
@@ -350,7 +784,7 @@ const MonthlyFees = () => {
                             className="table-responsive accounts-table"
                             data-pattern="priority-columns"
                           >
-                            <table
+                            {/* <table
                               id="tech-companies-1"
                               className="table  bg-white text-center mb-0"
                             >
@@ -383,12 +817,12 @@ const MonthlyFees = () => {
                                   <td></td>
                                 </tr>
                               </tbody>
-                            </table>
+                            </table> */}
                           </div>
                         </div>
                       </div>
                       <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row">
+                        {/* <div className="row">
                           <label
                             className="col-12 col-form-label info-lable"
                             style={{ textAlign: "right" }}
@@ -409,7 +843,7 @@ const MonthlyFees = () => {
                               </a>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                         <div className="row">
                           <div className="col-12 others-menu">
                             <div className="section-title">
@@ -509,14 +943,6 @@ const MonthlyFees = () => {
                                 </a>
                               </li>
                             </ul>
-                            <div className="button-group">
-                              <button className="custom-btn btn-info">
-                                Show
-                              </button>
-                              <button className="custom-btn btn-primary">
-                                Save
-                              </button>
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -524,7 +950,7 @@ const MonthlyFees = () => {
                     {/* <!--Right Site Top Table End--> */}
                   </div>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                   <div className="col-12">
                     <div className="section-title">
                       <h4>মাসিক ফি গ্রহণ</h4>
@@ -580,7 +1006,7 @@ const MonthlyFees = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -589,7 +1015,7 @@ const MonthlyFees = () => {
       {/* <!-- হিসাব নিকাশ সেকশন শেষ --> */}
       {/* <!--রির্পোট প্রিন্ট সেকশন--> */}
       {/* <!--Preview Page Section--> */}
-      <div className="preview-page d-print-block d-none">
+      <div className="preview-page d-print-block  d-none">
         <span className="print-button d-print-none" onclick="window.print()">
           <i className="bi bi-printer-fill"></i>
         </span>
@@ -739,7 +1165,11 @@ const MonthlyFees = () => {
                                 <i>*</i>
                               </label>
                               <div className="col-lg-6 col-md-6 col-12">
-                                <input type="text" className="form-control" />
+                                <input
+                                  required
+                                  type="text"
+                                  className="form-control"
+                                />
                               </div>
                             </div>
                           </div>
@@ -750,6 +1180,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-10 col-md-10 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="নাম"
@@ -763,7 +1194,11 @@ const MonthlyFees = () => {
                                 তারিখ
                               </label>
                               <div className="col-lg-10 col-md-10 col-12">
-                                <input type="date" className="form-control" />
+                                <input
+                                  required
+                                  type="date"
+                                  className="form-control"
+                                />
                               </div>
                             </div>
                           </div>
@@ -775,7 +1210,11 @@ const MonthlyFees = () => {
                                 আইডি
                               </label>
                               <div className="col-lg-6 col-md-6 col-12">
-                                <input type="text" className="form-control" />
+                                <input
+                                  required
+                                  type="text"
+                                  className="form-control"
+                                />
                               </div>
                             </div>
                           </div>
@@ -786,6 +1225,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-10 col-md-10 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="পিতার নাম"
@@ -800,6 +1240,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-10 col-md-10 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="জামাত"
@@ -817,6 +1258,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-8 col-md-8 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মোবাইল"
@@ -831,6 +1273,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-6 col-md-6 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   value="সক্রিয়"
@@ -908,6 +1351,7 @@ const MonthlyFees = () => {
                                   </label>
                                   <div className="col-lg-9 col-md-9 col-12">
                                     <input
+                                      required
                                       type="date"
                                       className="form-control"
                                     />
@@ -919,6 +1363,7 @@ const MonthlyFees = () => {
                                   <div className="col-8 d-flex align-items-center justify-content-between">
                                     <div className="form-check">
                                       <input
+                                        required
                                         className="form-check-input"
                                         type="radio"
                                         name="options"
@@ -932,6 +1377,7 @@ const MonthlyFees = () => {
                                     </div>
                                     <div className="form-check">
                                       <input
+                                        required
                                         className="form-check-input"
                                         type="radio"
                                         name="options"
@@ -946,6 +1392,7 @@ const MonthlyFees = () => {
                                   </div>
                                   <div className="col-4">
                                     <input
+                                      required
                                       type="text"
                                       className="form-control"
                                     />
@@ -1327,7 +1774,10 @@ const MonthlyFees = () => {
             <div className="section-title">
               <h4>মাসের নাম এন্ট্রি</h4>
             </div>
-            <form>
+            <form
+              style={{ padding: "100px" }}
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div className="modal-body">
                 <div className="row">
                   <div className="col-md-12 w-100">
@@ -1340,13 +1790,21 @@ const MonthlyFees = () => {
                                 শিক্ষাবর্ষ
                               </label>
                               <div className="col-7">
-                                <select className="form-select">
-                                  <option value="" selected>
-                                    সিলেক্ট করুন
-                                  </option>
-                                  <option>২০২২</option>
-                                  <option>২০২৩</option>
-                                  <option>২০২৪</option>
+                                <select
+                                  className="form-select"
+                                  size="4"
+                                  style={{ border: "none" }}
+                                  {...register("session")}
+                                >
+                                  <option disabled>সাল নির্বাচন করুন</option>
+                                  {academicYear?.data.map((item) => (
+                                    <option
+                                      key={item.id}
+                                      // onClick={() => setClasss(item.academicYear)}
+                                    >
+                                      {item.academic_year}
+                                    </option>
+                                  ))}
                                 </select>
                               </div>
                             </div>
@@ -1357,24 +1815,21 @@ const MonthlyFees = () => {
                                 জামাত/শ্রেনী
                               </label>
                               <div className="col-7">
-                                <select className="form-select">
-                                  <option selected="">
-                                    শ্রেণী নির্বাচন করুন
-                                  </option>
-                                  <option>নাযেরা</option>
-                                  <option>হিফযুল কুরআন</option>
-                                  <option>ই-দাদী</option>
-                                  <option>ইবতিদায়ী আউয়াল</option>
-                                  <option>ইবতিদায়ী নানী</option>
-                                  <option>উস্তানী আউয়াল</option>
-                                  <option>উস্তানী সানী</option>
-                                  <option>সানাবী আউয়াল</option>
-                                  <option>সানাবী আউয়াল</option>
-                                  <option>সানাবী সানী</option>
-                                  <option>নিহায়ী আউয়াল</option>
-                                  <option>নিহায়ী সানী</option>
-                                  <option>তাকমীল</option>
-                                  <option>ইফতা ১ম</option>
+                                <select
+                                  className="form-select"
+                                  size="4"
+                                  style={{ border: "none" }}
+                                  {...register("class")}
+                                >
+                                  <option disabled>শ্রেণী নির্বাচন করুন</option>
+                                  {marhalaClass?.data.map((item) => (
+                                    <option
+                                      key={item.id}
+                                      // onClick={() => setClasss(item.academicYear)}
+                                    >
+                                      {item.class_name}
+                                    </option>
+                                  ))}
                                 </select>
                               </div>
                             </div>
@@ -1399,9 +1854,11 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-7">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="প্রথম মাসের নাম"
+                                  {...register("m1")}
                                 />
                               </div>
                             </div>
@@ -1413,9 +1870,11 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-7">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মাসের নাম"
+                                  {...register("m2")}
                                 />
                               </div>
                             </div>
@@ -1427,9 +1886,11 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-7">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মাসের নাম"
+                                  {...register("m3")}
                                 />
                               </div>
                             </div>
@@ -1445,9 +1906,11 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-7">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মাসের নাম"
+                                  {...register("m4")}
                                 />
                               </div>
                             </div>
@@ -1459,9 +1922,11 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-7">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মাসের নাম"
+                                  {...register("m5")}
                                 />
                               </div>
                             </div>
@@ -1473,9 +1938,11 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-7">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মাসের নাম"
+                                  {...register("m6")}
                                 />
                               </div>
                             </div>
@@ -1491,9 +1958,11 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-7">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মাসের নাম"
+                                  {...register("m7")}
                                 />
                               </div>
                             </div>
@@ -1505,9 +1974,11 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-7">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মাসের নাম"
+                                  {...register("m8")}
                                 />
                               </div>
                             </div>
@@ -1519,9 +1990,11 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-7">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মাসের নাম"
+                                  {...register("m9")}
                                 />
                               </div>
                             </div>
@@ -1537,9 +2010,11 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-7">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মাসের নাম"
+                                  {...register("m10")}
                                 />
                               </div>
                             </div>
@@ -1551,9 +2026,11 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-7">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="এগারোতম মাসের নাম"
+                                  {...register("m11")}
                                 />
                               </div>
                             </div>
@@ -1565,9 +2042,11 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-7">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="বারতম মাসের নাম"
+                                  {...register("m12")}
                                 />
                               </div>
                             </div>
@@ -1576,10 +2055,10 @@ const MonthlyFees = () => {
                       </div>
                       <div className="col-12 addbank">
                         <div className="button-group">
-                          <a href="#" className="custom-btn btn-primary">
+                          <button className="custom-btn btn-primary">
                             Save
-                          </a>
-                          <button className="custom-btn btn-dark" type="submit">
+                          </button>
+                          {/* <button className="custom-btn btn-dark" type="submit">
                             Edit
                           </button>
                           <button
@@ -1595,7 +2074,7 @@ const MonthlyFees = () => {
                             type="button"
                           >
                             Close
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                       {/* <!--Table Area Start--> */}
@@ -1645,20 +2124,24 @@ const MonthlyFees = () => {
                                       <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </td>
-                                  <td>২০২২</td>
-                                  <td>তাকমীল</td>
-                                  <td>জানুয়ারী</td>
-                                  <td>ফেব্রুয়ারী</td>
-                                  <td>মার্চ</td>
-                                  <td>এপ্রিল</td>
-                                  <td>মে</td>
-                                  <td>জুন</td>
-                                  <td>জুলাই</td>
-                                  <td>আগস্ট</td>
-                                  <td>সেপটেম্বর</td>
-                                  <td>অক্টোবর</td>
-                                  <td>নভেম্বর</td>
-                                  <td>ডিসেম্বর</td>
+                                  {months?.data.map((item) => (
+                                    <>
+                                      <th>{item.session}</th>
+                                      <th>{item.class}</th>
+                                      <th>{item.m1}</th>
+                                      <th>{item.m2}</th>
+                                      <th>{item.m3}</th>
+                                      <th>{item.m4}</th>
+                                      <th>{item.m5}</th>
+                                      <th>{item.m6}</th>
+                                      <th>{item.m7}</th>
+                                      <th>{item.m8}</th>
+                                      <th>{item.m9}</th>
+                                      <th>{item.m10}</th>
+                                      <th>{item.m11}</th>
+                                      <th>{item.m12}</th>
+                                    </>
+                                  ))}
                                 </tr>
                               </tbody>
                             </table>
@@ -1745,6 +2228,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-7 col-md-7 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="সার্চ করুন....."
@@ -1768,6 +2252,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-7 col-md-12 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মাসের নাম"
@@ -1782,6 +2267,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-7 col-md-12 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মাসের মোট দিন"
@@ -1800,6 +2286,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-7 col-md-12 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="মাসে মোট বন্ধ"
@@ -1938,6 +2425,7 @@ const MonthlyFees = () => {
                                   </label>
                                   <div className="col-lg-7 col-md-7 col-12">
                                     <input
+                                      required
                                       type="text"
                                       className="form-control"
                                       placeholder="সার্চ করুন"
@@ -2000,6 +2488,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-6 col-md-5 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="নির্ধারিত খাবারের ফি"
@@ -2083,6 +2572,7 @@ const MonthlyFees = () => {
                                   <td>২৩০০</td>
                                   <td>
                                     <input
+                                      required
                                       className="form-check-input mt-0"
                                       type="checkbox"
                                     />
@@ -2103,6 +2593,7 @@ const MonthlyFees = () => {
                                   <td>২৩০০</td>
                                   <td>
                                     <input
+                                      required
                                       className="form-check-input mt-0"
                                       type="checkbox"
                                     />
@@ -2123,6 +2614,7 @@ const MonthlyFees = () => {
                                   <td>২৭০০</td>
                                   <td>
                                     <input
+                                      required
                                       className="form-check-input mt-0"
                                       type="checkbox"
                                     />
@@ -2185,6 +2677,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-9 col-md-9 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="আইডি"
@@ -2203,6 +2696,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-9 col-md-9 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="আইডি"
@@ -2217,6 +2711,7 @@ const MonthlyFees = () => {
                               </label>
                               <div className="col-lg-9 col-md-9 col-12">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="নির্ধারিত খাবারের ফি"
@@ -2342,6 +2837,7 @@ const MonthlyFees = () => {
                             </label>
                             <div className="col-8">
                               <input
+                                required
                                 type="text"
                                 className="form-control"
                                 placeholder="পদবীর নাম"
@@ -2354,6 +2850,7 @@ const MonthlyFees = () => {
                             </label>
                             <div className="col-8">
                               <input
+                                required
                                 type="text"
                                 className="form-control"
                                 placeholder="মন্তব্য"

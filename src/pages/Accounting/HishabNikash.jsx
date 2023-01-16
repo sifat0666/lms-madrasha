@@ -1,6 +1,18 @@
 import React from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useQuery } from "react-query";
+import { serverUrl } from "../../../utils/config";
 
 const HishabNikash = () => {
+  const { data } = useQuery("payment-method", () =>
+    fetch(`${serverUrl}/api/payment-method`).then((res) => res.json())
+  );
+
+  const [name, setName] = useState("ক্যাশ");
+
+  const { register, handleSubmit } = useForm();
+
   return (
     <div>
       {/* <!-- হিসাব নিকাশ সেকশন শুরু --> */}
@@ -8,10 +20,7 @@ const HishabNikash = () => {
         <div className="section-bg">
           <div className="row">
             <div className="col-md-12 w-100">
-              <div
-                className="main-contai
-              ......................ner"
-              >
+              <div className="main-container">
                 <div className="row">
                   <div className="col-lg-6 col-12">
                     <div className="section-title">
@@ -182,8 +191,11 @@ const HishabNikash = () => {
                                     <i>*</i>
                                   </label>
                                   <div className="col-12">
-                                    <select className="form-select">
-                                      <option selected>
+                                    <select
+                                      onChange={(e) => setName(e.target.value)}
+                                      className="form-select"
+                                    >
+                                      <option disabled>
                                         পেমেন্ট সিস্টেম সিলেক্ট
                                       </option>
                                       <option>ক্যাশ</option>
@@ -202,9 +214,16 @@ const HishabNikash = () => {
                                   <div className="col-12">
                                     <select className="form-select">
                                       <option selected>একাউন্ট সিলেক্ট</option>
-                                      <option>মোহাম্মদ শহিদুল ইসলাম</option>
-                                      <option>ইষলামি ব্যাংক</option>
-                                      <option>বিকাশ</option>
+                                      {data?.data.map((item) => {
+                                        if (item.account_type === name) {
+                                          return (
+                                            <option key={item.id}>
+                                              {item.account_name}
+                                            </option>
+                                          );
+                                        }
+                                        return null;
+                                      })}
                                     </select>
                                   </div>
                                 </div>

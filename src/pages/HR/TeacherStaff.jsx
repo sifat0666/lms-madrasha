@@ -1,11 +1,38 @@
+import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import { serverUrl } from "../../../utils/config";
 
 const TeacherStaff = () => {
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/employee`, data);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log("userdasdfata", data.data);
+      //  setRecord(data.data);
+      toast.success("sumitted successfully");
+      // getStudent(data?.data.id)
+
+      // window.location.reload(true);
+    },
+  });
+
+  const { data: emloyeeData } = useQuery("employeeData", () =>
+    fetch(`${serverUrl}/api/employee`).then((res) => res.json())
+  );
+
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (value) => {
     console.log("first", value);
+    mutation.mutate(value);
   };
 
   return (
@@ -555,7 +582,11 @@ const TeacherStaff = () => {
                                 <i>*</i>
                               </label>
                               <div className="col-6">
-                                <input type="text" className="form-control" />
+                                <input
+                                  required
+                                  type="text"
+                                  className="form-control"
+                                />
                               </div>
                             </div>
                           </div>
@@ -566,6 +597,7 @@ const TeacherStaff = () => {
                               </label>
                               <div className="col-10">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="নাম"
@@ -579,7 +611,11 @@ const TeacherStaff = () => {
                                 তারিখ
                               </label>
                               <div className="col-10">
-                                <input type="date" className="form-control" />
+                                <input
+                                  required
+                                  type="date"
+                                  className="form-control"
+                                />
                               </div>
                             </div>
                           </div>
@@ -591,7 +627,11 @@ const TeacherStaff = () => {
                                 আইডি
                               </label>
                               <div className="col-6">
-                                <input type="text" className="form-control" />
+                                <input
+                                  required
+                                  type="text"
+                                  className="form-control"
+                                />
                               </div>
                             </div>
                           </div>
@@ -602,6 +642,7 @@ const TeacherStaff = () => {
                               </label>
                               <div className="col-10">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="নাম"
@@ -616,6 +657,7 @@ const TeacherStaff = () => {
                               </label>
                               <div className="col-10">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="জামাত"
@@ -636,6 +678,7 @@ const TeacherStaff = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="মোবাইল"
+                                  required
                                 />
                               </div>
                             </div>
@@ -647,6 +690,7 @@ const TeacherStaff = () => {
                               </label>
                               <div className="col-6">
                                 <input
+                                  required
                                   type="text"
                                   className="form-control"
                                   value="সক্রিয়"
@@ -748,6 +792,7 @@ const TeacherStaff = () => {
                                     </div>
                                     <div className="form-check">
                                       <input
+                                        required
                                         className="form-check-input"
                                         type="radio"
                                         name="options"
@@ -764,6 +809,7 @@ const TeacherStaff = () => {
                                     <input
                                       type="text"
                                       className="form-control"
+                                      required
                                     />
                                   </div>
                                 </div>

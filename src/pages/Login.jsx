@@ -42,7 +42,10 @@ const Login = () => {
 
   return (
     <div>
-      <div style={{ background: "#f5f5f5" }}>
+      <div
+      // className="position-absolute top-0 start-0"
+      // style={{ background: "#f5f5f5"   }}
+      >
         {/* <!-- Create New User form Start --> */}
         <section class="user-form-section">
           <div class="row">

@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../utils/config";
 
@@ -16,6 +17,10 @@ const MarkEntry = () => {
 
   const { data: examName } = useQuery("examEnty", () =>
     fetch(`${serverUrl}/api/exam-entry`).then((res) => res.json())
+  );
+
+  const { data: marks } = useQuery("marks", () =>
+    fetch(`${serverUrl}/api/marks`).then((res) => res.json())
   );
 
   const [student, setStudent] = useState();
@@ -35,17 +40,26 @@ const MarkEntry = () => {
     },
   });
 
-  console.log(student);
+  const markEntry = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/marks`, data);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log("marks", data.data);
+      toast.success("mark submitted successfully");
+    },
+  });
 
   const { register, handleSubmit } = useForm();
 
-  const [id, setId] = useState();
-  const [mark, setMark] = useState();
-  const [subject, setSubject] = useState();
-  const [exam, setExam] = useState();
   const { register: register2, handleSubmit: handleSubmit2 } = useForm();
 
-  const [value, setValue] = useState();
+  const [valuee, setValue] = useState();
+  console.log("value", valuee);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -53,13 +67,14 @@ const MarkEntry = () => {
     setValue(data);
   };
 
-  const onMarkSubmit = (e) => {
-    e.preventDefault();
-    const value = {
-      student_id: id,
-      mark: { mark: mark, subject: subject },
-      exam: exam,
+  const onMarkSubmit = (value) => {
+    const params = {
+      ...value,
+      session: valuee.session,
+      class: valuee.class,
     };
+    console.log(params);
+    markEntry.mutate(params);
   };
 
   return (
@@ -138,7 +153,7 @@ const MarkEntry = () => {
                   </div>
                 </form>
                 <div className="sperator"></div>
-                <form onSubmit={onMarkSubmit}>
+                <form onSubmit={handleSubmit2(onMarkSubmit)}>
                   <div className="row">
                     <div className="col-lg-6 col-md-6 col-12">
                       <div className="row mb-3">
@@ -148,31 +163,35 @@ const MarkEntry = () => {
                         </label>
                         <div className="col-lg-6 col-md-6 col-10">
                           <select
+                            required
                             className="form-select"
                             size="3"
                             style={{ border: "none" }}
-                            onChange={(e) => setExam(e.target.value)}
+                            // onChange={(e) => setExam(e.target.value)}
+                            {...register2("exam")}
                           >
                             {examName?.data.map((item) => (
                               <option key={item.id}>{item.exam_name}</option>
                             ))}
                           </select>
                         </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-4 col-md-6 col-12">
-                      <div className="row mb-3">
-                        <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                        <label
+                          className="col-lg-4 col-md-4 col-12 col-form-label info-lable mt-3"
+                          style={{ padding: "10px" }}
+                        >
                           কিতাব
                           <i>*</i>
                         </label>
-                        <div className="col-lg-6 col-md-6 col-10">
+                        <div className="col-lg-6 col-md-6 col-10 mt-3">
                           <select
-                            // {...register2("subject")}
-                            onChange={(e) => setSubject(e.target.value)}
+                            required
+                            {...register2("subject")}
+                            // onChange={(e) => setSubject(e.target.value)}
                             className="form-select"
                           >
-                            <option selected="">শ্রেণী নির্বাচন করুন</option>
+                            <option selected="" disabled>
+                              শ্রেণী নির্বাচন করুন
+                            </option>
                             <option>নাযেরা</option>
                             <option>হিফযুল কুরআন</option>
                             <option>ই-দাদী</option>
@@ -189,15 +208,79 @@ const MarkEntry = () => {
                             <option>ইফতা ১ম</option>
                           </select>
                         </div>
+                        <label
+                          className="col-lg-4 col-md-4 col-12 col-form-label info-lable mt-3"
+                          style={{ padding: "10px" }}
+                        >
+                          নাম্বার
+                          <i>*</i>
+                        </label>
+                        <div className="col-lg-6 col-md-6 col-10 mt-3">
+                          <input
+                            required
+                            type="text"
+                            className="form-control"
+                            placeholder="নাম্বার"
+                            {...register2("number")}
+                          />
+                        </div>
+                        <label
+                          className="col-lg-4 col-md-4 col-12 col-form-label info-lable mt-3"
+                          style={{ padding: "10px" }}
+                        >
+                          পাশ নম্বর
+                          <i>*</i>
+                        </label>
+                        <div className="col-lg-6 col-md-6 col-10 mt-3">
+                          <input
+                            required
+                            type="text"
+                            className="form-control"
+                            placeholder="পাশ নম্বর"
+                            {...register2("pass_number")}
+                          />
+                        </div>
+                        <label
+                          className="col-lg-4 col-md-4 col-12 col-form-label info-lable mt-3"
+                          style={{ padding: "10px" }}
+                        >
+                          সব্বোচ্চ নম্বর
+                          <i>*</i>
+                        </label>
+                        <div className="col-lg-6 col-md-6 col-10 mt-3">
+                          <input
+                            required
+                            type="text"
+                            className="form-control"
+                            placeholder="সব্বোচ্চ নম্বর"
+                            {...register2("highest_number")}
+                          />
+                        </div>
+                        <label
+                          className="col-lg-4 col-md-4 col-12 col-form-label info-lable mt-3"
+                          style={{ padding: "10px" }}
+                        >
+                          আইডি
+                          <i>*</i>
+                        </label>
+                        <div className="col-lg-6 col-md-6 col-10 mt-3">
+                          <input
+                            required
+                            type="text"
+                            className="form-control"
+                            placeholder="আইডি"
+                            {...register2("student_id")}
+                          />
+                        </div>
+                        <div className="col-lg-6 col-md-6 col-12 mx-auto p-5">
+                          <button className="custom-btn btn-primary d-block w-100 ">
+                            Submit
+                          </button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="row my-3">
-                    <div className="col-12">
-                      <div
-                        className="table-responsive accounts-table"
-                        data-pattern="priority-columns"
-                      >
+                    <div className="col-lg-4 col-md-6 col-12">
+                      <div className="row mb-3">
                         <table
                           id="tech-companies-1"
                           className="table  bg-white text-center mb-0"
@@ -207,10 +290,10 @@ const MarkEntry = () => {
                               <th>আইডি</th>
 
                               <th>নাম</th>
-                              <th>ID</th>
-                              <th>নাম্বার</th>
+                              <th>শিক্ষাবর্ষঃ</th>
+                              <th>মারহালা/শ্রেণীঃ</th>
 
-                              <th>Submit</th>
+                              {/* <th>Submit</th> */}
                               <th>
                                 <span className="action-edit">
                                   <i className="bi bi-pencil-square"></i>
@@ -231,19 +314,11 @@ const MarkEntry = () => {
                                   {/* {item.id} */}
                                 </td>
                                 <td>{item.student_name}</td>
-                                <td>
-                                  <input
-                                    onChange={(e) => setId(e.target.value)}
-                                  />
-                                </td>
-                                <td>
-                                  <input
-                                    onChange={(e) => setMark(e.target.value)}
-                                  />
-                                </td>
-                                <td>
+                                <td>{item.session}</td>
+                                <td>{item.class}</td>
+                                {/* <td>
                                   <button type="submit">submit</button>
-                                </td>
+                                </td> */}
                                 <td>
                                   <span className="action-edit">
                                     <i className="bi bi-pencil-square"></i>
@@ -259,6 +334,14 @@ const MarkEntry = () => {
                           </tbody>
                         </table>
                       </div>
+                    </div>
+                  </div>
+                  <div className="row my-3">
+                    <div className="col-12">
+                      <div
+                        className="table-responsive accounts-table"
+                        data-pattern="priority-columns"
+                      ></div>
                     </div>
                   </div>
                 </form>

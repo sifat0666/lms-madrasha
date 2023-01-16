@@ -259,16 +259,16 @@ const NewUser = () => {
                                 name="checkbox"
                                 onClick={() => {
                                   const findPermission = array.find(
-                                    (x) => x === "teacther_control"
+                                    (x) => x === "teacher_control"
                                   );
                                   if (findPermission) {
                                     const newArray = arrayRemove(
                                       array,
-                                      "teacther_control"
+                                      "teacher_control"
                                     );
                                     setArray(newArray);
                                   } else {
-                                    setArray([...array, "teacther_control"]);
+                                    setArray([...array, "teacher_control"]);
                                   }
                                 }}
                               />

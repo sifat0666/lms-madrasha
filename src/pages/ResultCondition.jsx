@@ -70,7 +70,7 @@ const ResultCondition = () => {
 
   const onMarkSubmit = (value) => {
     console.log(value);
-    passMark.mutate(value);
+    passMark.mutate({ ...value, subject_a: "empty" });
   };
 
   return (
@@ -291,7 +291,7 @@ const ResultCondition = () => {
                                         className="form-select"
                                         size="3"
                                         style={{ border: "none" }}
-                                        {...register("exam")}
+                                        {...register("exam_name")}
                                       >
                                         {examName?.data.map((item) => (
                                           <option key={item.id}>
@@ -840,12 +840,18 @@ const ResultCondition = () => {
                                       </span> */}
                                     </div>
                                   </div>
-                                  <div className="row mb-3">
-                                    <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                                  {/* <div className="row mb-3">
+                                    <label
+                                      hidden
+                                      className="col-lg-4 col-md-4 col-12 col-form-label info-lable"
+                                    >
                                       বিষয় আরবি
                                       <i>*</i>
                                     </label>
-                                    <div className="col-lg-6 col-md-6 col-12">
+                                    <div
+                                      
+                                      className="col-lg-6 col-md-6 col-12"
+                                    >
                                       <input
                                         required
                                         type="text"
@@ -855,7 +861,7 @@ const ResultCondition = () => {
                                       />
                                     </div>
                                     <div className="col-2"></div>
-                                  </div>
+                                  </div> */}
                                   <div className="row mb-3">
                                     <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                       পাশ নাম্বার
