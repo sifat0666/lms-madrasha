@@ -1,6 +1,55 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import { serverUrl } from "../../utils/config";
 
-const IncomeEntry = () => {
+const ExpenceEntry = () => {
+  const [name, setName] = useState("ক্যাশ");
+  const [coa, setCoa] = useState("জমা");
+  const [ledger, setLedger] = useState();
+  // const [entry, setEntry] = useState();
+
+  const { data } = useQuery("payment-method", () =>
+    fetch(`${serverUrl}/api/payment-method`).then((res) => res.json())
+  );
+  const { data: audit } = useQuery("audit", () =>
+    fetch(`${serverUrl}/api/audit`).then((res) => res.json())
+  );
+  console.log(audit);
+  const { data: generalLedger } = useQuery("general-ledger", () =>
+    fetch(`${serverUrl}/api/general-ledger`).then((res) => res.json())
+  );
+  const { data: subLedger } = useQuery("sub-ledger", () =>
+    fetch(`${serverUrl}/api/sub-ledger`).then((res) => res.json())
+  );
+
+  const { data: fundData } = useQuery("fund", () =>
+    fetch(`${serverUrl}/api/fund`).then((res) => res.json())
+  );
+
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/audit`, data);
+    },
+    onError: (error, variable, context) => {
+      toast.error(error?.data.data.message);
+    },
+    onSuccess: (data) => {
+      toast.success(" added successfully");
+      // setEntry(data?.data);
+    },
+  });
+
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    mutation.mutate(data);
+  };
+
   return (
     <div>
       <section className="user-form-section">
@@ -11,40 +60,85 @@ const IncomeEntry = () => {
                 <div className="row">
                   <div className="col-lg-5 col-md-12 col-sm-12">
                     <div className="section-title">
-                      <h4>আয় এন্ট্রি</h4>
+                      <h4>আয় এন্ট্রি</h4>
                     </div>
                     <div className="my-4">
-                      <form className="incomeExpance-form">
-                        <div className="row mb-3">
-                          <label className="col-12 col-md-4 col-lg-4 col-form-label info-lable">
-                            ফান্ডঃ
-                          </label>
-                          <div className="col-12 col-md-8 col-lg-8">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="ফান্ড"
-                            />
+                      <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="incomeExpance-form"
+                      >
+                        <div className="filter-menu p-2 m-3">
+                          <select
+                            className="form-select"
+                            size="4"
+                            style={{ border: "none" }}
+                            {...register("fund_name")}
+                          >
+                            <option disabled>ফান্ডঃ নির্বাচন করুন</option>
+                            {fundData?.data.map((item) => (
+                              <option
+                                key={item.id}
+                                // onClick={() => setClasss(item.academicYear)}
+                              >
+                                {item.fund_name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className=" p-2 m-3 ">
+                          <div className="row mt-3">
+                            <div className="col-12">
+                              <div className="filter-menu">
+                                <select
+                                  className="form-select"
+                                  size="4"
+                                  style={{ border: "none" }}
+                                  {...register("general_ledger")}
+                                  onChange={(e) => setLedger(e.target.value)}
+                                >
+                                  <option disabled>জেনারেল লেজারঃ</option>
+                                  {generalLedger?.data.map((item) => {
+                                    if (item.chart_of_account === "জমা") {
+                                      return (
+                                        <option>{item.general_ledger}</option>
+                                      );
+                                    }
+                                  })}
+                                </select>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div className="row mb-3">
-                          <label className="col-12 col-md-4 col-lg-4 col-form-label info-lable">
-                            ট্রানজেকশন আইডিঃ
-                          </label>
-                          <div className="col-12 col-md-8 col-lg-8">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="ট্রানজেকশন আইডি"
-                            />
+                        <div className=" p-2 m-3 ">
+                          <div className="row mt-3">
+                            <div className="col-12">
+                              <div className="filter-menu">
+                                <select
+                                  className="form-select"
+                                  size="4"
+                                  style={{ border: "none" }}
+                                  {...register("sub_ledger")}
+                                >
+                                  <option disabled> সাব লেজারঃ</option>
+                                  {subLedger?.data.map((item) => {
+                                    if (item.general_ledger === ledger) {
+                                      return <option>{item.sub_ledger}</option>;
+                                    }
+                                    return null;
+                                  })}
+                                </select>
+                              </div>
+                            </div>
                           </div>
                         </div>
+
                         <div className="row mb-3">
                           <label className="col-12 col-md-4 col-lg-4 col-form-label info-lable">
                             আয়/ব্যয় তারিখঃ
                           </label>
                           <div className="col-12 col-md-8 col-lg-8">
                             <input
+                              {...register("submit_date")}
                               type="date"
                               className="form-control"
                               placeholder="আয়/ব্যয় তারিখ"
@@ -57,25 +151,15 @@ const IncomeEntry = () => {
                           </label>
                           <div className="col-12 col-md-8 col-lg-8">
                             <input
+                              {...register("chart_of_account")}
+                              value={"জমা"}
                               type="text"
                               className="form-control"
                               placeholder="চার্ট অফ একাউন্ট"
                             />
                           </div>
                         </div>
-                        <div className="row mb-3">
-                          <label className="col-12 col-md-4 col-lg-4 col-form-label info-lable">
-                            জেনারেল লেজারঃ
-                          </label>
-                          <div className="col-12 col-md-8 col-lg-8">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="জেনারেল লেজার"
-                            />
-                          </div>
-                        </div>
-                        <div className="row mb-3">
+                        {/* <div className="row mb-3">
                           <label className="col-12 col-md-4 col-lg-4 col-form-label info-lable">
                             সাব লেজারঃ
                           </label>
@@ -86,19 +170,20 @@ const IncomeEntry = () => {
                               placeholder="সাব লেজার"
                             />
                           </div>
-                        </div>
+                        </div> */}
                         <div className="row mb-3">
                           <label className="col-12 col-md-4 col-lg-4 col-form-label info-lable">
                             রশিদ/ভাউচার নংঃ
                           </label>
                           <div className="col-6 col-md-5 col-lg-5">
                             <input
+                              {...register("voucher_slip")}
                               type="text"
                               className="form-control"
                               placeholder="রশিদ/ভাউচার নং"
                             />
                           </div>
-                          <div className="col-6 col-md-3 col-lg-3">
+                          {/* <div className="col-6 col-md-3 col-lg-3">
                             <div className="input-group d-flex align-items-center gap-3">
                               <span className="">ক্যাশ বই</span>
                               <input
@@ -108,7 +193,7 @@ const IncomeEntry = () => {
                                 name="checkbox"
                               />
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                         <div className="row mb-3 mb-sm-2">
                           <label className="col-12 col-md-4 col-lg-4 col-form-label info-lable">
@@ -116,6 +201,7 @@ const IncomeEntry = () => {
                           </label>
                           <div className="col-12 col-md-8 col-lg-8">
                             <input
+                              {...register("ammount")}
                               type="number"
                               className="form-control"
                               placeholder="পরিমাণ "
@@ -128,6 +214,7 @@ const IncomeEntry = () => {
                           </label>
                           <div className="col-12 col-md-8 col-lg-8">
                             <textarea
+                              {...register("comment")}
                               className="form-control"
                               placeholder="মন্তব্য"
                             ></textarea>
@@ -169,7 +256,6 @@ const IncomeEntry = () => {
                         >
                           <thead className="text-center accounts-table-head">
                             <tr>
-                              <th>ট্রানঃ আইডি</th>
                               <th>ভাউচার</th>
                               <th>ধরণ</th>
                               <th>জেনারেল লেজার</th>
@@ -178,78 +264,19 @@ const IncomeEntry = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                            </tr>
+                            {audit?.data.map((item) => {
+                              if (item.chart_of_account === "জমা") {
+                                return (
+                                  <tr key={item.id}>
+                                    <th>{item.voucher_slip}</th>
+                                    <th>{item.chart_of_account}</th>
+                                    <td>{item.general_ledger}</td>
+                                    <td> {item.sub_ledger}</td>
+                                    <td> {item.ammount}</td>
+                                  </tr>
+                                );
+                              }
+                            })}
                           </tbody>
                         </table>
                       </div>
@@ -265,4 +292,4 @@ const IncomeEntry = () => {
   );
 };
 
-export default IncomeEntry;
+export default ExpenceEntry;

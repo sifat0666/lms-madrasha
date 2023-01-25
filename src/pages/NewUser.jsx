@@ -115,7 +115,7 @@ const NewUser = () => {
                                   ></i>
                                 </div>
                               </div>
-                              <div className="row form-group mb-3">
+                              {/* <div className="row form-group mb-3">
                                 <label className="col-lg-3 col-sm-12 col-form-label">
                                   কনফার্ম পাসওয়ার্ডঃ
                                 </label>
@@ -132,7 +132,7 @@ const NewUser = () => {
                                     onclick="passwordshowhide()"
                                   ></i>
                                 </div>
-                              </div>
+                              </div> */}
                             </div>
                           </div>
                         </div>

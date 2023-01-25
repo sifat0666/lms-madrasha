@@ -1,6 +1,83 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import { serverUrl } from "../../utils/config";
+import Attandance from "../Comonents/Report/Exam/AttandencePaper";
+import ExamPass from "../Comonents/Report/Exam/ExamPass";
+import FeeCollectionList from "../Comonents/Report/Exam/FeeCollectionList";
+import MarkSheet from "../Comonents/Report/Exam/MarkSheet";
+import SeatPlan from "../Comonents/Report/Exam/SeatPlan";
+import ReactPrint from "react-to-print";
+import { useRef } from "react";
 
 const ExamReport = () => {
+  const ref = useRef();
+
+  const [data, setData] = useState();
+  const [val, setVal] = useState();
+  const [report, setReport] = useState();
+  const [classData, setClassData] = useState();
+  console.log("data", classData);
+  console.log("rep", report);
+
+  const { data: instituteInfo } = useQuery("instituteInfo", () =>
+    fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
+  );
+
+  const { data: academicYear } = useQuery("academicyear", () =>
+    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+  );
+
+  const { data: marhalaClass } = useQuery("marhalaclass", () =>
+    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+  );
+
+  const { data: examName } = useQuery("examEnty", () =>
+    fetch(`${serverUrl}/api/exam-entry`).then((res) => res.json())
+  );
+
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/filter-student-by-class`, data);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      console.log(error);
+    },
+    onSuccess: (data) => {
+      setData(data?.data);
+      // console.log("data", data);
+    },
+  });
+
+  const subjectByClass = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/filter-subject-by-class`, data);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      console.log("error");
+      console.log(error);
+    },
+    onSuccess: (data) => {
+      console.log("success");
+      setClassData(data?.data);
+    },
+  });
+
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    setVal(data);
+    mutation.mutate(data);
+    subjectByClass.mutate({ class: data.class });
+    // console.log({ class: data.class });
+  };
+
   return (
     <div>
       <section className="user-form-section">
@@ -18,7 +95,7 @@ const ExamReport = () => {
                 <div className="row">
                   {/* <!--Filter Menu Section--> */}
                   <div className="col-lg-4 col-12 col-md-12 d-print-none">
-                    <form>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                       <div className="row">
                         <div className="col-12">
                           <div className="filter-menu report-menu">
@@ -26,14 +103,15 @@ const ExamReport = () => {
                               className="form-select"
                               size="5"
                               style={{ border: "none" }}
+                              onChange={(e) => setReport(e.target.value)}
                             >
                               <option>নির্বাচন করুন</option>
                               <option selected>
                                 ১. পরীক্ষার ফি উত্তোলন তালিকা
                               </option>
                               <option
-                                data-bs-toggle="modal"
-                                data-bs-target="#admitcard"
+                              // data-bs-toggle="modal"
+                              // data-bs-target="#admitcard"
                               >
                                 ২. প্রবেশপত্র
                               </option>
@@ -48,19 +126,15 @@ const ExamReport = () => {
                         <div className="col-12">
                           <div className="filter-menu">
                             <select
+                              {...register("session")}
                               className="form-select"
                               size="4"
                               style={{ border: "none" }}
                             >
-                              <option selected>সাল নির্বাচন করুন</option>
-                              <option>২০১৮</option>
-                              <option>২০১৯</option>
-                              <option>২০২০</option>
-                              <option>২০২১</option>
-                              <option>২০২২</option>
-                              <option>২০২৩</option>
-                              <option>২০২৪</option>
-                              <option>২০২৫</option>
+                              <option disabled>সাল নির্বাচন করুন</option>
+                              {academicYear?.data.map((item) => (
+                                <option>{item.academic_year}</option>
+                              ))}
                             </select>
                           </div>
                         </div>
@@ -69,16 +143,15 @@ const ExamReport = () => {
                         <div className="col-12">
                           <div className="filter-menu">
                             <select
+                              {...register("exam_name")}
                               className="form-select"
                               size="4"
                               style={{ border: "none" }}
                             >
-                              <option selected="">পরীক্ষা নির্বাচন করুন</option>
-                              <option>প্রথম সাময়িক পরীক্ষা</option>
-                              <option>দ্বিতীয় সাময়িক পরীক্ষা</option>
-                              <option>তৃতীয় সাময়িক পরীক্ষা</option>
-                              <option>বোর্ড পরীক্ষা</option>
-                              <option>মাসিক পরীক্ষা</option>
+                              <option disabled>পরীক্ষা নির্বাচন করুন</option>
+                              {examName?.data.map((item) => (
+                                <option>{item.exam_name}</option>
+                              ))}
                             </select>
                           </div>
                         </div>
@@ -87,35 +160,25 @@ const ExamReport = () => {
                         <div className="col-12">
                           <div className="filter-menu">
                             <select
+                              {...register("class")}
                               className="form-select"
                               size="4"
                               style={{ border: "none" }}
                             >
-                              <option selected>শ্রেণী নির্বাচন করুন</option>
-                              <option>তাকমীল (ক)</option>
-                              <option>তাকমীল (খ)</option>
-                              <option>মক্তব</option>
-                              <option>হিফযুল কুরআন পরীক্ষামুলক মারহালা</option>
+                              <option disabled>শ্রেণী নির্বাচন করুন</option>
+                              {marhalaClass?.data.map((item) => (
+                                <option
+                                  key={item.id}
+                                  // onClick={() => setClasss(item.academicYear)}
+                                >
+                                  {item.class_name}
+                                </option>
+                              ))}
                             </select>
                           </div>
                         </div>
                       </div>
-                      <div className="row mt-3">
-                        <div className="col-12">
-                          <div className="filter-menu">
-                            <select
-                              className="form-select"
-                              size="3"
-                              style={{ border: "none" }}
-                            >
-                              <option selected>ভাষা নির্বাচন করুন</option>
-                              <option>বাংলা</option>
-                              <option>আরাবী</option>
-                              <option>উভয়</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
+
                       <div className="row mt-3">
                         <div className="col-12">
                           <button
@@ -124,177 +187,51 @@ const ExamReport = () => {
                           >
                             Preview
                           </button>
+                          <ReactPrint
+                            trigger={() => (
+                              <button
+                                type="submit"
+                                className="m-2 custom-btn btn-primary d-block w-"
+                              >
+                                Print
+                              </button>
+                            )}
+                            content={() => ref.current}
+                          />
                         </div>
                       </div>
                     </form>
                   </div>
                   {/* <!--Preview Page Section--> */}
                   <div className="col-lg-8 col-12 col-md-12 mt-lg-0 mt-4">
-                    <div
-                      className="preview-page d-print-block"
-                      style={{ zIndex: 1 }}
-                    >
-                      <span
-                        className="print-button d-print-none"
-                        onclick="window.print()"
-                      >
-                        <i className="bi bi-printer-fill"></i>
-                      </span>
-                      <div className="pages-title d-print-none">
-                        <h5>জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ</h5>
-                        <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
-                        <span>01832-061454 # 027440235</span>
-                        <br />
-                        <span className="pages-subtitle">
-                          পরীক্ষা ফি উত্তোলন তালিকা
-                        </span>
-                      </div>
-                      <div className="pages-content">
-                        <div className="row my-3 justify-content-center align-items-center d-print-none">
-                          <div className="col-5">
-                            <p className="my-2">
-                              <strong>শ্রেণী/মারহালাঃ</strong>
-                              মিযান
-                            </p>
-                          </div>
-                          <div className="col-3">
-                            <p className="my-2">
-                              <strong>শিক্ষবর্ষঃ</strong>
-                              ২০২১-২০২২ইং
-                            </p>
-                          </div>
-                          <div className="col-4 d-flex justify-content-start justify-content-lg-end">
-                            <p className="my-2">
-                              <strong>প্রিন্ট তারিখঃ</strong>
-                              ০৪/০৩/২০২২ ইং
-                            </p>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-12">
-                            <div
-                              className="table-responsive"
-                              data-pattern="priority-columns"
-                            >
-                              <table className="table  bg-white table-bordered text-center report-table">
-                                <thead className="text-center">
-                                  <tr>
-                                    <td colspan="4">
-                                      <div className="pages-title">
-                                        <h5>
-                                          জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ
-                                        </h5>
-                                        <p>
-                                          ১১/১২ মাদরাসা রোড, গেন্ডারিয়া,
-                                          ঢাকা-১২০৪
-                                        </p>
-                                        <span>01832-061454 # 027440235</span>
-                                        <br />
-                                        <span className="pages-subtitle">
-                                          পরীক্ষা ফি উত্তোলন তালিকা
-                                        </span>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td colspan="4">
-                                      <div className="d-flex justify-content-between">
-                                        <div>
-                                          <strong>মারহালাঃ</strong>
-                                          মিযান
-                                        </div>
-                                        <div>
-                                          <strong>মারহালাঃ</strong>
-                                          মিযান
-                                        </div>
-                                        <div>
-                                          <strong>প্রিন্ট তারিখঃ</strong>
-                                          ০৪/০৩/২২ ইং
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th>ক্রঃ</th>
-                                    <th>আইডি</th>
-                                    <th>পরীক্ষার্থী</th>
-                                    <th>ফি</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>১৮১</td>
-                                    <td>আব্দুল্লাহ</td>
-                                    <td>আবু তাহের</td>
-                                    <td>০১/০৫/১৯৮৮</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                          <div className="col-12 mt-3">
-                            <div
-                              className="table-responsive"
-                              data-pattern="priority-columns"
-                            >
-                              <table className="table  bg-white table-bordered text-center report-table">
-                                <thead className="text-center">
-                                  <tr>
-                                    <td colspan="4">
-                                      <div className="pages-title">
-                                        <h5>
-                                          জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ
-                                        </h5>
-                                        <p>
-                                          ১১/১২ মাদরাসা রোড, গেন্ডারিয়া,
-                                          ঢাকা-১২০৪
-                                        </p>
-                                        <span>01832-061454 # 027440235</span>
-                                        <br />
-                                        <span className="pages-subtitle">
-                                          পরীক্ষা ফি উত্তোলন তালিকা
-                                        </span>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td colspan="4">
-                                      <div className="d-flex justify-content-between">
-                                        <div>
-                                          <strong>মারহালাঃ</strong>
-                                          মিযান
-                                        </div>
-                                        <div>
-                                          <strong>মারহালাঃ</strong>
-                                          মিযান
-                                        </div>
-                                        <div>
-                                          <strong>প্রিন্ট তারিখঃ</strong>
-                                          ০৪/০৩/২২ ইং
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th>ক্রঃ</th>
-                                    <th>আইডি</th>
-                                    <th>পরীক্ষার্থী</th>
-                                    <th>ফি</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <td>১৮১</td>
-                                    <td>আব্দুল্লাহ</td>
-                                    <td>আবু তাহের</td>
-                                    <td>০১/০৫/১৯৮৮</td>
-                                  </tr>
-                                </tbody>
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    <div ref={ref}>
+                      {report === "১. পরীক্ষার ফি উত্তোলন তালিকা" ? (
+                        <FeeCollectionList data={data} val={val} />
+                      ) : null}
+                      {report === "২. প্রবেশপত্র" ? (
+                        <ExamPass
+                          data={data}
+                          val={val}
+                          instituteInfo={instituteInfo}
+                        />
+                      ) : null}
+                      {report === "৩. দস্তখতপত্র" ? (
+                        <Attandance
+                          classData={classData}
+                          data={data}
+                          val={val}
+                        />
+                      ) : null}
+                      {report === "৪. নাম্বরপত্র" ? (
+                        <MarkSheet data={data} val={val} />
+                      ) : null}
+                      {report === "৫. সীট নং" ? (
+                        <SeatPlan
+                          data={data}
+                          val={val}
+                          instituteInfo={instituteInfo}
+                        />
+                      ) : null}
                     </div>
                   </div>
                 </div>

@@ -6,6 +6,10 @@ import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../../utils/config";
 
 const TeacherStaff = () => {
+  const { data } = useQuery("employee", () =>
+    fetch(`${serverUrl}/api/employee`).then((res) => res.json())
+  );
+
   const mutation = useMutation({
     mutationFn: (data) => {
       return axios.post(`${serverUrl}/api/employee`, data);
@@ -59,6 +63,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-10 col-md-10 col-12">
                               <input
+                                required
                                 type="text"
                                 className="form-control"
                                 placeholder=" ধরণ"
@@ -75,6 +80,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-10 col-md-10 col-12">
                               <input
+                                required
                                 type="text"
                                 className="form-control"
                                 placeholder=" থানা"
@@ -91,6 +97,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-8 col-md-8 col-12">
                               <input
+                                required
                                 type="date"
                                 className="form-control"
                                 placeholder=" যোগদানের তারিখ"
@@ -111,6 +118,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-5 col-md-5 col-6">
                               <select
+                                required
                                 className="form-select"
                                 {...register("position")}
                               >
@@ -152,6 +160,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-8 col-md-8 col-12">
                               <input
+                                required
                                 type="text"
                                 className="form-control"
                                 placeholder=" জেলা"
@@ -168,6 +177,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-8 col-md-8 col-12">
                               <input
+                                required
                                 type="text"
                                 className="form-control"
                                 placeholder=" পাশের বিভাগ"
@@ -183,13 +193,14 @@ const TeacherStaff = () => {
                         <div className="col-lg-4 col-md-4 col-12">
                           <div className="row mb-3">
                             <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                              আইডিঃ
+                              নাম
                             </label>
                             <div className="col-lg-10 col-md-10 col-12">
                               <input
+                                required
                                 type="text"
                                 className="form-control"
-                                placeholder="আইডি"
+                                placeholder="নাম"
                                 {...register("employee_id")}
                               />
                             </div>
@@ -203,10 +214,11 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-8 col-md-8 col-12">
                               <input
+                                required
                                 type="date"
                                 className="form-control"
                                 placeholder=" জেলা"
-                                {...register("jela")}
+                                {...register("dob")}
                               />
                             </div>
                           </div>
@@ -219,6 +231,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-8 col-md-8 col-12">
                               <input
+                                required
                                 type="date"
                                 className="form-control"
                                 placeholder=" পাশের বিভাগ"
@@ -239,6 +252,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-10 col-md-10 col-12">
                               <input
+                                required
                                 type="text"
                                 className="form-control"
                                 placeholder="পিতা"
@@ -255,6 +269,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-8 col-md-8 col-12">
                               <input
+                                required
                                 type="text"
                                 className="form-control"
                                 placeholder=" রেজিস্টশন নাম্বার"
@@ -271,6 +286,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-8 col-md-8 col-12">
                               <textarea
+                                required
                                 className="form-control"
                                 rows="1"
                                 placeholder=" অভিজ্ঞতা"
@@ -290,6 +306,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-10 col-md-10 col-12">
                               <input
+                                required
                                 type="text"
                                 className="form-control"
                                 placeholder="মাতা"
@@ -314,6 +331,22 @@ const TeacherStaff = () => {
                             </div>
                           </div>
                         </div>
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              মোবাইল নাম্বার
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <textarea
+                                className="form-control"
+                                rows="1"
+                                placeholder="মোবাইল নাম্বার"
+                                {...register("phn_no")}
+                              ></textarea>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div className="col-12">
@@ -325,6 +358,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-10 col-md-10 col-12">
                               <input
+                                required
                                 type="text"
                                 className="form-control"
                                 placeholder="গ্রাম"
@@ -340,6 +374,7 @@ const TeacherStaff = () => {
                             </label>
                             <div className="col-lg-8 col-md-8 col-12">
                               <input
+                                required
                                 type="text"
                                 className="form-control"
                                 placeholder="ডাক"
@@ -396,25 +431,27 @@ const TeacherStaff = () => {
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>২০২২</td>
-                              <td>৫০০.০০</td>
-                              <td>৬০০.০০</td>
-                              <td>০০.০০</td>
-                              <td>০০.০০</td>
-                              <td>০০.০০</td>
-                              <td>০০.০০</td>
-                              <td>
-                                <span className="action-edit">
-                                  <i className="bi bi-pencil-square"></i>
-                                </span>
-                              </td>
-                              <td>
-                                <span className="action-delete">
-                                  <i className="bi bi-trash3"></i>
-                                </span>
-                              </td>
-                            </tr>
+                            {data?.data.map((item) => (
+                              <tr>
+                                <td>{item.id}</td>
+                                <td>{item.employee_id}</td>
+                                <td>{item.graam}</td>
+                                <td>{item.daak}</td>
+                                <td>{item.thana}</td>
+                                <td>{item.position}</td>
+                                <td>{item.phn_no}</td>
+                                <td>
+                                  <span className="action-edit">
+                                    <i className="bi bi-pencil-square"></i>
+                                  </span>
+                                </td>
+                                <td>
+                                  <span className="action-delete">
+                                    <i className="bi bi-trash3"></i>
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
                         </table>
                       </div>

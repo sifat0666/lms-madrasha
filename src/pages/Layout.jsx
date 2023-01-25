@@ -152,7 +152,7 @@ const Layout = ({ children }) => {
                                   <p class="dropdown-item">হিসাব নিকাশ</p>
                                 </Link>
                               </li>
-                              <li>
+                              {/* <li>
                                 <Link to="/income-expence-entry">
                                   {" "}
                                   <a
@@ -162,7 +162,7 @@ const Layout = ({ children }) => {
                                     আয়-ব্যয় এন্ট্রি
                                   </a>
                                 </Link>
-                              </li>
+                              </li> */}
                               <li>
                                 <Link to="/income-entry">
                                   <p
@@ -186,11 +186,16 @@ const Layout = ({ children }) => {
                                 </Link>
                               </li>
                               <li>
-                                <Link to="fees-determination">
-                                  <p
-                                    class="dropdown-item menu-item"
-                                    // href="./pages/fees-determination.html"
-                                  >
+                                <Link to="/fee-name">
+                                  <p class="dropdown-item menu-item">
+                                    <span>ফি এর নাম এন্ট্রি</span>
+                                    <span>CTRL+N</span>
+                                  </p>
+                                </Link>
+                              </li>
+                              <li>
+                                <Link to="/fees-determination">
+                                  <p class="dropdown-item menu-item">
                                     <span>ফি নির্ধারণ</span>
                                     <span>CTRL+N</span>
                                   </p>
@@ -203,7 +208,11 @@ const Layout = ({ children }) => {
                                 </a>
                               </li>
                               <li>
-                                <a class="dropdown-item menu-item" href="#">
+                                <a
+                                  style={{ textDecoration: "none" }}
+                                  class="dropdown-item menu-item"
+                                  href="#"
+                                >
                                   <span>মাসিক ফি সেটিংস</span>
                                   <span>CTRL+C</span>
                                 </a>
@@ -217,14 +226,7 @@ const Layout = ({ children }) => {
                                     <span>মাসিক ফির রিপোর্ট</span>
                                   </p>
                                 </Link>
-                                <Link to="/khabar-fee-report">
-                                  <p
-                                    class="dropdown-item menu-item"
-                                    // href="./pages/report.html"
-                                  >
-                                    <span>খাবারের ফির রিপোর্ট</span>
-                                  </p>
-                                </Link>
+
                                 <Link to="/accounting/monthly-fees">
                                   <p
                                     class="dropdown-item menu-item"
@@ -284,6 +286,26 @@ const Layout = ({ children }) => {
                                 </Link>
                               </li>
                               <li>
+                                <Link to="/bokeya-vorti-fee">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/students-info.html"
+                                  >
+                                    বকেয়া ভর্তি ফি
+                                  </a>
+                                </Link>
+                              </li>{" "}
+                              <li>
+                                <Link to="/vorti-fee">
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/students-info.html"
+                                  >
+                                    ভর্তি ফি
+                                  </a>
+                                </Link>
+                              </li>
+                              <li>
                                 <Link to="/class-migration">
                                   <a
                                     class="dropdown-item"
@@ -293,7 +315,7 @@ const Layout = ({ children }) => {
                                   </a>
                                 </Link>
                               </li>
-                              <li>
+                              {/* <li>
                                 <Link to="student-idcard">
                                   <a
                                     class="dropdown-item"
@@ -302,7 +324,7 @@ const Layout = ({ children }) => {
                                     আলাদা আইডি কার্ড গেইট পাস ও ছুটি
                                   </a>
                                 </Link>
-                              </li>
+                              </li> */}
                               <li>
                                 <Link to="/student-attandence">
                                   {" "}
@@ -367,7 +389,7 @@ const Layout = ({ children }) => {
                                   </a>
                                 </Link>
                               </li>
-                              <li>
+                              {/* <li>
                                 <Link to="/hishab-nikash">
                                   <a class="dropdown-item">
                                     পরীক্ষার আয় ব্যায়
@@ -383,7 +405,7 @@ const Layout = ({ children }) => {
                                     আলাদা প্রবেশপত্র
                                   </a>
                                 </Link>
-                              </li>
+                              </li> */}
                               <li>
                                 <Link to="exam-report">
                                   <a
@@ -644,7 +666,11 @@ const Layout = ({ children }) => {
                   )}
                   <li class="user-menu-item">
                     <i class="bi bi-gear-fill"></i>
-                    <a href="">সেটিংস</a>
+                    <Link to="/settings">
+                      <a style={{ textDecoration: "none" }} href="">
+                        সেটিংস
+                      </a>
+                    </Link>
                   </li>{" "}
                   <li class="user-menu-item">
                     <i class="bi bi-info-circle-fill"></i>
@@ -693,7 +719,7 @@ const Layout = ({ children }) => {
                       </a>
                     </li>
                     <li class="dropdown-item">
-                      <a href="">
+                      <a style={{ textDecoration: "none" }} href="">
                         <i class="bi bi-gear-fill"></i>
                         সেটিংস
                       </a>
@@ -705,17 +731,15 @@ const Layout = ({ children }) => {
                       </a>
                     </li>
                     <li class="dropdown-item">
-                      <div
+                      <button
                         onClick={() => {
-                          localStorage.clear();
-                          // window.location.reload();
-                          // toast.success("logged out");
-                          navigate("/");
+                          // navigate("/");
+                          localStorage.clear("token");
                         }}
                       >
                         <i class="bi bi-box-arrow-in-right"></i>
                         লগ আউট
-                      </div>
+                      </button>
                     </li>
                   </ul>
                 </li>

@@ -73,6 +73,11 @@ const ResultCondition = () => {
     passMark.mutate({ ...value, subject_a: "empty" });
   };
 
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/division-entry/${id}`);
+    location.reload();
+  };
+
   return (
     <div>
       <section className="user-form-section">
@@ -679,7 +684,10 @@ const ResultCondition = () => {
                                         </span>
                                       </td>
                                       <td>
-                                        <span className="action-delete">
+                                        <span
+                                          onClick={() => onDelete(item.id)}
+                                          className="action-delete"
+                                        >
                                           <i className="bi bi-trash3"></i>
                                         </span>
                                       </td>

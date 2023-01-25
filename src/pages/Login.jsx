@@ -17,11 +17,12 @@ const Login = () => {
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);
-      toast.error(error.response.data.message);
+      console.log(error.response.data.message);
+      toast.error("Invalid email or password");
     },
     onSuccess: (data) => {
       const token = data.data.data.token;
-      console.log(token);
+      // console.log(token);
       localStorage.setItem("token", token);
       navigate("/dashboard");
       // console.log("first");
@@ -68,14 +69,12 @@ const Login = () => {
                         <div class="row">
                           <div class="col-12">
                             <div class="row form-group mb-1">
-                              <label class="col-12 col-form-label">
-                                ইউজার নেমঃ
-                              </label>
+                              <label class="col-12 col-form-label">ইমেইল</label>
                               <div class="col-12 col-sm-12">
                                 <input
                                   class="form-control"
                                   type="text"
-                                  placeholder="ইউজার নেম"
+                                  placeholder="ইমেইল"
                                   {...register("email")}
                                 />
                               </div>

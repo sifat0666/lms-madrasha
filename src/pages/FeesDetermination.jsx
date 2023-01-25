@@ -33,7 +33,13 @@ const FeesDetermination = () => {
 
   const { register, handleSubmit } = useForm();
   const onSubmit = async (value) => {
-    mutation.mutate(value);
+    mutation.mutate({ ...value, fee_type: "empty" });
+  };
+
+  const onDelete = async (id) => {
+    const data = await axios.delete(
+      `${serverUrl}/api/fees-determination/${id}`
+    );
   };
 
   // const options2 = academicYear?.data.map(item => [{`${item.academic_year}`: `${item.academic_year}`},])
@@ -59,10 +65,11 @@ const FeesDetermination = () => {
                             className="form-select"
                             size="4"
                             style={{ border: "none" }}
-                            {...register("fee_type")}
+                            {...register("fee_name")}
                           >
-                            <option value="admission_fee"> ভর্তি ফি</option>
-                            <option value="monthly_fee"> মাসিক ফি</option>
+                            <option> ভর্তি ফি</option>
+                            <option> মাসিক ফি</option>
+                            <option> খাবারের ফি</option>
                           </select>
                         </div>
                         <div className="row mb-3">
@@ -110,19 +117,7 @@ const FeesDetermination = () => {
                             </select>
                           </div>
                         </div>
-                        <div className="row mb-3">
-                          <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
-                            ফি এর নামঃ
-                          </label>
-                          <div className="col-12 col-md-12 col-lg-8">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="ফি এর নাম"
-                              {...register("fee_name")}
-                            />
-                          </div>
-                        </div>
+
                         {/* <!--Card Section--> */}
                         <div className="group-card-container">
                           <div className="row">
@@ -326,7 +321,10 @@ const FeesDetermination = () => {
                                   </span>
                                 </td>
                                 <td>
-                                  <span className="action-delete">
+                                  <span
+                                    onClick={(id) => onDelete(item.id)}
+                                    className="action-delete"
+                                  >
                                     <i className="bi bi-trash3"></i>
                                   </span>
                                 </td>

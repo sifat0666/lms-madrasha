@@ -37,6 +37,10 @@ const ExamEntry = () => {
     console.log(value);
     mutation.mutate(value);
   };
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/exam-entry/${id}`);
+    location.reload();
+  };
 
   return (
     <div>
@@ -277,7 +281,10 @@ const ExamEntry = () => {
                                 </span>
                               </td>
                               <td>
-                                <span className="action-delete">
+                                <span
+                                  onClick={(id) => onDelete(item.id)}
+                                  className="action-delete"
+                                >
                                   <i className="bi bi-trash3"></i>
                                 </span>
                               </td>

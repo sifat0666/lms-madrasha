@@ -1,11 +1,35 @@
 import axios from "axios";
 import React from "react";
+import { useRef } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
-import { serverUrl } from "../../utils/config";
+import ReactToPrint from "react-to-print";
+import { msg, sendSms, serverUrl } from "../../utils/config";
+// import { currentDate } from "./../../utils";
+
+const date = new Date();
+
+let day = date.getDate();
+let month = date.getMonth() + 1;
+let year = date.getFullYear();
+
+// This arrangement can be altered based on how we want the date's format to appear.
+let currentDate = `${day}-${month}-${year}`;
 
 const MonthlyFees = () => {
+  const ref = useRef();
+
+  const [studentId, setStudentId] = useState();
+  const [student, setStudent] = useState();
+  const [feeName, setFeeName] = useState();
+  const [fees, setFees] = useState();
+  const [feesList, setFeesList] = useState();
+  console.log("student", student);
+
+  const [monthName, setMonthName] = useState();
+
   const { data: marhalaClass } = useQuery("marhalaclass", () =>
     fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
   );
@@ -15,7 +39,6 @@ const MonthlyFees = () => {
   const { data: months } = useQuery("months", () =>
     fetch(`${serverUrl}/api/month-entry`).then((res) => res.json())
   );
-  const { data: user } = useQuery("me");
   const { data: monthlyFee } = useQuery("monthlyFee", () =>
     fetch(`${serverUrl}/api/monthly-fee`).then((res) => res.json())
   );
@@ -28,14 +51,24 @@ const MonthlyFees = () => {
       return axios.post(`${serverUrl}/api/month-entry`, data);
     },
     onError: (error, variable, context) => {
-      // console.log(error.response.data.message);
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
       console.log("userdata", data.data);
       toast.success("success");
-      // setStudent(data.data);
-      // window.location.reload(true);
+    },
+  });
+
+  const Fee = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/customfeecall`, data);
+    },
+    onError: (error) => {
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log("fee", data?.data);
+      setFees(data?.data);
     },
   });
 
@@ -44,106 +77,330 @@ const MonthlyFees = () => {
       return axios.post(`${serverUrl}/api/monthly-fee`, data);
     },
     onError: (error, variable, context) => {
-      // console.log(error.response.data.message);
       toast.error("every field is required");
     },
     onSuccess: (data) => {
-      // console.log("userdata", data.data);
       toast.success("success");
-      // setStudent(data.data);
-      // window.location.reload(true);
+      console.log("monthly fee", data?.data);
+      if (data?.data.fee_name === "মাসিক ফি") {
+        if (msg.mashik) {
+          sendSms(
+            student?.phn_no,
+            `${student?.student_name} জমা দিয়েছে ${data?.data.submitted_fee} টাকা ${data?.data.month} এর মাসিক ফী `
+          );
+        }
+      }
+      if (data?.data.fee_name === "খাবারের ফি") {
+        if (msg.khabar) {
+          sendSms(
+            student?.phn_no,
+            `${student?.student_name} জমা দিয়েছে ${data?.data.submitted_fee} টাকা ${data?.data.month} এর খাবার ফী `
+          );
+        }
+      }
     },
   });
 
-  const foodFeeMutaion = useMutation({
+  const getMonthlyFeeById = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/food-fee`, data);
+      return axios.post(`${serverUrl}/api/filter-student-by-fee`, data);
     },
     onError: (error, variable, context) => {
-      // console.log(error.response.data.message);
-      toast.error("every field is required");
+      // toast.error("every field is required");
     },
     onSuccess: (data) => {
-      // console.log("userdata", data.data);
-      toast.success("success");
-      // setStudent(data.data);
-      // window.location.reload(true);
+      // toast.success("success");
+      setFeesList(data?.data);
     },
   });
+
+  const { data: me, isLoading } = useQuery(["me"]);
+
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/monthly-fee/${id}`);
+    location.reload();
+  };
+
+  // console.log("student", me?.data);
+
+  // console.log("first", fees);
+
+  const onStudentSearch = async () => {
+    const data = await axios.get(`${serverUrl}/api/student/${studentId}`);
+    getMonthlyFeeById.mutate({ student_id: studentId });
+
+    setStudent(data?.data);
+
+    const value = data?.data;
+
+    const state = `${value.gender}_${value.abashik_onabashik}_${value.notun_puraton}`;
+    console.log("state", state);
+    const params = {
+      state: state,
+    };
+    params.academic_year = data?.data.session;
+    params.class_name = data?.data.class;
+    console.log("params", params);
+    Fee.mutate({ ...params, fee_name: feeName });
+  };
+
+  console.log(feeName);
+
   const { register, handleSubmit } = useForm();
-  const { register: register2, handleSubmit: handleSubmit2 } = useForm();
-  const { register: register3, handleSubmit: handleSubmit3 } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
     mutation.mutate(data);
   };
-  const onSubmit2 = (data) => {
-    console.log(data);
-    monthlyFeeMutation.mutate({ ...data, receiver: user?.data.name });
-    // mutation.mutate(data);
-  };
-  const onSubmit3 = (data) => {
-    console.log(data);
 
-    foodFeeMutaion.mutate({ ...data, receiver: user?.data.name });
-    // mutation.mutate(data);
+  const { register: FeeRegister, handleSubmit: feeHandleSubmit } = useForm();
+
+  const [feeVal, setFeeVal] = useState();
+
+  const onFeeSubmit = (data) => {
+    setFeeVal(data);
+    console.log("onfeesubmit", data);
+    const params = {
+      ...data,
+      receiver: me?.data.name,
+      student_id: studentId,
+      fee_name: feeName,
+      submit_date: currentDate,
+      student_name: student?.student_name,
+      determined_fee: fees,
+      class: student?.class,
+    };
+    console.log(params);
+    monthlyFeeMutation.mutate(params);
   };
 
   return (
     <div>
-      <section className="user-form-section d-print-none">
-        <div className="section-bg">
-          <div className="row">
-            <div className="col-md-12 w-100">
-              <div className="main-container">
-                <div className="row">
-                  <div className="col-lg-6 col-md-12 col-12">
-                    <div className="section-title">
+      <section class="user-form-section d-print-none">
+        <div class="section-bg">
+          <div class="row">
+            <div class="col-md-12 w-100">
+              <div class="main-container">
+                <div class="row">
+                  <div class="col-lg-7 col-md-12 col-12">
+                    <div class="section-title">
                       <h4>মাসিক ফি গ্রহণ</h4>
                     </div>
-                    <div className="my-4">
-                      <form
-                        onSubmit={handleSubmit2(onSubmit2)}
-                        className="accounts-form"
+                    <div class="my-4">
+                      <div
+                        className="row"
+                        style={{ display: "flex", alignItems: "center" }}
                       >
-                        <div className="row">
-                          {/* <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                        {" "}
+                        <div class="col-md-4 col-lg-4 col-12">
+                          <div class="row mb-3">
+                            <label class="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                              আইডি
+                            </label>
+                            <div class="col-lg-6 col-md-6 col-12">
+                              <input
+                                onChange={(e) => setStudentId(e.target.value)}
+                                type="text"
+                                class="form-control"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-12">
+                          <select
+                            class="form-select form-select-sm mx-auto m-3"
+                            // {...register("old_new")}
+                            onChange={(e) => setFeeName(e.target.value)}
+                          >
+                            {/* <option disabled>নতুন/পুরাতনঃ</option> */}
+                            <option selected disabled>
+                              ফি সিলেক্ট করুন
+                            </option>
+                            <option>মাসিক ফি</option>
+                            <option>খাবারের ফি</option>
+                          </select>
+                        </div>
+                        <div class="col-md-4 col-lg-4 col-12">
+                          <div class="row mb-3">
+                            <button
+                              onClick={onStudentSearch}
+                              className="custom-btn btn-primary"
+                            >
+                              Find
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <form
+                        onSubmit={feeHandleSubmit(onFeeSubmit)}
+                        class="accounts-form"
+                      >
+                        <div class="row">
+                          <div class="col-md-4 col-lg-4 col-12">
+                            <div class="row mb-3">
+                              <label class="col-lg-6 col-md-6 col-12 col-form-label info-lable">
                                 অর্ডার নং
                                 <i>*</i>
                               </label>
-                              <div className="col-lg-6 col-md-6 col-12">
-                                <input required type="text" className="form-control" />
+                              <div class="col-lg-6 col-md-6 col-12">
+                                <input
+                                  value={
+                                    feesList
+                                      ? feesList[feesList?.length]?.id
+                                      : "disabled"
+                                  }
+                                  {...FeeRegister("order_no")}
+                                  type="text"
+                                  class="form-control"
+                                />
                               </div>
                             </div>
-                          </div> */}
-                          {/* <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                          </div>
+                          <div class="col-md-4 col-lg-4 col-12">
+                            <div class="row mb-3">
+                              <label class="col-lg-2 col-md-2 col-12 col-form-label info-lable">
                                 নামঃ
                               </label>
-                              <div className="col-lg-10 col-md-10 col-12">
-                                <input required
+                              <div class="col-lg-10 col-md-10 col-12">
+                                <input
+                                  value={student?.student_name}
+                                  // {...FeeRegister("student_name")}
                                   type="text"
-                                  className="form-control"
+                                  class="form-control"
                                   placeholder="নাম"
                                 />
                               </div>
                             </div>
-                          </div> */}
-                          <div className="row mt-3">
-                            <div className="col-12">
-                              <div className="filter-menu">
-                                <select
-                                  className="form-select"
-                                  size="4"
-                                  style={{ border: "none" }}
-                                  {...register2("month")}
-                                >
-                                  <option disabled>মাস নির্বাচন করুন</option>
-                                  {/* {academicYear?.data.map((item) => (
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-12">
+                            <div class="row mb-3">
+                              <label class="col-lg-6 col-md-6 col-12 col-form-label info-lable">
+                                শিক্ষার্থী অবস্থা
+                              </label>
+                              <div class="col-lg-6 col-md-6 col-12">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  value="সক্রিয়"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4 col-lg-4 col-12">
+                            <div class="row mb-3">
+                              <label class="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                                পিতা
+                              </label>
+                              <div class="col-lg-10 col-md-10 col-12">
+                                <input
+                                  value={student?.father_name}
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="পিতার নাম"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4 col-lg-4 col-12">
+                            <div class="row mb-3">
+                              <label class="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                                শ্রেণী
+                              </label>
+                              <div class="col-lg-10 col-md-10 col-12">
+                                <input
+                                  value={student?.class}
+                                  // {...FeeRegister("class")}
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="জামাত"
+                                  readonly
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-lg-4 col-12">
+                            <div class="row mb-3">
+                              <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                                মোবাইল
+                              </label>
+                              <div class="col-lg-8 col-md-8 col-12">
+                                <input
+                                  value={student?.phn_no}
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="মোবাইল"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4 col-lg-4 col-12">
+                            <div class="row mb-3">
+                              <label class="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                                নির্ধারিত ফি
+                              </label>
+                              <div class="col-lg-10 col-md-10 col-12">
+                                <input
+                                  value={fees}
+                                  // {...FeeRegister("determined_fee")}
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="নির্ধারিত ফি
+                                  "
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4 col-lg-4 col-12">
+                            <div class="row mb-3">
+                              <label class="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                                কর্তন
+                              </label>
+                              <div class="col-lg-10 col-md-10 col-12">
+                                <input
+                                  {...FeeRegister("discount")}
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="কর্তন
+                                  "
+                                  readonly
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-4 col-lg-4 col-12">
+                            <div class="row mb-3">
+                              <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                                জমা
+                              </label>
+                              <div class="col-lg-8 col-md-8 col-12">
+                                <input
+                                  {...FeeRegister("submitted_fee")}
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="জমা"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row mt-3">
+                          <div className="col-12">
+                            <div className="filter-menu">
+                              <select
+                                className="form-select"
+                                size="4"
+                                // style={{ border: "none" }}
+                                {...FeeRegister("month")}
+                                onChange={(e) => setMonthName(e.target.value)}
+                                // {...register2("month")}
+                              >
+                                <option disabled>মাস নির্বাচন করুন</option>
+                                {/* {academicYear?.data.map((item) => (
                                     <option
                                       key={item.id}
                                       // onClick={() => setClasss(item.academicYear)}
@@ -151,292 +408,158 @@ const MonthlyFees = () => {
                                       {item.academic_year}
                                     </option>
                                   ))} */}
-                                  <option>{months?.data[0].m1}</option>
-                                  <option>{months?.data[0].m2}</option>
-                                  <option>{months?.data[0].m3}</option>
-                                  <option>{months?.data[0].m4}</option>
-                                  <option>{months?.data[0].m5}</option>
-                                  <option>{months?.data[0].m6}</option>
-                                  <option>{months?.data[0].m7}</option>
-                                  <option>{months?.data[0].m8}</option>
-                                  <option>{months?.data[0].m9}</option>
-                                  <option>{months?.data[0].m10}</option>
-                                  <option>{months?.data[0].m11}</option>
-                                  <option>{months?.data[0].m12}</option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row mt-3">
-                            <div className="col-12">
-                              <div className="filter-menu">
-                                <select
-                                  className="form-select"
-                                  size="4"
-                                  style={{ border: "none" }}
-                                  {...register("session")}
-                                >
-                                  <option disabled>সাল নির্বাচন করুন</option>
-                                  {academicYear?.data.map((item) => (
-                                    <option
-                                      key={item.id}
-                                      // onClick={() => setClasss(item.academicYear)}
-                                      {...register2("session")}
-                                    >
-                                      {item.academic_year}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row mt-3">
-                            <div className="col-12">
-                              <div className="filter-menu">
-                                <select
-                                  className="form-select"
-                                  size="4"
-                                  style={{ border: "none" }}
-                                  {...register2("class")}
-                                >
-                                  <option disabled>শ্রেণী নির্বাচন করুন</option>
-                                  {marhalaClass?.data.map((item) => (
-                                    <option
-                                      key={item.id}
-                                      // onClick={() => setClasss(item.academicYear)}
-                                    >
-                                      {item.class_name}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
+                                <option>{months?.data[0]?.m1}</option>
+                                <option>{months?.data[0]?.m2}</option>
+                                <option>{months?.data[0]?.m3}</option>
+                                <option>{months?.data[0]?.m4}</option>
+                                <option>{months?.data[0]?.m5}</option>
+                                <option>{months?.data[0]?.m6}</option>
+                                <option>{months?.data[0]?.m7}</option>
+                                <option>{months?.data[0]?.m8}</option>
+                                <option>{months?.data[0]?.m9}</option>
+                                <option>{months?.data[0]?.m10}</option>
+                                <option>{months?.data[0]?.m11}</option>
+                                <option>{months?.data[0]?.m12}</option>
+                              </select>
                             </div>
                           </div>
                         </div>
-                        <div className="row">
-                          <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
-                                আইডি
-                              </label>
-                              <div className="col-lg-6 col-md-6 col-12">
-                                <input
-                                  required
-                                  {...register2("student_id")}
-                                  type="text"
-                                  className="form-control"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                তারিখ
-                              </label>
-                              <div className="col-lg-10 col-md-10 col-12">
-                                <input
-                                  required
-                                  {...register2("date")}
-                                  type="date"
-                                  className="form-control"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          {/* <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                শ্রেণী
-                              </label>
-                              <div className="col-lg-10 col-md-10 col-12">
-                                <input required
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="জামাত"
-                                  readonly
-                                />
-                              </div>
-                            </div>
-                          </div> */}
-                        </div>
-                        <div className="col-md-4 col-lg-4 col-12">
-                          <div className="row mb-3">
-                            <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
-                              ফি
-                            </label>
-                            <div className="col-lg-6 col-md-6 col-12">
-                              <input
-                                required
-                                {...register2("fee")}
-                                type="text"
-                                className="form-control"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <button
-                            type="submit"
-                            className="custom-btn btn-primary"
-                          >
-                            Save
-                          </button>
-                          <button type="reset" className="custom-btn btn-info">
-                            reset
-                          </button>
-                        </div>
-                        {/* <div className="row">
-                          <div className="col-lg-4 col-md-4 offset-md-4 offset-0">
-                            <div className="row mb-3">
-                              <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                                মোবাইল
-                              </label>
-                              <div className="col-lg-8 col-md-8 col-12">
-                                <input required
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="মোবাইল"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
-                                শিক্ষার্থী অবস্থা
-                              </label>
-                              <div className="col-lg-6 col-md-6 col-12">
-                                <input required
-                                  type="text"
-                                  className="form-control"
-                                  value="সক্রিয়"
-                                  readonly
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div> */}
+                        <button
+                          // onClick={onStudentSearch}
+                          className="custom-btn btn-primary m-3"
+                        >
+                          Submit
+                        </button>
+                        <ReactToPrint
+                          trigger={() => (
+                            <button
+                              className="custom-btn btn-primary"
+                              type="button"
+                            >
+                              Print
+                            </button>
+                          )}
+                          content={() => ref.current}
+                        />
                       </form>
                     </div>
-                    {/* <div className="my-4">
-                      <div className="row">
-                        <div className="col-12">
+                    <div class="my-4">
+                      <div class="row">
+                        <div class="col-12">
                           <div
-                            className="table-responsive accounts-table"
+                            class="table-responsive accounts-table"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              className="table  bg-white text-center mb-0"
+                              class="table  bg-white text-center mb-0"
                             >
-                              <thead className="text-center accounts-table-head">
+                              <thead class="text-center accounts-table-head">
                                 <tr>
                                   <th>
-                                    <span className="action-edit">
-                                      <i className="bi bi-pencil-square"></i>
+                                    <span class="action-edit">
+                                      <i class="bi bi-pencil-square"></i>
                                     </span>
                                   </th>
                                   <th>
-                                    <span className="action-delete">
-                                      <i className="bi bi-trash3"></i>
+                                    <span class="action-delete">
+                                      <i class="bi bi-trash3"></i>
                                     </span>
                                   </th>
                                   <th>মাস</th>
                                   <th>ফি নাম</th>
+                                  <th>নির্ধারিত</th>
                                   <th>কর্তন</th>
-                                  <th>পূর্ব জমা</th>
-                                  <th>বর্তমান জমা</th>
+                                  <th>জমা</th>
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <td>
-                                    <span className="action-edit">
-                                      <i className="bi bi-pencil-square"></i>
-                                    </span>
-                                  </td>
-                                  <td>
-                                    <span className="action-delete">
-                                      <i className="bi bi-trash3"></i>
-                                    </span>
-                                  </td>
-                                  <td>জুলাই</td>
-                                  <td>ভর্তি ফি</td>
-                                  <td>২০০.০০</td>
-                                  <td>০.০০</td>
-                                  <td>১৫০০.০০</td>
-                                </tr>
+                                {feesList?.map((item) => (
+                                  <tr key={item.id}>
+                                    <td>
+                                      <span class="action-edit">
+                                        <i class="bi bi-pencil-square"></i>
+                                      </span>
+                                    </td>
+                                    <td>
+                                      <span
+                                        onClick={(id) => onDelete(item.id)}
+                                        class="action-delete"
+                                      >
+                                        <i class="bi bi-trash3"></i>
+                                      </span>
+                                    </td>
+                                    <td>{item.month}</td>
+                                    <td>{item.fee_name}</td>
+                                    <td>{item.determined_fee}</td>
+                                    <td>{item.discount}</td>
+                                    <td>{item.submitted_fee}</td>
+                                  </tr>
+                                ))}
                               </tbody>
                             </table>
                           </div>
                         </div>
                       </div>
-                    </div> */}
-                    {/* <div className="my-2">
-                      <div className="row">
-                        <div className="col-12">
-                          <div className="filter-container py-2">
-                            <div className="row">
-                              <div className="col-lg-4 col-md-4 col-12">
-                                <div className="row">
-                                  <label className="col-lg-3 col-md-3 col-12 d-lg-block d-none col-form-label info-lable">
-                                    <i className="bi bi-search text-white"></i>
+                    </div>
+                    {/* <div class="my-2">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="filter-container py-2">
+                            <div class="row">
+                              <div class="col-lg-4 col-md-4 col-12">
+                                <div class="row">
+                                  <label class="col-lg-3 col-md-3 col-12 d-lg-block d-none col-form-label info-lable">
+                                    <i class="bi bi-search text-white"></i>
                                   </label>
-                                  <div className="col-lg-9 col-md-9 col-12">
-                                    <input required
-                                      type="date"
-                                      className="form-control"
-                                    />
+                                  <div class="col-lg-9 col-md-9 col-12">
+                                    <input type="date" class="form-control" />
                                   </div>
                                 </div>
                               </div>
-                              <div className="col-lg-4 col-md-4 col-12 mt-2 mt-md-0">
-                                <div className="row">
-                                  <div className="col-8 d-flex align-items-center justify-content-between">
-                                    <div className="form-check">
-                                      <input required
-                                        className="form-check-input"
+                              <div class="col-lg-4 col-md-4 col-12 mt-2 mt-md-0">
+                                <div class="row">
+                                  <div class="col-8 d-flex align-items-center justify-content-between">
+                                    <div class="form-check">
+                                      <input
+                                        class="form-check-input"
                                         type="radio"
                                         name="options"
                                       />
                                       <label
-                                        className="form-check-label"
+                                        class="form-check-label"
                                         for="options"
                                       >
                                         আইডি
                                       </label>
                                     </div>
-                                    <div className="form-check">
-                                      <input required
-                                        className="form-check-input"
+                                    <div class="form-check">
+                                      <input
+                                        class="form-check-input"
                                         type="radio"
                                         name="options"
                                       />
                                       <label
-                                        className="form-check-label"
+                                        class="form-check-label"
                                         for="options"
                                       >
                                         অর্ডার নং
                                       </label>
                                     </div>
                                   </div>
-                                  <div className="col-4">
-                                    <input required
-                                      type="text"
-                                      className="form-control"
-                                    />
+                                  <div class="col-4">
+                                    <input type="text" class="form-control" />
                                   </div>
                                 </div>
                               </div>
-                              <div className="col-lg-4 col-md-4 col-12">
-                                <div className="row">
-                                  <label className="col-lg-9 col-md-9 col-8 col-form-label info-lable">
+                              <div class="col-lg-4 col-md-4 col-12">
+                                <div class="row">
+                                  <label class="col-lg-9 col-md-9 col-8 col-form-label info-lable">
                                     আজকের গ্রহন: ২৭০০
                                   </label>
-                                  <div className="col-3 d-flex align-items-center">
+                                  <div class="col-3 d-flex align-items-center">
                                     <i
-                                      className="bi bi-gear-fill"
+                                      class="bi bi-gear-fill"
                                       style={{ cursor: "pointer" }}
                                     ></i>
                                   </div>
@@ -447,423 +570,349 @@ const MonthlyFees = () => {
                         </div>
                       </div>
                     </div> */}
-                    <div className="my-2">
-                      <div className="row">
-                        <div className="col-12">
-                          <li className="others-nav-title my-1">
-                            <i className="bi bi-arrow-down-square"></i>
-                            <a href="#" className="others-nav-link px-1">
-                              মাসিক ফি
-                            </a>
-                          </li>
+                    {/* <div class="my-2">
+                      <div class="row">
+                        <div class="col-12">
                           <div
-                            className="table-responsive accounts-table"
+                            class="table-responsive accounts-table"
                             data-pattern="priority-columns"
                           >
                             <table
                               id="tech-companies-1"
-                              className="table  bg-white text-center mb-0"
+                              class="table  bg-white text-center mb-0"
                             >
-                              <thead className="text-center accounts-table-head">
+                              <thead class="text-center accounts-table-head">
                                 <tr>
+                                  <th>
+                                    <span class="action-edit">
+                                      <i class="bi bi-pencil-square"></i>
+                                    </span>
+                                  </th>
+                                  <th>
+                                    <span class="action-delete">
+                                      <i class="bi bi-trash3"></i>
+                                    </span>
+                                  </th>
                                   <th>অর্ডার নং</th>
                                   <th>শিক্ষার্থীর আইডি</th>
+                                  <th>নাম</th>
+                                  <th>পিতার নাম</th>
                                   <th>ফির পরিমান</th>
                                   <th>গ্রহিতা</th>
-                                  <th>Date</th>
                                 </tr>
                               </thead>
                               <tbody>
-                                {monthlyFee?.data.map((item) => (
-                                  <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.student_id}</td>
-                                    <td>{item.fee}</td>
-                                    <td>{item.receiver}</td>
-                                    <td>{item.date}</td>
-                                  </tr>
-                                ))}
+                                <tr>
+                                  <td>
+                                    <span class="action-edit">
+                                      <i class="bi bi-pencil-square"></i>
+                                    </span>
+                                  </td>
+                                  <td>
+                                    <span class="action-delete">
+                                      <i class="bi bi-trash3"></i>
+                                    </span>
+                                  </td>
+                                  <td>৪৩৪৩</td>
+                                  <td>৬৫৬</td>
+                                  <td>আশিকুর রহমান</td>
+                                  <td>আবু বক্কর</td>
+                                  <td>১৫০০.০০</td>
+                                  <td>এডমিন</td>
+                                </tr>
                               </tbody>
                             </table>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="my-2">
-                      <div className="row">
-                        <div className="col-12">
-                          <li className="others-nav-title my-1">
-                            <i className="bi bi-arrow-down-square"></i>
-                            <a href="#" className="others-nav-link px-1">
-                              খাবারের ফি
-                            </a>
-                          </li>
-                          <div
-                            className="table-responsive accounts-table"
-                            data-pattern="priority-columns"
-                          >
-                            <table
-                              id="tech-companies-1"
-                              className="table  bg-white text-center mb-0"
-                            >
-                              <thead className="text-center accounts-table-head">
-                                <tr>
-                                  <th>অর্ডার নং</th>
-                                  <th>শিক্ষার্থীর আইডি</th>
-                                  <th>ফির পরিমান</th>
-                                  <th>গ্রহিতা</th>
-                                  <th>Date</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {foodFee?.data.map((item) => (
-                                  <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.student_id}</td>
-                                    <td>{item.fee}</td>
-                                    <td>{item.receiver}</td>
-                                    <td>{item.date}</td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    </div> */}
                   </div>
-                  <div className="col-lg-6 col-12">
-                    <div className="section-title">
+                  <div class="col-lg-5 col-12">
+                    <div class="section-title">
                       <h4>খাবারের ফি গ্রহণ</h4>
                     </div>
                     {/* <!--Right Site top Table--> */}
-                    <div className="row">
-                      <form
-                        onSubmit={handleSubmit3(onSubmit3)}
-                        className="accounts-form"
-                      >
-                        <div className="row">
-                          {/* <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
-                                অর্ডার নং
-                                <i>*</i>
-                              </label>
-                              <div className="col-lg-6 col-md-6 col-12">
-                                <input required type="text" className="form-control" />
-                              </div>
-                            </div>
-                          </div> */}
-                          {/* <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                নামঃ
-                              </label>
-                              <div className="col-lg-10 col-md-10 col-12">
-                                <input required
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="নাম"
-                                />
-                              </div>
-                            </div>
-                          </div> */}
-                          <div className="row mt-3">
-                            <div className="col-12">
-                              <div className="filter-menu">
-                                <select
-                                  className="form-select"
-                                  size="4"
-                                  style={{ border: "none" }}
-                                  {...register3("month")}
-                                >
-                                  <option disabled>মাস নির্বাচন করুন</option>
-                                  {/* {academicYear?.data.map((item) => (
-                                    <option
-                                      key={item.id}
-                                      // onClick={() => setClasss(item.academicYear)}
-                                    >
-                                      {item.academic_year}
-                                    </option>
-                                  ))} */}
-                                  <option>{months?.data[0].m1}</option>
-                                  <option>{months?.data[0].m2}</option>
-                                  <option>{months?.data[0].m3}</option>
-                                  <option>{months?.data[0].m4}</option>
-                                  <option>{months?.data[0].m5}</option>
-                                  <option>{months?.data[0].m6}</option>
-                                  <option>{months?.data[0].m7}</option>
-                                  <option>{months?.data[0].m8}</option>
-                                  <option>{months?.data[0].m9}</option>
-                                  <option>{months?.data[0].m10}</option>
-                                  <option>{months?.data[0].m11}</option>
-                                  <option>{months?.data[0].m12}</option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row mt-3">
-                            <div className="col-12">
-                              <div className="filter-menu">
-                                <select
-                                  className="form-select"
-                                  size="4"
-                                  style={{ border: "none" }}
-                                  {...register3("session")}
-                                >
-                                  <option disabled>সাল নির্বাচন করুন</option>
-                                  {academicYear?.data.map((item) => (
-                                    <option
-                                      key={item.id}
-                                      // onClick={() => setClasss(item.academicYear)}
-                                    >
-                                      {item.academic_year}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="row mt-3">
-                            <div className="col-12">
-                              <div className="filter-menu">
-                                <select
-                                  className="form-select"
-                                  size="4"
-                                  style={{ border: "none" }}
-                                  {...register3("class")}
-                                >
-                                  <option disabled>শ্রেণী নির্বাচন করুন</option>
-                                  {marhalaClass?.data.map((item) => (
-                                    <option
-                                      key={item.id}
-                                      // onClick={() => setClasss(item.academicYear)}
-                                    >
-                                      {item.class_name}
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
-                                আইডি
-                              </label>
-                              <div className="col-lg-6 col-md-6 col-12">
-                                <input
-                                  required
-                                  {...register3("student_id")}
-                                  type="text"
-                                  className="form-control"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                তারিখ
-                              </label>
-                              <div className="col-lg-10 col-md-10 col-12">
-                                <input
-                                  required
-                                  {...register3("date")}
-                                  type="date"
-                                  className="form-control"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          {/* <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                শ্রেণী
-                              </label>
-                              <div className="col-lg-10 col-md-10 col-12">
-                                <input required
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="জামাত"
-                                  readonly
-                                />
-                              </div>
-                            </div>
-                          </div> */}
-                        </div>
-                        <div className="col-md-4 col-lg-4 col-12">
-                          <div className="row mb-3">
-                            <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
-                              ফি
-                            </label>
-                            <div className="col-lg-6 col-md-6 col-12">
-                              <input
-                                required
-                                {...register3("fee")}
-                                type="text"
-                                className="form-control"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="">
-                          <button
-                            type="submit"
-                            className="custom-btn btn-primary"
-                          >
-                            Save
-                          </button>
-                          <button type="reset" className="custom-btn btn-info">
-                            reset
-                          </button>
-                        </div>
-                        {/* <div className="row">
-                          <div className="col-lg-4 col-md-4 offset-md-4 offset-0">
-                            <div className="row mb-3">
-                              <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                                মোবাইল
-                              </label>
-                              <div className="col-lg-8 col-md-8 col-12">
-                                <input required
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="মোবাইল"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
-                                শিক্ষার্থী অবস্থা
-                              </label>
-                              <div className="col-lg-6 col-md-6 col-12">
-                                <input required
-                                  type="text"
-                                  className="form-control"
-                                  value="সক্রিয়"
-                                  readonly
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div> */}
-                      </form>
-                      <div></div>
-
-                      <div className="col-lg-7 col-md-7 col-12">
-                        <div className="row mt-3">
-                          <div className="col-12">
-                            <div className="row">
-                              {/* <div className="col-6">
-                                <div className="student-image">
-                                  <span className="student-image-title">
+                    <div class="row">
+                      <div class="col-lg-7 col-md-7 col-12">
+                        <div class="row mt-3">
+                          <div class="col-12">
+                            <div class="row">
+                              <div class="col-6">
+                                <div class="student-image">
+                                  <span class="student-image-title">
                                     শিক্ষার্থীর ছবি
                                   </span>
-                             
+                                  <img src={student?.image} />
                                 </div>
-                              </div> */}
-                              {/* <div className="col-6 meal-fee-btn">
-                                <div className="button-group">
-                                  <button className="custom-btn btn-primary">
-                                    Save
-                                  </button>
-                                  <button className="custom-btn btn-danger">
-                                    Print
+                              </div>
+                              <div class="col-6 meal-fee-btn">
+                                <div class="button-group">
+                                  <button class="custom-btn btn-primary">
+                                    Save And Print
                                   </button>
                                 </div>
-                              </div> */}
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <div className="mt-3">
+                        <div class="mt-3">
                           <div
-                            className="table-responsive accounts-table"
+                            class="table-responsive accounts-table"
                             data-pattern="priority-columns"
                           >
-                            {/* <table
+                            <table
                               id="tech-companies-1"
-                              className="table  bg-white text-center mb-0"
+                              class="table  bg-white text-center mb-0"
                             >
-                              <thead className="text-center accounts-table-head">
+                              <thead class="text-center accounts-table-head">
                                 <tr>
                                   <th>মাস</th>
-                                  <th>ফি</th>
-                                  <th>গ্রহন</th>
+                                  <th>নির্ধারিত</th>
+                                  <th>জমা</th>
                                 </tr>
                               </thead>
-                              <tbody>
-                                <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                              </tbody>
-                            </table> */}
+                              {feeName === "মাসিক ফি" ? null : (
+                                <tbody>
+                                  <tr>
+                                    <td>{months?.data[0]?.m1}</td>
+                                    <td>{feeName === "খাবারের ফি" && fees}</td>
+                                    <td>
+                                      {feesList?.map((item) => {
+                                        if (
+                                          item.month === months?.data[0]?.m1 &&
+                                          item.fee_name === feeName
+                                        ) {
+                                          return <p>{item.submitted_fee}</p>;
+                                        }
+                                        return null;
+                                      })}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>{months?.data[0]?.m2}</td>
+                                    <td>{feeName === "খাবারের ফি" && fees}</td>
+                                    <td>
+                                      {" "}
+                                      {feesList?.map((item) => {
+                                        if (
+                                          item.month === months?.data[0]?.m2 &&
+                                          item.fee_name === feeName
+                                        ) {
+                                          return <p>{item.submitted_fee}</p>;
+                                        }
+                                        return null;
+                                      })}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>{months?.data[0]?.m3}</td>
+                                    <td>{feeName === "খাবারের ফি" && fees}</td>
+                                    <td>
+                                      {" "}
+                                      {feesList?.map((item) => {
+                                        if (
+                                          item.month === months?.data[0]?.m3 &&
+                                          item.fee_name === feeName
+                                        ) {
+                                          return <p>{item.submitted_fee}</p>;
+                                        }
+                                        return null;
+                                      })}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>{months?.data[0]?.m4}</td>
+                                    <td>{feeName === "খাবারের ফি" && fees}</td>
+                                    <td>
+                                      {" "}
+                                      {feesList?.map((item) => {
+                                        if (
+                                          item.month === months?.data[0]?.m4 &&
+                                          item.fee_name === feeName
+                                        ) {
+                                          return <p>{item.submitted_fee}</p>;
+                                        }
+                                        return null;
+                                      })}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>{months?.data[0]?.m5}</td>
+                                    <td>{feeName === "খাবারের ফি" && fees}</td>
+                                    <td>
+                                      {" "}
+                                      {feesList?.map((item) => {
+                                        if (
+                                          item.month === months?.data[0]?.m5 &&
+                                          item.fee_name === feeName
+                                        ) {
+                                          return <p>{item.submitted_fee}</p>;
+                                        }
+                                        return null;
+                                      })}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>{months?.data[0]?.m6}</td>
+                                    <td>{feeName === "খাবারের ফি" && fees}</td>
+                                    <td>
+                                      {" "}
+                                      {feesList?.map((item) => {
+                                        if (
+                                          item.month === months?.data[0]?.m6 &&
+                                          item.fee_name === feeName
+                                        ) {
+                                          return <p>{item.submitted_fee}</p>;
+                                        }
+                                        return null;
+                                      })}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>{months?.data[0]?.m7}</td>
+                                    <td>{feeName === "খাবারের ফি" && fees}</td>
+                                    <td>
+                                      {" "}
+                                      {feesList?.map((item) => {
+                                        if (
+                                          item.month === months?.data[0]?.m7 &&
+                                          item.fee_name === feeName
+                                        ) {
+                                          return <p>{item.submitted_fee}</p>;
+                                        }
+                                        return null;
+                                      })}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>{months?.data[0]?.m8}</td>
+                                    <td>{feeName === "খাবারের ফি" && fees}</td>
+                                    <td>
+                                      {" "}
+                                      {feesList?.map((item) => {
+                                        if (
+                                          item.month === months?.data[0]?.m8 &&
+                                          item.fee_name === feeName
+                                        ) {
+                                          return <p>{item.submitted_fee}</p>;
+                                        }
+                                        return null;
+                                      })}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>{months?.data[0]?.m9}</td>
+                                    <td>{feeName === "খাবারের ফি" && fees}</td>
+                                    <td>
+                                      {" "}
+                                      {feesList?.map((item) => {
+                                        if (
+                                          item.month === months?.data[0]?.m9 &&
+                                          item.fee_name === feeName
+                                        ) {
+                                          return <p>{item.submitted_fee}</p>;
+                                        }
+                                        return null;
+                                      })}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>{months?.data[0]?.m10}</td>
+                                    <td>{feeName === "খাবারের ফি" && fees}</td>
+                                    <td>
+                                      {" "}
+                                      {feesList?.map((item) => {
+                                        if (
+                                          item.month === months?.data[0]?.m10 &&
+                                          item.fee_name === feeName
+                                        ) {
+                                          return <p>{item.submitted_fee}</p>;
+                                        }
+                                        return null;
+                                      })}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>{months?.data[0]?.m11}</td>
+                                    <td>{feeName === "খাবারের ফি" && fees}</td>
+                                    <td>
+                                      {" "}
+                                      {feesList?.map((item) => {
+                                        if (
+                                          item.month === months?.data[0]?.m11 &&
+                                          item.fee_name === feeName
+                                        ) {
+                                          return <p>{item.submitted_fee}</p>;
+                                        }
+                                        return null;
+                                      })}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>{months?.data[0]?.m12}</td>
+                                    <td>{feeName === "খাবারের ফি" && fees}</td>
+                                    <td>
+                                      {" "}
+                                      {feesList?.map((item) => {
+                                        if (
+                                          item.month === months?.data[0]?.m12 &&
+                                          item.fee_name === feeName
+                                        ) {
+                                          return <p>{item.submitted_fee}</p>;
+                                        }
+                                        return null;
+                                      })}
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              )}
+                            </table>
                           </div>
                         </div>
                       </div>
-                      <div className="col-lg-5 col-md-5 col-12">
-                        {/* <div className="row">
+                      <div class="col-lg-5 col-md-5 col-12">
+                        <div class="row">
                           <label
-                            className="col-12 col-form-label info-lable"
-                            style={{ textAlign: "right" }}
+                            class="col-12 col-form-label info-lable"
+                            style={{ textAlign: "left" }}
                           >
                             মন্তব্য
                           </label>
-                          <div className="col-12">
+                          <div class="col-12">
                             <textarea
-                              className="form-control"
+                              class="form-control"
                               placeholder="মন্তব্য লিখুন"
                               rows="3"
                             ></textarea>
                           </div>
-                          <div className="col-12 meal-fee">
-                            <div className="button-group">
-                              <a className="custom-btn btn-primary" href="#">
+                          <div class="col-12 meal-fee">
+                            <div class="button-group">
+                              <a class="custom-btn btn-primary" href="#">
                                 Edit
                               </a>
                             </div>
                           </div>
-                        </div> */}
-                        <div className="row">
-                          <div className="col-12 others-menu">
-                            <div className="section-title">
+                        </div>
+                        <div class="row">
+                          <div class="col-12 others-menu">
+                            <div class="section-title">
                               <h4>গুরুত্বপূর্ণ লিংক</h4>
                             </div>
                           </div>
-                          <div className="col-12 others-navigation">
-                            <ul className="navbar-nav">
-                              <li className="others-nav-item">
-                                <i className="bi bi-gear-fill"></i>
-                                <a href="" className="others-nav-link">
+                          <div class="col-12 others-navigation">
+                            <ul class="navbar-nav">
+                              {/* <li class="others-nav-item">
+                                <i class="bi bi-gear-fill"></i>
+                                <a href="" class="others-nav-link">
                                   {" "}
                                   অর্ডার নং সেটিংস
                                 </a>
-                              </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-calendar-month"></i>
+                              </li> */}
+                              <li class="others-nav-item">
+                                <i class="bi bi-calendar-month"></i>
                                 <a
                                   href="#"
-                                  className="others-nav-link"
+                                  class="others-nav-link"
                                   data-bs-toggle="modal"
                                   data-bs-target="#monthname"
                                 >
@@ -871,58 +920,67 @@ const MonthlyFees = () => {
                                   মাসের নাম
                                 </a>
                               </li>
-                              <li className="others-nav-title my-1">
-                                <i className="bi bi-arrow-down-square"></i>
-                                <a href="#" className="others-nav-link px-1">
+                              {/* <li class="others-nav-title my-1">
+                                <i class="bi bi-arrow-down-square"></i>
+                                <a href="#" class="others-nav-link px-1">
                                   মাসিক ফি
                                 </a>
                               </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-cash-coin"></i>
-                                <a href="#" className="others-nav-link">
-                                  {" "}
-                                  ফি নির্ধারণ
-                                </a>
-                              </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-card-checklist"></i>
-                                <a href="#" className="others-nav-link">
+
+                              <li class="others-nav-item">
+                                <i class="bi bi-card-checklist"></i>
+                                <a
+                                  href="#"
+                                  class="others-nav-link"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#talika"
+                                >
                                   {" "}
                                   তালিকা তৈরি
                                 </a>
-                                <li className="others-nav-item">
-                                  <i className="bi bi-arrow-down-up"></i>
-                                  <a href="#" className="others-nav-link">
+                                <li class="others-nav-item">
+                                  <i class="bi bi-arrow-down-up"></i>
+                                  <a
+                                    href="#"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#mealfeeincrase"
+                                    class="others-nav-link"
+                                  >
                                     {" "}
                                     বাড়ানো কমানো
                                   </a>
                                 </li>
                               </li>
-                              <li className="others-nav-title my-1">
-                                <i className="bi bi-arrow-down-square"></i>
-                                <a href="#" className="others-nav-link px-1">
+                              <li class="others-nav-title my-1">
+                                <i class="bi bi-arrow-down-square"></i>
+                                <a href="#" class="others-nav-link px-1">
                                   খাবারের ফি
                                 </a>
-                              </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-cash-coin"></i>
-                                <a href="#" className="others-nav-link">
+                              </li> */}
+                              {/* <li class="others-nav-item">
+                                <i class="bi bi-cash-coin"></i>
+                                <a href="#" class="others-nav-link">
                                   {" "}
                                   ফি নির্ধারণ
                                 </a>
-                              </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-card-checklist"></i>
-                                <a href="#" className="others-nav-link">
+                              </li> */}
+                              {/* <li class="others-nav-item">
+                                <i class="bi bi-card-checklist"></i>
+                                <a
+                                  href="#"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#talika"
+                                  class="others-nav-link"
+                                >
                                   {" "}
                                   তালিকা তৈরি
                                 </a>
                               </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-arrow-down-up"></i>
+                              <li class="others-nav-item">
+                                <i class="bi bi-arrow-down-up"></i>
                                 <a
                                   href="#"
-                                  className="others-nav-link"
+                                  class="others-nav-link"
                                   data-bs-toggle="modal"
                                   data-bs-target="#mealfeeincrase"
                                 >
@@ -930,19 +988,25 @@ const MonthlyFees = () => {
                                   বাড়ানো কমানো
                                 </a>
                               </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-calendar2-day-fill"></i>
+                              <li class="others-nav-item">
+                                <i class="bi bi-calendar2-day-fill"></i>
                                 <a
                                   href="#"
-                                  className="others-nav-link"
+                                  class="others-nav-link"
                                   data-bs-toggle="modal"
                                   data-bs-target="#holiday"
                                 >
                                   {" "}
                                   দিন ও ছুটি
                                 </a>
-                              </li>
+                              </li> */}
                             </ul>
+                            {/* <div class="button-group">
+                              <button class="custom-btn btn-info">Show</button>
+                              <button class="custom-btn btn-primary">
+                                Save
+                              </button>
+                            </div> */}
                           </div>
                         </div>
                       </div>
@@ -950,63 +1014,200 @@ const MonthlyFees = () => {
                     {/* <!--Right Site Top Table End--> */}
                   </div>
                 </div>
-                {/* <div className="row">
-                  <div className="col-12">
-                    <div className="section-title">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="section-title">
                       <h4>মাসিক ফি গ্রহণ</h4>
                     </div>
                   </div>
-                  <div className="my-2">
-                    <div className="row">
-                      <div className="col-12">
+                  <div class="my-2">
+                    <div class="row">
+                      <div class="col-12">
                         <div
-                          className="table-responsive accounts-table"
+                          class="table-responsive accounts-table"
                           data-pattern="priority-columns"
                         >
                           <table
                             id="tech-companies-1"
-                            className="table  bg-white text-center mb-0"
+                            class="table  bg-white text-center mb-0"
                           >
-                            <thead className="text-center accounts-table-head">
+                            <thead class="text-center accounts-table-head">
                               <tr>
-                                <th>শিক্ষাবর্ষ</th>
-                                <th>জানুয়ারী</th>
-                                <th>ফেব্রুয়ারী</th>
-                                <th>মার্চ</th>
-                                <th>এপ্রিল</th>
-                                <th>মে</th>
-                                <th>জুন</th>
-                                <th>জুলাই</th>
-                                <th>আগস্ট</th>
-                                <th>সেপটেম্বর</th>
-                                <th>অক্টোবর</th>
-                                <th>নভেম্বর</th>
-                                <th>ডিসেম্বর</th>
+                                <th>মাস</th>
+                                <th>{months?.data[0]?.m1}</th>
+                                <th>{months?.data[0]?.m2}</th>
+                                <th>{months?.data[0]?.m3}</th>
+                                <th>{months?.data[0]?.m4}</th>
+                                <th>{months?.data[0]?.m5}</th>
+                                <th>{months?.data[0]?.m6}</th>
+                                <th>{months?.data[0]?.m7}</th>
+                                <th>{months?.data[0]?.m8}</th>
+                                <th>{months?.data[0]?.m9}</th>
+                                <th>{months?.data[0]?.m10}</th>
+                                <th>{months?.data[0]?.m11}</th>
+                                <th>{months?.data[0]?.m12}</th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr>
-                                <td>২০২২</td>
-                                <td>৫০০.০০</td>
-                                <td>৬০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                              </tr>
-                            </tbody>
+                            {feeName === "খাবারের ফি" ? null : (
+                              <tbody>
+                                <tr>
+                                  <td>নির্ধারিত</td>
+                                  <td>{feeName === "মাসিক ফি" && fees}</td>
+                                  <td>{feeName === "মাসিক ফি" && fees}</td>
+                                  <td>{feeName === "মাসিক ফি" && fees}</td>
+                                  <td>{feeName === "মাসিক ফি" && fees}</td>
+                                  <td>{feeName === "মাসিক ফি" && fees}</td>
+                                  <td>{feeName === "মাসিক ফি" && fees}</td>
+                                  <td>{feeName === "মাসিক ফি" && fees}</td>
+                                  <td>{feeName === "মাসিক ফি" && fees}</td>
+                                  <td>{feeName === "মাসিক ফি" && fees}</td>
+                                  <td>{feeName === "মাসিক ফি" && fees}</td>
+                                  <td>{feeName === "মাসিক ফি" && fees}</td>
+                                  <td>{feeName === "মাসিক ফি" && fees}</td>
+                                </tr>
+                                <tr>
+                                  <td>জমা</td>
+                                  <td>
+                                    {feesList?.map((item) => {
+                                      if (
+                                        item.month === months?.data[0]?.m1 &&
+                                        item.fee_name === "মাসিক ফি"
+                                      ) {
+                                        return <p>{item.submitted_fee}</p>;
+                                      }
+                                      return null;
+                                    })}
+                                  </td>{" "}
+                                  <td>
+                                    {feesList?.map((item) => {
+                                      if (
+                                        item.month === months?.data[0]?.m2 &&
+                                        item.fee_name === "মাসিক ফি"
+                                      ) {
+                                        return <p>{item.submitted_fee}</p>;
+                                      }
+                                      return null;
+                                    })}
+                                  </td>{" "}
+                                  <td>
+                                    {feesList?.map((item) => {
+                                      if (
+                                        item.month === months?.data[0]?.m3 &&
+                                        item.fee_name === "মাসিক ফি"
+                                      ) {
+                                        return <p>{item.submitted_fee}</p>;
+                                      }
+                                      return null;
+                                    })}
+                                  </td>{" "}
+                                  <td>
+                                    {feesList?.map((item) => {
+                                      if (
+                                        item.month === months?.data[0]?.m4 &&
+                                        item.fee_name === "মাসিক ফি"
+                                      ) {
+                                        return <p>{item.submitted_fee}</p>;
+                                      }
+                                      return null;
+                                    })}
+                                  </td>{" "}
+                                  <td>
+                                    {feesList?.map((item) => {
+                                      if (
+                                        item.month === months?.data[0]?.m5 &&
+                                        item.fee_name === "মাসিক ফি"
+                                      ) {
+                                        return <p>{item.submitted_fee}</p>;
+                                      }
+                                      return null;
+                                    })}
+                                  </td>{" "}
+                                  <td>
+                                    {feesList?.map((item) => {
+                                      if (
+                                        item.month === months?.data[0]?.m6 &&
+                                        item.fee_name === "মাসিক ফি"
+                                      ) {
+                                        return <p>{item.submitted_fee}</p>;
+                                      }
+                                      return null;
+                                    })}
+                                  </td>{" "}
+                                  <td>
+                                    {feesList?.map((item) => {
+                                      if (
+                                        item.month === months?.data[0]?.m7 &&
+                                        item.fee_name === "মাসিক ফি"
+                                      ) {
+                                        return <p>{item.submitted_fee}</p>;
+                                      }
+                                      return null;
+                                    })}
+                                  </td>{" "}
+                                  <td>
+                                    {feesList?.map((item) => {
+                                      if (
+                                        item.month === months?.data[0]?.m8 &&
+                                        item.fee_name === "মাসিক ফি"
+                                      ) {
+                                        return <p>{item.submitted_fee}</p>;
+                                      }
+                                      return null;
+                                    })}
+                                  </td>{" "}
+                                  <td>
+                                    {feesList?.map((item) => {
+                                      if (
+                                        item.month === months?.data[0]?.m9 &&
+                                        item.fee_name === "মাসিক ফি"
+                                      ) {
+                                        return <p>{item.submitted_fee}</p>;
+                                      }
+                                      return null;
+                                    })}
+                                  </td>{" "}
+                                  <td>
+                                    {feesList?.map((item) => {
+                                      if (
+                                        item.month === months?.data[0]?.m10 &&
+                                        item.fee_name === "মাসিক ফি"
+                                      ) {
+                                        return <p>{item.submitted_fee}</p>;
+                                      }
+                                      return null;
+                                    })}
+                                  </td>{" "}
+                                  <td>
+                                    {feesList?.map((item) => {
+                                      if (
+                                        item.month === months?.data[0]?.m11 &&
+                                        item.fee_name === "মাসিক ফি"
+                                      ) {
+                                        return <p>{item.submitted_fee}</p>;
+                                      }
+                                      return null;
+                                    })}
+                                  </td>{" "}
+                                  <td>
+                                    {feesList?.map((item) => {
+                                      if (
+                                        item.month === months?.data[0]?.m12 &&
+                                        item.fee_name === "মাসিক ফি"
+                                      ) {
+                                        return <p>{item.submitted_fee}</p>;
+                                      }
+                                      return null;
+                                    })}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            )}
                           </table>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
@@ -1015,7 +1216,7 @@ const MonthlyFees = () => {
       {/* <!-- হিসাব নিকাশ সেকশন শেষ --> */}
       {/* <!--রির্পোট প্রিন্ট সেকশন--> */}
       {/* <!--Preview Page Section--> */}
-      <div className="preview-page d-print-block  d-none">
+      {/* <div className="preview-page d-print-block  d-none">
         <span className="print-button d-print-none" onclick="window.print()">
           <i className="bi bi-printer-fill"></i>
         </span>
@@ -1134,634 +1335,9 @@ const MonthlyFees = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <!--Modal Section--> */}
-      {/* <!-- Monthly Fees Collection  Modal Start--> */}
-      <div
-        className="modal fade"
-        id="monthly-fee"
-        aria-hidden="true"
-        tabindex="-1"
-      >
-        <div className="modal-dialog modal-xl">
-          <div className="modal-content">
-            <div className="section-title">
-              <h4>মাসিক ফি কালেকশান</h4>
-            </div>
-            <form>
-              <div className="modal-body">
-                <div className="row">
-                  <div className="col-lg-7 col-md-12 col-12">
-                    <div className="section-title">
-                      <h4>মাসিক ফি গ্রহণ</h4>
-                    </div>
-                    <div className="my-4">
-                      <form className="accounts-form">
-                        <div className="row">
-                          <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
-                                অর্ডার নং
-                                <i>*</i>
-                              </label>
-                              <div className="col-lg-6 col-md-6 col-12">
-                                <input
-                                  required
-                                  type="text"
-                                  className="form-control"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                নামঃ
-                              </label>
-                              <div className="col-lg-10 col-md-10 col-12">
-                                <input
-                                  required
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="নাম"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                তারিখ
-                              </label>
-                              <div className="col-lg-10 col-md-10 col-12">
-                                <input
-                                  required
-                                  type="date"
-                                  className="form-control"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
-                                আইডি
-                              </label>
-                              <div className="col-lg-6 col-md-6 col-12">
-                                <input
-                                  required
-                                  type="text"
-                                  className="form-control"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                পিতা
-                              </label>
-                              <div className="col-lg-10 col-md-10 col-12">
-                                <input
-                                  required
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="পিতার নাম"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-md-4 col-lg-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                শ্রেণী
-                              </label>
-                              <div className="col-lg-10 col-md-10 col-12">
-                                <input
-                                  required
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="জামাত"
-                                  readonly
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-lg-4 col-md-4 offset-md-4 offset-0">
-                            <div className="row mb-3">
-                              <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                                মোবাইল
-                              </label>
-                              <div className="col-lg-8 col-md-8 col-12">
-                                <input
-                                  required
-                                  type="text"
-                                  className="form-control"
-                                  placeholder="মোবাইল"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-4 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-6 col-md-6 col-12 col-form-label info-lable">
-                                শিক্ষার্থী অবস্থা
-                              </label>
-                              <div className="col-lg-6 col-md-6 col-12">
-                                <input
-                                  required
-                                  type="text"
-                                  className="form-control"
-                                  value="সক্রিয়"
-                                  readonly
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                    <div className="my-4">
-                      <div className="row">
-                        <div className="col-12">
-                          <div
-                            className="table-responsive accounts-table"
-                            data-pattern="priority-columns"
-                          >
-                            <table
-                              id="tech-companies-1"
-                              className="table  bg-white text-center mb-0"
-                            >
-                              <thead className="text-center accounts-table-head">
-                                <tr>
-                                  <th>
-                                    <span className="action-edit">
-                                      <i className="bi bi-pencil-square"></i>
-                                    </span>
-                                  </th>
-                                  <th>
-                                    <span className="action-delete">
-                                      <i className="bi bi-trash3"></i>
-                                    </span>
-                                  </th>
-                                  <th>মাস</th>
-                                  <th>ফি নাম</th>
-                                  <th>কর্তন</th>
-                                  <th>পূর্ব জমা</th>
-                                  <th>বর্তমান জমা</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>
-                                    <span className="action-edit">
-                                      <i className="bi bi-pencil-square"></i>
-                                    </span>
-                                  </td>
-                                  <td>
-                                    <span className="action-delete">
-                                      <i className="bi bi-trash3"></i>
-                                    </span>
-                                  </td>
-                                  <td>জুলাই</td>
-                                  <td>ভর্তি ফি</td>
-                                  <td>২০০.০০</td>
-                                  <td>০.০০</td>
-                                  <td>১৫০০.০০</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="my-2">
-                      <div className="row">
-                        <div className="col-12">
-                          <div className="filter-container py-2">
-                            <div className="row">
-                              <div className="col-lg-4 col-md-4 col-12">
-                                <div className="row">
-                                  <label className="col-lg-3 col-md-3 col-12 d-lg-block d-none col-form-label info-lable">
-                                    <i className="bi bi-search text-white"></i>
-                                  </label>
-                                  <div className="col-lg-9 col-md-9 col-12">
-                                    <input
-                                      required
-                                      type="date"
-                                      className="form-control"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-lg-4 col-md-4 col-12 mt-2 mt-md-0">
-                                <div className="row">
-                                  <div className="col-8 d-flex align-items-center justify-content-between">
-                                    <div className="form-check">
-                                      <input
-                                        required
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="options"
-                                      />
-                                      <label
-                                        className="form-check-label"
-                                        for="options"
-                                      >
-                                        আইডি
-                                      </label>
-                                    </div>
-                                    <div className="form-check">
-                                      <input
-                                        required
-                                        className="form-check-input"
-                                        type="radio"
-                                        name="options"
-                                      />
-                                      <label
-                                        className="form-check-label"
-                                        for="options"
-                                      >
-                                        অর্ডার নং
-                                      </label>
-                                    </div>
-                                  </div>
-                                  <div className="col-4">
-                                    <input
-                                      required
-                                      type="text"
-                                      className="form-control"
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-lg-4 col-md-4 col-12">
-                                <div className="row">
-                                  <label className="col-lg-9 col-md-9 col-8 col-form-label info-lable">
-                                    আজকের গ্রহন: ২৭০০
-                                  </label>
-                                  <div className="col-3 d-flex align-items-center">
-                                    <i
-                                      className="bi bi-gear-fill"
-                                      style={{ cursor: "pointer" }}
-                                    ></i>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="my-2">
-                      <div className="row">
-                        <div className="col-12">
-                          <div
-                            className="table-responsive accounts-table"
-                            data-pattern="priority-columns"
-                          >
-                            <table
-                              id="tech-companies-1"
-                              className="table  bg-white text-center mb-0"
-                            >
-                              <thead className="text-center accounts-table-head">
-                                <tr>
-                                  <th>
-                                    <span className="action-edit">
-                                      <i className="bi bi-pencil-square"></i>
-                                    </span>
-                                  </th>
-                                  <th>
-                                    <span className="action-delete">
-                                      <i className="bi bi-trash3"></i>
-                                    </span>
-                                  </th>
-                                  <th>অর্ডার নং</th>
-                                  <th>শিক্ষার্থীর আইডি</th>
-                                  <th>নাম</th>
-                                  <th>পিতার নাম</th>
-                                  <th>ফির পরিমান</th>
-                                  <th>গ্রহিতা</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td>
-                                    <span className="action-edit">
-                                      <i className="bi bi-pencil-square"></i>
-                                    </span>
-                                  </td>
-                                  <td>
-                                    <span className="action-delete">
-                                      <i className="bi bi-trash3"></i>
-                                    </span>
-                                  </td>
-                                  <td>৪৩৪৩</td>
-                                  <td>৬৫৬</td>
-                                  <td>আশিকুর রহমান</td>
-                                  <td>আবু বক্কর</td>
-                                  <td>১৫০০.০০</td>
-                                  <td>এডমিন</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-lg-5 col-12">
-                    <div className="section-title">
-                      <h4>খাবারের ফি গ্রহণ</h4>
-                    </div>
-                    {/* <!--Right Site top Table--> */}
-                    <div className="row">
-                      <div className="col-lg-7 col-md-7 col-12">
-                        <div className="row mt-3">
-                          <div className="col-12">
-                            <div className="row">
-                              <div className="col-6">
-                                <div className="student-image">
-                                  <span className="student-image-title">
-                                    শিক্ষার্থীর ছবি
-                                  </span>
-                                  {/* <img src="/" alt="" /> */}
-                                </div>
-                              </div>
-                              <div className="col-6 meal-fee-btn">
-                                <div className="button-group">
-                                  <button className="custom-btn btn-primary">
-                                    Save
-                                  </button>
-                                  <button className="custom-btn btn-danger">
-                                    Print
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="mt-3">
-                          <div
-                            className="table-responsive accounts-table"
-                            data-pattern="priority-columns"
-                          >
-                            <table
-                              id="tech-companies-1"
-                              className="table  bg-white text-center mb-0"
-                            >
-                              <thead className="text-center accounts-table-head">
-                                <tr>
-                                  <th>মাস</th>
-                                  <th>ফি</th>
-                                  <th>গ্রহন</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                                <tr>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row">
-                          <label
-                            className="col-12 col-form-label info-lable"
-                            style={{ textAlign: "left" }}
-                          >
-                            মন্তব্য
-                          </label>
-                          <div className="col-12">
-                            <textarea
-                              className="form-control"
-                              placeholder="মন্তব্য লিখুন"
-                              rows="3"
-                            ></textarea>
-                          </div>
-                          <div className="col-12 meal-fee">
-                            <div className="button-group">
-                              <a className="custom-btn btn-primary" href="#">
-                                Edit
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-12 others-menu">
-                            <div className="section-title">
-                              <h4>গুরুত্বপূর্ণ লিংক</h4>
-                            </div>
-                          </div>
-                          <div className="col-12 others-navigation">
-                            <ul className="navbar-nav">
-                              <li className="others-nav-item">
-                                <i className="bi bi-gear-fill"></i>
-                                <a href="" className="others-nav-link">
-                                  {" "}
-                                  অর্ডার নং সেটিংস
-                                </a>
-                              </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-calendar-month"></i>
-                                <a
-                                  href="#"
-                                  className="others-nav-link"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#monthname"
-                                >
-                                  {" "}
-                                  মাসের নাম
-                                </a>
-                              </li>
-                              <li className="others-nav-title my-1">
-                                <i className="bi bi-arrow-down-square"></i>
-                                <a href="#" className="others-nav-link px-1">
-                                  মাসিক ফি
-                                </a>
-                              </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-cash-coin"></i>
-                                <a href="#" className="others-nav-link">
-                                  {" "}
-                                  ফি নির্ধারণ
-                                </a>
-                              </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-card-checklist"></i>
-                                <a href="#" className="others-nav-link">
-                                  {" "}
-                                  তালিকা তৈরি
-                                </a>
-                                <li className="others-nav-item">
-                                  <i className="bi bi-arrow-down-up"></i>
-                                  <a href="#" className="others-nav-link">
-                                    {" "}
-                                    বাড়ানো কমানো
-                                  </a>
-                                </li>
-                              </li>
-                              <li className="others-nav-title my-1">
-                                <i className="bi bi-arrow-down-square"></i>
-                                <a href="#" className="others-nav-link px-1">
-                                  খাবারের ফি
-                                </a>
-                              </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-cash-coin"></i>
-                                <a href="#" className="others-nav-link">
-                                  {" "}
-                                  ফি নির্ধারণ
-                                </a>
-                              </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-card-checklist"></i>
-                                <a href="#" className="others-nav-link">
-                                  {" "}
-                                  তালিকা তৈরি
-                                </a>
-                              </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-arrow-down-up"></i>
-                                <a
-                                  href="#"
-                                  className="others-nav-link"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#mealfeeincrase"
-                                >
-                                  {" "}
-                                  বাড়ানো কমানো
-                                </a>
-                              </li>
-                              <li className="others-nav-item">
-                                <i className="bi bi-calendar2-day-fill"></i>
-                                <a
-                                  href="#"
-                                  className="others-nav-link"
-                                  data-bs-toggle="modal"
-                                  data-bs-target="#holiday"
-                                >
-                                  {" "}
-                                  দিন ও ছুটি
-                                </a>
-                              </li>
-                            </ul>
-                            <div className="button-group">
-                              <button className="custom-btn btn-info">
-                                Show
-                              </button>
-                              <button className="custom-btn btn-primary">
-                                Save
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    {/* <!--Right Site Top Table End--> */}
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-12">
-                    <div className="section-title">
-                      <h4>মাসিক ফি গ্রহণ</h4>
-                    </div>
-                  </div>
-                  <div className="my-2">
-                    <div className="row">
-                      <div className="col-12">
-                        <div
-                          className="table-responsive accounts-table"
-                          data-pattern="priority-columns"
-                        >
-                          <table
-                            id="tech-companies-1"
-                            className="table  bg-white text-center mb-0"
-                          >
-                            <thead className="text-center accounts-table-head">
-                              <tr>
-                                <th>শিক্ষাবর্ষ</th>
-                                <th>জানুয়ারী</th>
-                                <th>ফেব্রুয়ারী</th>
-                                <th>মার্চ</th>
-                                <th>এপ্রিল</th>
-                                <th>মে</th>
-                                <th>জুন</th>
-                                <th>জুলাই</th>
-                                <th>আগস্ট</th>
-                                <th>সেপটেম্বর</th>
-                                <th>অক্টোবর</th>
-                                <th>নভেম্বর</th>
-                                <th>ডিসেম্বর</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>২০২২</td>
-                                <td>৫০০.০০</td>
-                                <td>৬০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                                <td>০০.০০</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="modal-footer">
-                <div className="button-group">
-                  <button className="custom-btn btn-primary" type="submit">
-                    Save
-                  </button>
-                  <button
-                    className="custom-btn btn-dark"
-                    data-bs-dismiss="modal"
-                    onclick="javascript:void(0)"
-                    type="button"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      {/* <!--Monthly Fees Collection  Modal End--> */}
+
       {/* <!--Month Name Add Modal Start--> */}
       <div
         className="modal fade"
@@ -2125,7 +1701,7 @@ const MonthlyFees = () => {
                                     </span>
                                   </td>
                                   {months?.data.map((item) => (
-                                    <>
+                                    <React.Fragment key={item.id}>
                                       <th>{item.session}</th>
                                       <th>{item.class}</th>
                                       <th>{item.m1}</th>
@@ -2140,7 +1716,7 @@ const MonthlyFees = () => {
                                       <th>{item.m10}</th>
                                       <th>{item.m11}</th>
                                       <th>{item.m12}</th>
-                                    </>
+                                    </React.Fragment>
                                   ))}
                                 </tr>
                               </tbody>
@@ -2398,6 +1974,13 @@ const MonthlyFees = () => {
       </div>
       {/* <!--ছুটি বা দিন Add Modal End--> */}
       {/* <!--খাবারের খরচ বাড়ানো কমানো Modal Start--> */}
+
+      <div className="modal fade" id="talika" aria-hidden="true" tabindex="-1">
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content"></div>
+        </div>
+      </div>
+
       <div
         className="modal fade"
         id="mealfeeincrase"
@@ -2811,182 +2394,155 @@ const MonthlyFees = () => {
           </div>
         </div>
       </div>
-      {/* <!--খাবার এন্ট্রি Modal End--> */}
-      {/* <!-- Add Desegnation  Modal Start--> */}
-      <div
-        className="modal fade"
-        id="adddesignation"
-        aria-hidden="true"
-        tabindex="-1"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="section-title">
-              <h4>পদবীর নাম যোগ করুন</h4>
+      {/* fee invoice */}
+      <div className="d-none" id="invoice">
+        <div
+          ref={ref}
+          className="preview-page d-print-block"
+          style={{ zIndex: 1 }}
+        >
+          <span className="print-button">
+            <i className="bi bi-printer-fill"></i>
+          </span>
+          <div className="pages-title">
+            <h5>জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ</h5>
+            <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
+            <span>01832-061454 # 027440235</span>
+          </div>
+          <div className="row my-3 invoice-title">
+            <div className="col-4 d-flex align-items-center">
+              {/* <div className="slip-no">
+                <strong>ইনভয়েস নং</strong>
+                <span className=""> ০০৪</span>
+              </div> */}
             </div>
-            <form>
-              <div className="modal-body">
-                <div className="row">
-                  <div className="col-md-12 w-100">
-                    <div className="row">
-                      <div className="col-12">
-                        <div className="my-4">
-                          <div className="row mb-3">
-                            <label className="col-sm-3 col-form-label info-lable">
-                              পদবীর নামঃ
-                            </label>
-                            <div className="col-8">
-                              <input
-                                required
-                                type="text"
-                                className="form-control"
-                                placeholder="পদবীর নাম"
-                              />
-                            </div>
-                          </div>
-                          <div className="row mb-3">
-                            <label className="col-sm-3 col-form-label info-lable">
-                              মন্তব্যঃ
-                            </label>
-                            <div className="col-8">
-                              <input
-                                required
-                                type="text"
-                                className="form-control"
-                                placeholder="মন্তব্য"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-12 addbank">
-                        <div className="button-group">
-                          <a href="#" className="custom-btn btn-primary">
-                            Save
-                          </a>
-                          <button className="custom-btn btn-dark" type="submit">
-                            Update
-                          </button>
-                          <button
-                            className="custom-btn btn-primary"
-                            type="submit"
-                          >
-                            New
-                          </button>
-                          <button
-                            className="custom-btn btn-danger"
-                            data-bs-dismiss="modal"
-                            onclick="javascript:void(0)"
-                            type="button"
-                          >
-                            Close
-                          </button>
-                        </div>
-                      </div>
-                      <div className="col-md-12">
-                        <div className="table-data mt-4">
-                          <div
-                            className="table-responsive"
-                            data-pattern="priority-columns"
-                          >
-                            <table
-                              id="tech-companies-1"
-                              className="table  bg-white table-bordered text-center"
-                            >
-                              <thead
-                                className="text-center"
-                                style={{
-                                  backgroundColor: "#62659B",
-                                  color: "white",
-                                }}
-                              >
-                                <tr>
-                                  <th></th>
-                                  <th>ক্রমিক নং</th>
-                                  <th>পদবীর নাম</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr>
-                                  <th></th>
-                                  <td>০১</td>
-                                  <td>মুহতামিম</td>
-                                </tr>
-                                <tr>
-                                  <th></th>
-                                  <td>০২</td>
-                                  <td>নায়েবে মুহতামিম শায়খুল হাদীস</td>
-                                </tr>
-                                <tr>
-                                  <th></th>
-                                  <td>০৩</td>
-                                  <td>প্রধান মুফতী কাম- শায়খে ছানী</td>
-                                </tr>
-                                <tr>
-                                  <th></th>
-                                  <td>০৪</td>
-                                  <td>শিক্ষাসচিব কাম- সিনিয়র মুহাদ্দিস</td>
-                                </tr>
-                                <tr>
-                                  <th></th>
-                                  <td>০৪</td>
-                                  <td>সিনিয়র মুহাদ্দিস</td>
-                                </tr>
-                                <tr>
-                                  <th></th>
-                                  <td>০৪</td>
-                                  <td>মুহাদ্দিস</td>
-                                </tr>
-                                <tr>
-                                  <th></th>
-                                  <td>০৪</td>
-                                  <td>সিনিয়র ইস্তাদ</td>
-                                </tr>
-                                <tr>
-                                  <th></th>
-                                  <td>০৪</td>
-                                  <td>উস্তাদে মুহতারাম</td>
-                                </tr>
-                                <tr>
-                                  <th></th>
-                                  <td>০৪</td>
-                                  <td>উস্তাদ হিফজ বিভাগ</td>
-                                </tr>
-                                <tr>
-                                  <th></th>
-                                  <td>০৪</td>
-                                  <td>উস্তাদ নাজেরা বিভাগ</td>
-                                </tr>
-                                <tr>
-                                  <th></th>
-                                  <td>০৪</td>
-                                  <td>উস্তাদ নূরানী বিভাগ</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
+            <div className="col-4 d-flex justify-content-center align-items-center">
+              <span className="pages-subtitle-slip">ইনভয়েস</span>
+            </div>
+            <div className="col-4 d-flex align-items-center justify-content-lg-end justify-content-start">
+              <div className="slip-date">
+                <strong>তারিখঃ</strong>
+                <span className="">{currentDate}</span>
+              </div>
+            </div>
+          </div>
+          <div className="pages-content">
+            <div className="row mb-1 customer-info">
+              <div className="col-6 d-flex flex-wrap align-content-center">
+                <div className="donor-name">
+                  <strong className="dtitle">শিক্ষার্থীর নামঃ</strong>
+                  <div className="border-line w-100">
+                    {student?.student_name}
+                  </div>
+                </div>
+                <div className="donor-name">
+                  <strong className="dtitle">পিতার নামঃ</strong>
+                  <div className="border-line w-100">
+                    {student?.father_name}
+                  </div>
+                </div>
+                <div className="donor-name">
+                  <strong className="dtitle">ঠিকানাঃ</strong>
+                  <div className="border-line w-100">{student?.jela}</div>
+                </div>
+                {/* <div className="donor-name mt-1">
+                  <strong className="dtitle">টাকাঃ</strong>
+                  <div className="border-all w-100">৫০০.০০ টাকা</div>
+                </div> */}
+              </div>
+              <div className="col-6">
+                <div className="donor-name">
+                  <strong className="dtitle">মোবাইলঃ</strong>
+                  <div className="border-line w-100">{student?.phn_no}</div>
+                </div>
+                <div className="donor-name">
+                  <strong className="dtitle">শ্রেণীঃ</strong>
+                  <div className="border-line w-100">{student?.class}</div>
+                </div>
+              </div>
+            </div>
+            {/* <div className="row mb-2">
+              <div className="col-12">
+                <div className="donor-name">
+                  <strong className="dtitle">কথায়ঃ</strong>
+                  <div className="border-line w-100">পাচশত টাকা মাত্র।</div>
+                </div>
+              </div>
+            </div> */}
+            <div className="row">
+              <div className="col-12">
+                <div
+                  className="table-responsive"
+                  data-pattern="priority-columns"
+                >
+                  <table className="table  bg-white table-bordered text-center report-table">
+                    <thead className="text-center">
+                      <tr>
+                        <th>ক্রঃ</th>
+                        <th> মাসের নাম</th>
+                        <th> ফি এর নাম </th>
+                        <th>নিরধারিত ফি</th>
+                        <th>কর্তন</th>
+                        <th>জমা ফি</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>০১</td>
+                        <td>{monthName}</td>
+                        <td>{feeName}</td>
+                        <td>{fees}</td>
+                        <td>{feeVal?.discount}</td>
+                        <td>{feeVal?.submitted_fee}</td>
+                      </tr>
+                      {/* <tr>
+                        <th colspan="5" className="text-right">
+                          Total Price After Discount
+                        </th>
+                        <td>০.০০</td>
+                      </tr>
+                      <tr>
+                        <th colspan="5" className="text-right">
+                          Grand Total
+                        </th>
+                        <td>০.০০</td>
+                      </tr> */}
+                      <tr>
+                        <th colspan="5" className="text-right">
+                          Paid Amount
+                        </th>
+                        <td>{feeVal?.ammount}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  {/* <span>মন্তব্যঃ </span>
+                  <span>{feeVal?.comment}</span> */}
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="row mt-5">
+                  <div className="col-lg-4 col-12 d-flex justify-content-lg-start justify-content-center">
+                    <div className="marksheet-sing">
+                      <span>শিক্ষার্থীর স্বাক্ষর</span>
+                      <br />
+                    </div>
+                  </div>
+                  <div className="col-lg-4 col-12 d-flex justify-content-lg-end justify-content-center mt-lg-0 mt-3">
+                    <div className="marksheet-sing">
+                      <span>পরিচালকের স্বাক্ষর</span>
+                      <br />
+                    </div>
+                  </div>
+                  <div className="col-lg-4 col-12 d-flex justify-content-lg-end justify-content-center mt-lg-0 mt-3">
+                    <div className="marksheet-sing">
+                      <span>আদায়কারীর স্বাক্ষর</span>
+                      <br />
+                      <span>{me?.data.name}</span>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="modal-footer">
-                <div className="button-group">
-                  <button className="custom-btn btn-primary" type="submit">
-                    Save
-                  </button>
-                  <button
-                    className="custom-btn btn-dark"
-                    data-bs-dismiss="modal"
-                    onclick="javascript:void(0)"
-                    type="button"
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>

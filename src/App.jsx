@@ -53,8 +53,16 @@ import MashikFeeReport from "./pages/MashikFeeReport";
 import KhabarerFeeReport from "./pages/KhabarerFeeReport";
 import Fund from "./pages/Accounting/Fund";
 import AddPaymentSystem from "./pages/Accounting/AddPaymentSystem";
+import FeeName from "./pages/FeeName";
+import Settings from "./pages/Settings";
+import { useNavigate } from "react-router-dom";
+import BokeyaVortiFee from "./pages/BokeyaVortiFee";
+import VortFee from "./pages/VortFee";
+import ForgetPassword from "./Comonents/ForgetPassword";
 
 function App() {
+  const navigate = useNavigate();
+
   const { data, isLoading } = useQuery(
     ["me"],
     () =>
@@ -73,6 +81,14 @@ function App() {
 
   const user = data?.data;
 
+  useEffect(() => {
+    if (localStorage.getItem("token") == undefined) {
+      navigate("/");
+    }
+  }, []);
+
+  if (isLoading) return <h1>Loading.....</h1>;
+
   // const user = userProxy?.data.data;
 
   return (
@@ -82,7 +98,9 @@ function App() {
       <Layout />
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/dashboard" element={<Dasboard />} />
+        <Route path="/forget-paswsword" element={<ForgetPassword />} />
         <Route
           path="/newuser"
           element={
@@ -165,6 +183,16 @@ function App() {
           }
         />
         <Route
+          path="/fee-name"
+          element={
+            user?.permissions.includes("audit_permission") ? (
+              <FeeName />
+            ) : (
+              <NotAuthenticated />
+            )
+          }
+        />
+        <Route
           path="/fees-determination"
           element={
             user?.permissions.includes("audit_permission") ? (
@@ -220,6 +248,26 @@ function App() {
           element={
             user?.permissions.includes("students_control") ? (
               <StudentInfo />
+            ) : (
+              <NotAuthenticated />
+            )
+          }
+        />
+        <Route
+          path="/bokeya-vorti-fee"
+          element={
+            user?.permissions.includes("students_control") ? (
+              <BokeyaVortiFee />
+            ) : (
+              <NotAuthenticated />
+            )
+          }
+        />{" "}
+        <Route
+          path="/vorti-fee"
+          element={
+            user?.permissions.includes("students_control") ? (
+              <VortFee />
             ) : (
               <NotAuthenticated />
             )

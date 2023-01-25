@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useMutation } from "react-query";
@@ -7,6 +8,10 @@ import { serverUrl } from "../../utils/config";
 
 const InstituteInfo = () => {
   const { register, handleSubmit } = useForm();
+
+  const [ls, setls] = useState();
+  const [mum, setmum] = useState();
+  const [nt, setnt] = useState();
 
   const mutation = useMutation({
     mutationFn: (newUser) => {
@@ -23,9 +28,42 @@ const InstituteInfo = () => {
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // alert(JSON.stringify(data));
-    mutation.mutate(data);
+    // console.log("logo", logo);
+    // console.log(data);
+    // console.log(data.logo[0]);
+
+    const params = {
+      ...data,
+      logo: ls,
+      mumtamim_sign: mum,
+      najeme_talim_sign: nt,
+    };
+
+    const acaLogo = new FormData();
+    const mumSign = new FormData();
+    const naSign = new FormData();
+    acaLogo.append("file", data.logo[0]);
+    mumSign.append("file", data.mumtamim_sign[0]);
+    naSign.append("file", data.najeme_talim_sign[0]);
+    acaLogo.append("upload_preset", "hwcadnsm");
+    mumSign.append("upload_preset", "hwcadnsm");
+    naSign.append("upload_preset", "hwcadnsm");
+    axios
+      .post("https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload", acaLogo)
+      .then((response) => setls(response.data.secure_url));
+
+    axios
+      .post("https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload", mumSign)
+      .then((response) => setmum(response.data.secure_url));
+
+    axios
+      .post("https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload", naSign)
+      .then((response) => setnt(response.data.secure_url));
+
+    console.log(params);
+    mutation.mutate(params);
   };
 
   return (
@@ -216,6 +254,48 @@ const InstituteInfo = () => {
                               {...register("ilhaka")}
                             />
                           </div>
+                        </div>
+                        <div class="mb-3">
+                          <label
+                            for="formFile"
+                            class="col-sm-2 col-form-label info-lable"
+                          >
+                            প্রতিষ্ঠানের লোগো:
+                          </label>
+                          <input
+                            class="col-sm-2 col-form-label info-lable"
+                            type="file"
+                            id="formFile"
+                            {...register("logo")}
+                          />
+                        </div>{" "}
+                        <div class="mb-3">
+                          <label
+                            for="formFile"
+                            class="col-sm-2 col-form-label info-lable"
+                          >
+                            মুহতামিমের স্বাক্ষর:
+                          </label>
+                          <input
+                            class="col-sm-2 col-form-label info-lable"
+                            type="file"
+                            {...register("mumtamim_sign")}
+                            id="formFile"
+                          />
+                        </div>{" "}
+                        <div class="mb-3">
+                          <label
+                            for="formFile"
+                            class="col-sm-2 col-form-label info-lable"
+                          >
+                            নাজেমে তালি: স্বাক্ষর:
+                          </label>
+                          <input
+                            class="col-sm-2 col-form-label info-lable"
+                            type="file"
+                            {...register("najeme_talim_sign")}
+                            id="formFile"
+                          />
                         </div>
                         <div className="button-group">
                           <button

@@ -146,7 +146,6 @@ const StudentAttandance = () => {
                         <thead className="text-center accounts-table-head">
                           <tr>
                             <th>আইডি</th>
-                            <th>শ্রেণী</th>
                             <th>নাম</th>
                             <th>রোল নং</th>
                             <th>হাজিরা</th>

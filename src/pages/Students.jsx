@@ -20,7 +20,7 @@ const Students = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
-      toast.success("student registered successfully");
+      toast.success("session registered successfully");
     },
   });
 

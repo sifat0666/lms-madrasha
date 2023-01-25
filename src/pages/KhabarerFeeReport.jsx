@@ -90,18 +90,18 @@ const Report = () => {
                                       {item.academic_year}
                                     </option>
                                   ))} */}
-                              <option>{months?.data[0].m1}</option>
-                              <option>{months?.data[0].m2}</option>
-                              <option>{months?.data[0].m3}</option>
-                              <option>{months?.data[0].m4}</option>
-                              <option>{months?.data[0].m5}</option>
-                              <option>{months?.data[0].m6}</option>
-                              <option>{months?.data[0].m7}</option>
-                              <option>{months?.data[0].m8}</option>
-                              <option>{months?.data[0].m9}</option>
-                              <option>{months?.data[0].m10}</option>
-                              <option>{months?.data[0].m11}</option>
-                              <option>{months?.data[0].m12}</option>
+                              <option>{months?.data[0]?.m1}</option>
+                              <option>{months?.data[0]?.m2}</option>
+                              <option>{months?.data[0]?.m3}</option>
+                              <option>{months?.data[0]?.m4}</option>
+                              <option>{months?.data[0]?.m5}</option>
+                              <option>{months?.data[0]?.m6}</option>
+                              <option>{months?.data[0]?.m7}</option>
+                              <option>{months?.data[0]?.m8}</option>
+                              <option>{months?.data[0]?.m9}</option>
+                              <option>{months?.data[0]?.m10}</option>
+                              <option>{months?.data[0]?.m11}</option>
+                              <option>{months?.data[0]?.m12}</option>
                             </select>
                           </div>
                         </div>

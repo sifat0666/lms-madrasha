@@ -4,14 +4,34 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../utils/config";
+import StudentList from "../Comonents/Report/Student/StudentList";
+import StudentListNew from "../Comonents/Report/Student/StudentListNew";
+import StudentListOld from "../Comonents/Report/Student/StudentListOld";
+import StudentListBoy from "../Comonents/Report/Student/StudentListBoy";
+import StudentListGirl from "../Comonents/Report/Student/StudentListGirl";
+import StudentListResi from "../Comonents/Report/Student/StudentListResi";
+import StudentListUnresi from "../Comonents/Report/Student/StudentListUnresi";
+import Survey from "../Comonents/Report/Student/Survey";
+import ParentNo from "../Comonents/Report/Student/ParentNo";
+import TarikhOnijayiFee from "../Comonents/Report/Student/TarikhOnujayiFee";
+import VortiFeeReport from "../Comonents/Report/Student/VortiFeeReport";
+import { useRef } from "react";
+import ReactToPrint from "react-to-print";
 
 const Report = () => {
+  const ref = useRef();
+
   const [student, setStudent] = useState();
   const [value, setValue] = useState();
+  const [report, setReport] = useState();
+  const [survey, setSurvey] = useState();
 
   const { data: marhalaClass } = useQuery("marhalaclass", () =>
     fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
   );
+  // const { data: studentData } = useQuery("marhalaclass", () =>
+  //   fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+  // );
   const { data: academicYear } = useQuery("academicyear", () =>
     fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
   );
@@ -31,11 +51,27 @@ const Report = () => {
     },
   });
 
+  const surveyMutaion = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/student-servey`, data);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log("userdata", data.data);
+      // window.location.reload(true);
+      setSurvey(data?.data);
+    },
+  });
+
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
     mutation.mutate(data);
+    surveyMutaion.mutate(data);
     setValue(data);
   };
 
@@ -57,6 +93,63 @@ const Report = () => {
                   {/* <!--Filter Menu Section--> */}
                   <div className="col-lg-4 col-12 col-md-12 d-print-none">
                     <form onSubmit={handleSubmit(onSubmit)}>
+                      <div class="col-12">
+                        <div class="filter-menu">
+                          <select
+                            class="form-select"
+                            size="9"
+                            aria-label="size 3 select example"
+                            onChange={(e) => setReport(e.target.value)}
+                          >
+                            <option disabled>নির্বাচন করুন</option>
+                            <option>১. ভর্তি রেজিস্টার</option>
+                            <option>২. ভর্তি রেজিস্টার নতুন</option>
+                            <option>৩. ভর্তি রেজিস্টার পুরাতন</option>
+                            <option>৪. ভর্তি রেজিস্টার ছাত্র</option>
+                            <option>৫. ভর্তি রেজিস্টার ছাত্রী</option>
+                            <option>৬. ভর্তি রেজিস্টার আবাসিক</option>
+                            <option>৭. ভর্তি রেজিস্টার অনাবাসিক</option>
+                            {/* <option>৮. নতুন পুরাতন শিক্ষার্থীর তালিকা</option> */}
+                            <option>
+                              ৮. মারহালাওয়ারী নতুন পুরাতন মোট শিক্ষার্থী
+                            </option>
+                            {/* <option>
+                              ৬. শিক্ষার্থীদের সংক্ষিপ্ত তালিকা দুই কলামে
+                            </option> */}
+                            <option>৯. অভিবাবকের মোবাইল</option>
+                            <option>১০. ভর্তি ফি এর রিপোর্ট</option>
+                            <option>১১. আজকের ভর্তি রিপোর্ট</option>
+                            {/* <option>
+                              ৮. মারহালা ওয়ারী কিতাব/বিষয়ের তালিকা
+                            </option>
+                            <option>
+                              ৯. শিক্ষার্থীদের পরিচয় পত্র (আইডি কার্ড)
+                            </option>
+                            <option>
+                              ১০. শিক্ষার্থীদের পরিচয় পত্র (আইডি কার্ড)
+                            </option> */}
+                          </select>
+                        </div>
+                      </div>
+                      {report === "১১. আজকের ভর্তি রিপোর্ট" && (
+                        <div className="col-lg-7 col-12 col-md-12 m-3">
+                          <div className="row mb-lg-3 mb-1">
+                            <label className="col-lg-4 col-12 col-md-12 col-form-label info-lable">
+                              তারিখঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-12 col-md-12">
+                              <input
+                                required
+                                type="date"
+                                className="form-control"
+                                placeholder="মাতার নাম"
+                                {...register("date")}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      )}
                       <div className="row mt-3">
                         <div className="col-12">
                           <div className="filter-menu">
@@ -127,81 +220,58 @@ const Report = () => {
                           >
                             Preview
                           </button>
-                        </div>
-                      </div>
-                    </form>
-                    <form action="">
-                      <div className="row p-3">
-                        <div className="col-12">
-                          <div className="filter-menu">
-                            <select
-                              className="form-select"
-                              size="9"
-                              aria-label="size 3 select example"
-                            >
-                              <option disabled>নির্বাচন করুন</option>
-                              {/* <option>১. ভর্তি রেজিস্টার নতুন-পুরাতন</option>
-                              <option>২. ভর্তি রেজিস্টার ছাত্র-ছাত্রী</option> */}
-                              <option>অনাবাসিক</option>
-                              <option>আবাসিক</option>
-                              <option>নতুন</option>
-                              <option>পুরাতন</option>
-                            </select>
-                          </div>
+                          <ReactToPrint
+                            trigger={() => (
+                              <button
+                                type="submit"
+                                className="m-2 custom-btn btn-primary d-block w-"
+                              >
+                                Print
+                              </button>
+                            )}
+                            content={() => ref.current}
+                          />
                         </div>
                       </div>
                     </form>
                   </div>
                   {/* <!--Preview Page Section--> */}
                   <div className="col-lg-8 col-12 col-md-12 mt-lg-0 mt-4">
-                    <div className="preview-page d-print-block">
-                      <span
-                        className="print-button d-print-none"
-                        onclick="window.print()"
-                      >
-                        <i className="bi bi-printer-fill"></i>
-                      </span>
-                      <div className="pages-title">
-                        <h5>জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ</h5>
-                        <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
-                        <span>01832-061454 # 027440235</span>
-                        <br />
-                        <span className="pages-subtitle">
-                          ভর্তি রেজিস্টার: ২০২২
-                        </span>
-                      </div>
-                      <div className="pages-content">
-                        <p className="my-2">জামাত/ক্লাশ : তাকমীল (ক)</p>
-                        <div
-                          className="table-responsive"
-                          data-pattern="priority-columns"
-                        >
-                          <table className="table  bg-white table-bordered text-center report-table">
-                            <thead className="text-center">
-                              <tr>
-                                <th>দাখেল</th>
-                                <th>নাম</th>
-                                <th>পিতার নাম</th>
-                                <th>জন্ম তারিখ</th>
-                                <th>রক্তের গ্রুপ</th>
-                                <th>মোবাইল নাম্বার</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {student?.map((item) => (
-                                <tr key={item.id}>
-                                  <td>{item.id}</td>
-                                  <td>{item.student_name}</td>
-                                  <td>{item.father_name}</td>
-                                  <td>{item.dob}</td>
-                                  <td>A+</td>
-                                  <td>{item.phn_no}</td>
-                                </tr>
-                              ))}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
+                    <div ref={ref}>
+                      {report === "১. ভর্তি রেজিস্টার" && (
+                        <StudentList student={student} value={value} />
+                      )}{" "}
+                      {report === "২. ভর্তি রেজিস্টার নতুন" && (
+                        <StudentListNew student={student} value={value} />
+                      )}{" "}
+                      {report === "৩. ভর্তি রেজিস্টার পুরাতন" && (
+                        <StudentListOld student={student} value={value} />
+                      )}{" "}
+                      {report === "৪. ভর্তি রেজিস্টার ছাত্র" && (
+                        <StudentListBoy student={student} value={value} />
+                      )}{" "}
+                      {report === "৫. ভর্তি রেজিস্টার ছাত্রী" && (
+                        <StudentListGirl student={student} value={value} />
+                      )}{" "}
+                      {report === "৬. ভর্তি রেজিস্টার আবাসিক" && (
+                        <StudentListResi student={student} value={value} />
+                      )}{" "}
+                      {report === "৭. ভর্তি রেজিস্টার অনাবাসিক" && (
+                        <StudentListUnresi student={student} value={value} />
+                      )}
+                      {report ===
+                        "৮. মারহালাওয়ারী নতুন পুরাতন মোট শিক্ষার্থী" && (
+                        <Survey survey={survey} value={value} />
+                      )}
+                      {report === "৯. অভিবাবকের মোবাইল" && (
+                        <ParentNo student={student} value={value} />
+                      )}{" "}
+                      {report === "১০. ভর্তি ফি এর রিপোর্ট" && (
+                        <VortiFeeReport student={student} value={value} />
+                      )}{" "}
+                      {report === "১১. আজকের ভর্তি রিপোর্ট" && (
+                        <TarikhOnijayiFee student={student} value={value} />
+                      )}
                     </div>
                   </div>
                 </div>

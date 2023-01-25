@@ -18,6 +18,9 @@ const MarkEntry = () => {
   const { data: examName } = useQuery("examEnty", () =>
     fetch(`${serverUrl}/api/exam-entry`).then((res) => res.json())
   );
+  const { data: sub } = useQuery("subject", () =>
+    fetch(`${serverUrl}/api/subject`).then((res) => res.json())
+  );
 
   const { data: marks } = useQuery("marks", () =>
     fetch(`${serverUrl}/api/marks`).then((res) => res.json())
@@ -175,37 +178,22 @@ const MarkEntry = () => {
                             ))}
                           </select>
                         </div>
-                        <label
-                          className="col-lg-4 col-md-4 col-12 col-form-label info-lable mt-3"
-                          style={{ padding: "10px" }}
-                        >
-                          কিতাব
+                        <label className="col-lg-4 col-md-4 col-form-label info-lable">
+                          বিষয়
                           <i>*</i>
                         </label>
-                        <div className="col-lg-6 col-md-6 col-10 mt-3">
+                        <div className="col-lg-6 col-md-6 col-10">
                           <select
                             required
-                            {...register2("subject")}
-                            // onChange={(e) => setSubject(e.target.value)}
                             className="form-select"
+                            size="3"
+                            style={{ border: "none" }}
+                            // onChange={(e) => setExam(e.target.value)}
+                            {...register2("subject")}
                           >
-                            <option selected="" disabled>
-                              শ্রেণী নির্বাচন করুন
-                            </option>
-                            <option>নাযেরা</option>
-                            <option>হিফযুল কুরআন</option>
-                            <option>ই-দাদী</option>
-                            <option>ইবতিদায়ী আউয়াল</option>
-                            <option>ইবতিদায়ী নানী</option>
-                            <option>উস্তানী আউয়াল</option>
-                            <option>উস্তানী সানী</option>
-                            <option>সানাবী আউয়াল</option>
-                            <option>সানাবী আউয়াল</option>
-                            <option>সানাবী সানী</option>
-                            <option>নিহায়ী আউয়াল</option>
-                            <option>নিহায়ী সানী</option>
-                            <option>তাকমীল</option>
-                            <option>ইফতা ১ম</option>
+                            {sub?.data.map((item) => (
+                              <option key={item.id}>{item.subject}</option>
+                            ))}
                           </select>
                         </div>
                         <label

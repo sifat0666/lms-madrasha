@@ -8,6 +8,7 @@ specifiers:
   '@vitejs/plugin-react': ^3.0.0
   axios: ^1.2.1
   csstype: ^3.1.1
+  dayjs: ^1.11.7
   react: ^18.2.0
   react-dom: ^18.2.0
   react-hook-form: ^7.41.2
@@ -24,6 +25,7 @@ dependencies:
   '@react-pdf/renderer': 3.0.2_react@18.2.0
   axios: 1.2.1
   csstype: 3.1.1
+  dayjs: 1.11.7
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.41.2_react@18.2.0
@@ -955,6 +957,10 @@ packages:
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
+
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
+    dev: false
 
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}

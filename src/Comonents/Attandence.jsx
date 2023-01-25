@@ -3,13 +3,17 @@ import React from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
-import { useMutation } from "react-query";
-import { serverUrl } from "../../utils/config";
+import { useMutation, useQuery } from "react-query";
+import { sendSms, serverUrl } from "../../utils/config";
 
 const state = ["Preset", "Absent", "Escaped"];
 
 const Attandence = ({ item, otherData }) => {
   const [att, setAtt] = useState();
+
+  const { data: msg } = useQuery("msg", () =>
+    fetch(`${serverUrl}/api/msg/${1}`).then((res) => res.json())
+  );
 
   const mutation = useMutation({
     mutationFn: (data) => {
@@ -19,9 +23,39 @@ const Attandence = ({ item, otherData }) => {
       // console.log(error.response.data.message);
       toast.error(error.response.data.message);
     },
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       console.log("userdata", data.data);
       toast.success("submitted successfully");
+
+      const student = await axios.get(
+        `${serverUrl}/api/student/${data?.data.student_id}`
+      );
+
+      console.log("msg", msg);
+      if (data?.data.attandance === "Absent") {
+        if (msg.absent) {
+          sendSms(
+            student?.data.phn_no,
+            `${student?.data.student_name} আজকে ${data?.data.date} তারিখে অনুপস্থিত রয়েছে`
+          );
+        }
+      }
+      if (data?.data.attandance === "Preset") {
+        if (msg.present) {
+          sendSms(
+            student?.data.phn_no,
+            `${student?.data.student_name} আজকে ${data?.data.date} তারিখে উপস্থিত রয়েছে`
+          );
+        }
+      }
+      if (data?.data.attandance === "Escaped") {
+        if (msg.escaped) {
+          sendSms(
+            student?.data.phn_no,
+            `${student?.data.student_name} আজকে ${data?.data.date} তারিখে ক্লাস থেকে পালিয়েছে`
+          );
+        }
+      }
     },
   });
 
@@ -47,47 +81,39 @@ const Attandence = ({ item, otherData }) => {
   return (
     <>
       <tr>
-        <td>{item.id}</td>
-        <td>{item.class}</td>
-        <td>{item.student_name}</td>
-        <td>{item.roll}</td>
+        <td className="min-vw-10">{item.id}</td>
+        <td className="min-vw-10">{item.student_name}</td>
+        <td className="min-vw-10">{item.roll}</td>
         <td>
-          {/* <div className="entrytype-option justify-content-center">
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="options"
-                onclick="presetAttendance()"
-              />
-              <label className="form-check-label" for="options">
-                Present
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="options"
-                onclick="absentAttendance()"
-              />
-              <label className="form-check-label" for="options">
-                Absent
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="options"
-                onclick=""
-              />
-              <label className="form-check-label" for="options">
-                Escaped
-              </label>
-            </div>
-          </div> */}
-          <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex" }}>
+          <div className="entrytype-option justify-content-center">
+            <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex" }}>
+              <select
+                className="form-select"
+                size="4"
+                style={{ border: "none" }}
+                {...register("att")}
+              >
+                {state?.map((item) => (
+                  <option
+                    key={item.id}
+                    // onClick={() => setClasss(item.academicYear)}
+                    onChange={(e) => setAtt(e.target.value)}
+                    // style={{ height: "30px" }}
+                    className="w-auto p-2 text-justify"
+                    style={{ alignItems: "center" }}
+                  >
+                    {item}
+                  </option>
+                ))}
+              </select>
+              <div className="d-flex align-items-center m-2">
+                <button className="custom-btn btn-primary h-10" type="submit">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+          {/* <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex" }}>
             <select
               className="form-select"
               size="4"
@@ -99,7 +125,8 @@ const Attandence = ({ item, otherData }) => {
                   key={item.id}
                   // onClick={() => setClasss(item.academicYear)}
                   onChange={(e) => setAtt(e.target.value)}
-                  style={{ height: "10px" }}
+                  style={{ height: "30px" }}
+                  className=""
                 >
                   {item}
                 </option>
@@ -108,7 +135,7 @@ const Attandence = ({ item, otherData }) => {
             <button type="submit" className="btn">
               Submit
             </button>
-          </form>
+          </form> */}
         </td>
         <td></td>
       </tr>
