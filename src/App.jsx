@@ -81,7 +81,25 @@ function App() {
     }
   }, []);
 
-  if (isLoading) return <h1>Loading.....</h1>;
+  if (isLoading)
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <div
+          style={{ width: "5rem", height: "5rem", fontWeight: 900 }}
+          class="spinner-border text-light"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
 
   // const user = userProxy?.data.data;
 
