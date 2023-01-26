@@ -1,8 +1,6 @@
-import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 
 import Dasboard from "./Comonents/Dasboard";
-import Navbar from "./Comonents/Navbar";
 import Layout from "./pages/Layout";
 import { Routes, Route } from "react-router-dom";
 import NewUser from "./pages/NewUser";
@@ -16,7 +14,6 @@ import StudentIDCard from "./pages/Report/StudentIDCard";
 import StudentAttandance from "./pages/Attendance/StudentAttandance";
 import MonthlyFees from "./pages/MonthlyFees";
 
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
 import IncomeExpenceEntry from "./pages/IncomeExpenceEntry";
 import IncomeEntry from "./pages/IncomeEntry";
 import ExpenceEntry from "./pages/ExpenceEntry";
@@ -30,7 +27,6 @@ import ExamReport from "./pages/ExamReport";
 import MarkEntry from "./pages/MarkEntry";
 import MarkSheet from "./pages/MarkSheet";
 import TeacherStaff from "./pages/HR/TeacherStaff";
-import MonthlyEntry from "./pages/HR/MonthlyEntry";
 import SallerySheet from "./pages/HR/SallerySheet";
 import PaySallary from "./pages/HR/PaySallary";
 import SalaryReport from "./pages/HR/SalaryReport";
@@ -41,14 +37,11 @@ import AddBook from "./pages/Store/AddBook";
 import NewSale from "./pages/Store/NewSale";
 import ManageSale from "./pages/Store/ManageSale";
 import InvoiceDetail from "./pages/Store/InvoiceDetail";
-import Login from "./pages/login";
+import Login from "./pages/Login";
 import axios from "axios";
 import { serverUrl } from "../utils/config";
-import { useForm } from "react-hook-form";
-// import { useContext } from "react";
 import { useEffect } from "react";
 import NotAuthenticated from "./pages/NotAuthenticated";
-import TestPdf from "../pdf/TestPdf";
 import MashikFeeReport from "./pages/MashikFeeReport";
 import KhabarerFeeReport from "./pages/KhabarerFeeReport";
 import Fund from "./pages/Accounting/Fund";
@@ -59,6 +52,7 @@ import { useNavigate } from "react-router-dom";
 import BokeyaVortiFee from "./pages/BokeyaVortiFee";
 import VortFee from "./pages/VortFee";
 import ForgetPassword from "./Comonents/ForgetPassword";
+import { useQuery } from "react-query";
 
 function App() {
   const navigate = useNavigate();
