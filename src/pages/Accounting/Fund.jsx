@@ -5,7 +5,6 @@ import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 import { serverUrl } from "../../../utils/config";
 import { useState } from "react";
-import { G } from "@react-pdf/renderer";
 // import { serverUrl } from "../../utils/config";
 // import { serverUrl } from "../../utils/config";
 
