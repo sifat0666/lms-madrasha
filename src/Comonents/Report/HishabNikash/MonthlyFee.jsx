@@ -17,18 +17,17 @@ const MonthlyFee = ({ value, student, months }) => {
       {" "}
       <div>
         <div className="preview-page d-print-block" style={{ zIndex: 1 }}>
-          <span className="print-button d-print-none" onclick="window.print()">
-            <i className="bi bi-printer-fill"></i>
-          </span>
-
           <div className="pages-content">
             <div className="row">
               <div className="col-12">
                 <div
-                  className="table-responsive"
+                  // className="table-responsive"
                   data-pattern="priority-columns"
                 >
-                  <table className="table  bg-white table-bordered text-center report-table">
+                  <table
+                    style={{ width: "200px" }}
+                    className="table  bg-white table-bordered text-center report-table"
+                  >
                     <thead className="text-center">
                       <tr>
                         <td colspan="16">
