@@ -10,9 +10,6 @@ const StudentListGirl = ({ student, value }) => {
   return (
     <div>
       <div className="preview-page d-print-block">
-        <span className="print-button d-print-none" onclick="window.print()">
-          <i className="bi bi-printer-fill"></i>
-        </span>
         <div className="pages-title">
           <h5>{instituteInfo?.name}</h5>
           <p>{instituteInfo?.address}</p>

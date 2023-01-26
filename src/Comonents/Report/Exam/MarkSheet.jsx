@@ -4,9 +4,9 @@ import { useQuery } from "react-query";
 import { serverUrl } from "../../../../utils/config";
 
 const MarkSheet = ({ data, val, classData }) => {
-  // const { data: instituteInfo } = useQuery("instituteInfo", () =>
-  //   fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
-  // );
+  const { data: instituteInfo } = useQuery("instituteInfo", () =>
+    fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
+  );
   return (
     <div className="preview-page d-print-block" style={{ zIndex: 1 }}>
       {/* <span className="print-button d-print-none" onclick="window.print()">

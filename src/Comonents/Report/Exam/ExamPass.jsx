@@ -2,10 +2,10 @@ import React from "react";
 import { useQuery } from "react-query";
 import { serverUrl } from "../../../../utils/config";
 
-const ExamPass = ({ data, val, instituteInfo }) => {
-  //   const { data: instituteInfo } = useQuery("instituteInfo", () =>
-  //     fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
-  //   );
+const ExamPass = ({ data, val }) => {
+  const { data: instituteInfo } = useQuery("instituteInfo", () =>
+    fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
+  );
   console.log("va;", val);
   console.log("pass", data);
   return (

@@ -212,7 +212,7 @@ const ExamReport = () => {
                         <ExamPass
                           data={data}
                           val={val}
-                          instituteInfo={instituteInfo}
+                          // instituteInfo={instituteInfo}
                         />
                       ) : null}
                       {report === "৩. দস্তখতপত্র" ? (

@@ -16,11 +16,7 @@ const KhabarFee = ({ value, student, months }) => {
     <div>
       {" "}
       <div>
-        <div className="preview-page d-print-block" style={{ zIndex: 1 }}>
-          <span className="print-button d-print-none" onclick="window.print()">
-            <i className="bi bi-printer-fill"></i>
-          </span>
-
+        <div className=" d-print-block" style={{ zIndex: 1 }}>
           <div className="pages-content">
             <div className="row">
               <div className="col-12">
@@ -29,7 +25,7 @@ const KhabarFee = ({ value, student, months }) => {
                   data-pattern="priority-columns"
                 >
                   <table
-                    style={{ width: "900px" }}
+                    style={{ width: "750px" }}
                     className="table  bg-white table-bordered text-center report-table"
                   >
                     <thead className="text-center">

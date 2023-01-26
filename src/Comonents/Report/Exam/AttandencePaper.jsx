@@ -13,7 +13,7 @@ const Attandance = ({ data, val, classData }) => {
   // console.log(instituteInfo);
   return (
     <>
-      <div className="preview-page d-print-block" style={{ zIndex: 1 }}>
+      <div className=" d-print-block" style={{ zIndex: 1 }}>
         {/* <span className="print-button d-print-none" onclick="window.print()">
           <i className="bi bi-printer-fill"></i>
         </span> */}
@@ -23,10 +23,13 @@ const Attandance = ({ data, val, classData }) => {
           <div className="row">
             <div className="col-12">
               <div className="table-responsive" data-pattern="priority-columns">
-                <table className="table  bg-white table-bordered text-center report-table">
+                <table
+                  style={{ width: "750px" }}
+                  className="table  bg-white table-bordered text-center report-table"
+                >
                   <thead className="text-center">
                     <tr>
-                      <td colspan="4">
+                      <td colspan="3">
                         <div className="pages-title">
                           <h5>{instituteInfo?.name}</h5>
                           <p>{instituteInfo?.address}</p>
@@ -39,16 +42,13 @@ const Attandance = ({ data, val, classData }) => {
                       </td>
                     </tr>
                     <tr>
-                      <td colspan="4">
+                      <td colspan="5">
                         <div className="d-flex justify-content-between">
                           <div>
                             <strong>মারহালাঃ</strong>
                             {val?.class}
                           </div>
-                          <div>
-                            <strong>মারহালাঃ</strong>
-                            {val?.class}
-                          </div>
+
                           <div>
                             <strong>প্রিন্ট তারিখঃ</strong>
                             {dayjs().format("YYYY-MM-DD")}
@@ -60,13 +60,13 @@ const Attandance = ({ data, val, classData }) => {
                       <th>ক্রঃ</th>
                       <th>আইডি</th>
                       <th>পরীক্ষার্থী</th>
-                      <tr>
-                        {classData?.map((item) => (
-                          <th className="border-right border-dark p-2">
-                            {item.subject}
-                          </th>
-                        ))}
-                      </tr>
+                      {/* <th> দস্তখত </th> */}
+
+                      {classData?.map((item) => (
+                        <th className="border-right border-dark p-2">
+                          {item.subject}
+                        </th>
+                      ))}
                     </tr>
                   </thead>
                   <tbody>
