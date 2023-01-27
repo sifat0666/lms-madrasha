@@ -11,7 +11,7 @@ const FeeCollectionList = ({ data, val }) => {
   console.log(instituteInfo);
   return (
     <>
-      <div className="preview-page d-print-block" style={{ zIndex: 1 }}>
+      <div className=" d-print-block" style={{ zIndex: 1 }}>
         {/* <span className="print-button d-print-none" onclick="window.print()">
           <i className="bi bi-printer-fill"></i>
         </span> */}
@@ -20,8 +20,11 @@ const FeeCollectionList = ({ data, val }) => {
           <div className="row my-3 justify-content-center align-items-center d-print-none"></div>
           <div className="row">
             <div className="col-12">
-              <div className="table-responsive" data-pattern="priority-columns">
-                <table className="table  bg-white table-bordered text-center report-table">
+              <div className="" data-pattern="priority-columns">
+                <table
+                  style={{ width: "100%" }}
+                  className="table  bg-white table-bordered text-center report-table"
+                >
                   <thead className="text-center">
                     <tr>
                       <td colspan="4">

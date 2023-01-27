@@ -25,7 +25,7 @@ const KhabarFee = ({ value, student, months }) => {
                   data-pattern="priority-columns"
                 >
                   <table
-                    style={{ width: "750px" }}
+                    style={{ width: "100%" }}
                     className="table  bg-white table-bordered text-center report-table"
                   >
                     <thead className="text-center">

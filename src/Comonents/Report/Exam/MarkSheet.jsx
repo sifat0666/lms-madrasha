@@ -8,7 +8,7 @@ const MarkSheet = ({ data, val, classData }) => {
     fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
   );
   return (
-    <div className="preview-page d-print-block" style={{ zIndex: 1 }}>
+    <div className=" d-print-block" style={{ zIndex: 1 }}>
       {/* <span className="print-button d-print-none" onclick="window.print()">
           <i className="bi bi-printer-fill"></i>
         </span> */}
@@ -18,7 +18,10 @@ const MarkSheet = ({ data, val, classData }) => {
         <div className="row">
           <div className="col-12">
             <div className="table-responsive" data-pattern="priority-columns">
-              <table className="table  bg-white table-bordered text-center report-table">
+              <table
+                style={{ width: "100%" }}
+                className="table  bg-white table-bordered text-center report-table"
+              >
                 <thead className="text-center">
                   <tr>
                     <td colspan="4">

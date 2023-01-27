@@ -8,6 +8,7 @@ import { serverUrl } from "../../utils/config";
 
 const InstituteInfo = () => {
   const { register, handleSubmit } = useForm();
+  const { register: register2, handleSubmit: handleSubmit2 } = useForm();
 
   const [ls, setls] = useState();
   const [mum, setmum] = useState();
@@ -22,11 +23,84 @@ const InstituteInfo = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
+      console.log(data?.data);
+      toast.success("Institute info submitted");
+      // setStudentids(data?.data.id);
+    },
+  });
+
+  const NajemeTalimMutauion = useMutation({
+    mutationFn: (data) => {
+      return axios.post(
+        "https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload",
+        data
+      );
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
       // toast.success("Institute info submitted");
+      setnt(data?.data.secure_url);
       console.log(data?.data);
       // setStudentids(data?.data.id);
     },
   });
+  const logoMutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(
+        "https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload",
+        data
+      );
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      // .then((response) => setls(response.data.secure_url));
+
+      console.log(data?.data);
+      setls(data?.data.secure_url);
+      // setStudentids(data?.data.id);
+    },
+  });
+  const mumtamimMutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(
+        "https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload",
+        data
+      );
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      // toast.success("Institute info submitted");
+      console.log(data?.data);
+      setmum(data?.data.secure_url);
+      // setStudentids(data?.data.id);
+    },
+  });
+
+  const onSubmit2 = (data) => {
+    const acaLogo = new FormData();
+    const mumSign = new FormData();
+    const naSign = new FormData();
+    acaLogo.append("file", data.logo[0]);
+    mumSign.append("file", data.mumtamim_sign[0]);
+    naSign.append("file", data.najeme_talim_sign[0]);
+    acaLogo.append("upload_preset", "hwcadnsm");
+    mumSign.append("upload_preset", "hwcadnsm");
+    naSign.append("upload_preset", "hwcadnsm");
+
+    logoMutation.mutate(acaLogo);
+    mumtamimMutation.mutate(mumSign);
+    NajemeTalimMutauion.mutate(naSign);
+    toast.success("images submited");
+  };
 
   const onSubmit = async (data) => {
     // alert(JSON.stringify(data));
@@ -41,29 +115,8 @@ const InstituteInfo = () => {
       najeme_talim_sign: nt,
     };
 
-    const acaLogo = new FormData();
-    const mumSign = new FormData();
-    const naSign = new FormData();
-    acaLogo.append("file", data.logo[0]);
-    mumSign.append("file", data.mumtamim_sign[0]);
-    naSign.append("file", data.najeme_talim_sign[0]);
-    acaLogo.append("upload_preset", "hwcadnsm");
-    mumSign.append("upload_preset", "hwcadnsm");
-    naSign.append("upload_preset", "hwcadnsm");
-    axios
-      .post("https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload", acaLogo)
-      .then((response) => setls(response.data.secure_url));
-
-    axios
-      .post("https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload", mumSign)
-      .then((response) => setmum(response.data.secure_url));
-
-    axios
-      .post("https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload", naSign)
-      .then((response) => setnt(response.data.secure_url));
-
     console.log(params);
-    mutation.mutate(params);
+    setTimeout(() => mutation.mutate(params), 2000);
   };
 
   return (
@@ -255,48 +308,63 @@ const InstituteInfo = () => {
                             />
                           </div>
                         </div>
-                        <div class="mb-3">
-                          <label
-                            for="formFile"
-                            class="col-sm-2 col-form-label info-lable"
+                        <form onSubmit={handleSubmit2(onSubmit2)}>
+                          <div class="mb-3">
+                            <label
+                              for="formFile"
+                              class="col-sm-2 col-form-label info-lable"
+                            >
+                              প্রতিষ্ঠানের লোগো:
+                            </label>
+                            <input
+                              class="col-sm-2 col-form-label info-lable"
+                              type="file"
+                              id="formFile"
+                              {...register2("logo")}
+                            />
+                          </div>{" "}
+                          <div class="mb-3">
+                            <label
+                              for="formFile"
+                              class="col-sm-2 col-form-label info-lable"
+                            >
+                              মুহতামিমের স্বাক্ষর:
+                            </label>
+                            <input
+                              class="col-sm-2 col-form-label info-lable"
+                              type="file"
+                              {...register2("mumtamim_sign")}
+                              id="formFile"
+                            />
+                          </div>{" "}
+                          <div class="mb-3">
+                            <label
+                              for="formFile"
+                              class="col-sm-2 col-form-label info-lable"
+                            >
+                              নাজেমে তালি: স্বাক্ষর:
+                            </label>
+                            <input
+                              class="col-sm-2 col-form-label info-lable"
+                              type="file"
+                              {...register2("najeme_talim_sign")}
+                              id="formFile"
+                            />
+                          </div>
+                          <div
+                            className="mb-3"
+                            style={{ width: "200px", marginLeft: "200px" }}
                           >
-                            প্রতিষ্ঠানের লোগো:
-                          </label>
-                          <input
-                            class="col-sm-2 col-form-label info-lable"
-                            type="file"
-                            id="formFile"
-                            {...register("logo")}
-                          />
-                        </div>{" "}
-                        <div class="mb-3">
-                          <label
-                            for="formFile"
-                            class="col-sm-2 col-form-label info-lable"
-                          >
-                            মুহতামিমের স্বাক্ষর:
-                          </label>
-                          <input
-                            class="col-sm-2 col-form-label info-lable"
-                            type="file"
-                            {...register("mumtamim_sign")}
-                            id="formFile"
-                          />
-                        </div>{" "}
-                        <div class="mb-3">
-                          <label
-                            for="formFile"
-                            class="col-sm-2 col-form-label info-lable"
-                          >
-                            নাজেমে তালি: স্বাক্ষর:
-                          </label>
-                          <input
-                            class="col-sm-2 col-form-label info-lable"
-                            type="file"
-                            {...register("najeme_talim_sign")}
-                            id="formFile"
-                          />
-                        </div>
+                            {" "}
+                            <button
+                              className="custom-btn btn-primary"
+                              type="submit"
+                            >
+                              Save images first
+                            </button>
+                          </div>
+                        </form>
+
                         <div className="button-group">
                           <button
                             className="custom-btn btn-primary"
@@ -309,6 +377,7 @@ const InstituteInfo = () => {
                           </button>
                         </div>
                       </form>
+
                       <div className="upload-container">
                         <div className="row">
                           <div className="col-lg-4 col-sm-12 col-md-6">
