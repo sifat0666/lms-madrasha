@@ -220,17 +220,6 @@ const ResultCondition = () => {
                                         ))}
                                       </select>
                                     </div>
-                                    <div className="col-2">
-                                      <span className="addbutton">
-                                        <a
-                                          href="#"
-                                          data-bs-toggle="modal"
-                                          data-bs-target="#membertype"
-                                        >
-                                          <i className="bi bi-plus-circle-fill"></i>
-                                        </a>
-                                      </span>
-                                    </div>
                                   </div>
                                 </div>
                                 <div className="col-lg-3 col-md-3 col-12">
@@ -654,11 +643,6 @@ const ResultCondition = () => {
                                     <th>ডিভিশন-4</th>
 
                                     <th>
-                                      <span className="action-edit">
-                                        <i className="bi bi-pencil-square"></i>
-                                      </span>
-                                    </th>
-                                    <th>
                                       <span className="action-delete">
                                         <i className="bi bi-trash3"></i>
                                       </span>
@@ -678,11 +662,7 @@ const ResultCondition = () => {
                                       <td>{item.case3_div}</td>
                                       <td>{item.case4}</td>
                                       <td>{item.case4_div} </td>
-                                      <td>
-                                        <span className="action-edit">
-                                          <i className="bi bi-pencil-square"></i>
-                                        </span>
-                                      </td>
+
                                       <td>
                                         <span
                                           onClick={() => onDelete(item.id)}
@@ -953,11 +933,7 @@ const ResultCondition = () => {
                                           <th>কিতাব</th>
                                           {/* <th>কিতাব আরাবী</th> */}
                                           <th>পাশ নাম্বার</th>
-                                          <th>
-                                            <span className="action-edit">
-                                              <i className="bi bi-pencil-square"></i>
-                                            </span>
-                                          </th>
+
                                           <th>
                                             <span className="action-delete">
                                               <i className="bi bi-trash3"></i>
@@ -975,11 +951,7 @@ const ResultCondition = () => {
                                             <td>{item.book}</td>
                                             {/* <td>{item.exam_namea}</td> */}
                                             <td>{item.pass_mark}</td>
-                                            <td>
-                                              <span className="action-edit">
-                                                <i className="bi bi-pencil-square"></i>
-                                              </span>
-                                            </td>
+
                                             <td>
                                               <span className="action-delete">
                                                 <i className="bi bi-trash3"></i>

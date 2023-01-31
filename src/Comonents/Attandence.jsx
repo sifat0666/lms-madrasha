@@ -33,7 +33,7 @@ const Attandence = ({ item, otherData }) => {
 
       console.log("msg", msg);
       if (data?.data.attandance === "Absent") {
-        if (msg.absent) {
+        if (true) {
           sendSms(
             student?.data.phn_no,
             `${student?.data.student_name} আজকে ${data?.data.date} তারিখে অনুপস্থিত রয়েছে`
@@ -41,7 +41,7 @@ const Attandence = ({ item, otherData }) => {
         }
       }
       if (data?.data.attandance === "Preset") {
-        if (msg.present) {
+        if (true) {
           sendSms(
             student?.data.phn_no,
             `${student?.data.student_name} আজকে ${data?.data.date} তারিখে উপস্থিত রয়েছে`
@@ -49,7 +49,7 @@ const Attandence = ({ item, otherData }) => {
         }
       }
       if (data?.data.attandance === "Escaped") {
-        if (msg.escaped) {
+        if (true) {
           sendSms(
             student?.data.phn_no,
             `${student?.data.student_name} আজকে ${data?.data.date} তারিখে ক্লাস থেকে পালিয়েছে`
@@ -84,6 +84,7 @@ const Attandence = ({ item, otherData }) => {
         <td className="min-vw-10">{item.id}</td>
         <td className="min-vw-10">{item.student_name}</td>
         <td className="min-vw-10">{item.roll}</td>
+        <td className="min-vw-10">{item.phn_no}</td>
         <td>
           <div className="entrytype-option justify-content-center">
             <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex" }}>

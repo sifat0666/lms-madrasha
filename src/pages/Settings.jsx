@@ -30,7 +30,8 @@ const Settings = () => {
   });
 
   const onSubmit = (data) => {
-    mutation.mutate(data);
+    console.log(data);
+    // mutation.mutate(data);
   };
 
   return (
@@ -47,6 +48,16 @@ const Settings = () => {
                     </div>
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <div className="bg-white d-flex flex-column justify-content-center align-items-center ">
+                        <div class="form-group">
+                          <textarea
+                            {...register("vorti_msg")}
+                            type="email"
+                            class="form-control"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                            placeholder="ভর্তি ফি পরবর্তী মেসেজ"
+                          />
+                        </div>
                         <div class="form-check form-switch p-3">
                           <input
                             {...register("vorti")}
@@ -61,6 +72,16 @@ const Settings = () => {
                           >
                             ভর্তি এর মেসেজ যাবে
                           </label>
+                        </div>
+                        <div class="form-group">
+                          <textarea
+                            {...register("mashik_msg")}
+                            type="email"
+                            class="form-control"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                            placeholder="মাসিক ফি গ্রহন পরবর্তী মেসেজ"
+                          />
                         </div>
                         <div class="form-check form-switch p-3">
                           <input
@@ -77,6 +98,16 @@ const Settings = () => {
                             মাসিক ফি এর মেসেজ যাবে
                           </label>
                         </div>
+                        <div class="form-group">
+                          <textarea
+                            {...register("khabar_msg")}
+                            type="email"
+                            class="form-control"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                            placeholder="খাবার ফি গ্রহন পরবর্তী মেসেজ"
+                          />
+                        </div>
                         <div class="form-check form-switch p-3">
                           <input
                             {...register("khabar")}
@@ -91,6 +122,16 @@ const Settings = () => {
                           >
                             খাবার ফি এর মেসেজ যাবে
                           </label>
+                        </div>
+                        <div class="form-group">
+                          <textarea
+                            {...register("present_msg")}
+                            type="email"
+                            class="form-control"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                            placeholder="উপস্থিত এর মেসেজ"
+                          />
                         </div>
                         <div class="form-check form-switch p-3">
                           <input
@@ -107,6 +148,16 @@ const Settings = () => {
                             উপস্থিত এর মেসেজ যাবে
                           </label>
                         </div>
+                        <div class="form-group">
+                          <textarea
+                            {...register("absent_msg")}
+                            type="email"
+                            class="form-control"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                            placeholder="অনুপস্থিত এর মেসেজ"
+                          />
+                        </div>
                         <div class="form-check form-switch p-3">
                           <input
                             {...register("absent")}
@@ -121,6 +172,16 @@ const Settings = () => {
                           >
                             অনুপস্থিত এর মেসেজ যাবে
                           </label>
+                        </div>
+                        <div class="form-group">
+                          <textarea
+                            {...register("escaped_msg")}
+                            type="email"
+                            class="form-control"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                            placeholder="পালিয়ে গেলে এর মেসেজ"
+                          />
                         </div>
                         <div class="form-check form-switch p-3">
                           <input

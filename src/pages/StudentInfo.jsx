@@ -8,7 +8,32 @@ import { useState } from "react";
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 50,
+  },
+  preview: {
+    marginTop: 50,
+    display: "flex",
+    flexDirection: "column",
+  },
+  image: { maxWidth: "144px", maxHeight: "144px" },
+  delete: {
+    cursor: "pointer",
+    padding: 15,
+    background: "red",
+    color: "white",
+    border: "none",
+  },
+};
+
 const StudentInfo = () => {
+  const [student, setStudent] = useState();
+
   const { data: msg } = useQuery("msg", () =>
     fetch(`${serverUrl}/api/msg/${1}`).then((res) => res.json())
   );
@@ -21,10 +46,23 @@ const StudentInfo = () => {
   let month = date.getMonth() + 1;
   let year = date.getFullYear();
 
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/student/${id}`);
+    location.reload();
+  };
+
+  const imageChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImage(e.target.files[0]);
+    }
+  };
+
   // This arrangement can be altered based on how we want the date's format to appear.
   let currentDate = `${day}-${month}-${year}`;
   const ref = useRef();
   const { register, handleSubmit } = useForm();
+  const { register: register2, handleSubmit: handleSubmit2 } = useForm();
+  const { register: register3, handleSubmit: handleSubmit3 } = useForm();
   const mutation = useMutation({
     mutationFn: (newUser) => {
       return axios.post(`${serverUrl}/api/student`, newUser);
@@ -32,9 +70,10 @@ const StudentInfo = () => {
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);
       toast.error(error.response.data.message);
+      console.log(error);
     },
     onSuccess: (data) => {
-      toast.success("student registered successfully");
+      toast.success(`student registered successfully, ID ${data?.data.id}`);
       console.log("data student", data?.data.id);
       setStudentids(data?.data.id);
     },
@@ -56,6 +95,21 @@ const StudentInfo = () => {
     },
   });
 
+  const crustomStudent = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/custom-student-call`, data);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log("userdata", data.data);
+      setStudent(data?.data);
+      // window.location.reload(true);
+    },
+  });
+
   const submitFee = useMutation({
     mutationFn: (data) => {
       return axios.post(`${serverUrl}/api/pay-fees`, data);
@@ -68,7 +122,7 @@ const StudentInfo = () => {
       toast.success("fee submitted");
 
       console.log("msg", msg);
-      if (msg.vorti) {
+      if (true) {
         sendSms(
           value?.phn_no,
           `${value.student_name} জমা দিয়েছে ${data?.data.ammount} টাকা ভর্তি ফি`
@@ -76,11 +130,11 @@ const StudentInfo = () => {
       }
     },
   });
-  const { data: me, isLoading } = useQuery(["me"]);
+  const { data: me } = useQuery(["me"]);
 
   // console.log("student", me?.data);
 
-  console.log("first", fees);
+  // console.log("first", fees);
 
   const { data: marhalaClass } = useQuery("marhalaclass", () =>
     fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
@@ -91,36 +145,41 @@ const StudentInfo = () => {
   const [value, setValue] = useState({});
 
   const onSubmit = async (value) => {
-    console.log("studetn", value);
-
     const data = `${value.gender}_${value.abashik_onabashik}_${value.old_new}`;
-    console.log(data);
 
     const imageData = new FormData();
-    imageData.append("file", value.image_data[0]);
+    imageData.append("file", image);
     imageData.append("upload_preset", "hwcadnsm");
-    console.log(imageData);
-    axios
-      .post("https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload", imageData)
-      .then((response) => setImage(response.data.secure_url));
+    const response = await axios.post(
+      "https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload",
+      imageData
+    );
 
-    mutation.mutate({ ...value, notun_puraton: value.old_new, image: image });
+    console.log("img", response?.data.secure_url);
+
+    mutation.mutate({
+      ...value,
+      notun_puraton: value.old_new,
+      image: response?.data.secure_url,
+    });
 
     const params = {
       state: data,
     };
     params.academic_year = value.session;
     params.class_name = value.class;
-    console.log("params", params);
+    // console.log("params", params);
     Fee.mutate({ ...params, fee_name: "ভর্তি ফি" });
     setValue(value);
   };
 
-  const { register: register2, handleSubmit: handleSubmit2 } = useForm();
+  const onSubmit3 = (data) => {
+    crustomStudent.mutate(data);
+  };
 
   const [feeVal, setFeeVal] = useState();
 
-  console.log("feeVal", feeVal);
+  // console.log("feeVal", feeVal);
 
   const onSubmit2 = (value) => {
     value.determined_fee = fees;
@@ -267,7 +326,7 @@ const StudentInfo = () => {
                           </div>
                         </div>
                         <div className="row">
-                          <div className="col-lg-7 col-md-12 col-12">
+                          {/* <div className="col-lg-7 col-md-12 col-12">
                             <div className="row mb-1 mb-lg-3">
                               <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                                 ছাত্রের আইডিঃ
@@ -284,7 +343,7 @@ const StudentInfo = () => {
                                 />
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                           <div className="col-lg-5 col-md-12 col-12">
                             <div className="row mb-1 mb-lg-3">
                               <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
@@ -580,7 +639,6 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
-                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="NID/জন্ম নিবন্ধন নং"
@@ -619,7 +677,6 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
-                                  required
                                   type="text"
                                   className="form-control"
                                   placeholder="রক্তের গ্রুপঃ"
@@ -634,34 +691,65 @@ const StudentInfo = () => {
                           <div className="col-lg-7 col-12 col-md-12">
                             <div className="row mb-lg-3 mb-1">
                               <label className="col-sm-4 col-form-label info-lable">
-                                এস. এম. এস যাবেঃ
-                                <i>*</i>
+                                মোবাইল নাম্বার <i>*</i>
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
                                   required
                                   type="text"
                                   className="form-control"
-                                  placeholder="এস. এম. এস যাবে"
+                                  placeholder="মোবাইল নাম্বার "
                                   {...register("phn_no")}
                                 />
                               </div>
                             </div>
                           </div>
-                          <div class="mb-3">
-                            <label
-                              for="formFile"
-                              class="col-sm-2 col-form-label info-lable"
-                            >
-                              শিক্ষার্থীর ছবি:
-                            </label>
-                            <input
-                              class="col-sm-2 col-form-label info-lable"
-                              type="file"
-                              id="formFile"
-                              {...register("image_data")}
-                            />
-                          </div>{" "}
+                          <div className="file-upload">
+                            <div className="file-image">
+                              {image ? (
+                                <div style={styles.preview}>
+                                  <div className="file-title">
+                                    শিক্ষার্থীর ছবি
+                                  </div>
+                                  <img
+                                    src={URL.createObjectURL(image)}
+                                    style={styles.image}
+                                    alt="Thumb"
+                                  />
+                                </div>
+                              ) : (
+                                <img
+                                  src="https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg"
+                                  alt=""
+                                  width="144"
+                                  height="144"
+                                />
+                              )}
+
+                              <div className="mt-2">
+                                144px
+                                <i className="bi bi-x"></i>
+                                144px
+                              </div>
+                            </div>
+                            <div className="upload-button">
+                              <div>
+                                <input
+                                  className="my-4"
+                                  accept="image/*"
+                                  type="file"
+                                  onChange={imageChange}
+                                />
+                              </div>
+                              <button
+                                onClick={() => setImage()}
+                                style={styles.delete}
+                                // className="upload-btn"
+                              >
+                                Remove
+                              </button>
+                            </div>
+                          </div>
                           <div className="col-lg-5 col-12 col-md-12 m-5">
                             <div class="form-check form-switch">
                               <input
@@ -800,116 +888,83 @@ const StudentInfo = () => {
                   </div>
                   <div className="col-lg-5 col-12 col-md-12">
                     <div className="table-data mt-4">
-                      <div className="row form-group searchbar">
-                        <div className="col-sm-6 position-relative search">
-                          <i className="bi bi-search search-icon"></i>
-                          <input
-                            required
-                            className="form-control"
-                            type="search"
-                            placeholder="Search"
-                          />
-                        </div>
-                      </div>
                       <div
                         className="table-responsive"
                         data-pattern="priority-columns"
                       >
+                        <form
+                          className="row"
+                          onSubmit={handleSubmit3(onSubmit3)}
+                        >
+                          <div>
+                            <select
+                              {...register3("session")}
+                              className="form-select"
+                            >
+                              <option disabled>শিক্ষাবর্ষ নির্বাচন করুন</option>
+                              {academicYear?.data.map((item) => (
+                                <option key={item.id}>
+                                  {item.academic_year}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          <div>
+                            <select
+                              {...register3("class")}
+                              className="form-select"
+                            >
+                              <option disabled>শ্রেণী নির্বাচন করুন</option>
+                              {marhalaClass?.data.map((item) => (
+                                <option
+                                  key={item.id}
+                                  // onClick={() => setClasss(item.academicYear)}
+                                >
+                                  {item.class_name}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <button className="btn btn-success btn-sm">
+                            খুজুন
+                          </button>
+                        </form>
                         <table
                           id="tech-companies-1"
                           className="table  bg-white table-bordered text-center"
                         >
                           <thead className="text-center accounts-table-head">
+                            {" "}
                             <tr>
-                              <th>
-                                <select className="form-select">
-                                  <option value=""></option>
-                                  <option>তাকমিল</option>
-                                  <option>মক্তব</option>
-                                  <option>হিফজুল কুরআন</option>
-                                  <option>পরীক্ষামূলক মারহালা</option>
-                                </select>
-                              </th>
-                              <th>
-                                <select className="form-select">
-                                  <option value=""></option>
-                                  <option>তাকমিল</option>
-                                  <option>মক্তব</option>
-                                  <option>হিফজুল কুরআন</option>
-                                  <option>পরীক্ষামূলক মারহালা</option>
-                                </select>
-                              </th>
-                              <th>
-                                <select className="form-select">
-                                  <option value=""></option>
-                                  <option>তাকমিল</option>
-                                  <option>মক্তব</option>
-                                  <option>হিফজুল কুরআন</option>
-                                  <option>পরীক্ষামূলক মারহালা</option>
-                                </select>
-                              </th>
-                              <th>
-                                <button className="btn btn-success btn-sm">
-                                  খুজুন
-                                </button>
-                              </th>
+                              <td>ID</td>
+                              <th>নাম</th>
+                              <th>রোল</th>
+                              <td>
+                                {" "}
+                                <span className="action-delete">
+                                  <i className="bi bi-trash3"></i>
+                                </span>
+                              </td>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                            </tr>
-                            <tr>
-                              <td></td>
-                              <th></th>
-                              <th></th>
-                              <td></td>
-                            </tr>
+                            {student?.map((item) => (
+                              <tr key={item.id}>
+                                <td>{item.id}</td>
+                                <th>{item.student_name}</th>
+                                <th>{item.roll}</th>
+                                <td>
+                                  {" "}
+                                  <span
+                                    onClick={(id) => onDelete(item.id)}
+                                    className="action-delete"
+                                  >
+                                    <i className="bi bi-trash3"></i>
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
                         </table>
                       </div>
@@ -1018,7 +1073,6 @@ const StudentInfo = () => {
                             </label>
                             <div className="col-8">
                               <input
-                                required
                                 type="text"
                                 className="form-control"
                                 placeholder="কর্তন"
@@ -1033,7 +1087,6 @@ const StudentInfo = () => {
                             </label>
                             <div className="col-8">
                               <input
-                                required
                                 type="text"
                                 className="form-control"
                                 placeholder="মন্তব্য"

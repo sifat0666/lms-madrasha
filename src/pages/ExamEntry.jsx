@@ -257,11 +257,7 @@ const ExamEntry = () => {
                             <th>আইডি</th>
                             <th>পরীক্ষার নাম</th>
                             <th>ফি</th>
-                            <th>
-                              <span className="action-edit">
-                                <i className="bi bi-pencil-square"></i>
-                              </span>
-                            </th>
+
                             <th>
                               <span className="action-delete">
                                 <i className="bi bi-trash3"></i>
@@ -275,11 +271,7 @@ const ExamEntry = () => {
                               <td>{item.id}</td>
                               <td>{item.exam_name}</td>
                               <td>{item.fee}</td>
-                              <td>
-                                <span className="action-edit">
-                                  <i className="bi bi-pencil-square"></i>
-                                </span>
-                              </td>
+
                               <td>
                                 <span
                                   onClick={(id) => onDelete(item.id)}

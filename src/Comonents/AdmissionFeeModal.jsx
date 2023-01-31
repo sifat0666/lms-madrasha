@@ -107,15 +107,16 @@ const AdmissionFeeModal = ({ item }) => {
           {item.vorti_fee_dibe === 0 && <span>মৌকুফ</span>}
         </td>
         <td>
-          {" "}
-          <a
-            href="#"
-            className="custom-btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#admissonfees"
-          >
-            Pay fees
-          </a>
+          {item.vorti_fee_dibe === 1 && (
+            <a
+              href="#"
+              className="custom-btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#admissonfees"
+            >
+              Pay fees
+            </a>
+          )}{" "}
           <div
             className="modal fade"
             id="admissonfees"

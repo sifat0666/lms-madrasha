@@ -1,6 +1,14 @@
 import React from "react";
+import { useQuery } from "react-query";
+import { serverUrl } from "../../utils/config";
 
 const Dasboard = () => {
+  const { data } = useQuery("dashboard", () =>
+    fetch(`${serverUrl}/api/dashboard`).then((res) => res.json())
+  );
+
+  console.log(data);
+
   return (
     <div>
       {" "}
@@ -10,16 +18,20 @@ const Dasboard = () => {
           <div className="row">
             <div className="col-lg-8">
               <div className="grid-container">
-                <div className="grid-card">Total Users</div>
-                <div className="grid-card">Students</div>
-                <div className="grid-card">Group</div>
-                <div className="grid-card">Subject</div>
-                <div className="grid-card">Section</div>
-                <div className="grid-card">Class</div>
-                <div className="grid-card">Subjects</div>
-                <div className="grid-card">Report</div>
-                <div className="grid-card">Group</div>
-                <div className="grid-card">Subject</div>
+                <div className="grid-card">Total Users: {data?.total_user}</div>
+                <div className="grid-card">
+                  Total Students: {data?.total_student}
+                </div>
+                {/* <div className="grid-card">Group</div> */}
+                {/* <div className="grid-card">Subject</div> */}
+                {/* <div className="grid-card">Section</div> */}
+                <div className="grid-card">
+                  Total Class: {data?.total_class}
+                </div>
+                {/* <div className="grid-card">Subjects</div> */}
+                {/* <div className="grid-card">Report</div> */}
+                {/* <div className="grid-card">Group</div> */}
+                {/* <div className="grid-card">Subject</div> */}
               </div>
             </div>
             <div className="col-lg-4 company-about">

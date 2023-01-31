@@ -25,7 +25,12 @@ const Students = () => {
   });
 
   const onSubmit = async (value) => {
-    mutation.mutate(value);
+    mutation.mutate({ ...value, academic_year_id: "filled" });
+  };
+
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/academicyear/${id}`);
+    location.reload();
   };
 
   return (
@@ -59,21 +64,7 @@ const Students = () => {
                             />
                           </div>
                         </div> */}
-                        <div className="row mb-3">
-                          <label className="col-sm-12 col-md-12 col-lg-4 col-form-label info-lable">
-                            আইডি
-                            <i>*</i>
-                          </label>
-                          <div className="col-sm-12 col-md-12 col-lg-8">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="শিক্ষাবর্ষ"
-                              required
-                              {...register("academic_year_id")}
-                            />
-                          </div>
-                        </div>
+
                         <div className="row mb-3">
                           <label className="col-sm-12 col-md-12 col-lg-4 col-form-label info-lable">
                             শিক্ষাবর্ষের নাম
@@ -259,15 +250,24 @@ const Students = () => {
                   <th scope="col">শিক্ষাবর্ষের নাম</th>
                   <th scope="col">বাংলা সন</th>
                   <th scope="col">আরবী হিজরী</th>
+                  <span className="action-delete">
+                    <i className="bi bi-trash3"></i>
+                  </span>
                 </tr>
               </thead>
               <tbody>
                 {data?.data.map((item) => (
                   <tr key={item.id}>
-                    <th scope="row">{item.academic_year_id}</th>
+                    <th scope="row">{item.id}</th>
                     <td>{item.academic_year}</td>
                     <td>{item.bangla_year}</td>
                     <td>{item.arabic_year}</td>
+                    <span
+                      onClick={(id) => onDelete(item.id)}
+                      className="action-delete"
+                    >
+                      <i className="bi bi-trash3"></i>
+                    </span>
                   </tr>
                 ))}
               </tbody>

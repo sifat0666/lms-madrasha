@@ -6,100 +6,99 @@ import { toast } from "react-hot-toast";
 import { useMutation } from "react-query";
 import { serverUrl } from "../../utils/config";
 
+// Just some styles
+const styles = {
+  container: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: 50,
+  },
+  preview: {
+    marginTop: 50,
+    display: "flex",
+    flexDirection: "column",
+  },
+  image: { maxWidth: "144px", maxHeight: "144px" },
+  delete: {
+    cursor: "pointer",
+    padding: 15,
+    background: "red",
+    color: "white",
+    border: "none",
+  },
+};
+
 const InstituteInfo = () => {
   const { register, handleSubmit } = useForm();
   const { register: register2, handleSubmit: handleSubmit2 } = useForm();
 
   const [ls, setls] = useState();
+  const [lslink, setlslink] = useState();
   const [mum, setmum] = useState();
+  const [mumlink, setmumlink] = useState();
   const [nt, setnt] = useState();
+  const [ntlink, setntlink] = useState();
+
+  // const [selectedImage, setSelectedImage] = useState();
+  // const [selectedImage2, setSelectedImage2] = useState();
+  // const [selectedImage3, setSelectedImage3] = useState();
 
   const mutation = useMutation({
     mutationFn: (newUser) => {
       return axios.post(`${serverUrl}/api/institute-info`, newUser);
     },
     onError: (error, variable, context) => {
-      // console.log(error.response.data.message);
-      toast.error(error.response.data.message);
+      console.log(error.response.data.message);
+      // toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
-      console.log(data?.data);
       toast.success("Institute info submitted");
-      // setStudentids(data?.data.id);
-    },
-  });
-
-  const NajemeTalimMutauion = useMutation({
-    mutationFn: (data) => {
-      return axios.post(
-        "https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload",
-        data
-      );
-    },
-    onError: (error, variable, context) => {
-      // console.log(error.response.data.message);
-      toast.error(error.response.data.message);
-    },
-    onSuccess: (data) => {
-      // toast.success("Institute info submitted");
-      setnt(data?.data.secure_url);
       console.log(data?.data);
       // setStudentids(data?.data.id);
     },
   });
-  const logoMutation = useMutation({
-    mutationFn: (data) => {
-      return axios.post(
-        "https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload",
-        data
-      );
-    },
-    onError: (error, variable, context) => {
-      // console.log(error.response.data.message);
-      toast.error(error.response.data.message);
-    },
-    onSuccess: (data) => {
-      // .then((response) => setls(response.data.secure_url));
+  const lsChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setls(e.target.files[0]);
+    }
+  };
+  const mumChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setmum(e.target.files[0]);
+    }
+  };
+  const ntChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setnt(e.target.files[0]);
+    }
+  };
 
-      console.log(data?.data);
-      setls(data?.data.secure_url);
-      // setStudentids(data?.data.id);
-    },
-  });
-  const mumtamimMutation = useMutation({
-    mutationFn: (data) => {
-      return axios.post(
-        "https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload",
-        data
-      );
-    },
-    onError: (error, variable, context) => {
-      // console.log(error.response.data.message);
-      toast.error(error.response.data.message);
-    },
-    onSuccess: (data) => {
-      // toast.success("Institute info submitted");
-      console.log(data?.data);
-      setmum(data?.data.secure_url);
-      // setStudentids(data?.data.id);
-    },
-  });
-
-  const onSubmit2 = (data) => {
+  const handleImageSubmit = () => {
+    console.log("ls", ls);
     const acaLogo = new FormData();
     const mumSign = new FormData();
     const naSign = new FormData();
-    acaLogo.append("file", data.logo[0]);
-    mumSign.append("file", data.mumtamim_sign[0]);
-    naSign.append("file", data.najeme_talim_sign[0]);
+    acaLogo.append("file", ls);
+    mumSign.append("file", mum);
+    naSign.append("file", nt);
     acaLogo.append("upload_preset", "hwcadnsm");
     mumSign.append("upload_preset", "hwcadnsm");
     naSign.append("upload_preset", "hwcadnsm");
+    axios
+      .post("https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload", acaLogo)
+      .then((response) => setlslink(response?.data?.secure_url));
 
-    logoMutation.mutate(acaLogo);
-    mumtamimMutation.mutate(mumSign);
-    NajemeTalimMutauion.mutate(naSign);
-    toast.success("images submited");
+    axios
+      .post("https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload", mumSign)
+      .then((response) => setmumlink(response?.data?.secure_url));
+
+    axios
+      .post("https://api.cloudinary.com/v1_1/dlmyqzumr/image/upload", naSign)
+      .then((response) => setntlink(response?.data?.secure_url));
+
+    // console.log(params);?
   };
 
   const onSubmit = async (data) => {
@@ -107,16 +106,14 @@ const InstituteInfo = () => {
     // console.log("logo", logo);
     // console.log(data);
     // console.log(data.logo[0]);
-
     const params = {
-      ...data,
-      logo: ls,
-      mumtamim_sign: mum,
-      najeme_talim_sign: nt,
+      logo: lslink,
+      mumtamim_sign: mumlink,
+      najeme_talim_sign: ntlink,
     };
-
     console.log(params);
-    setTimeout(() => mutation.mutate(params), 2000);
+    // console.log(params);
+    mutation.mutate({ ...data, ...params });
   };
 
   return (
@@ -131,6 +128,159 @@ const InstituteInfo = () => {
               <div className="row">
                 <div className="col-md-12 w-100">
                   <div className="main-container">
+                    <div className="">
+                      <div className="col-lg-4 col-sm-12 col-md-6">
+                        <div className="file-upload">
+                          <div className="file-image">
+                            <div className="file-title">প্রতিষ্ঠানের লোগো</div>
+                            {ls ? (
+                              <div style={styles.preview}>
+                                <img
+                                  src={URL.createObjectURL(ls)}
+                                  style={styles.image}
+                                  alt="Thumb"
+                                />
+                              </div>
+                            ) : (
+                              <img
+                                src="https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg"
+                                alt=""
+                                width="144"
+                                height="144"
+                              />
+                            )}
+
+                            <div className="mt-2">
+                              144px
+                              <i className="bi bi-x"></i>
+                              144px
+                            </div>
+                          </div>
+                          <div className="upload-button">
+                            <div>
+                              <input
+                                className="my-4"
+                                accept="image/*"
+                                type="file"
+                                onChange={lsChange}
+                              />
+                            </div>
+                            <button
+                              onClick={() => setls()}
+                              style={styles.delete}
+                              // className="upload-btn"
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="col-lg-4 col-sm-12 col-md-6 mb-3">
+                        <div className="file-upload">
+                          <div className="file-image">
+                            <div className="file-title">
+                              মুমতামিম এর স্বাক্ষর
+                            </div>
+                            {mum ? (
+                              <div style={styles.preview}>
+                                <img
+                                  src={URL.createObjectURL(mum)}
+                                  style={styles.image}
+                                  alt="Thumb"
+                                />
+                              </div>
+                            ) : (
+                              <img
+                                src="https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg"
+                                alt=""
+                                width="144"
+                                height="144"
+                              />
+                            )}
+
+                            <div className="mt-2">
+                              144px
+                              <i className="bi bi-x"></i>
+                              144px
+                            </div>
+                          </div>
+                          <div className="upload-button">
+                            <div>
+                              <input
+                                className="my-4"
+                                accept="image/*"
+                                type="file"
+                                onChange={mumChange}
+                              />
+                            </div>
+                            <button
+                              onClick={() => setmum()}
+                              style={styles.delete}
+                              // className="upload-btn"DDdd
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-lg-4 col-sm-12 col-md-6">
+                        <div className="file-upload">
+                          <div className="file-image">
+                            <div className="file-title">
+                              নাজেমে তালিম এর স্বাক্ষর
+                            </div>
+                            {nt ? (
+                              <div style={styles.preview}>
+                                <img
+                                  src={URL.createObjectURL(nt)}
+                                  style={styles.image}
+                                  alt="Thumb"
+                                />
+                              </div>
+                            ) : (
+                              <img
+                                src="https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg"
+                                alt=""
+                                width="144"
+                                height="144"
+                              />
+                            )}
+
+                            <div className="mt-2">
+                              144px
+                              <i className="bi bi-x"></i>
+                              144px
+                            </div>
+                          </div>
+                          <div className="upload-button">
+                            <div>
+                              <input
+                                className="my-4"
+                                accept="image/*"
+                                type="file"
+                                onChange={ntChange}
+                              />
+                            </div>
+                            <button
+                              onClick={() => setnt()}
+                              style={styles.delete}
+                              // className="upload-btn"
+                            >
+                              Remove
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="button-group">
+                      <button
+                        onClick={handleImageSubmit}
+                        className="custom-btn btn-primary mx-5"
+                      >
+                        Save
+                      </button>
+                    </div>
                     <div className="my-4">
                       <div className="info-button">
                         <div className="custon-btn">বাংলা</div>
@@ -141,6 +291,7 @@ const InstituteInfo = () => {
                         className="intitute-form"
                       >
                         <div className="row mb-3">
+                          <form></form>
                           <label className="col-sm-2 col-form-label info-lable">
                             প্রতিষ্ঠানের নামঃ
                           </label>
@@ -308,62 +459,6 @@ const InstituteInfo = () => {
                             />
                           </div>
                         </div>
-                        <form onSubmit={handleSubmit2(onSubmit2)}>
-                          <div class="mb-3">
-                            <label
-                              for="formFile"
-                              class="col-sm-2 col-form-label info-lable"
-                            >
-                              প্রতিষ্ঠানের লোগো:
-                            </label>
-                            <input
-                              class="col-sm-2 col-form-label info-lable"
-                              type="file"
-                              id="formFile"
-                              {...register2("logo")}
-                            />
-                          </div>{" "}
-                          <div class="mb-3">
-                            <label
-                              for="formFile"
-                              class="col-sm-2 col-form-label info-lable"
-                            >
-                              মুহতামিমের স্বাক্ষর:
-                            </label>
-                            <input
-                              class="col-sm-2 col-form-label info-lable"
-                              type="file"
-                              {...register2("mumtamim_sign")}
-                              id="formFile"
-                            />
-                          </div>{" "}
-                          <div class="mb-3">
-                            <label
-                              for="formFile"
-                              class="col-sm-2 col-form-label info-lable"
-                            >
-                              নাজেমে তালি: স্বাক্ষর:
-                            </label>
-                            <input
-                              class="col-sm-2 col-form-label info-lable"
-                              type="file"
-                              {...register2("najeme_talim_sign")}
-                              id="formFile"
-                            />
-                          </div>
-                          <div
-                            className="mb-3"
-                            style={{ width: "200px", marginLeft: "200px" }}
-                          >
-                            {" "}
-                            <button
-                              className="custom-btn btn-primary"
-                              type="submit"
-                            >
-                              Save images first
-                            </button>
-                          </div>
-                        </form>
 
                         <div className="button-group">
                           <button
@@ -377,92 +472,7 @@ const InstituteInfo = () => {
                           </button>
                         </div>
                       </form>
-
-                      <div className="upload-container">
-                        <div className="row">
-                          <div className="col-lg-4 col-sm-12 col-md-6">
-                            <div className="file-upload">
-                              <div className="file-image">
-                                <div className="file-title">
-                                  প্রতিষ্ঠানের লোগো
-                                </div>
-                                <img
-                                  src="https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg"
-                                  alt=""
-                                  width="144"
-                                  height="144"
-                                />
-                                <div className="mt-2">
-                                  144px
-                                  <i className="bi bi-x"></i>
-                                  144px
-                                </div>
-                              </div>
-                              <div className="upload-button">
-                                <div className="upload-btn-wrapper">
-                                  <button className="upload-btn">Browse</button>
-                                  <input type="file" name="file" />
-                                </div>
-                                <button className="upload-btn">save</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-sm-12 col-md-6">
-                            <div className="file-upload">
-                              <div className="file-image">
-                                <div className="file-title">
-                                  মুহতামিমের স্বাক্ষর
-                                </div>
-                                <img
-                                  src="https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg"
-                                  alt=""
-                                  width="144"
-                                  height="144"
-                                />
-                                <div className="mt-2">
-                                  144px
-                                  <i className="bi bi-x"></i>
-                                  144px
-                                </div>
-                              </div>
-                              <div className="upload-button">
-                                <div className="upload-btn-wrapper">
-                                  <button className="upload-btn">Browse</button>
-                                  <input type="file" name="file" />
-                                </div>
-                                <button className="upload-btn">save</button>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-sm-12 col-md-6">
-                            <div className="file-upload">
-                              <div className="file-image">
-                                <div className="file-title">
-                                  নাজেমে তালি: স্বাক্ষর
-                                </div>
-                                <img
-                                  src="https://thumbs.dreamstime.com/b/no-thumbnail-image-placeholder-forums-blogs-websites-148010362.jpg"
-                                  alt=""
-                                  width="144"
-                                  height="144"
-                                />
-                                <div className="mt-2">
-                                  144px
-                                  <i className="bi bi-x"></i>
-                                  144px
-                                </div>
-                              </div>
-                              <div className="upload-button">
-                                <div className="upload-btn-wrapper">
-                                  <button className="upload-btn">Browse</button>
-                                  <input type="file" name="file" />
-                                </div>
-                                <button className="upload-btn">save</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <div className="upload-container"></div>
                     </div>
                   </div>
                 </div>

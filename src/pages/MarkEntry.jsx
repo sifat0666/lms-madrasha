@@ -43,6 +43,7 @@ const MarkEntry = () => {
     },
   });
 
+  const [classname, setClassname] = useState();
   const markEntry = useMutation({
     mutationFn: (data) => {
       return axios.post(`${serverUrl}/api/marks`, data);
@@ -56,6 +57,8 @@ const MarkEntry = () => {
       toast.success("mark submitted successfully");
     },
   });
+
+  console.log(classname);
 
   const { register, handleSubmit } = useForm();
 
@@ -128,6 +131,7 @@ const MarkEntry = () => {
                           size="4"
                           style={{ border: "none" }}
                           {...register("class")}
+                          onChange={(e) => setClassname(e.target.value)}
                         >
                           {marhalaClass?.data.map((item) => (
                             <option
@@ -191,9 +195,13 @@ const MarkEntry = () => {
                             // onChange={(e) => setExam(e.target.value)}
                             {...register2("subject")}
                           >
-                            {sub?.data.map((item) => (
-                              <option key={item.id}>{item.subject}</option>
-                            ))}
+                            {sub?.data.map((item) => {
+                              if (item.class === classname) {
+                                return (
+                                  <option key={item.id}>{item.subject}</option>
+                                );
+                              }
+                            })}
                           </select>
                         </div>
                         <label
@@ -282,11 +290,7 @@ const MarkEntry = () => {
                               <th>মারহালা/শ্রেণীঃ</th>
 
                               {/* <th>Submit</th> */}
-                              <th>
-                                <span className="action-edit">
-                                  <i className="bi bi-pencil-square"></i>
-                                </span>
-                              </th>
+
                               <th>
                                 <span className="action-delete">
                                   <i className="bi bi-trash3"></i>
@@ -307,11 +311,7 @@ const MarkEntry = () => {
                                 {/* <td>
                                   <button type="submit">submit</button>
                                 </td> */}
-                                <td>
-                                  <span className="action-edit">
-                                    <i className="bi bi-pencil-square"></i>
-                                  </span>
-                                </td>
+
                                 <td>
                                   <span className="action-delete">
                                     <i className="bi bi-trash3"></i>

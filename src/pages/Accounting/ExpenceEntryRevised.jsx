@@ -6,9 +6,8 @@ import { toast } from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../../utils/config";
 
-const HishabNikash = () => {
+const ExpenceEntryRevised = () => {
   const [name, setName] = useState("ক্যাশ");
-  const [coa, setCoa] = useState("জমা");
   const [ledger, setLedger] = useState();
   const [ledger2, setLedger2] = useState();
 
@@ -66,7 +65,7 @@ const HishabNikash = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    mutation.mutate(data);
+    mutation.mutate({ ...data, chart_of_account: "খরচ" });
   };
   const onSubmit2 = (data) => {
     console.log("ledger submit", data);
@@ -91,7 +90,7 @@ const HishabNikash = () => {
                 <div className="row">
                   <div className="col-lg-6 col-12">
                     <div className="section-title">
-                      <h4>হিসাব-নিকাশ</h4>
+                      <h4>খরচ হিসাব</h4>
                     </div>
                     <div className="my-4">
                       <form
@@ -134,7 +133,7 @@ const HishabNikash = () => {
                                 >
                                   <option disabled> সিলেক্ট করুন</option>
                                   {generalLedger?.data.map((item) => {
-                                    if (item.chart_of_account === coa) {
+                                    if (item.chart_of_account === "খরচ") {
                                       return (
                                         <option>{item.general_ledger}</option>
                                       );
@@ -146,26 +145,6 @@ const HishabNikash = () => {
                           </div>
                         </div>
                         <div className="row">
-                          <div className="col-lg-7 col-md-7 col-12">
-                            <div className="row mb-3">
-                              <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                                চার্ট অফ একাউন্ট
-                                <i>*</i>
-                              </label>
-                              <div className="col-lg-6 col-md-6 col-10">
-                                <select
-                                  required
-                                  {...register("chart_of_account")}
-                                  onChange={(e) => setCoa(e.target.value)}
-                                  className="form-select"
-                                >
-                                  <option disabled> সিলেক্ট করুন</option>
-                                  <option>জমা</option>
-                                  <option>খরচ</option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
                           <div className="col-md-5 col-12">
                             <div className="row mb-3">
                               <label className="col-md-4 col-12 col-form-label info-lable">
@@ -230,7 +209,7 @@ const HishabNikash = () => {
                           <div className="col-lg-7 col-md-7 col-12">
                             <div className="row mb-3">
                               <label className="col-md-4 col-12 col-form-label info-lable">
-                                জমা/খরচ তারিখঃ
+                                খরচ তারিখঃ
                                 <i>*</i>
                               </label>
                               <div className="col-md-8 col-12">
@@ -400,7 +379,7 @@ const HishabNikash = () => {
                         >
                           <option disabled>লেজার নির্বাচন করুন</option>
                           {generalLedger?.data.map((item) => {
-                            if (item.chart_of_account === "জমা") {
+                            if (item.chart_of_account === "খরচ") {
                               return <option>{item.general_ledger}</option>;
                             }
                           })}
@@ -516,7 +495,7 @@ const HishabNikash = () => {
                               </thead>
                               <tbody>
                                 {audit?.data.map((item) => {
-                                  if (item.chart_of_account === "জমা") {
+                                  if (item.chart_of_account === "খরচ") {
                                     return (
                                       <tr key={item.id}>
                                         <td>{item.submit_date}</td>
@@ -553,4 +532,4 @@ const HishabNikash = () => {
   );
 };
 
-export default HishabNikash;
+export default ExpenceEntryRevised;

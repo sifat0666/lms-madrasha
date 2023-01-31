@@ -81,12 +81,15 @@ const Layout = ({ children }) => {
                       </div>
                       <div class="offcanvas-body">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-between">
-                          <li class="nav-item">
-                            <a class="nav-link" href="/dashboard">
-                              <i class="bi bi-house-door-fill"></i>
-                              ড্যাশবোর্ড
-                            </a>
-                          </li>
+                          <Link to="/dashboard">
+                            <li class="nav-item">
+                              <a class="nav-link" href="/dashboard">
+                                <i class="bi bi-house-door-fill"></i>
+                                ড্যাশবোর্ড
+                              </a>
+                            </li>
+                          </Link>
+
                           <li class="nav-item dropdown">
                             <a
                               class="nav-link dropdown-toggle"
@@ -296,16 +299,6 @@ const Layout = ({ children }) => {
                                 </Link>
                               </li>{" "}
                               <li>
-                                <Link to="/vorti-fee">
-                                  <a
-                                    class="dropdown-item"
-                                    // href="./pages/students-info.html"
-                                  >
-                                    ভর্তি ফি
-                                  </a>
-                                </Link>
-                              </li>
-                              <li>
                                 <Link to="/class-migration">
                                   <a
                                     class="dropdown-item"
@@ -440,6 +433,17 @@ const Layout = ({ children }) => {
                                   </a>
                                 </Link>
                               </li>
+                              <li>
+                                <Link to="mark-sheet-class">
+                                  {" "}
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Exam/mark-sheet.html"
+                                  >
+                                    ক্লাস ভিত্তিক মার্কশিট
+                                  </a>
+                                </Link>
+                              </li>{" "}
                               <li>
                                 <Link to="mark-sheet">
                                   {" "}

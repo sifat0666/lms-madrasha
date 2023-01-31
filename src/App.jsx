@@ -53,6 +53,9 @@ import BokeyaVortiFee from "./pages/BokeyaVortiFee";
 import VortFee from "./pages/VortFee";
 import ForgetPassword from "./Comonents/ForgetPassword";
 import { useQuery } from "react-query";
+import IncomeEntryRevised from "./pages/Accounting/IncomeEntryRevised";
+import ExpenceEntryRevised from "./pages/Accounting/ExpenceEntryRevised";
+import MarkSheetClass from "./pages/MarkSheetClass";
 
 function App() {
   const navigate = useNavigate();
@@ -178,7 +181,7 @@ function App() {
           path="/income-entry"
           element={
             user?.permissions.includes("audit_permission") ? (
-              <IncomeEntry />
+              <IncomeEntryRevised />
             ) : (
               <NotAuthenticated />
             )
@@ -188,7 +191,7 @@ function App() {
           path="/expence-entry"
           element={
             user?.permissions.includes("audit_permission") ? (
-              <ExpenceEntry />
+              <ExpenceEntryRevised />
             ) : (
               <NotAuthenticated />
             )
@@ -416,6 +419,16 @@ function App() {
             )
           }
         />
+        <Route
+          path="mark-sheet-class"
+          element={
+            user?.permissions.includes("result_control") ? (
+              <MarkSheetClass />
+            ) : (
+              <NotAuthenticated />
+            )
+          }
+        />{" "}
         <Route
           path="mark-sheet"
           element={

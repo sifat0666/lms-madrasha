@@ -1,4 +1,5 @@
 import axios from "axios";
+import dayjs from "dayjs";
 import React from "react";
 import { useRef } from "react";
 import { useState } from "react";
@@ -26,7 +27,6 @@ const MonthlyFees = () => {
   const [feeName, setFeeName] = useState();
   const [fees, setFees] = useState();
   const [feesList, setFeesList] = useState();
-  console.log("student", student);
 
   const [monthName, setMonthName] = useState();
 
@@ -78,26 +78,27 @@ const MonthlyFees = () => {
     },
     onError: (error, variable, context) => {
       toast.error("every field is required");
+      console.log(error.response.data.message);
     },
     onSuccess: (data) => {
       toast.success("success");
       console.log("monthly fee", data?.data);
-      if (data?.data.fee_name === "মাসিক ফি") {
-        if (msg.mashik) {
-          sendSms(
-            student?.phn_no,
-            `${student?.student_name} জমা দিয়েছে ${data?.data.submitted_fee} টাকা ${data?.data.month} এর মাসিক ফী `
-          );
-        }
-      }
-      if (data?.data.fee_name === "খাবারের ফি") {
-        if (msg.khabar) {
-          sendSms(
-            student?.phn_no,
-            `${student?.student_name} জমা দিয়েছে ${data?.data.submitted_fee} টাকা ${data?.data.month} এর খাবার ফী `
-          );
-        }
-      }
+      // if (data?.data.fee_name === "মাসিক ফি") {
+      //   if (msg.mashik) {
+      //     sendSms(
+      //       student?.phn_no,
+      //       `${student?.student_name} জমা দিয়েছে ${data?.data.submitted_fee} টাকা ${data?.data.month} এর মাসিক ফী `
+      //     );
+      //   }
+      // }
+      // if (data?.data.fee_name === "খাবারের ফি") {
+      //   if (msg.khabar) {
+      //     sendSms(
+      //       student?.phn_no,
+      //       `${student?.student_name} জমা দিয়েছে ${data?.data.submitted_fee} টাকা ${data?.data.month} এর খাবার ফী `
+      //     );
+      //   }
+      // }
     },
   });
 
@@ -134,7 +135,7 @@ const MonthlyFees = () => {
     const value = data?.data;
 
     const state = `${value.gender}_${value.abashik_onabashik}_${value.notun_puraton}`;
-    console.log("state", state);
+
     const params = {
       state: state,
     };
@@ -143,8 +144,6 @@ const MonthlyFees = () => {
     console.log("params", params);
     Fee.mutate({ ...params, fee_name: feeName });
   };
-
-  console.log(feeName);
 
   const { register, handleSubmit } = useForm();
 
@@ -159,18 +158,19 @@ const MonthlyFees = () => {
 
   const onFeeSubmit = (data) => {
     setFeeVal(data);
-    console.log("onfeesubmit", data);
-    const params = {
+    // console.log("onfeesubmit", data);
+    let params = {
       ...data,
       receiver: me?.data.name,
       student_id: studentId,
       fee_name: feeName,
-      submit_date: currentDate,
+      submit_date: dayjs().format("YYYY-MM-DD"),
       student_name: student?.student_name,
       determined_fee: fees,
       class: student?.class,
     };
-    console.log(params);
+    // console.log("params", params);
+    console.log(params, { ...params });
     monthlyFeeMutation.mutate(params);
   };
 
@@ -264,7 +264,7 @@ const MonthlyFees = () => {
                               <div class="col-lg-10 col-md-10 col-12">
                                 <input
                                   value={student?.student_name}
-                                  // {...FeeRegister("student_name")}
+                                  {...FeeRegister("student_name")}
                                   type="text"
                                   class="form-control"
                                   placeholder="নাম"
@@ -312,7 +312,7 @@ const MonthlyFees = () => {
                               <div class="col-lg-10 col-md-10 col-12">
                                 <input
                                   value={student?.class}
-                                  // {...FeeRegister("class")}
+                                  {...FeeRegister("class")}
                                   type="text"
                                   class="form-control"
                                   placeholder="জামাত"
@@ -346,7 +346,7 @@ const MonthlyFees = () => {
                               <div class="col-lg-10 col-md-10 col-12">
                                 <input
                                   value={fees}
-                                  // {...FeeRegister("determined_fee")}
+                                  {...FeeRegister("determined_fee")}
                                   type="text"
                                   class="form-control"
                                   placeholder="নির্ধারিত ফি
@@ -457,11 +457,6 @@ const MonthlyFees = () => {
                               <thead class="text-center accounts-table-head">
                                 <tr>
                                   <th>
-                                    <span class="action-edit">
-                                      <i class="bi bi-pencil-square"></i>
-                                    </span>
-                                  </th>
-                                  <th>
                                     <span class="action-delete">
                                       <i class="bi bi-trash3"></i>
                                     </span>
@@ -476,11 +471,6 @@ const MonthlyFees = () => {
                               <tbody>
                                 {feesList?.map((item) => (
                                   <tr key={item.id}>
-                                    <td>
-                                      <span class="action-edit">
-                                        <i class="bi bi-pencil-square"></i>
-                                      </span>
-                                    </td>
                                     <td>
                                       <span
                                         onClick={(id) => onDelete(item.id)}
@@ -643,13 +633,6 @@ const MonthlyFees = () => {
                                     শিক্ষার্থীর ছবি
                                   </span>
                                   <img src={student?.image} />
-                                </div>
-                              </div>
-                              <div class="col-6 meal-fee-btn">
-                                <div class="button-group">
-                                  <button class="custom-btn btn-primary">
-                                    Save And Print
-                                  </button>
                                 </div>
                               </div>
                             </div>
@@ -871,28 +854,6 @@ const MonthlyFees = () => {
                         </div>
                       </div>
                       <div class="col-lg-5 col-md-5 col-12">
-                        <div class="row">
-                          <label
-                            class="col-12 col-form-label info-lable"
-                            style={{ textAlign: "left" }}
-                          >
-                            মন্তব্য
-                          </label>
-                          <div class="col-12">
-                            <textarea
-                              class="form-control"
-                              placeholder="মন্তব্য লিখুন"
-                              rows="3"
-                            ></textarea>
-                          </div>
-                          <div class="col-12 meal-fee">
-                            <div class="button-group">
-                              <a class="custom-btn btn-primary" href="#">
-                                Edit
-                              </a>
-                            </div>
-                          </div>
-                        </div>
                         <div class="row">
                           <div class="col-12 others-menu">
                             <div class="section-title">

@@ -40,6 +40,7 @@ const FeesDetermination = () => {
     const data = await axios.delete(
       `${serverUrl}/api/fees-determination/${id}`
     );
+    location.reload();
   };
 
   // const options2 = academicYear?.data.map(item => [{`${item.academic_year}`: `${item.academic_year}`},])
@@ -136,7 +137,7 @@ const FeesDetermination = () => {
                                         <span>নতুন</span>
                                         <div className="input-box">
                                           <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
                                             placeholder=""
                                             {...register("boy_resi_new")}
@@ -147,7 +148,7 @@ const FeesDetermination = () => {
                                         <span>পুরাতন</span>
                                         <div className="input-box">
                                           <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
                                             placeholder=""
                                             {...register("boy_resi_old")}
@@ -165,7 +166,7 @@ const FeesDetermination = () => {
                                         <span>নতুন</span>
                                         <div className="input-box">
                                           <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
                                             placeholder=""
                                             {...register("boy_unresi_new")}
@@ -176,7 +177,7 @@ const FeesDetermination = () => {
                                         <span>পুরাতন</span>
                                         <div className="input-box">
                                           <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
                                             placeholder=""
                                             {...register("boy_unresi_old")}
@@ -203,7 +204,7 @@ const FeesDetermination = () => {
                                         <span>নতুন</span>
                                         <div className="input-box">
                                           <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
                                             placeholder=""
                                             {...register("girl_resi_new")}
@@ -214,7 +215,7 @@ const FeesDetermination = () => {
                                         <span>পুরাতন</span>
                                         <div className="input-box">
                                           <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
                                             placeholder=""
                                             {...register("girl_resi_old")}
@@ -232,7 +233,7 @@ const FeesDetermination = () => {
                                         <span>নতুন</span>
                                         <div className="input-box">
                                           <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
                                             placeholder=""
                                             {...register("girl_unresi_new")}
@@ -243,7 +244,7 @@ const FeesDetermination = () => {
                                         <span>পুরাতন</span>
                                         <div className="input-box">
                                           <input
-                                            type="text"
+                                            type="number"
                                             className="form-control"
                                             placeholder=""
                                             {...register("girl_unresi_old")}
@@ -298,11 +299,6 @@ const FeesDetermination = () => {
                           <thead className="text-center accounts-table-head">
                             <tr>
                               <th>
-                                <span className="action-edit">
-                                  <i className="bi bi-pencil-square"></i>
-                                </span>
-                              </th>
-                              <th>
                                 <span className="action-delete">
                                   <i className="bi bi-trash3"></i>
                                 </span>
@@ -315,11 +311,6 @@ const FeesDetermination = () => {
                           <tbody>
                             {fee?.data.map((item) => (
                               <tr key={item.id}>
-                                <td>
-                                  <span className="action-edit">
-                                    <i className="bi bi-pencil-square"></i>
-                                  </span>
-                                </td>
                                 <td>
                                   <span
                                     onClick={(id) => onDelete(item.id)}

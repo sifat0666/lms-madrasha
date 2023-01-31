@@ -148,6 +148,7 @@ const StudentAttandance = () => {
                             <th>আইডি</th>
                             <th>নাম</th>
                             <th>রোল নং</th>
+                            <th>মোবাইল নাম্বার</th>
                             <th>হাজিরা</th>
                             {/* <th>Submit</th> */}
                           </tr>

@@ -50,6 +50,13 @@ const NewUser = () => {
     });
   }
 
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/users/${id}`);
+    location.reload();
+  };
+
+  console.log(data?.data);
+
   return (
     <div>
       <main className="page-bg">
@@ -501,45 +508,38 @@ const NewUser = () => {
                           <thead className="text-center accounts-table-head">
                             <tr>
                               <th></th>
-                              <th>
-                                <span className="action-edit">
-                                  <i className="bi bi-pencil-square"></i>
-                                </span>
-                              </th>
+
+                              <th data-priority="3">ইউজারনেম</th>
+                              <th data-priority="1">ক্ষমতা</th>
+                              <th data-priority="1"> ইমেইল</th>
                               <th>
                                 <span className="action-delete">
                                   <i className="bi bi-trash3"></i>
                                 </span>
                               </th>
-                              <th data-priority="1">ক্ষমতা</th>
-                              <th data-priority="3">ইউজারনেম</th>
-                              <th data-priority="1"> ইমেইল</th>
                             </tr>
                           </thead>
                           <tbody>
                             {data?.data.map((user) => (
-                              <>
-                                <tr>
-                                  <td></td>
-                                  <th>
-                                    <span className="action-edit">
-                                      <i className="bi bi-pencil-square"></i>
-                                    </span>
-                                  </th>
-                                  <th>
-                                    <span className="action-delete">
-                                      <i className="bi bi-trash3"></i>
-                                    </span>
-                                  </th>
-                                  <td>
-                                    {user.permissions.map((permission) => (
-                                      <div>{permission}</div>
-                                    ))}
-                                  </td>
-                                  <td>{user.name}</td>
-                                  <td>{user.email}</td>
-                                </tr>
-                              </>
+                              <tr key={user.id}>
+                                <td></td>
+
+                                <td>{user.name}</td>
+                                <td>
+                                  {user.permissions.map((permission) => (
+                                    <div>{permission}</div>
+                                  ))}
+                                </td>
+                                <td>{user.email}</td>
+                                <td>
+                                  <span
+                                    onClick={(id) => onDelete(user.user_id)}
+                                    className="action-delete"
+                                  >
+                                    <i className="bi bi-trash3"></i>
+                                  </span>
+                                </td>
+                              </tr>
                             ))}
                           </tbody>
                         </table>

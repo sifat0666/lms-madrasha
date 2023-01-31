@@ -11,6 +11,13 @@ import { serverUrl } from "../../utils/config";
 const MarkSheet = () => {
   const ref = useRef();
 
+  const [student, setStudent] = useState();
+
+  console.log(student?.id);
+
+  const { data: instituteInfo } = useQuery("instituteInfo", () =>
+    fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
+  );
   const { data: marhalaClass } = useQuery("marhalaclass", () =>
     fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
   );
@@ -30,26 +37,29 @@ const MarkSheet = () => {
       return axios.post(`${serverUrl}/api/result`, data);
     },
     onError: (error, variable, context) => {
-      // console.log(error.response.data.message);
-      // toast.error(error.response.data.message);
-      console.log(error);
+      console.log("🚀 ~ file: MarkSheet.jsx:36 ~ MarkSheet ~ error", error);
     },
     onSuccess: (data) => {
       console.log(data?.data);
       setResults(data?.data);
-      // toast.success("posted successfully");
     },
   });
 
   const { register, handleSubmit } = useForm();
   const [value, setValue] = useState();
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    const student = await axios.get(
+      `${serverUrl}/api/student/${data?.student_id}`
+    );
+    setStudent(student?.data);
     console.log(data);
     setValue(data);
     fetchResult.mutate(data);
   };
 
   console.log("val", value);
+
+  console.log("results", results);
 
   return (
     <div>
@@ -198,7 +208,7 @@ const MarkSheet = () => {
                           <ReactToPrint
                             trigger={() => (
                               <button
-                                className="custom-btn btn-primary"
+                                className="custom-btn btn-primary my-3"
                                 type="submit"
                               >
                                 Save
@@ -218,16 +228,10 @@ const MarkSheet = () => {
                       style={{ zIndex: 1, background: "white" }}
                       ref={ref}
                     >
-                      <span
-                        className="print-button d-print-none"
-                        onclick="window.print()"
-                      >
-                        <i className="bi bi-printer-fill"></i>
-                      </span>
                       <div className="pages-title">
-                        <h5>জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ</h5>
-                        <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
-                        <span>01832-061454 # 027440235</span>
+                        <h5>{instituteInfo?.name}</h5>
+                        <p>{instituteInfo?.address}</p>
+                        <span>{instituteInfo?.num}</span>
                         <br />
                         <span>শিক্ষবর্ষঃ {value?.session}ইং</span>
                         <br />
@@ -240,22 +244,22 @@ const MarkSheet = () => {
                       </div>
                       <div className="pages-content">
                         <div className="row">
-                          <div className="col-5 d-flex flex-wrap align-content-center">
-                            <div className="student-id">
+                          <div className="col-5 flex-wrap align-content-center">
+                            <div className="">
                               <strong>আইডিঃ</strong>
-                              <span>৮৩৪</span>
+                              <span> {student?.id}</span>
                             </div>
                             <div className="student-name">
-                              <strong>পরীক্ষার্থীর নামঃ</strong>
-                              <span>মুহাঃ নাহিদুল ইসলাম</span>
+                              <strong>পরীক্ষার্থীর নামঃ </strong>
+                              <span> {student?.student_name}</span>
                             </div>
                             <div className="student-fname">
-                              <strong>পিতার নামঃ</strong>
-                              <span>মুহাঃ আব্দুল্লাহ</span>
+                              <strong>পিতার নামঃ </strong>
+                              <span>{student?.father_name}</span>
                             </div>
                             <div className="student-dob">
                               <strong>জন্ম তারিখঃ</strong>
-                              <span>০৬/০১/২০২২ ইং</span>
+                              <span> {student?.dob} ইং</span>
                             </div>
                           </div>
                           <div className="col-1"></div>
