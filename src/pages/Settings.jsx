@@ -31,7 +31,7 @@ const Settings = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    // mutation.mutate(data);
+    mutation.mutate(data);
   };
 
   return (
