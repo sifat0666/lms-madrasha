@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
   // If that's true render null instead of the sidebar
 
   // if (withouSidebarRoutes.some((item) => pathname.includes(item))) return null;
-  if (pathname === "/") return null;
+  if (pathname === "/" || pathname === "/forget-password") return null;
 
   const navigate = useNavigate();
   // import {navigate} = useNavigate()

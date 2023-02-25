@@ -118,7 +118,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/dashboard" element={<Dasboard />} />
-        <Route path="/forget-paswsword" element={<ForgetPassword />} />
+        <Route path="/forget-password" element={<ForgetPassword />} />
         <Route
           path="/newuser"
           element={
