@@ -56,6 +56,7 @@ import { useQuery } from "react-query";
 import IncomeEntryRevised from "./pages/Accounting/IncomeEntryRevised";
 import ExpenceEntryRevised from "./pages/Accounting/ExpenceEntryRevised";
 import MarkSheetClass from "./pages/MarkSheetClass";
+import NotFound from "./Comonents/NotFound";
 
 function App() {
   const navigate = useNavigate();
@@ -70,6 +71,7 @@ function App() {
       refetchInterval: false,
       refetchIntervalInBackground: false,
       refetchOnWindowFocus: false,
+      retry: false,
     }
   );
   // if (isLoading) return <div>Loading....</div>;
@@ -78,31 +80,31 @@ function App() {
 
   const user = data?.data;
 
-  useEffect(() => {
-    if (localStorage.getItem("token") == undefined) {
-      navigate("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("token") == undefined) {
+  //     navigate("/");
+  //   }
+  // }, []);
 
-  if (isLoading)
-    return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <div
-          style={{ width: "5rem", height: "5rem", fontWeight: 900 }}
-          class="spinner-border text-light"
-          role="status"
-        >
-          <span class="sr-only">Loading...</span>
-        </div>
-      </div>
-    );
+  // if (isLoading)
+  //   return (
+  //     <div
+  //       style={{
+  //         display: "flex",
+  //         justifyContent: "center",
+  //         alignItems: "center",
+  //         height: "100vh",
+  //       }}
+  //     >
+  //       <div
+  //         style={{ width: "5rem", height: "5rem", fontWeight: 900 }}
+  //         class="spinner-border text-light"
+  //         role="status"
+  //       >
+  //         <span class="sr-only">Loading...</span>
+  //       </div>
+  //     </div>
+  //   );
 
   // const user = userProxy?.data.data;
 
@@ -113,6 +115,7 @@ function App() {
       <Layout />
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="*" element={<NotFound />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/dashboard" element={<Dasboard />} />
         <Route path="/forget-paswsword" element={<ForgetPassword />} />

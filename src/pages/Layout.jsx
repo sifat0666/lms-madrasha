@@ -14,8 +14,6 @@ const withouSidebarRoutes = ["/login"];
 const Layout = ({ children }) => {
   const { pathname } = useLocation();
 
-  console.log(pathname);
-
   // Validates if the current pathname includes one the routes you want to hide the sidebar is present on the current url
   // If that's true render null instead of the sidebar
 
@@ -25,21 +23,11 @@ const Layout = ({ children }) => {
   const navigate = useNavigate();
   // import {navigate} = useNavigate()
 
-  const { data, isLoading } = useQuery(
-    ["me"],
-    () =>
-      axios.get(`${serverUrl}/api/user`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      }),
-    {
-      refetchInterval: false,
-      refetchIntervalInBackground: false,
-      refetchOnWindowFocus: false,
-    }
+  const { data, isLoading } = useQuery(["me"], () =>
+    axios.get(`${serverUrl}/api/user`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    })
   );
-
-  // if (isLoading) return <div>loading</div>;
-  // console.log(data?.data.roles[0]);
 
   return (
     <div>
@@ -685,7 +673,8 @@ const Layout = ({ children }) => {
                     <div
                       onClick={() => {
                         localStorage.clear();
-                        window.location.reload();
+                        // window.location.reload();
+                        navigate("/login");
                         // toast.success("logged out");
 
                         navigate("/");
