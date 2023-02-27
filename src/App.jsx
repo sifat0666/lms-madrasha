@@ -57,6 +57,7 @@ import IncomeEntryRevised from "./pages/Accounting/IncomeEntryRevised";
 import ExpenceEntryRevised from "./pages/Accounting/ExpenceEntryRevised";
 import MarkSheetClass from "./pages/MarkSheetClass";
 import NotFound from "./Comonents/NotFound";
+import PasswordReset from "./Comonents/PasswordReset";
 
 function App() {
   const navigate = useNavigate();
@@ -119,6 +120,7 @@ function App() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/dashboard" element={<Dasboard />} />
         <Route path="/forget-password" element={<ForgetPassword />} />
+        <Route path="/password-reset/:token" element={<PasswordReset />} />
         <Route
           path="/newuser"
           element={

@@ -5,8 +5,13 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useMutation } from "react-query";
 import { serverUrl } from "../../utils/config";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const ForgetPassword = () => {
+const PasswordReset = () => {
+  const { token } = useParams();
+  const navigate = useNavigate();
+
   const {
     handleSubmit,
     register,
@@ -15,7 +20,7 @@ const ForgetPassword = () => {
 
   const mutation = useMutation({
     mutationFn: (newUser) => {
-      return axios.post(`${serverUrl}/api/send-password-reset-email`, newUser);
+      return axios.post(`${serverUrl}/api/reset-password/${token}`, newUser);
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);
@@ -23,10 +28,13 @@ const ForgetPassword = () => {
     },
     onSuccess: (data) => {
       toast.success(data?.data.message);
+      navigate("/login");
     },
   });
 
-  const onSubmit = (values) => mutation.mutate(values);
+  const onSubmit = (values) => {
+    mutation.mutate({ password: values.email });
+  };
 
   return (
     <div
@@ -42,17 +50,13 @@ const ForgetPassword = () => {
         <div class="card-body px-5">
           <form onSubmit={handleSubmit(onSubmit)}>
             <p class="card-text py-2">
-              Enter your email address we will send you a password reset link
+              Set a new password and we will redirect you to the login page
             </p>
             <div class="form-outline">
               <input
                 // type="email"
                 {...register("email", {
                   required: "Required",
-                  pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                    message: "invalid email address",
-                  },
                 })}
                 id="typeEmail"
                 class="form-control my-3"
@@ -60,7 +64,7 @@ const ForgetPassword = () => {
               <p className=" pb-3">{errors.email && errors.email.message}</p>
             </div>
             <button class="btn btn-primary w-100">
-              {mutation.isLoading ? "Loading..." : "Send"}
+              {mutation.isLoading ? "Loading..." : "Save"}
             </button>
           </form>
         </div>
@@ -69,4 +73,4 @@ const ForgetPassword = () => {
   );
 };
 
-export default ForgetPassword;
+export default PasswordReset;

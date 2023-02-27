@@ -104,7 +104,7 @@ const Login = () => {
                         <button type="submit" class="custom-btn btn-primary">
                           লগইন করুন
                         </button>
-                        <a href="#" class="forgate-pass">
+                        <a href="/forget-password" class="forgate-pass">
                           <i class="bi bi-shield-lock-fill"></i>
                           <span>পাসওয়ার্ড ভুলে গেছেন ?</span>
                         </a>

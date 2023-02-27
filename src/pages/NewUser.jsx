@@ -15,6 +15,14 @@ const NewUser = () => {
     fetch(`${serverUrl}/api/users`).then((res) => res.json())
   );
 
+  const { data: me, isLoading } = useQuery(["me"], () =>
+    axios.get(`${serverUrl}/api/user`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    })
+  );
+
+  console.log(me?.data.roles.name, ",e");
+
   // const data = [];
 
   // console.log("🚀 ~ file: NewUser.jsx:8 ~ NewUser ~ data", data);
@@ -29,7 +37,7 @@ const NewUser = () => {
     },
     onSuccess: (data) => {
       console.log(data.data);
-      window.location.reload(true);
+      toast.success(data?.data.message);
     },
   });
   const [array, setArray] = useState([]);
@@ -146,18 +154,7 @@ const NewUser = () => {
                       </div>
                       <div className="user-role position-relative">
                         <div className="section-subtitle">ক্ষমতা প্রদান</div>
-                        <div className="role-all">
-                          <div className="input-group d-flex align-items-center gap-3">
-                            <input
-                              className="form-check-input mt-0"
-                              type="checkbox"
-                              value=""
-                              aria-label="Checkbox for following text input"
-                              onclick="allSelect(this)"
-                            />
-                            <span className="">সব নির্বাচন</span>
-                          </div>
-                        </div>
+
                         {array}
                         <div className="user-permission">
                           <div className="user-permission-left">
@@ -512,11 +509,9 @@ const NewUser = () => {
                               <th data-priority="3">ইউজারনেম</th>
                               <th data-priority="1">ক্ষমতা</th>
                               <th data-priority="1"> ইমেইল</th>
-                              <th>
-                                <span className="action-delete">
-                                  <i className="bi bi-trash3"></i>
-                                </span>
-                              </th>
+                              {me?.data.roles.name === "admin" ? (
+                                <th></th>
+                              ) : null}
                             </tr>
                           </thead>
                           <tbody>
@@ -531,14 +526,16 @@ const NewUser = () => {
                                   ))}
                                 </td>
                                 <td>{user.email}</td>
-                                <td>
-                                  <span
-                                    onClick={(id) => onDelete(user.user_id)}
-                                    className="action-delete"
-                                  >
-                                    <i className="bi bi-trash3"></i>
-                                  </span>
-                                </td>
+                                {me?.data.roles.name === "admin" ? (
+                                  <td>
+                                    <span
+                                      onClick={(id) => onDelete(user.user_id)}
+                                      className="action-delete"
+                                    >
+                                      <i className="bi bi-trash3"></i>
+                                    </span>
+                                  </td>
+                                ) : null}
                               </tr>
                             ))}
                           </tbody>
