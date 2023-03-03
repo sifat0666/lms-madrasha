@@ -1,6 +1,43 @@
+import axios from "axios";
 import React from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import { serverUrl } from "../../../utils/config";
 
 const AddBook = () => {
+  const { data: book } = useQuery("doner_member", () =>
+    fetch(`${serverUrl}/api/book`).then((res) => res.json())
+  );
+
+  console.log("doner", book);
+
+  const mutation = useMutation({
+    mutationFn: (book) => {
+      return axios.post(`${serverUrl}/api/book`, book);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log(data?.data, "data");
+      toast.success("Added Successfully");
+    },
+  });
+
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    mutation.mutate({ ...data, image: "image" });
+  };
+
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/book/${id}`);
+    location.reload();
+  };
+
   return (
     <div>
       <section className="user-form-section d-print-none">
@@ -8,201 +45,231 @@ const AddBook = () => {
           <div className="row">
             <div className="col-md-12 w-100">
               <div className="main-container">
-                <div className="row">
-                  <div className="col-12">
-                    <div className="section-title">
-                      <h4>বই যোগ করুন</h4>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            বইয়ের নাম
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="বইয়ের নাম"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-2 col-md-4 col-12"></div>
-                      <div className="col-lg-5 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            সিরিয়াল নাম্বার
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="সিরিয়াল নাম্বার"
-                            />
-                          </div>
-                        </div>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="section-title">
+                        <h4>বই যোগ করুন</h4>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            ক্যাটাগরি
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <select name="" id="" className="form-select">
-                              <option value="">সিলেক্ট করুন</option>
-                              <option value="">পাঠ্য বই</option>
-                              <option value="">সাহিত্য</option>
-                              <option value="">হাদিস</option>
-                            </select>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              বইয়ের নাম
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("name")}
+                                type="text"
+                                className="form-control"
+                                placeholder="বইয়ের নাম"
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="col-lg-2 col-md-4 col-12"></div>
-                      <div className="col-lg-5 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            শ্রেনী/মারহালা
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <select className="form-select">
-                              <option selected="">শ্রেণী নির্বাচন করুন</option>
-                              <option>নাযেরা</option>
-                              <option>হিফযুল কুরআন</option>
-                              <option>ই-দাদী</option>
-                              <option>ইবতিদায়ী আউয়াল</option>
-                              <option>ইবতিদায়ী নানী</option>
-                              <option>উস্তানী আউয়াল</option>
-                              <option>উস্তানী সানী</option>
-                              <option>সানাবী আউয়াল</option>
-                              <option>সানাবী আউয়াল</option>
-                              <option>সানাবী সানী</option>
-                              <option>নিহায়ী আউয়াল</option>
-                              <option>নিহায়ী সানী</option>
-                              <option>তাকমীল</option>
-                              <option>ইফতা ১ম</option>
-                            </select>
+                        <div className="col-lg-2 col-md-4 col-12"></div>
+                        <div className="col-lg-5 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              সিরিয়াল নাম্বার
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("serial_no")}
+                                type="text"
+                                className="form-control"
+                                placeholder="সিরিয়াল নাম্বার"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            বিক্রির মূল্য
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="number"
-                              className="form-control"
-                              value="0.00"
-                              placeholder="বিক্রির মূল্য"
-                            />
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              ক্যাটাগরি
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <select
+                                {...register("category")}
+                                className="form-select"
+                              >
+                                <option disabled>সিলেক্ট করুন</option>
+                                <option>পাঠ্য বই</option>
+                                <option>সাহিত্য</option>
+                                <option>হাদিস</option>
+                              </select>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="col-lg-2 col-md-4 col-12"></div>
-                      <div className="col-lg-5 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            ইউনিট
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <select name="" id="" className="form-select">
-                              <option value="">সিলেক্ট করুন</option>
-                              <option value="">পিচ</option>
-                              <option value="">সেট</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            কেনা মূল্য
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="number"
-                              className="form-control"
-                              value="0.00"
-                              placeholder="বিক্রির মূল্য"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-2 col-md-4 col-12"></div>
-                      <div className="col-lg-5 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            বইয়ের ডিটেইলস
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <textarea className="form-control"></textarea>
+                        <div className="col-lg-2 col-md-4 col-12"></div>
+                        <div className="col-lg-5 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              শ্রেনী/মারহালা
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <select
+                                {...register("class")}
+                                className="form-select"
+                              >
+                                <option disabled>শ্রেণী নির্বাচন করুন</option>
+                                <option>নাযেরা</option>
+                                <option>হিফযুল কুরআন</option>
+                                <option>ই-দাদী</option>
+                                <option>ইবতিদায়ী আউয়াল</option>
+                                <option>ইবতিদায়ী নানী</option>
+                                <option>উস্তানী আউয়াল</option>
+                                <option>উস্তানী সানী</option>
+                                <option>সানাবী আউয়াল</option>
+                                <option>সানাবী আউয়াল</option>
+                                <option>সানাবী সানী</option>
+                                <option>নিহায়ী আউয়াল</option>
+                                <option>নিহায়ী সানী</option>
+                                <option>তাকমীল</option>
+                                <option>ইফতা ১ম</option>
+                              </select>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            ছবি
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input type="file" className="form-control" />
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              বিক্রির মূল্য
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("price")}
+                                type="number"
+                                className="form-control"
+                                placeholder="বিক্রির মূল্য"
+                              />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="col-lg-2 col-md-4 col-12"></div>
-                      <div className="col-lg-5 col-md-4 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            সাপ্লাইয়ার
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <select name="" id="" className="form-select">
-                              <option value="">সিলেক্ট করুন</option>
-                              <option value="">লেকচার পাবলিকেশন</option>
-                              <option value="">সাইমুম প্রকাশনী</option>
-                            </select>
+                        <div className="col-lg-2 col-md-4 col-12"></div>
+                        <div className="col-lg-5 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              ইউনিট
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <select
+                                {...register("unit")}
+                                className="form-select"
+                              >
+                                <option disabled>সিলেক্ট করুন</option>
+                                <option>পিচ</option>
+                                <option>সেট</option>
+                              </select>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-6 d-flex justify-content-center w-100 payroll">
-                    <div className="button-group w-100">
-                      <button className="custom-btn btn-primary">Save</button>
-                      <button className="custom-btn btn-dark">New</button>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              কেনা মূল্য
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("buying_price")}
+                                type="number"
+                                className="form-control"
+                                placeholder="কেনা মূল্য"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-2 col-md-4 col-12"></div>
+                        <div className="col-lg-5 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              বইয়ের ডিটেইলস
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <textarea
+                                {...register("details")}
+                                className="form-control"
+                              ></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              ছবি
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("image")}
+                                type="file"
+                                className="form-control"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-2 col-md-4 col-12"></div>
+                        <div className="col-lg-5 col-md-4 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              সাপ্লাইয়ার
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <select
+                                {...register("supplier")}
+                                name=""
+                                id=""
+                                className="form-select"
+                              >
+                                <option disabled>সিলেক্ট করুন</option>
+                                <option>লেকচার পাবলিকেশন</option>
+                                <option>সাইমুম প্রকাশনী</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-6 d-flex justify-content-center w-100 payroll">
+                      <div className="button-group w-100">
+                        <button
+                          type="submit"
+                          className="custom-btn btn-primary"
+                        >
+                          Save
+                        </button>
+                        <button className="custom-btn btn-dark">reset</button>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </form>
                 <div className="row my-3">
                   <div className="col-12">
                     <div
@@ -221,42 +288,30 @@ const AddBook = () => {
                             <th>মূল্য</th>
                             <th>কেনা মূল্য</th>
                             <th>ছবি</th>
-                            <th>
-                              <span className="action-edit">
-                                <i className="bi bi-pencil-square"></i>
-                              </span>
-                            </th>
-                            <th>
-                              <span className="action-delete">
-                                <i className="bi bi-trash3"></i>
-                              </span>
-                            </th>
+
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                              <img
-                                src="../../assets/images/book image.jpg"
-                                alt=""
-                              />
-                            </td>
-                            <td>
-                              <span className="action-edit">
-                                <i className="bi bi-pencil-square"></i>
-                              </span>
-                            </td>
-                            <td>
-                              <span className="action-delete">
-                                <i className="bi bi-trash3"></i>
-                              </span>
-                            </td>
-                          </tr>
+                          {book?.map((item) => (
+                            <tr key={item.id}>
+                              <td>{item.id}</td>
+                              <td>{item.name}</td>
+                              <td>{item.supplier}</td>
+                              <td>{item.price}</td>
+                              <td>{item.buying_price}</td>
+                              <td>{item.image}</td>
+
+                              <td>
+                                <span
+                                  onClick={(id) => onDelete(item.id)}
+                                  className="action-delete"
+                                >
+                                  <i className="bi bi-trash3"></i>
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
                         </tbody>
                       </table>
                     </div>
@@ -2354,8 +2409,11 @@ const AddBook = () => {
                                 <tbody>
                                   <tr>
                                     <th>
-                                      <span className="action-edit">
-                                        <i className="bi bi-pencil-square"></i>
+                                      <span
+                                        onClick={(id) => onDelete(item.id)}
+                                        className="action-delete"
+                                      >
+                                        <i className="bi bi-trash3"></i>
                                       </span>
                                     </th>
                                     <td></td>

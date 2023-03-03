@@ -1,6 +1,43 @@
+import axios from "axios";
 import React from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import { serverUrl } from "../../../utils/config";
 
 const DonerMember = () => {
+  const { data: doner_member } = useQuery("doner_member", () =>
+    fetch(`${serverUrl}/api/doner-member`).then((res) => res.json())
+  );
+
+  console.log("doner", doner_member);
+
+  const mutation = useMutation({
+    mutationFn: (newUser) => {
+      return axios.post(`${serverUrl}/api/doner-member`, newUser);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log(data?.data, "data");
+      toast.success("Registered Successfully");
+    },
+  });
+
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    mutation.mutate(data);
+  };
+
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/doner-member/${id}`);
+    location.reload();
+  };
+
   return (
     <div>
       <section className="user-form-section d-print-none">
@@ -8,447 +45,430 @@ const DonerMember = () => {
           <div className="row">
             <div className="col-md-12 w-100">
               <div className="main-container">
-                <div className="row">
-                  <div className="col-12">
-                    <div className="section-title">
-                      <h4>দাতা সদস্য এন্ট্রি</h4>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="row">
+                    <div className="col-12">
+                      <div className="section-title">
+                        <h4>দাতা সদস্য এন্ট্রি</h4>
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            তারিখঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="date"
-                              className="form-control"
-                              placeholder=" তারিখ"
-                            />
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-5 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              তারিখঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("date")}
+                                type="date"
+                                className="form-control"
+                                placeholder=" তারিখ"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-5 col-md-5 offset-md-2 offset-0">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              সদস্যের নামঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("name")}
+                                type="text"
+                                className="form-control"
+                                placeholder=" সদস্যের নাম"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div className="col-lg-5 col-md-5 offset-md-2 offset-0">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            সদস্যের নামঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder=" সদস্যের নাম"
-                            />
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            সদস্যের ধরণঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-6 col-md-6 col-10">
-                            <select className="form-select">
-                              <option selected>নির্বাচন করুন</option>
-                              <option>বদরী</option>
-                            </select>
-                          </div>
-                          <div className="col-2">
-                            <span className="addbutton">
-                              <a
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#membertype"
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-5 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              সদস্যের ধরণঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-6 col-md-6 col-10">
+                              <select
+                                {...register("type")}
+                                className="form-select"
                               >
-                                <i className="bi bi-plus-circle-fill"></i>
-                              </a>
-                            </span>
+                                <option disabled>নির্বাচন করুন</option>
+                                <option>বদরী</option>
+                              </select>
+                            </div>
+                            <div className="col-2">
+                              <span className="addbutton">
+                                <a
+                                  href="#"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#membertype"
+                                >
+                                  <i className="bi bi-plus-circle-fill"></i>
+                                </a>
+                              </span>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="col-lg-5 col-md-5 offset-md-2 offset-0">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            পিতার নামঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="  পিতার নাম"
-                            />
+                        <div className="col-lg-5 col-md-5 offset-md-2 offset-0">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              পিতার নামঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("father_name")}
+                                type="text"
+                                className="form-control"
+                                placeholder="  পিতার নাম"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            সময়কালঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-6 col-md-6 col-10">
-                            <select className="form-select">
-                              <option selected>নির্বাচন করুন</option>
-                              <option>মাসিক</option>
-                              <option>সাপ্তাহিক</option>
-                              <option>বার্ষিক</option>
-                            </select>
-                          </div>
-                          <div className="col-2">
-                            <span className="addbutton">
-                              <a
-                                href="#"
-                                data-bs-toggle="modal"
-                                data-bs-target="#payterm"
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-5 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              সময়কালঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-6 col-md-6 col-10">
+                              <select
+                                {...register("duration")}
+                                className="form-select"
                               >
-                                <i className="bi bi-plus-circle-fill"></i>
-                              </a>
-                            </span>
+                                <option disabled>নির্বাচন করুন</option>
+                                <option>মাসিক</option>
+                                <option>সাপ্তাহিক</option>
+                                <option>বার্ষিক</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-lg-5 col-md-5 offset-md-2 offset-0">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              মোবাইল নম্বর
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("mother_name")}
+                                type="text"
+                                className="form-control"
+                                placeholder=" মোবাইল নম্বর"
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div className="col-lg-5 col-md-5 offset-md-2 offset-0">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            মাতার নামঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder=" মাতার নাম"
-                            />
+                    </div>
+
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-5 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              ফি
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("fee")}
+                                type="number"
+                                className="form-control"
+                                placeholder="ফি"
+                              />
+                            </div>
                           </div>
                         </div>
+                        <div className="col-lg-5 col-md-5 offset-md-2 offset-0">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              পরিচয়পত্র নংঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("nid_no")}
+                                className="form-control"
+                                placeholder="  NID/ জন্ম নিবন্ধন নং"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-5 col-12 offset-0 offset-md-7">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              পেশাঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("occupation")}
+                                className="form-control"
+                                placeholder="পেশা"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-5 col-12 offset-0 offset-md-7">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              কপিলঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("copil")}
+                                className="form-control"
+                                placeholder="কপিল"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-4 col-md-4 col-12">
+                          <div className="row">
+                            <label className="col-12 col-form-label info-lable">
+                              স্থায়ী ঠিকানা
+                            </label>
+                          </div>
+                        </div>
+                        <div className="col-4"></div>
+                        <div className="col-4">
+                          <div className="row">
+                            <label className="col-sm-12 d-none d-md-block col-form-label info-lable">
+                              বর্তমান ঠিকানা
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="col-lg-5 col-md-5 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              গ্রাম/বাসাঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("graam_perm")}
+                                className="form-control"
+                                placeholder="গ্রাম/বাসা"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-2 d-none d-md-block"></div>
+                        <div className="col-lg-5 col-md-5 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              গ্রাম/বাসাঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("graam")}
+                                className="form-control"
+                                placeholder="গ্রাম/বাসা"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-5 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              ডাকঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("daak_perm")}
+                                className="form-control"
+                                placeholder="ডাক"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-2 d-none d-md-block"></div>
+                        <div className="col-lg-5 col-md-5 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              ডাকঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("daak")}
+                                className="form-control"
+                                placeholder="ডাক"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-5 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              থানাঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("thana_perm")}
+                                className="form-control"
+                                placeholder="থানা"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-2 d-none d-md-block"></div>
+                        <div className="col-lg-5 col-md-5 col-12">
+                          <div className="row mb-3">
+                            <label className="col-sm-4 col-form-label info-lable">
+                              থানাঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              <input
+                                {...register("thana")}
+                                className="form-control"
+                                placeholder="থানা"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-12">
+                      <div className="row">
+                        <div className="col-lg-5 col-md-5 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              জেলাঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("jela_perm")}
+                                className="form-control"
+                                placeholder="জেলা"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-2 d-none d-md-block"></div>
+                        <div className="col-lg-5 col-md-5 col-12">
+                          <div className="row mb-3">
+                            <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
+                              জেলাঃ
+                              <i>*</i>
+                            </label>
+                            <div className="col-lg-8 col-md-8 col-12">
+                              <input
+                                {...register("jela")}
+                                className="form-control"
+                                placeholder="জেলা"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* <!-- Image Upload section --> */}
+                    <div className="col-12 mb-3">
+                      <div className="upload-container">
+                        <div className="file-upload">
+                          <div className="file-image">
+                            <div className="file-title">দাতার ছবি</div>
+                            <img
+                              {...register("image")}
+                              src="../../assets/images/fileupload.png"
+                              alt=""
+                              width="144"
+                              height="144"
+                            />
+                            <div className="mt-2">
+                              144px
+                              <i className="bi bi-x"></i>
+                              144px
+                            </div>
+                          </div>
+                          <div className="upload-button">
+                            <div className="upload-btn-wrapper">
+                              <button className="upload-btn">Browse</button>
+                              <input type="file" name="file" />
+                            </div>
+                            <button className="upload-btn">save</button>
+                          </div>
+                        </div>
+                        <div className="file-upload">
+                          <div className="file-image">
+                            <div className="file-title">
+                              NID/জন্মনিবন্ধন কার্ড
+                            </div>
+                            <img
+                              {...register("nid_image")}
+                              src="../../assets/images/fileupload.png"
+                              alt=""
+                              width="144"
+                              height="144"
+                            />
+                            <div className="mt-2">
+                              144px
+                              <i className="bi bi-x"></i>
+                              144px
+                            </div>
+                          </div>
+                          <div className="upload-button">
+                            <div className="upload-btn-wrapper">
+                              <button className="upload-btn">Browse</button>
+                              <input type="file" name="file" />
+                            </div>
+                            <button className="upload-btn">save</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* <!-- Button Area --> */}
+                    <div className="col-6 d-flex justify-content-center w-100 donoate">
+                      <div className="button-group w-100">
+                        <button className="custom-btn btn-primary">Save</button>
+                        <button className="custom-btn btn-danger">Clear</button>
                       </div>
                     </div>
                   </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            আইডিঃ
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="আইডি"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-5 col-md-5 offset-md-2 offset-0">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            স্বামী/স্ত্রীর নামঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder=" স্বামী/স্ত্রীর নাম"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            ফি
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="ফি"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-5 col-md-5 offset-md-2 offset-0">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            পরিচয়পত্র নংঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              className="form-control"
-                              placeholder="  NID/ জন্ম নিবন্ধন নং"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-5 col-12 offset-0 offset-md-7">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            পেশাঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              className="form-control"
-                              placeholder="পেশা"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-5 col-12 offset-0 offset-md-7">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            কপিলঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              className="form-control"
-                              placeholder="কপিল"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-4 col-md-4 col-12">
-                        <div className="row">
-                          <label className="col-12 col-form-label info-lable">
-                            স্থায়ী ঠিকানা
-                          </label>
-                        </div>
-                      </div>
-                      <div className="col-4"></div>
-                      <div className="col-4">
-                        <div className="row">
-                          <label className="col-sm-12 d-none d-md-block col-form-label info-lable">
-                            বর্তমান ঠিকানা
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            গ্রাম/বাসাঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              className="form-control"
-                              placeholder="গ্রাম/বাসা"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-2 d-none d-md-block"></div>
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            গ্রাম/বাসাঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              className="form-control"
-                              placeholder="গ্রাম/বাসা"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            ডাকঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input className="form-control" placeholder="ডাক" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-2 d-none d-md-block"></div>
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            ডাকঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input className="form-control" placeholder="ডাক" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            থানাঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              className="form-control"
-                              placeholder="থানা"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-2 d-none d-md-block"></div>
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-sm-4 col-form-label info-lable">
-                            থানাঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            <input
-                              className="form-control"
-                              placeholder="থানা"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="row">
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            জেলাঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              className="form-control"
-                              placeholder="জেলা"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-2 d-none d-md-block"></div>
-                      <div className="col-lg-5 col-md-5 col-12">
-                        <div className="row mb-3">
-                          <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                            জেলাঃ
-                            <i>*</i>
-                          </label>
-                          <div className="col-lg-8 col-md-8 col-12">
-                            <input
-                              className="form-control"
-                              placeholder="জেলা"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* <!-- Image Upload section --> */}
-                  <div className="col-12 mb-3">
-                    <div className="upload-container">
-                      <div className="file-upload">
-                        <div className="file-image">
-                          <div className="file-title">দাতার ছবি</div>
-                          <img
-                            src="../../assets/images/fileupload.png"
-                            alt=""
-                            width="144"
-                            height="144"
-                          />
-                          <div className="mt-2">
-                            144px
-                            <i className="bi bi-x"></i>
-                            144px
-                          </div>
-                        </div>
-                        <div className="upload-button">
-                          <div className="upload-btn-wrapper">
-                            <button className="upload-btn">Browse</button>
-                            <input type="file" name="file" />
-                          </div>
-                          <button className="upload-btn">save</button>
-                        </div>
-                      </div>
-                      <div className="file-upload">
-                        <div className="file-image">
-                          <div className="file-title">
-                            NID/জন্মনিবন্ধন কার্ড
-                          </div>
-                          <img
-                            src="../../assets/images/fileupload.png"
-                            alt=""
-                            width="144"
-                            height="144"
-                          />
-                          <div className="mt-2">
-                            144px
-                            <i className="bi bi-x"></i>
-                            144px
-                          </div>
-                        </div>
-                        <div className="upload-button">
-                          <div className="upload-btn-wrapper">
-                            <button className="upload-btn">Browse</button>
-                            <input type="file" name="file" />
-                          </div>
-                          <button className="upload-btn">save</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* <!-- Button Area --> */}
-                  <div className="col-6 d-flex justify-content-center w-100 donoate">
-                    <div className="button-group w-100">
-                      <button className="custom-btn btn-info">New</button>
-                      <button className="custom-btn btn-primary">
-                        Save & Finish
-                      </button>
-                      <button className="custom-btn btn-dark">Close</button>
-                      <button className="custom-btn btn-danger">
-                        Edit & Finish
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                </form>
                 {/* <!-- Table Area --> */}
                 <div className="row my-3">
                   <div className="col-12">
@@ -467,36 +487,29 @@ const DonerMember = () => {
                             <th>পিতার নাম</th>
                             <th>সদস্য ধরন</th>
                             <th>মোবাইল</th>
-                            <th>
-                              <span className="action-edit">
-                                <i className="bi bi-pencil-square"></i>
-                              </span>
-                            </th>
-                            <th>
-                              <span className="action-delete">
-                                <i className="bi bi-trash3"></i>
-                              </span>
-                            </th>
+
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                              <span className="action-edit">
-                                <i className="bi bi-pencil-square"></i>
-                              </span>
-                            </td>
-                            <td>
-                              <span className="action-delete">
-                                <i className="bi bi-trash3"></i>
-                              </span>
-                            </td>
-                          </tr>
+                          {doner_member?.map((item) => (
+                            <tr>
+                              <td>{item.id}</td>
+                              <td>{item.name}</td>
+                              <td>{item.father_name}</td>
+                              <td>{item.type}</td>
+                              <td>{item.mother_name}</td>
+
+                              <td>
+                                <span
+                                  onClick={(id) => onDelete(item.id)}
+                                  className="action-delete"
+                                >
+                                  <i className="bi bi-trash3"></i>
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
                         </tbody>
                       </table>
                     </div>

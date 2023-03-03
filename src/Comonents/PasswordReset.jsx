@@ -28,7 +28,7 @@ const PasswordReset = () => {
     },
     onSuccess: (data) => {
       toast.success(data?.data.message);
-      navigate("/login");
+      navigate("/");
     },
   });
 
