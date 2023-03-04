@@ -9,6 +9,9 @@ const TeacherStaff = () => {
   const { data } = useQuery("employee", () =>
     fetch(`${serverUrl}/api/employee`).then((res) => res.json())
   );
+  const { data: podobi } = useQuery("podobi", () =>
+    fetch(`${serverUrl}/api/podobi`).then((res) => res.json())
+  );
 
   const mutation = useMutation({
     mutationFn: (data) => {
@@ -123,7 +126,7 @@ const TeacherStaff = () => {
                                 {...register("position")}
                               >
                                 {/* <option>নির্বাচন করুন</option> */}
-                                <option>মুহতামিম</option>
+                                {/* <option>মুহতামিম</option>
                                 <option>নায়েবে মুহতামিম</option>
                                 <option>শায়খুল হাদীস</option>
                                 <option>প্রধান মুফতী কাম- শায়খে ছানী</option>
@@ -135,7 +138,10 @@ const TeacherStaff = () => {
                                 <option>উস্তাদে মুহতারাম</option>
                                 <option>উস্তাদ হিফজ বিভাগ</option>
                                 <option>উস্তাদ নাজেরা বিভাগ</option>
-                                <option>উস্তাদ নূরানী বিভাগ</option>
+                                <option>উস্তাদ নূরানী বিভাগ</option> */}
+                                {podobi?.map((item) => (
+                                  <option>{item.podobi}</option>
+                                ))}
                               </select>
                             </div>
                             {/* <div className="col-lg-5 col-md-5 col-6 d-flex align-items-center">

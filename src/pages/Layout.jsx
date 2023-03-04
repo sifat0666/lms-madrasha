@@ -462,9 +462,11 @@ const Layout = ({ children }) => {
                             </a>
                             <ul class="dropdown-menu">
                               <li>
-                                <a class="dropdown-item" href="#">
-                                  পদবী এন্ট্রি
-                                </a>
+                                <Link to="/podobi-entry">
+                                  <a class="dropdown-item" href="/podobi-entry">
+                                    পদবী এন্ট্রি
+                                  </a>
+                                </Link>
                               </li>
                               <li>
                                 <Link to="/teacher-staff">
@@ -478,9 +480,11 @@ const Layout = ({ children }) => {
                                 </Link>
                               </li>
                               <li>
-                                <a class="dropdown-item" href="#">
-                                  পেরোল তৈরী
-                                </a>
+                                <Link to="/payroll">
+                                  <a class="dropdown-item" href="#">
+                                    পেরোল তৈরী
+                                  </a>
+                                </Link>
                               </li>
                               <li>
                                 <Link to="/monthly-entry">

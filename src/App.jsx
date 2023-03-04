@@ -58,6 +58,8 @@ import ExpenceEntryRevised from "./pages/Accounting/ExpenceEntryRevised";
 import MarkSheetClass from "./pages/MarkSheetClass";
 import NotFound from "./Comonents/NotFound";
 import PasswordReset from "./Comonents/PasswordReset";
+import PodobiEntry from "./pages/PodobiEntry";
+import Payroll from "./pages/Payroll";
 
 function App() {
   const navigate = useNavigate();
@@ -445,6 +447,26 @@ function App() {
           }
         />
         //teacher
+        <Route
+          path="podobi-entry"
+          element={
+            user?.permissions.includes("teacher_control") ? (
+              <PodobiEntry />
+            ) : (
+              <NotAuthenticated />
+            )
+          }
+        />
+        <Route
+          path="payroll"
+          element={
+            user?.permissions.includes("teacher_control") ? (
+              <Payroll />
+            ) : (
+              <NotAuthenticated />
+            )
+          }
+        />
         <Route
           path="teacher-staff"
           element={
