@@ -1,33 +1,57 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
+import { useMutation, useQuery } from "react-query";
+import { serverUrl } from "../../utils/config";
 
-const PayrollTable = ({ item }) => {
-  const [name, setName] = useState();
-  const [podobi, setPodobi] = useState();
-  const [mul_beton, setMul_beton] = useState();
-  const [bari_vara, setBariVara] = useState();
-  const [chikitsha, setChikitsha] = useState();
-  const [otiriktiBeton, setOtiriktoBeton] = useState();
-  const [id, setId] = useState();
+const PayrollTable = ({ item, sallery_sheet }) => {
+  console.log(item);
+
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/sallery-sheet`, data);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log("userdasdfata", data.data);
+      toast.success("sumitted successfully");
+    },
+  });
+
+  const [mul_beton, setMul_beton] = useState(0);
+  const [bari_vara, setBariVara] = useState(0);
+  const [chikitsha, setChikitsha] = useState(0);
+  const [otiriktoBeton, setOtiriktoBeton] = useState(0);
+
+  const total =
+    parseInt(mul_beton) +
+    parseInt(bari_vara) +
+    parseInt(chikitsha) +
+    parseInt(otiriktoBeton);
 
   const onSubmit = () => {
-    console.log({
-      name,
-      podobi,
+    const data = {
+      name: item.employee_id,
+      podobi: item.position,
       mul_beton,
       bari_vara,
       chikitsha,
-      otiriktiBeton,
-      id,
-    });
+      otiriktoBeton,
+      employee_id: item.id,
+      total,
+    };
+
+    mutation.mutate(data);
   };
 
   return (
     <tr>
       <td>
         <input
-          onChange={(e) => setId(e.target.value)}
           readOnly
           type="text"
           value={item.id}
@@ -36,8 +60,7 @@ const PayrollTable = ({ item }) => {
       </td>{" "}
       <td>
         <input
-          onChange={(e) => setId(e.target.value)}
-          type="test"
+          type="text"
           readOnly
           value={item.employee_id}
           style={{ width: "5rem", border: "none" }}
@@ -45,7 +68,6 @@ const PayrollTable = ({ item }) => {
       </td>{" "}
       <td>
         <input
-          onChange={(e) => setId(e.target.value)}
           type="text"
           readOnly
           value={item.position}
@@ -54,37 +76,49 @@ const PayrollTable = ({ item }) => {
       </td>{" "}
       <td>
         <input
-          onChange={(e) => setId(e.target.value)}
+          defaultValue={() =>
+            sallery_sheet?.map((i) => {
+              if (i.employee_id === item.id) {
+                return i.mul_beton;
+              }
+              return 0;
+            })
+          }
+          onChange={(e) => setMul_beton(e.target.value)}
           type="number"
-          defaultValue={0}
           style={{ width: "5rem" }}
         />
       </td>{" "}
       <td>
         <input
-          onChange={(e) => setId(e.target.value)}
+          onChange={(e) => setBariVara(e.target.value)}
           type="number"
-          defaultValue={0}
           style={{ width: "5rem" }}
         />
       </td>{" "}
       <td>
         <input
-          onChange={(e) => setId(e.target.value)}
+          onChange={(e) => setChikitsha(e.target.value)}
           type="number"
-          defaultValue={0}
           style={{ width: "5rem" }}
         />
       </td>{" "}
       <td>
         <input
-          onChange={(e) => setId(e.target.value)}
+          onChange={(e) => setOtiriktoBeton(e.target.value)}
           type="number"
-          defaultValue={0}
           style={{ width: "5rem" }}
         />
       </td>{" "}
-      <td>@mdo</td>
+      <td>
+        {sallery_sheet?.map((i) => {
+          if (i.employee_id === item.id) {
+            return i.total;
+          }
+        })
+          ? ""
+          : total}
+      </td>
       <td>
         <button onClick={onSubmit}>Submit</button>
       </td>

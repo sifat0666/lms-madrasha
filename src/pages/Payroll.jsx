@@ -9,13 +9,11 @@ const Payroll = () => {
     fetch(`${serverUrl}/api/employee`).then((res) => res.json())
   );
 
-  const { register, handleSubmit } = useForm();
+  const { data: sallery_sheet } = useQuery("sallery-sheet", () =>
+    fetch(`${serverUrl}/api/sallery-sheet`).then((res) => res.json())
+  );
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
-  console.log(data, "data");
+  // console.log(data, "data");
 
   return (
     <div className="bg-light m-2 mt-4">
@@ -35,7 +33,11 @@ const Payroll = () => {
         </thead>
         <tbody style={{ textAlign: "center" }}>
           {data?.data.map((item) => (
-            <PayrollTable key={item.id} item={item} />
+            <PayrollTable
+              sallery_sheet={sallery_sheet}
+              key={item.id}
+              item={item}
+            />
           ))}
         </tbody>
       </table>
