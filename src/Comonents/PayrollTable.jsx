@@ -5,9 +5,8 @@ import { toast } from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../utils/config";
 
-const PayrollTable = ({ item, sallery_sheet }) => {
-  console.log(item);
-
+const PayrollTable = ({ item }) => {
+  console.log("iotem", item);
   const mutation = useMutation({
     mutationFn: (data) => {
       return axios.post(`${serverUrl}/api/sallery-sheet`, data);
@@ -35,13 +34,13 @@ const PayrollTable = ({ item, sallery_sheet }) => {
 
   const onSubmit = () => {
     const data = {
-      name: item.employee_id,
-      podobi: item.position,
+      name: item?.employee_id,
+      podobi: item?.position,
       mul_beton,
       bari_vara,
       chikitsha,
       otiriktoBeton,
-      employee_id: item.id,
+      employee_id: item?.id,
       total,
     };
 
@@ -54,7 +53,7 @@ const PayrollTable = ({ item, sallery_sheet }) => {
         <input
           readOnly
           type="text"
-          value={item.id}
+          value={item?.id}
           style={{ width: "5rem", textAlign: "center", border: "none" }}
         />
       </td>{" "}
@@ -62,7 +61,7 @@ const PayrollTable = ({ item, sallery_sheet }) => {
         <input
           type="text"
           readOnly
-          value={item.employee_id}
+          value={item?.employee_id}
           style={{ width: "5rem", border: "none" }}
         />
       </td>{" "}
@@ -70,20 +69,12 @@ const PayrollTable = ({ item, sallery_sheet }) => {
         <input
           type="text"
           readOnly
-          value={item.position}
+          value={item?.position}
           style={{ width: "5rem", border: "none" }}
         />
       </td>{" "}
       <td>
         <input
-          defaultValue={() =>
-            sallery_sheet?.map((i) => {
-              if (i.employee_id === item.id) {
-                return i.mul_beton;
-              }
-              return 0;
-            })
-          }
           onChange={(e) => setMul_beton(e.target.value)}
           type="number"
           style={{ width: "5rem" }}
@@ -110,15 +101,7 @@ const PayrollTable = ({ item, sallery_sheet }) => {
           style={{ width: "5rem" }}
         />
       </td>{" "}
-      <td>
-        {sallery_sheet?.map((i) => {
-          if (i.employee_id === item.id) {
-            return i.total;
-          }
-        })
-          ? ""
-          : total}
-      </td>
+      <td>{total}</td>
       <td>
         <button onClick={onSubmit}>Submit</button>
       </td>

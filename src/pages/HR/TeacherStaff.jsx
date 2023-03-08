@@ -9,6 +9,8 @@ const TeacherStaff = () => {
   const { data } = useQuery("employee", () =>
     fetch(`${serverUrl}/api/employee`).then((res) => res.json())
   );
+
+  console.log("employee", data);
   const { data: podobi } = useQuery("podobi", () =>
     fetch(`${serverUrl}/api/podobi`).then((res) => res.json())
   );
@@ -424,16 +426,8 @@ const TeacherStaff = () => {
                               <th>জেলা</th>
                               <th>পদবী</th>
                               <th>মোবাইল নাম্বার</th>
-                              <th>
-                                <span className="action-edit">
-                                  <i className="bi bi-pencil-square"></i>
-                                </span>
-                              </th>
-                              <th>
-                                <span className="action-delete">
-                                  <i className="bi bi-trash3"></i>
-                                </span>
-                              </th>
+
+                              <th></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -446,11 +440,7 @@ const TeacherStaff = () => {
                                 <td>{item.thana}</td>
                                 <td>{item.position}</td>
                                 <td>{item.phn_no}</td>
-                                <td>
-                                  <span className="action-edit">
-                                    <i className="bi bi-pencil-square"></i>
-                                  </span>
-                                </td>
+
                                 <td>
                                   <span className="action-delete">
                                     <i className="bi bi-trash3"></i>

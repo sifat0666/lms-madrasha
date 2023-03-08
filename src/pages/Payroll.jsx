@@ -6,7 +6,7 @@ import PayrollTable from "../Comonents/PayrollTable";
 
 const Payroll = () => {
   const { data } = useQuery("employee", () =>
-    fetch(`${serverUrl}/api/employee`).then((res) => res.json())
+    fetch(`${serverUrl}/api/employee-payroll-null`).then((res) => res.json())
   );
 
   const { data: sallery_sheet } = useQuery("sallery-sheet", () =>
@@ -17,6 +17,9 @@ const Payroll = () => {
 
   return (
     <div className="bg-light m-2 mt-4">
+      <div className="section-title">
+        <h4>বেতন নির্ধারণ</h4>
+      </div>
       <table class="table table-bordered" style={{ textAlign: "center" }}>
         <thead>
           <tr>
@@ -32,12 +35,42 @@ const Payroll = () => {
           </tr>
         </thead>
         <tbody style={{ textAlign: "center" }}>
-          {data?.data.map((item) => (
-            <PayrollTable
-              sallery_sheet={sallery_sheet}
-              key={item.id}
-              item={item}
-            />
+          {data?.map((item) => {
+            if (sallery_sheet?.find((i) => i.employee_id === item.id)) {
+              return null;
+            } else {
+              return <PayrollTable key={item?.id} item={item} />;
+            }
+          })}
+        </tbody>
+      </table>
+      <div className="section-title">
+        <h4>বেতন লিস্ট</h4>
+      </div>
+      <table class="table table-bordered mt-2" style={{ textAlign: "center" }}>
+        <thead>
+          <tr>
+            <th scope="col">আইডি</th>
+            <th scope="col">নাম</th>
+            <th scope="col">পদবী</th>
+            <th scope="col">মূল বেতন</th>
+            <th scope="col">বাড়ি ভাড়া</th>
+            <th scope="col">চিকিৎসা</th>
+            <th scope="col">অতিরিক্ত বেতন</th>
+            <th scope="col">মোট বেতন</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody style={{ textAlign: "center" }}>
+          {sallery_sheet?.map((item) => (
+            <tr>
+              <td>{item.employee_id}</td> <td>{item.name}</td>
+              <td>{item.podobi}</td>
+              <td>{item.mul_beton}</td> <td>{item.bari_vara}</td>
+              <td>{item.chikitsha}</td>
+              <td>{item.otiriktoBeton}</td>
+              <td>{item.total}</td>
+            </tr>
           ))}
         </tbody>
       </table>

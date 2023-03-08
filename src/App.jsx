@@ -60,6 +60,7 @@ import NotFound from "./Comonents/NotFound";
 import PasswordReset from "./Comonents/PasswordReset";
 import PodobiEntry from "./pages/PodobiEntry";
 import Payroll from "./pages/Payroll";
+import TeacherMonthEntry from "./pages/TeacherMonthEntry";
 
 function App() {
   const navigate = useNavigate();
@@ -481,7 +482,7 @@ function App() {
           path="monthly-entry"
           element={
             user?.permissions.includes("teacher_control") ? (
-              <MonthlyFees />
+              <TeacherMonthEntry />
             ) : (
               <NotAuthenticated />
             )
