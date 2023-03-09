@@ -1,6 +1,33 @@
 import React from "react";
+import { useState } from "react";
+import { useQuery } from "react-query";
+import { serverUrl } from "../../../utils/config";
 
 const PaySallary = () => {
+  const [session, setSession] = useState();
+  const [month, setMonth] = useState();
+
+  const { data: academicYear } = useQuery("academicyear", () =>
+    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+  );
+
+  const { data: sallery_sheet } = useQuery("sallery-sheet", () =>
+    fetch(`${serverUrl}/api/sallery-sheet`).then((res) => res.json())
+  );
+
+  const { data: months } = useQuery("teacher_month", () =>
+    fetch(`${serverUrl}/api/teacher-month-entry`).then((res) => res.json())
+  );
+
+  const findMonth = months?.find((i) => i.session === session);
+
+  console.log("sessoin state", session);
+  console.log("findMonth", findMonth);
+
+  const searchStaff = () => {
+    console.log({ session, month });
+  };
+
   return (
     <div>
       <section className="user-form-section">
@@ -20,39 +47,20 @@ const PaySallary = () => {
                     <div className="row">
                       <div className="col-lg-3 col-12 col-md-12">
                         <div className="row">
-                          <label className="col-lg-2 d-none d-lg-block col-form-label info-lable">
-                            <i className="bi bi-search"></i>
-                          </label>
-                          <div className="col-lg-7 col-9 col-md-10">
-                            <input
-                              type="search"
-                              className="form-control"
-                              placeholder="সার্চ করুন..."
-                            />
-                          </div>
-                          <div className="col-lg-3 col-3 col-md-2">
-                            <input
-                              type="button"
-                              className="custom-btn btn-primary"
-                              value="খুজুন"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col-lg-3 col-12 col-md-12">
-                        <div className="row">
                           <label className="col-lg-5 col-12 col-form-label info-lable">
                             শিক্ষাবর্ষ
                           </label>
                           <div className="col-lg-7 col-12 col-md-12">
-                            <select className="form-select">
-                              <option value="" selected="">
-                                সিলেক্ট করুন
-                              </option>
-                              <option value="">২০২২</option>
-                              <option value="">২০২৩</option>
-                              <option value="">২০২৪</option>
-                              <option value="">২০২৫</option>
+                            <select
+                              onChange={(e) => setSession(e.target.value)}
+                              className="form-select"
+                            >
+                              <option disabled>সিলেক্ট করুন</option>
+                              {academicYear?.data.map((item) => (
+                                <option key={item.id}>
+                                  {item.academic_year}
+                                </option>
+                              ))}
                             </select>
                           </div>
                         </div>
@@ -63,18 +71,27 @@ const PaySallary = () => {
                             মাস
                           </label>
                           <div className="col-lg-5 col-md-6 col-12">
-                            <select className="form-select">
-                              <option value="" selected="">
-                                সিলেক্ট করুন
-                              </option>
-                              <option value="">জানুয়ারী</option>
-                              <option value="">ফেব্রুয়ারী</option>
-                              <option value="">মার্চ</option>
-                              <option value="">এপ্রিল</option>
+                            <select
+                              onChange={(e) => setMonth(e.target.value)}
+                              className="form-select"
+                            >
+                              <option>{findMonth?.m1}</option>
+                              <option>{findMonth?.m2}</option>
+                              <option>{findMonth?.m3}</option>
+                              <option>{findMonth?.m4}</option>
+                              <option>{findMonth?.m5}</option>
+                              <option>{findMonth?.m6}</option>
+                              <option>{findMonth?.m7}</option>
+                              <option>{findMonth?.m8}</option>
+                              <option>{findMonth?.m9}</option>
+                              <option>{findMonth?.m10}</option>
+                              <option>{findMonth?.m11}</option>
+                              <option>{findMonth?.m12}</option>
                             </select>
                           </div>
                           <div className="col-lg-5 col-md-6 col-12 mt-2 mt-md-0">
                             <button
+                              onClick={searchStaff}
                               type="submit"
                               className="custom-btn btn-primary d-block w-100"
                             >
@@ -113,11 +130,13 @@ const PaySallary = () => {
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <th>৫৪৩</th>
-                                  <td>মুহতামিম</td>
-                                  <td>৪০০০০.০০</td>
-                                </tr>
+                                {sallery_sheet?.map((item) => (
+                                  <tr key={item.id}>
+                                    <th>{item.employee_id}</th>
+                                    <td>{item.name}</td>
+                                    <td>{item.total}</td>
+                                  </tr>
+                                ))}
                               </tbody>
                             </table>
                           </div>
