@@ -1,11 +1,16 @@
+import axios from "axios";
 import React from "react";
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../../utils/config";
+import PaySalleryTable from "../../Comonents/PaySalleryTable";
 
 const PaySallary = () => {
   const [session, setSession] = useState();
   const [month, setMonth] = useState();
+  const [paidTable, setPaidTable] = useState();
+  const [notPaidTable, setNotPaidTable] = useState([]);
+  console.log("not paid table", notPaidTable);
 
   const { data: academicYear } = useQuery("academicyear", () =>
     fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
@@ -13,6 +18,10 @@ const PaySallary = () => {
 
   const { data: sallery_sheet } = useQuery("sallery-sheet", () =>
     fetch(`${serverUrl}/api/sallery-sheet`).then((res) => res.json())
+  );
+
+  const { data: paid_sallery } = useQuery("paid_sallery", () =>
+    fetch(`${serverUrl}/api/monthly-sallery-entry`).then((res) => res.json())
   );
 
   const { data: months } = useQuery("teacher_month", () =>
@@ -24,8 +33,38 @@ const PaySallary = () => {
   console.log("sessoin state", session);
   console.log("findMonth", findMonth);
 
+  //payroll-filter
+
+  const { mutate } = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/payroll-filter`, data);
+    },
+    onError: (error, variable, context) => {
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log("return", data);
+      setPaidTable(data);
+      // toast.success("submitted successfully");
+    },
+  });
+
+  const { mutate: notPaidMutate } = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/employee-payroll-queue`, data);
+    },
+    onError: (error, variable, context) => {
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log("return", data);
+      setNotPaidTable(data);
+    },
+  });
+
   const searchStaff = () => {
-    console.log({ session, month });
+    mutate({ session, month });
+    notPaidMutate({ session, month });
   };
 
   return (
@@ -38,14 +77,17 @@ const PaySallary = () => {
                 <div className="row d-print-none">
                   <div className="col-12">
                     <div className="section-title" style={{ marginTop: "2px" }}>
-                      <h4> শিক্ষক/স্টাফদের বেতন প্রদান</h4>
+                      <h4>
+                        {" "}
+                        শিক্ষক/স্টাফদের বেতন প্রদান / {month} / {session}
+                      </h4>
                     </div>
                   </div>
                 </div>
                 <div className="row">
                   <div className="col-12">
                     <div className="row">
-                      <div className="col-lg-3 col-12 col-md-12">
+                      <div className="col-lg-4 col-12 col-md-12">
                         <div className="row">
                           <label className="col-lg-5 col-12 col-form-label info-lable">
                             শিক্ষাবর্ষ
@@ -95,7 +137,7 @@ const PaySallary = () => {
                               type="submit"
                               className="custom-btn btn-primary d-block w-100"
                             >
-                              Save
+                              Search
                             </button>
                           </div>
                         </div>
@@ -103,239 +145,52 @@ const PaySallary = () => {
                     </div>
                   </div>
                 </div>
-                <div className="sperator"></div>
                 <div className="row">
-                  <div className="col-lg-3 col-12 d-print-none">
-                    <form>
-                      <div className="row mt-3">
-                        <div className="col-12">
-                          <div
-                            className="table-responsive"
-                            data-pattern="priority-columns"
-                          >
-                            <table
-                              id="tech-companies-1"
-                              className="table  bg-white table-bordered text-center"
-                            >
-                              <thead
-                                className={{
-                                  backgroundColor: "#62659B",
-                                  color: "white",
-                                }}
-                              >
-                                <tr>
-                                  <th>আইডি নং</th>
-                                  <th>শিক্ষকের নাম</th>
-                                  <th>নির্ধারিত বেতন</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {sallery_sheet?.map((item) => (
-                                  <tr key={item.id}>
-                                    <th>{item.employee_id}</th>
-                                    <td>{item.name}</td>
-                                    <td>{item.total}</td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div className="col-lg-3 col-12 d-print-none">
-                    <form>
-                      <div className="row mt-3">
-                        <div className="col-12">
-                          <div className="row mb-2">
-                            <label
-                              className="col-lg-5 col-12 col-md-5 col-form-label info-lable"
-                              style={{ textAlign: "left" }}
-                            >
-                              লেনদেনের ধরণ
-                            </label>
-                            <div className="col-lg-7 col-12 col-md-7">
-                              <select className="form-select">
-                                <option value="" selected="">
-                                  সিলেক্ট করুন
-                                </option>
-                                <option value="">বেতন প্রদান</option>
-                                <option value="">লোন প্রদান</option>
-                                <option value="">আমানত প্রদান</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-12">
-                          <div className="row mb-2">
-                            <label
-                              className="col-lg-5 col-12 col-md-5 col-form-label info-lable"
-                              style={{ textAlign: "left" }}
-                            >
-                              এন্ট্রির তারিখ
-                            </label>
-                            <div className="col-lg-7 col-12 col-md-7">
-                              <input type="date" className="form-control" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-12">
-                          <div className="row mb-2">
-                            <label
-                              className="col-lg-5 col-12 col-md-5 col-form-label info-lable"
-                              style={{ textAlign: "left" }}
-                            >
-                              শিক্ষাবর্ষ
-                            </label>
-                            <div className="col-lg-7 col-12 col-md-7">
-                              <select className="form-select">
-                                <option value="" selected="">
-                                  সিলেক্ট করুন
-                                </option>
-                                <option value="">২০২২</option>
-                                <option value="">২০২৩</option>
-                                <option value="">২০২৪</option>
-                                <option value="">২০২৫</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-12">
-                          <div className="row mb-2">
-                            <label
-                              className="col-lg-5 col-12 col-md-5 col-form-label info-lable"
-                              style={{ textAlign: "left" }}
-                            >
-                              মাস
-                            </label>
-                            <div className="col-lg-7 col-12 col-md-7">
-                              <select className="form-select">
-                                <option value="" selected="">
-                                  সিলেক্ট করুন
-                                </option>
-                                <option value="">জানুয়ারী</option>
-                                <option value="">ফেব্রুয়ারী</option>
-                                <option value="">মার্চ</option>
-                                <option value="">এপ্রিল</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-12">
-                          <div className="row mb-2">
-                            <label
-                              className="col-lg-5 col-12 col-md-5 col-form-label info-lable"
-                              style={{ textAlign: "left" }}
-                            >
-                              শিক্ষক নাম
-                            </label>
-                            <div className="col-lg-7 col-12 col-md-7">
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="শিক্ষক/স্টাফের নাম"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-12">
-                          <div className="row mb-2">
-                            <label
-                              className="col-lg-5 col-12 col-md-5 col-form-label info-lable"
-                              style={{ textAlign: "left" }}
-                            >
-                              পরিমান
-                            </label>
-                            <div className="col-lg-7 col-12 col-md-7">
-                              <input
-                                type="text"
-                                className="form-control"
-                                placeholder="বেতনের পরিমান"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="col-12">
-                          <div className="row mb-2">
-                            <label
-                              className="col-lg-5 col-12 col-md-5 col-form-label info-lable"
-                              style={{ textAlign: "left" }}
-                            >
-                              মন্তব্য
-                            </label>
-                            <div className="col-lg-7 col-12 col-md-7">
-                              <textarea
-                                className="form-control"
-                                rows="2"
-                                placeholder="মন্তব্য"
-                              ></textarea>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="row mt-3">
-                        <div className="col-12 paysalary-btn">
-                          <div className="row">
-                            <div className="col-6">
-                              <button className="custom-btn btn-primary d-block w-100 mb-2">
-                                Save
-                              </button>
-                              <button className="custom-btn btn-dark d-block w-100">
-                                Update
-                              </button>
-                            </div>
-                            <div className="col-6">
-                              <button className="custom-btn btn-dark d-block w-100 mb-2">
-                                New
-                              </button>
-                              <button className="custom-btn btn-danger d-block w-100">
-                                Close
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div className="col-lg-6 col-12 d-print-none">
+                  <div className="col-lg-8 col-12 d-print-none">
                     <div className="row mt-3">
                       <div className="col-12">
-                        <div className="row">
-                          <div className="col-lg-6 col-12 col-md-6">
-                            <div className="row">
-                              <div className="col-lg-9 col-md-9 col-12">
-                                <input
-                                  type="date"
-                                  placeholder=""
-                                  className="form-control"
-                                />
-                              </div>
-                              <label className="col-lg-3 col-md-3 col-12 col-form-label info-lable">
-                                পর্যন্ত
-                                <i>*</i>
-                              </label>
-                            </div>
-                          </div>
-                          <div className="col-lg-6 col-md-6 col-12">
-                            <div className="row">
-                              <div className="col-lg-7 col-md-7 col-12">
-                                <input
-                                  type="date"
-                                  placeholder=""
-                                  className="form-control"
-                                />
-                              </div>
-                              <div className="col-lg-5 col-md-5 col-12 mt-2 mt-md-0">
-                                <button className="custom-btn btn-primary d-block w-100">
-                                  Show
-                                </button>
-                              </div>
-                            </div>
-                          </div>
+                        <div
+                          className="table-responsive"
+                          data-pattern="priority-columns"
+                        >
+                          <table
+                            id="tech-companies-1"
+                            className="table  bg-white table-bordered text-center"
+                          >
+                            <thead
+                              className={{
+                                backgroundColor: "#62659B",
+                                color: "white",
+                              }}
+                            >
+                              <tr>
+                                <th>আইডি নং</th>
+                                <th>পদবি</th>
+                                <th>নাম</th>
+                                <th>নির্ধারিত বেতন</th>
+                                <th> বেতন</th>
+                                <th> কর্তন</th>
+                                <th> </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {notPaidTable?.data?.map((item) => (
+                                <tr key={item.id}>
+                                  <PaySalleryTable
+                                    month={month}
+                                    session={session}
+                                    item={item}
+                                  />
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
                         </div>
                       </div>
                     </div>
+                  </div>
+
+                  <div className="col-lg-4 col-12 d-print-none">
                     <div className="row mt-3">
                       <div className="col-12">
                         <div
@@ -354,31 +209,31 @@ const PaySallary = () => {
                               }}
                             >
                               <tr>
-                                <th>
-                                  <span className="action-edit">
-                                    <i className="bi bi-pencil-square"></i>
-                                  </span>
-                                </th>
-                                <th>আইডি</th>
-                                <th>শিক্ষকের নাম</th>
+                                <th></th>
+                                <th> নাম</th>
+                                <th>পদবি</th>
                                 <th>মোট বেতন</th>
-                                <th>মাস</th>
+                                <th>কর্তন</th>
+
                                 <th>তারিখ</th>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <th>
-                                  <span className="action-edit">
-                                    <i className="bi bi-pencil-square"></i>
-                                  </span>
-                                </th>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                              </tr>
+                              {paidTable?.data?.map((item) => (
+                                <tr>
+                                  <th>
+                                    <span className="action-edit">
+                                      <i className="bi bi-pencil-square"></i>
+                                    </span>
+                                  </th>
+                                  <td>{item.name}</td>
+                                  <td>{item.employee_id}</td>
+                                  <td>{item.podobi}</td>
+                                  <td>{item.sallery}</td>
+                                  <td>{item.korton}</td>
+                                  <td>{item.updated_at.slice(0, 10)}</td>
+                                </tr>
+                              ))}
                             </tbody>
                           </table>
                         </div>

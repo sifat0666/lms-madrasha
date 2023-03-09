@@ -347,33 +347,31 @@ const TeacherMonthEntry = () => {
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  {months?.map((item) => (
-                                    <>
-                                      <td>
-                                        <span
-                                          onClick={(id) => onDelete(item.id)}
-                                          className="action-delete"
-                                        >
-                                          <i className="bi bi-trash3"></i>
-                                        </span>
-                                      </td>
-                                      <th>{item.session}</th>
-                                      <th>{item.m1}</th>
-                                      <th>{item.m2}</th>
-                                      <th>{item.m3}</th>
-                                      <th>{item.m4}</th>
-                                      <th>{item.m5}</th>
-                                      <th>{item.m6}</th>
-                                      <th>{item.m7}</th>
-                                      <th>{item.m8}</th>
-                                      <th>{item.m9}</th>
-                                      <th>{item.m10}</th>
-                                      <th>{item.m11}</th>
-                                      <th>{item.m12}</th>
-                                    </>
-                                  ))}
-                                </tr>
+                                {months?.map((item) => (
+                                  <tr>
+                                    <td>
+                                      <span
+                                        onClick={(id) => onDelete(item.id)}
+                                        className="action-delete"
+                                      >
+                                        <i className="bi bi-trash3"></i>
+                                      </span>
+                                    </td>
+                                    <th>{item.session}</th>
+                                    <th>{item.m1}</th>
+                                    <th>{item.m2}</th>
+                                    <th>{item.m3}</th>
+                                    <th>{item.m4}</th>
+                                    <th>{item.m5}</th>
+                                    <th>{item.m6}</th>
+                                    <th>{item.m7}</th>
+                                    <th>{item.m8}</th>
+                                    <th>{item.m9}</th>
+                                    <th>{item.m10}</th>
+                                    <th>{item.m11}</th>
+                                    <th>{item.m12}</th>
+                                  </tr>
+                                ))}
                               </tbody>
                             </table>
                           </div>

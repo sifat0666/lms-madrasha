@@ -35,13 +35,9 @@ const Payroll = () => {
           </tr>
         </thead>
         <tbody style={{ textAlign: "center" }}>
-          {data?.map((item) => {
-            if (sallery_sheet?.find((i) => i.employee_id === item.id)) {
-              return null;
-            } else {
-              return <PayrollTable key={item?.id} item={item} />;
-            }
-          })}
+          {data?.map((item) => (
+            <PayrollTable key={item?.id} item={item} />
+          ))}
         </tbody>
       </table>
       <div className="section-title">
