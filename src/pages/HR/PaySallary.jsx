@@ -97,7 +97,7 @@ const PaySallary = () => {
                               onChange={(e) => setSession(e.target.value)}
                               className="form-select"
                             >
-                              <option disabled>সিলেক্ট করুন</option>
+                              <option>সিলেক্ট করুন</option>
                               {academicYear?.data.map((item) => (
                                 <option key={item.id}>
                                   {item.academic_year}
@@ -117,6 +117,8 @@ const PaySallary = () => {
                               onChange={(e) => setMonth(e.target.value)}
                               className="form-select"
                             >
+                              <option>সিলেক্ট করুন</option>
+
                               <option>{findMonth?.m1}</option>
                               <option>{findMonth?.m2}</option>
                               <option>{findMonth?.m3}</option>
@@ -227,7 +229,7 @@ const PaySallary = () => {
                                     </span>
                                   </th>
                                   <td>{item.name}</td>
-                                  <td>{item.employee_id}</td>
+
                                   <td>{item.podobi}</td>
                                   <td>{item.sallery}</td>
                                   <td>{item.korton}</td>
