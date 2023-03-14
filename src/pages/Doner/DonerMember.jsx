@@ -30,7 +30,7 @@ const DonerMember = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    mutation.mutate(data);
+    mutation.mutate({ ...data, duration: "empty", type: "empty" });
   };
 
   const onDelete = async (id) => {
@@ -91,7 +91,7 @@ const DonerMember = () => {
                     <div className="col-12">
                       <div className="row">
                         <div className="col-lg-5 col-md-5 col-12">
-                          <div className="row mb-3">
+                          {/* <div className="row mb-3">
                             <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                               সদস্যের ধরণঃ
                               <i>*</i>
@@ -116,7 +116,7 @@ const DonerMember = () => {
                                 </a>
                               </span>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                         <div className="col-lg-5 col-md-5 offset-md-2 offset-0">
                           <div className="row mb-3">
@@ -139,7 +139,7 @@ const DonerMember = () => {
                     <div className="col-12">
                       <div className="row">
                         <div className="col-lg-5 col-md-5 col-12">
-                          <div className="row mb-3">
+                          {/* <div className="row mb-3">
                             <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                               সময়কালঃ
                               <i>*</i>
@@ -155,7 +155,7 @@ const DonerMember = () => {
                                 <option>বার্ষিক</option>
                               </select>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                         <div className="col-lg-5 col-md-5 offset-md-2 offset-0">
                           <div className="row mb-3">
@@ -406,7 +406,7 @@ const DonerMember = () => {
                       </div>
                     </div>
                     {/* <!-- Image Upload section --> */}
-                    <div className="col-12 mb-3">
+                    {/* <div className="col-12 mb-3">
                       <div className="upload-container">
                         <div className="file-upload">
                           <div className="file-image">
@@ -459,7 +459,7 @@ const DonerMember = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     {/* <!-- Button Area --> */}
                     <div className="col-6 d-flex justify-content-center w-100 donoate">
                       <div className="button-group w-100">
