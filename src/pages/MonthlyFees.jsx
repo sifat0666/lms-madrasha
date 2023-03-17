@@ -27,6 +27,7 @@ const MonthlyFees = () => {
   const [feeName, setFeeName] = useState();
   const [fees, setFees] = useState();
   const [feesList, setFeesList] = useState();
+  const [joma, setJoma] = useState(0);
 
   const [monthName, setMonthName] = useState();
 
@@ -122,10 +123,6 @@ const MonthlyFees = () => {
     location.reload();
   };
 
-  // console.log("student", me?.data);
-
-  // console.log("first", fees);
-
   const onStudentSearch = async () => {
     const data = await axios.get(`${serverUrl}/api/student/${studentId}`);
     getMonthlyFeeById.mutate({ student_id: studentId });
@@ -158,7 +155,7 @@ const MonthlyFees = () => {
 
   const onFeeSubmit = (data) => {
     setFeeVal(data);
-    // console.log("onfeesubmit", data);
+
     let params = {
       ...data,
       receiver: me?.data.name,
@@ -168,11 +165,16 @@ const MonthlyFees = () => {
       student_name: student?.student_name,
       determined_fee: fees,
       class: student?.class,
+      discount: korton,
     };
-    // console.log("params", params);
+
     console.log(params, { ...params });
     monthlyFeeMutation.mutate(params);
   };
+
+  const korton = parseInt(fees) - parseInt(joma);
+
+  console.log("korteon", korton, fees, joma);
 
   return (
     <div>
@@ -355,23 +357,7 @@ const MonthlyFees = () => {
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-4 col-lg-4 col-12">
-                            <div class="row mb-3">
-                              <label class="col-lg-2 col-md-2 col-12 col-form-label info-lable">
-                                কর্তন
-                              </label>
-                              <div class="col-lg-10 col-md-10 col-12">
-                                <input
-                                  {...FeeRegister("discount")}
-                                  type="text"
-                                  class="form-control"
-                                  placeholder="কর্তন
-                                  "
-                                  readonly
-                                />
-                              </div>
-                            </div>
-                          </div>
+
                           <div class="col-lg-4 col-md-4 col-lg-4 col-12">
                             <div class="row mb-3">
                               <label class="col-lg-4 col-md-4 col-12 col-form-label info-lable">
@@ -380,9 +366,26 @@ const MonthlyFees = () => {
                               <div class="col-lg-8 col-md-8 col-12">
                                 <input
                                   {...FeeRegister("submitted_fee")}
-                                  type="text"
+                                  onChange={(e) => setJoma(e.target.value)}
+                                  type="number"
                                   class="form-control"
                                   placeholder="জমা"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-4 col-lg-4 col-12">
+                            <div class="row mb-3">
+                              <label class="col-lg-2 col-md-2 col-12 col-form-label info-lable">
+                                কর্তন
+                              </label>
+                              <div class="col-lg-10 col-md-10 col-12">
+                                <input
+                                  // {...FeeRegister("discount")}
+                                  value={joma && korton}
+                                  type="text"
+                                  class="form-control"
+                                  placeholder="কর্তন"
                                 />
                               </div>
                             </div>

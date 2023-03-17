@@ -1,0 +1,60 @@
+header theke delete icon dlt
+--------------
+hishab nikash report
+
+
+msg lekhar field banano
+reports arabic
+logout if 5 min idle
+
+fee deyni entry report 
+
+vorti fee form design
+
+profile edit
+
+
+
+report total
+
+hajira report
+
+
+
+
+design class poriboorton -- done
+
+montoboo, particularsbornono optional --done
+
+fix logout  -- done
+
+
+
+
+
+
+moukuf entry report --done
+
+
+create dev page and call action -- done
+
+
+joma korton-p --done
+
+add 404 page --done
+
+
+korton optional korte hobe --done
+
+monthly fees print icon --done
+msg lekhar  field nullable --done
+
+
+-------------------
+bokeya
+
+chuti komano barano -- !
+
+
+------------------------------
+monthly fee deadline

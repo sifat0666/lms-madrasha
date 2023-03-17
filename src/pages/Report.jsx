@@ -17,6 +17,7 @@ import TarikhOnijayiFee from "../Comonents/Report/Student/TarikhOnujayiFee";
 import VortiFeeReport from "../Comonents/Report/Student/VortiFeeReport";
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
+import HajiraKhata from "../Comonents/Report/Student/HajiraKhata";
 
 const Report = () => {
   const ref = useRef();
@@ -119,6 +120,8 @@ const Report = () => {
                             <option>৯. অভিবাবকের মোবাইল</option>
                             <option>১০. ভর্তি ফি এর রিপোর্ট</option>
                             <option>১১. আজকের ভর্তি রিপোর্ট</option>
+                            <option>১২. হাজিরা খাতা</option>
+                            <option>১৩. হাজিরা রিপোর্ট</option>
                             {/* <option>
                               ৮. মারহালা ওয়ারী কিতাব/বিষয়ের তালিকা
                             </option>
@@ -272,6 +275,9 @@ const Report = () => {
                       {report === "১১. আজকের ভর্তি রিপোর্ট" && (
                         <TarikhOnijayiFee student={student} value={value} />
                       )}
+                      {report === "১২. হাজিরা খাতা" && (
+                        <HajiraKhata student={student} value={value} />
+                      )}{" "}
                     </div>
                   </div>
                 </div>

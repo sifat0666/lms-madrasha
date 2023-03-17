@@ -211,7 +211,7 @@ const PaySallary = () => {
                               }}
                             >
                               <tr>
-                                <th></th>
+                                {/* <th></th> */}
                                 <th> নাম</th>
                                 <th>পদবি</th>
                                 <th>মোট বেতন</th>
@@ -223,11 +223,11 @@ const PaySallary = () => {
                             <tbody>
                               {paidTable?.data?.map((item) => (
                                 <tr>
-                                  <th>
+                                  {/* <th>
                                     <span className="action-edit">
                                       <i className="bi bi-pencil-square"></i>
                                     </span>
-                                  </th>
+                                  </th> */}
                                   <td>{item.name}</td>
 
                                   <td>{item.podobi}</td>

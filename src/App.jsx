@@ -61,6 +61,8 @@ import PasswordReset from "./Comonents/PasswordReset";
 import PodobiEntry from "./pages/PodobiEntry";
 import Payroll from "./pages/Payroll";
 import TeacherMonthEntry from "./pages/TeacherMonthEntry";
+import Contact from "./pages/Contact";
+import User from "./pages/User";
 
 function App() {
   const navigate = useNavigate();
@@ -124,6 +126,7 @@ function App() {
         <Route path="/dashboard" element={<Dasboard />} />
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route path="/password-reset/:token" element={<PasswordReset />} />
+        <Route path="/user" element={data ? <User /> : <NotAuthenticated />} />
         <Route
           path="/newuser"
           element={
@@ -139,6 +142,16 @@ function App() {
           element={
             data?.data.roles.name === "admin" ? (
               <InstituteInfo />
+            ) : (
+              <NotAuthenticated />
+            )
+          }
+        />
+        <Route
+          path="/developer-contact"
+          element={
+            data?.data.roles.name === "admin" ? (
+              <Contact />
             ) : (
               <NotAuthenticated />
             )

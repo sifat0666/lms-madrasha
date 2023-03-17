@@ -22,6 +22,11 @@ const AdmissionFeeModal = ({ item }) => {
   const [student_id, setStudent_Id] = useState();
   const [student, setStudent] = useState();
   const [fee, setFee] = useState();
+
+  const [joma, setJoma] = useState();
+
+  const korton = parseInt(fee) - parseInt(joma);
+
   console.log("fee", fee);
 
   const { register: register2, handleSubmit: handleSubmit2 } = useForm();
@@ -86,7 +91,13 @@ const AdmissionFeeModal = ({ item }) => {
   const [feeVal, setFeeVal] = useState();
   const onSubmit2 = (data) => {
     setFeeVal(data);
-    submitFee.mutate({ ...data, student_id: student?.id, determined_fee: fee });
+    submitFee.mutate({
+      ...data,
+      student_id: student?.id,
+      determined_fee: fee,
+      discount: korton,
+      ammount: joma,
+    });
   };
 
   console.log("stu", student);
@@ -203,11 +214,12 @@ const AdmissionFeeModal = ({ item }) => {
                                 <div className="col-8">
                                   <input
                                     required
-                                    type="number"
+                                    type="text"
                                     className="form-control"
                                     placeholder="জমা"
-                                    // value={fees}
-                                    {...register2("ammount")}
+                                    // defaultValue={fees}
+                                    // {...register2("ammount")}
+                                    onChange={(e) => setJoma(e.target.value)}
                                   />
                                 </div>
                               </div>
@@ -221,7 +233,7 @@ const AdmissionFeeModal = ({ item }) => {
                                     type="number"
                                     className="form-control"
                                     placeholder="কর্তন"
-                                    // value={fees}
+                                    value={korton}
                                     {...register2("discount")}
                                   />
                                 </div>
@@ -371,8 +383,8 @@ const AdmissionFeeModal = ({ item }) => {
                       <tr>
                         <td>০১</td>
                         <td>{fee}</td>
-                        <td>{feeVal?.ammount}</td>
-                        <td>{feeVal?.discount}</td>
+                        <td>{joma}</td>
+                        <td>{korton}</td>
                       </tr>
                       {/* <tr>
                         <th colspan="5" className="text-right">
@@ -387,10 +399,10 @@ const AdmissionFeeModal = ({ item }) => {
                         <td>০.০০</td>
                       </tr> */}
                       <tr>
-                        <th colspan="5" className="text-right">
+                        <th colspan="3" className="text-right">
                           Paid Amount
                         </th>
-                        <td>{feeVal?.ammount}</td>
+                        <td>{joma}</td>
                       </tr>
                     </tbody>
                   </table>

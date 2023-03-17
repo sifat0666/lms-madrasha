@@ -214,10 +214,9 @@ const DonateRecive = () => {
                               }}
                             >
                               <tr>
-                                <th></th>
+                                {/* <th></th> */}
                                 <th> নাম</th>
-                                <th>পদবি</th>
-                                <th>মোট বেতন</th>
+                                <th>জমা</th>
                                 <th>কর্তন</th>
 
                                 <th>তারিখ</th>
@@ -226,15 +225,14 @@ const DonateRecive = () => {
                             <tbody>
                               {paidTable?.data?.map((item) => (
                                 <tr>
-                                  <th>
+                                  {/* <th>
                                     <span className="action-edit">
                                       <i className="bi bi-pencil-square"></i>
                                     </span>
-                                  </th>
+                                  </th> */}
                                   <td>{item.name}</td>
 
-                                  <td>{item.podobi}</td>
-                                  <td>{item.sallery}</td>
+                                  <td>{item.fee}</td>
                                   <td>{item.korton}</td>
                                   <td>{item.updated_at.slice(0, 10)}</td>
                                 </tr>

@@ -109,9 +109,11 @@ const Layout = ({ children }) => {
                                 </Link>
                               </li>
                               <li>
-                                <a class="dropdown-item" href="#">
-                                  সফটওয়্যার ডেভেলপমেন্ট কোম্পানি
-                                </a>
+                                <Link to="/developer-contact">
+                                  <a class="dropdown-item">
+                                    সফটওয়্যার ডেভেলপমেন্ট কোম্পানি
+                                  </a>
+                                </Link>
                               </li>
                               <li>
                                 <a class="dropdown-item" href="#">
@@ -576,13 +578,13 @@ const Layout = ({ children }) => {
                                   </a>
                                 </Link>
                               </li>
-                              <li>
+                              {/* <li>
                                 <Link to="/report">
                                   <a class="dropdown-item" href="./report.html">
                                     রিপোর্ট
                                   </a>
                                 </Link>
-                              </li>
+                              </li> */}
                             </ul>
                           </li>
                           <li class="nav-item dropdown">
@@ -631,7 +633,7 @@ const Layout = ({ children }) => {
                                 <Link to="invoice-details">
                                   <a
                                     class="dropdown-item"
-                                    href="./pages/Library/invoice-details.html"
+                                    // href="./pages/Library/invoice-details.html"
                                   >
                                     ইনভয়েসের বিবরণ
                                   </a>
@@ -647,18 +649,18 @@ const Layout = ({ children }) => {
               </div>
             </div>
             <div class="nav-right">
-              <div class="notification">
+              {/* <div class="notification">
                 <a href="">
                   <i class="bi bi-bell-fill"></i>
                 </a>
-              </div>
+              </div> */}
               <div class="user-menu">
                 {/* <!--Desktop--> */}
                 <ul class="list-unstyled d-none d-lg-inline-block">
                   {data ? (
                     <li class="user-menu-item">
                       {/* <i class="bi bi-gear-fill"></i> */}
-                      <a href="">
+                      <a href="/user">
                         {isLoading ? "loading..." : data?.data.name}
                       </a>
                     </li>
@@ -681,7 +683,8 @@ const Layout = ({ children }) => {
                     <i class="bi bi-box-arrow-in-right"></i>
                     <div
                       onClick={() => {
-                        localStorage.clear();
+                        axios.post(`${serverUrl}/api/logout`),
+                          localStorage.clear();
                         // window.location.reload();
                         navigate("/login");
                         // toast.success("logged out");

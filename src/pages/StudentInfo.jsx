@@ -33,6 +33,8 @@ const styles = {
 
 const StudentInfo = () => {
   const [student, setStudent] = useState();
+  const [joma, setJoma] = useState();
+  console.log("joma", joma);
 
   const { data: msg } = useQuery("msg", () =>
     fetch(`${serverUrl}/api/msg/${1}`).then((res) => res.json())
@@ -180,13 +182,14 @@ const StudentInfo = () => {
   const [feeVal, setFeeVal] = useState();
 
   // console.log("feeVal", feeVal);
+  const korton = parseInt(fees) - parseInt(joma);
 
   const onSubmit2 = (value) => {
     value.determined_fee = fees;
     value.student_id = student_ids;
-    setFeeVal(value);
+    setFeeVal();
     // console.log("fess submit", value);
-    submitFee.mutate(value);
+    submitFee.mutate({ ...value, ammount: joma, discount: korton });
   };
   return (
     <div>
@@ -248,7 +251,7 @@ const StudentInfo = () => {
                             </select>
                           </div>
                         </div>
-                        <div className="col-lg-5 col-md-2 col-2">
+                        {/* <div className="col-lg-5 col-md-2 col-2">
                           <div className="row mb-3">
                             <div className="option-icon">
                               <span>
@@ -267,7 +270,7 @@ const StudentInfo = () => {
                               </span>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
 
                         <div className="row">
                           {/* <div className="col-lg-7 col-md-12 col-12 ">
@@ -326,9 +329,9 @@ const StudentInfo = () => {
                           </div>
                         </div>
                         <div className="row">
-                          {/* <div className="col-lg-7 col-md-12 col-12">
+                          <div className="col-lg-7 col-md-12 col-12">
                             <div className="row mb-1 mb-lg-3">
-                              <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
+                              {/* <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
                                 ছাত্রের আইডিঃ
                                 <i>*</i>
                               </label>
@@ -341,9 +344,9 @@ const StudentInfo = () => {
                                   value={"auto filled"}
                                   {...register("student_id")}
                                 />
-                              </div>
+                              </div> */}
                             </div>
-                          </div> */}
+                          </div>
                           <div className="col-lg-5 col-md-12 col-12">
                             <div className="row mb-1 mb-lg-3">
                               <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
@@ -1062,8 +1065,9 @@ const StudentInfo = () => {
                                 type="text"
                                 className="form-control"
                                 placeholder="জমা"
-                                // value={fees}
-                                {...register2("ammount")}
+                                defaultValue={fees}
+                                // {...register2("ammount")}
+                                onChange={(e) => setJoma(e.target.value)}
                               />
                             </div>
                           </div>
@@ -1076,8 +1080,9 @@ const StudentInfo = () => {
                                 type="text"
                                 className="form-control"
                                 placeholder="কর্তন"
+                                value={parseInt(fees) - parseInt(joma)}
                                 // value={fees}
-                                {...register2("discount")}
+                                // {...register2("discount")}
                               />
                             </div>
                           </div>
@@ -1218,8 +1223,8 @@ const StudentInfo = () => {
                       <tr>
                         <td>০১</td>
                         <td>{fees}</td>
-                        <td>{feeVal?.ammount}</td>
-                        <td>{feeVal?.discount}</td>
+                        <td>{joma}</td>
+                        <td>{korton}</td>
                       </tr>
                       {/* <tr>
                         <th colspan="5" className="text-right">
@@ -1234,10 +1239,10 @@ const StudentInfo = () => {
                         <td>০.০০</td>
                       </tr> */}
                       <tr>
-                        <th colspan="5" className="text-right">
+                        <th colspan="4" className="text-right">
                           Paid Amount
                         </th>
-                        <td>{feeVal?.ammount}</td>
+                        <td>{joma}</td>
                       </tr>
                     </tbody>
                   </table>

@@ -305,7 +305,6 @@ const IncomeEntryRevised = () => {
                                   </label>
                                   <div className="col-12">
                                     <input
-                                      required
                                       type="text"
                                       className="form-control"
                                       placeholder="মন্তব্য লিখুন"
@@ -328,7 +327,6 @@ const IncomeEntryRevised = () => {
                                   </label>
                                   <div className="col-12">
                                     <input
-                                      required
                                       className="form-control"
                                       placeholder="পার্টিকোলার্স বর্ণনা"
                                       type="text"

@@ -220,7 +220,39 @@ const ClassMigration = () => {
                   style={{ width: "800px" }}
                 >
                   {student ? (
-                    <div>{JSON.stringify(student, null, 2)}</div>
+                    <table className="table  bg-white table-bordered text-center report-table">
+                      <thead className="text-center">
+                        <tr>
+                          <th>আইডিঃ</th>
+                          <th>নাম</th>
+                          <th>মারহালা</th>
+                          <th>শিক্ষাবর্ষ</th>
+
+                          <th>পিতার নাম</th>
+                          <th>জন্ম তারিখ</th>
+                          <th>রক্তের গ্রুপ</th>
+                          <th>মোবাইল নাম্বার</th>
+                          <th>গ্রাম</th>
+                          <th>জেলা</th>
+                          <th>থানা</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr key={student?.id}>
+                          <td>{student?.id}</td>
+                          <td>{student?.student_name}</td>
+                          <td>{student?.class}</td>
+                          <td>{student?.session}</td>
+                          <td>{student?.father_name}</td>
+                          <td>{student?.dob}</td>
+                          <td>{student?.blood_group}</td>
+                          <td>{student?.phn_no}</td>
+                          <td>{student?.graam}</td>
+                          <td>{student?.jela}</td>
+                          <td>{student?.thana}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   ) : null}
                 </div>
               </div>

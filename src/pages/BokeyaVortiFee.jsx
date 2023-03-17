@@ -11,6 +11,7 @@ import AdmissionFeeModal from "../Comonents/AdmissionFeeModal";
 
 const BokeyaVortiFee = () => {
   const [student, setStudent] = useState();
+
   const { data: marhalaClass } = useQuery("marhalaclass", () =>
     fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
   );
@@ -33,6 +34,8 @@ const BokeyaVortiFee = () => {
 
   const [fees, setFees] = useState("");
   // const [student_ids, setStudentids] = useState("");
+
+  const korton = parseInt(fees) - parseInt(joma);
 
   const Fee = useMutation({
     mutationFn: (data) => {

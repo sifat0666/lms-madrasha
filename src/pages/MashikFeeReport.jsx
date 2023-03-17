@@ -11,6 +11,7 @@ import JomaLedger from "../Comonents/Report/HishabNikash/JomaLedger";
 import KhabarFee from "../Comonents/Report/HishabNikash/KhabarFee";
 import KhorochLedger from "../Comonents/Report/HishabNikash/KhorochLedger";
 import MonthlyFee from "../Comonents/Report/HishabNikash/MonthlyFee";
+import MoukufHishab from "../Comonents/Report/HishabNikash/MoukufHishab";
 
 const Report = () => {
   const ref = useRef();
@@ -19,6 +20,7 @@ const Report = () => {
   const [report, setReport] = useState();
   const [value, setValue] = useState();
   const [student, setStudent] = useState();
+  const [moukuf, setMoukuf] = useState();
   console.log("🚀 ~ file: MashikFeeReport.jsx:13 ~ Report ~ student", student);
 
   const { data: marhalaClass } = useQuery("marhalaclass", () =>
@@ -73,6 +75,21 @@ const Report = () => {
     },
   });
 
+  const { mutate } = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/moukuf-student`, data);
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      // console.log("userdata", data.data);
+      setMoukuf(data.data);
+      // window.location.reload(true);
+    },
+  });
+
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
@@ -80,6 +97,7 @@ const Report = () => {
     mutation.mutate(data);
     setValue(data);
     studentMutation.mutate(data);
+    mutate(data);
   };
   console.log(report);
 
@@ -115,6 +133,7 @@ const Report = () => {
                             <option>৩ জমা লেজার</option>
                             <option>৪ খরচ লেজার</option>
                             <option>৫ তারিখ ধরে হিসাব</option>
+                            <option>৬. ছাত্র/ছাত্রি মওকুফ তালিকা</option>
                           </select>
                         </div>
                       </div>
@@ -358,6 +377,9 @@ const Report = () => {
                           months={months}
                           student={student}
                         />
+                      )}
+                      {report === "৬. ছাত্র/ছাত্রি মওকুফ তালিকা" && (
+                        <MoukufHishab value={value} data={moukuf} />
                       )}
                     </div>
                   </div>

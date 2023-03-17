@@ -10,6 +10,10 @@ const AddBook = () => {
     fetch(`${serverUrl}/api/book`).then((res) => res.json())
   );
 
+  const { data: marhala } = useQuery("marhalaclass", () =>
+    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+  );
+
   console.log("doner", book);
 
   const mutation = useMutation({
@@ -123,20 +127,9 @@ const AddBook = () => {
                                 className="form-select"
                               >
                                 <option disabled>শ্রেণী নির্বাচন করুন</option>
-                                <option>নাযেরা</option>
-                                <option>হিফযুল কুরআন</option>
-                                <option>ই-দাদী</option>
-                                <option>ইবতিদায়ী আউয়াল</option>
-                                <option>ইবতিদায়ী নানী</option>
-                                <option>উস্তানী আউয়াল</option>
-                                <option>উস্তানী সানী</option>
-                                <option>সানাবী আউয়াল</option>
-                                <option>সানাবী আউয়াল</option>
-                                <option>সানাবী সানী</option>
-                                <option>নিহায়ী আউয়াল</option>
-                                <option>নিহায়ী সানী</option>
-                                <option>তাকমীল</option>
-                                <option>ইফতা ১ম</option>
+                                {marhala?.data.map((item) => (
+                                  <option>{item.class_name}</option>
+                                ))}
                               </select>
                             </div>
                           </div>
@@ -242,16 +235,12 @@ const AddBook = () => {
                               <i>*</i>
                             </label>
                             <div className="col-lg-8 col-md-8 col-12">
-                              <select
+                              <input
                                 {...register("supplier")}
-                                name=""
-                                id=""
-                                className="form-select"
-                              >
-                                <option disabled>সিলেক্ট করুন</option>
-                                <option>লেকচার পাবলিকেশন</option>
-                                <option>সাইমুম প্রকাশনী</option>
-                              </select>
+                                type="text"
+                                className="form-control"
+                                placeholder="সাপ্লাইয়ার"
+                              />
                             </div>
                           </div>
                         </div>
