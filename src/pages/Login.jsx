@@ -11,6 +11,28 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
+
+  const changePasswordMutation = useMutation({
+    mutationFn: (newUser) => {
+      return axios.post(`${serverUrl}/api/student`, newUser, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+      console.log(error);
+    },
+    onSuccess: (data) => {
+      toast.success(`Change password successfully`);
+      console.log("data student", data?.data.id);
+      // setStudentids(data?.data.id);
+    },
+  });
+
   const mutation = useMutation({
     mutationFn: (newUser) => {
       return axios.post(`${serverUrl}/api/login`, newUser);
@@ -25,7 +47,7 @@ const Login = () => {
       const token = data.data.data.token;
       console.log(token);
       localStorage.setItem("token", token);
-      // navigate("/dashboard");
+      navigate("/dashboard");
       // console.log("first");
       //
     },
