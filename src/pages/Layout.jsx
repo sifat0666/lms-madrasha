@@ -682,14 +682,28 @@ const Layout = ({ children }) => {
                   <li class="user-menu-item">
                     <i class="bi bi-box-arrow-in-right"></i>
                     <div
-                      onClick={() => {
-                        axios.post(`${serverUrl}/api/logout`),
-                          localStorage.clear();
+                      onClick={async () => {
+                        const data = await axios.post(
+                          `${serverUrl}/api/logout`,
+                          {},
+                          {
+                            headers: {
+                              accept: "application/json",
+                              Authorization: `Bearer ${localStorage.getItem(
+                                "token"
+                              )}`,
+                            },
+                          }
+                        );
+
+                        console.log("logout", data);
+
+                        // localStorage.clear();
                         // window.location.reload();
-                        navigate("/login");
+                        // navigate("/login");
                         // toast.success("logged out");
 
-                        navigate("/");
+                        // navigate("/");
                       }}
                     >
                       {" "}

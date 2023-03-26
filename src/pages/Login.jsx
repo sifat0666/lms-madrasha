@@ -21,18 +21,31 @@ const Login = () => {
       toast.error("Invalid email or password");
     },
     onSuccess: (data) => {
+      console.log(data);
       const token = data.data.data.token;
-      // console.log(token);
+      console.log(token);
       localStorage.setItem("token", token);
-      navigate("/dashboard");
+      // navigate("/dashboard");
       // console.log("first");
       //
     },
   });
 
   const onSubmit = async (value) => {
-    mutation.mutate(value);
+    // mutation.mutate(value);
     // console.log(value);
+
+    // axios.post(`${serverUrl}/api/login`, data).then((response) => {
+    //   console.log("login res", response);
+    // });
+
+    // axios.get(`${serverUrl}/sanctum/csrf-cookie`,  {withCredentials: true}).then((response) => {
+    //   console.log("csrf", response);
+    //   axios.post(`${serverUrl}/api/login`, value, {withCredentials: true}).then((response) => {
+    //     console.log(response);
+    //   });
+    // });
+    mutation.mutate(value);
   };
 
   const {

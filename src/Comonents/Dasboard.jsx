@@ -1,13 +1,20 @@
+import axios from "axios";
 import React from "react";
 import { useQuery } from "react-query";
 import { serverUrl } from "../../utils/config";
 
 const Dasboard = () => {
-  const { data } = useQuery("dashboard", () =>
-    fetch(`${serverUrl}/api/dashboard`).then((res) => res.json())
+  // const { data } = useQuery("dashboard", () =>
+  //   fetch(`${serverUrl}/api/dashboard`, {headers:  {Authorization: { Authorization: `Bearer ${localStorage.getItem("token")}` } }}).then((res) => res.json())
+  // );
+
+    const { data, isLoading } = useQuery(["dashboard"], () =>
+    axios.get(`${serverUrl}/api/dashboard`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    })
   );
 
-  console.log(data);
+  console.log('data',data?.data);
 
   return (
     <div>
@@ -18,15 +25,15 @@ const Dasboard = () => {
           <div className="row">
             <div className="col-lg-8">
               <div className="grid-container">
-                <div className="grid-card">Total Users: {data?.total_user}</div>
+                <div className="grid-card">Total Users: {data?.data?.total_user}</div>
                 <div className="grid-card">
-                  Total Students: {data?.total_student}
+                  Total Students: {data?.data?.total_student}
                 </div>
                 {/* <div className="grid-card">Group</div> */}
                 {/* <div className="grid-card">Subject</div> */}
                 {/* <div className="grid-card">Section</div> */}
                 <div className="grid-card">
-                  Total Class: {data?.total_class}
+                  Total Class: {data?.data?.total_class}
                 </div>
                 {/* <div className="grid-card">Subjects</div> */}
                 {/* <div className="grid-card">Report</div> */}

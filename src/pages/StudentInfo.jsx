@@ -67,7 +67,10 @@ const StudentInfo = () => {
   const { register: register3, handleSubmit: handleSubmit3 } = useForm();
   const mutation = useMutation({
     mutationFn: (newUser) => {
-      return axios.post(`${serverUrl}/api/student`, newUser);
+      return axios.post(`${serverUrl}/api/student`, newUser, {headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }});
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);
