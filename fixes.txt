@@ -1,17 +1,10 @@
+logout if 5 min idle
 header theke delete icon dlt
 --------------
-hishab nikash report
+hishab nikash report --done
 
 
 msg lekhar field banano
-reports arabic
-logout if 5 min idle
-
-fee deyni entry report 
-
-vorti fee form design
-
-profile edit
 
 
 
@@ -20,7 +13,9 @@ report total
 hajira report
 
 
+profile edit -- done
 
+fee deyni entry report --done
 
 design class poriboorton -- done
 

@@ -10,6 +10,8 @@ import DateHishab from "../Comonents/Report/HishabNikash/DateHishab";
 import JomaLedger from "../Comonents/Report/HishabNikash/JomaLedger";
 import KhabarFee from "../Comonents/Report/HishabNikash/KhabarFee";
 import KhorochLedger from "../Comonents/Report/HishabNikash/KhorochLedger";
+import MashDhoreBetoBokeya from "../Comonents/Report/HishabNikash/MashDhoreBetoBokeya";
+import MashDhoreBeton from "../Comonents/Report/HishabNikash/MashDhoreBeton";
 import MonthlyFee from "../Comonents/Report/HishabNikash/MonthlyFee";
 import MoukufHishab from "../Comonents/Report/HishabNikash/MoukufHishab";
 
@@ -21,7 +23,8 @@ const Report = () => {
   const [value, setValue] = useState();
   const [student, setStudent] = useState();
   const [moukuf, setMoukuf] = useState();
-  console.log("🚀 ~ file: MashikFeeReport.jsx:13 ~ Report ~ student", student);
+  const [mashikFee, setMashikFee] = useState();
+  const [mashikFeeBokeya, setMashikFeeBokeya] = useState();
 
   const { data: marhalaClass } = useQuery("marhalaclass", () =>
     fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
@@ -33,32 +36,50 @@ const Report = () => {
     fetch(`${serverUrl}/api/month-entry`).then((res) => res.json())
   );
 
-  // const getStudent = (student_id) => {
-  //   const { data: studentData } = useQuery("student", () =>
-  //     fetch(`${serverUrl}/api/marhalaclass/${student_id}`).then((res) =>
-  //       res.json()
-  //     )
-  //   );
-
-  //   return studentData?.data.student_name;
-  // };
-
   const mutation = useMutation({
     mutationFn: (data) => {
       return axios.post(`${serverUrl}/api/monthly-fee-report`, data);
     },
     onError: (error, variable, context) => {
-      // console.log(error.response.data.message);
+      console.log("ee", error.response.data.message);
+      s;
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
-      console.log("userdasdfata", data.data);
       setRecord(data.data);
-      // getStudent(data?.data.id)
-
-      // window.location.reload(true);
     },
   });
+
+  const mashikFeeMutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/mash-hishebe-mashik-fee`, data);
+    },
+    onError: (error, variable, context) => {
+      console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      setMashikFee(data?.data);
+    },
+  });
+
+  const mashikFeeMutationMutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(
+        `${serverUrl}/api/mash-hishebe-mashik-fee-bokeya`,
+        data
+      );
+    },
+    onError: (error, variable, context) => {
+      console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      setMashikFeeBokeya(data?.data);
+    },
+  });
+
+  //
 
   const studentMutation = useMutation({
     mutationFn: (data) => {
@@ -69,7 +90,6 @@ const Report = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
-      console.log("userdata", data.data);
       setStudent(data.data);
       // window.location.reload(true);
     },
@@ -93,13 +113,13 @@ const Report = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     mutation.mutate(data);
     setValue(data);
     studentMutation.mutate(data);
     mutate(data);
+    mashikFeeMutation.mutate(data);
+    mashikFeeMutationMutation.mutate(data);
   };
-  console.log(report);
 
   return (
     <div>
@@ -134,6 +154,8 @@ const Report = () => {
                             <option>৪ খরচ লেজার</option>
                             <option>৫ তারিখ ধরে হিসাব</option>
                             <option>৬. ছাত্র/ছাত্রি মওকুফ তালিকা</option>
+                            <option>৭. মাস হিসাবে বেতন তালিকা</option>
+                            <option>৮. মাস হিসাবে বেতন বকেয়া তালিকা</option>
                           </select>
                         </div>
                       </div>
@@ -380,6 +402,15 @@ const Report = () => {
                       )}
                       {report === "৬. ছাত্র/ছাত্রি মওকুফ তালিকা" && (
                         <MoukufHishab value={value} data={moukuf} />
+                      )}
+                      {report === "৭. মাস হিসাবে বেতন তালিকা" && (
+                        <MashDhoreBeton value={value} data={mashikFee} />
+                      )}
+                      {report === "৮. মাস হিসাবে বেতন বকেয়া তালিকা" && (
+                        <MashDhoreBetoBokeya
+                          value={value}
+                          data={mashikFeeBokeya}
+                        />
                       )}
                     </div>
                   </div>

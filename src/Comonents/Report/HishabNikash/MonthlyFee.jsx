@@ -68,7 +68,6 @@ const MonthlyFee = ({ value, student, months }) => {
                         <th>{months?.data[0]?.m10}</th>
                         <th>{months?.data[0]?.m11}</th>
                         <th>{months?.data[0]?.m12}</th>
-                        <th>নিরধারিত ফি</th>
                       </tr>
                     </thead>
                     {student?.map((item) => (
@@ -233,7 +232,6 @@ const MonthlyFee = ({ value, student, months }) => {
                               return null;
                             })}
                           </td>
-                          <td></td>
                         </tr>
                         <tr>
                           <td>নিরধারিত ফি</td>
@@ -393,7 +391,6 @@ const MonthlyFee = ({ value, student, months }) => {
                               return null;
                             })}
                           </td>
-                          <td></td>
                         </tr>
                         <tr>
                           <td>কর্তন</td>
@@ -553,7 +550,6 @@ const MonthlyFee = ({ value, student, months }) => {
                               return null;
                             })}
                           </td>
-                          <td></td>
                         </tr>
                       </tbody>
                     ))}

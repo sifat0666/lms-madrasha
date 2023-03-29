@@ -158,7 +158,7 @@ const Fund = () => {
                                   style={{ border: "none" }}
                                   {...register2("fund")}
                                 >
-                                  <option disabled>ফান্ডঃ নির্বাচন করুন</option>
+                                  <option>ফান্ডঃ নির্বাচন করুন</option>
                                   {data?.data.map((item) => (
                                     <option
                                       key={item.id}
@@ -227,7 +227,7 @@ const Fund = () => {
                                   style={{ border: "none" }}
                                   {...register3("fund")}
                                 >
-                                  <option disabled>ফান্ডঃ নির্বাচন করুন</option>
+                                  <option>ফান্ডঃ নির্বাচন করুন</option>
                                   {data?.data.map((item) => (
                                     <option
                                       key={item.id}
@@ -267,7 +267,7 @@ const Fund = () => {
                                     style={{ border: "none" }}
                                     {...register3("general_ledger")}
                                   >
-                                    <option disabled>জেনারেল লেজারঃ {x}</option>
+                                    <option>জেনারেল লেজারঃ {x}</option>
                                     {/* {generalLedger?.data.map((item) => {
                                       if (item.chart_of_account === x) {
                                         return (

@@ -35,7 +35,7 @@ const BokeyaVortiFee = () => {
   const [fees, setFees] = useState("");
   // const [student_ids, setStudentids] = useState("");
 
-  const korton = parseInt(fees) - parseInt(joma);
+  // const korton = parseInt(fees) - parseInt(joma);
 
   const Fee = useMutation({
     mutationFn: (data) => {

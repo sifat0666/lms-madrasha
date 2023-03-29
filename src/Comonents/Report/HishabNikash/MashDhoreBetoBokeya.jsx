@@ -3,27 +3,14 @@ import dayjs from "dayjs";
 import { useQuery } from "react-query";
 import { serverUrl } from "../../../../utils/config";
 
-const JomaLedger = ({ data, val }) => {
+const MashDhoreBetonBokeya = ({ data, value }) => {
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
     fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
   );
 
-  const { data: audit } = useQuery("audit", () =>
-    fetch(`${serverUrl}/api/audit`).then((res) => res.json())
-  );
+  console.log("val", value);
 
-  const total = audit?.data
-    .map((item) => {
-      if (item.chart_of_account === "জমা") {
-        return parseInt(item?.ammount);
-      }
-      return null;
-    })
-    ?.reduce((accumulator, currentValue) => accumulator + currentValue);
-
-  console.log("first", audit);
-
-  console.log(instituteInfo);
+  //   console.log(instituteInfo);
   return (
     <>
       <div className="preview-page d-print-block" style={{ zIndex: 1 }}>
@@ -48,7 +35,9 @@ const JomaLedger = ({ data, val }) => {
                           <p>{instituteInfo?.address}</p>
                           <span>{instituteInfo?.num}</span>
                           <br />
-                          <span className="pages-subtitle">জমা লেজার</span>
+                          <span className="pages-subtitle">
+                            মাসিক বেতন্ বকেয়া লিস্ট
+                          </span>
                         </div>
                       </td>
                     </tr>
@@ -56,12 +45,12 @@ const JomaLedger = ({ data, val }) => {
                       <td colspan="8">
                         <div className="d-flex justify-content-between">
                           <div>
-                            <strong>মারহালাঃ</strong>
-                            {val?.class}
+                            <strong>শিক্ষাবর্ষ: </strong>
+                            {value?.session}
                           </div>
                           <div>
-                            <strong>মারহালাঃ</strong>
-                            {val?.class}
+                            <strong>মাস: </strong>
+                            {value?.month}
                           </div>
                           <div>
                             <strong>প্রিন্ট তারিখঃ</strong>
@@ -71,35 +60,49 @@ const JomaLedger = ({ data, val }) => {
                       </td>
                     </tr>
                     <tr>
-                      <th>আইডি</th>
-                      <th>ফান্ড</th>
-                      <th>চার্ট অফ অ্যাকাউন্ট</th>
-                      <th>লেজার</th>
-                      <th>সাব লেজার</th>
-                      <th>তারিখ</th>
-                      <th>পরিমান</th>
+                      <td colspan="10">
+                        <h3>মাসিক বেতন বকেয়া</h3>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>স্টুডেন্ট আইডি</th>
+                      <th>নাম</th>
+                      <th>মারহালা</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {audit?.data.map((item, i) => (
-                      <tr key={item.id}>
-                        {item.chart_of_account === "জমা" && (
-                          <>
+                    {data?.maash.map((item, i) => {
+                      if (true) {
+                        return (
+                          <tr key={item.id}>
                             <td>{item.id}</td>
-                            <td>{item.fund_name}</td>
-                            <td>{item.chart_of_account}</td>
-                            <td>{item.general_ledger}</td>
-                            <td>{item.sub_ledger}</td>
-                            <td>{item.submit_date}</td>
-                            <td>{item.ammount}</td>
-                          </>
-                        )}
-                      </tr>
-                    ))}
+                            <td>{item.student_name}</td>
+                            <td>{item.class}</td>
+                          </tr>
+                        );
+                      }
+                    })}
                     <tr>
-                      <td colspan={6}></td>
-                      <td>total: {total}</td>
+                      <td colspan="10">
+                        <h3>খাবার ফি বকেয়া</h3>
+                      </td>
                     </tr>
+                    <tr>
+                      <th>স্টুডেন্ট আইডি</th>
+                      <th>নাম</th>
+                      <th>মারহালা</th>
+                    </tr>
+                    {data?.khabar.map((item, i) => {
+                      if (true) {
+                        return (
+                          <tr key={item.id}>
+                            <td>{item.id}</td>
+                            <td>{item.student_name}</td>
+                            <td>{item.class}</td>
+                          </tr>
+                        );
+                      }
+                    })}
                   </tbody>
                 </table>
               </div>
@@ -111,4 +114,4 @@ const JomaLedger = ({ data, val }) => {
   );
 };
 
-export default JomaLedger;
+export default MashDhoreBetonBokeya;

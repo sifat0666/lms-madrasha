@@ -49,7 +49,12 @@ const MonthlyFees = () => {
 
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/month-entry`, data);
+      return axios.post(`${serverUrl}/api/month-entry`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);
@@ -62,7 +67,12 @@ const MonthlyFees = () => {
 
   const Fee = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/customfeecall`, data);
+      return axios.post(`${serverUrl}/api/customfeecall`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error) => {
       toast.error(error.response.data.message);
@@ -75,7 +85,12 @@ const MonthlyFees = () => {
 
   const monthlyFeeMutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/monthly-fee`, data);
+      return axios.post(`${serverUrl}/api/monthly-fee`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error("every field is required");
@@ -105,7 +120,12 @@ const MonthlyFees = () => {
 
   const getMonthlyFeeById = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/filter-student-by-fee`, data);
+      return axios.post(`${serverUrl}/api/filter-student-by-fee`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // toast.error("every field is required");
@@ -119,12 +139,24 @@ const MonthlyFees = () => {
   const { data: me, isLoading } = useQuery(["me"]);
 
   const onDelete = async (id) => {
-    const data = await axios.delete(`${serverUrl}/api/monthly-fee/${id}`);
+    const data = await axios.delete(`${serverUrl}/api/monthly-fee/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     location.reload();
   };
 
   const onStudentSearch = async () => {
-    const data = await axios.get(`${serverUrl}/api/student/${studentId}`);
+    const data = await axios.get(`${serverUrl}/api/student/${studentId}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    console.log("stu", data?.data);
     getMonthlyFeeById.mutate({ student_id: studentId });
 
     setStudent(data?.data);
@@ -161,7 +193,7 @@ const MonthlyFees = () => {
       receiver: me?.data.name,
       student_id: studentId,
       fee_name: feeName,
-      submit_date: dayjs().format("YYYY-MM-DD"),
+      session: student?.session,
       student_name: student?.student_name,
       determined_fee: fees,
       class: student?.class,

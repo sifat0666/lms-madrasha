@@ -12,6 +12,15 @@ const DateHishab = ({ data, value }) => {
     fetch(`${serverUrl}/api/audit`).then((res) => res.json())
   );
 
+  const total = audit?.data
+    .map((item) => {
+      if (item.submit_date === value?.date) {
+        return parseInt(item?.ammount);
+      }
+      return null;
+    })
+    ?.reduce((accumulator, currentValue) => accumulator + currentValue);
+
   return (
     <>
       <div className="preview-page d-print-block" style={{ zIndex: 1 }}>
@@ -50,14 +59,13 @@ const DateHishab = ({ data, value }) => {
                       </td>
                     </tr>
                     <tr>
-                      <th>ক্রঃ</th>
                       <th>আইডি</th>
                       <th>ফান্ড</th>
                       <th>চার্ট অফ অ্যাকাউন্ট</th>
                       <th>লেজার</th>
                       <th>সাব লেজার</th>
-                      <th>পরিমান</th>
                       <th>তারিখ</th>
+                      <th>পরিমান</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -65,18 +73,21 @@ const DateHishab = ({ data, value }) => {
                       <tr key={item.id}>
                         {item.submit_date === value?.date && (
                           <>
-                            <td>{i}</td>
                             <td>{item.id}</td>
                             <td>{item.fund_name}</td>
                             <td>{item.chart_of_account}</td>
                             <td>{item.general_ledger}</td>
                             <td>{item.sub_ledger}</td>
-                            <td>{item.ammount}</td>
                             <td>{item.submit_date}</td>
+                            <td>{item.ammount}</td>
                           </>
                         )}
                       </tr>
                     ))}
+                    <tr>
+                      <td colspan={6}></td>
+                      <td>total: {total}</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>

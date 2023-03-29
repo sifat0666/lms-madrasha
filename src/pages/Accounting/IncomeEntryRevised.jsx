@@ -110,7 +110,9 @@ const IncomeEntryRevised = () => {
                                   {...register("fund_name")}
                                   className="form-select"
                                 >
-                                  <option disabled>ফান্ড নির্বাচন করুন</option>
+                                  <option value={""}>
+                                    ফান্ড নির্বাচন করুন
+                                  </option>
                                   {fundData?.data.map((item) => (
                                     <option>{item.fund_name}</option>
                                   ))}
@@ -131,7 +133,7 @@ const IncomeEntryRevised = () => {
                                   onChange={(e) => setLedger(e.target.value)}
                                   className="form-select"
                                 >
-                                  <option disabled> সিলেক্ট করুন</option>
+                                  <option value={""}> সিলেক্ট করুন</option>
                                   {generalLedger?.data.map((item) => {
                                     if (item.chart_of_account === "জমা") {
                                       return (
@@ -157,7 +159,7 @@ const IncomeEntryRevised = () => {
                                   {...register("sub_ledger")}
                                   className="form-select"
                                 >
-                                  <option disabled> সিলেক্ট করুন</option>
+                                  <option value={""}> সিলেক্ট করুন</option>
                                   {subLedger?.data.map((item) => {
                                     if (item.general_ledger === ledger) {
                                       return <option>{item.sub_ledger}</option>;
@@ -368,43 +370,7 @@ const IncomeEntryRevised = () => {
                         </div>
                       </form>
                     </div>
-                    <form className="row" onSubmit={handleSubmit2(onSubmit2)}>
-                      <div>
-                        <select
-                          {...register2("general_ledger")}
-                          className="form-select"
-                          onChange={(e) => setLedger2(e.target.value)}
-                        >
-                          <option disabled>লেজার নির্বাচন করুন</option>
-                          {generalLedger?.data.map((item) => {
-                            if (item.chart_of_account === "জমা") {
-                              return <option>{item.general_ledger}</option>;
-                            }
-                          })}
-                        </select>
-                      </div>
-                      <div>
-                        <select
-                          {...register2("sub_ledger")}
-                          className="form-select"
-                        >
-                          <option disabled>সাব লেজার নির্বাচন করুন</option>
-                          {subLedger?.data.map((item) => {
-                            if (item.general_ledger === ledger2) {
-                              return <option>{item.sub_ledger}</option>;
-                            }
-                            return null;
-                          })}
-                        </select>
-                      </div>
 
-                      <button
-                        className="btn btn-success btn-sm mx-3 my-1"
-                        style={{ width: "100px" }}
-                      >
-                        খুজুন
-                      </button>
-                    </form>
                     {/* <!--Right Site top Table--> */}
                     <div className="row">
                       <div className="col-12">
@@ -412,7 +378,72 @@ const IncomeEntryRevised = () => {
                           <div
                             className="table-responsive accounts-table"
                             data-pattern="priority-columns"
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="my-4"></div>
+                  </div>
+                  <div className="col-lg-6 col-12 mt-4">
+                    <div className="my-4">
+                      <div className="row">
+                        {/* <input
+                          type="date"
+                          id="birthday"
+                          name="birthday"
+                          className="mx-3 my-2 p-3"
+                          style={{ width: "300px" }}
+                          onChange={(e) => setAuditData(e.target.value)}
+                        /> */}
+                        <div className="col-12">
+                          <div
+                            className="table-responsive accounts-table"
+                            data-pattern="priority-columns"
                           >
+                            <form
+                              className="row"
+                              onSubmit={handleSubmit2(onSubmit2)}
+                            >
+                              <div>
+                                <select
+                                  {...register2("general_ledger")}
+                                  className="form-select"
+                                  onChange={(e) => setLedger2(e.target.value)}
+                                >
+                                  <option disabled>লেজার নির্বাচন করুন</option>
+                                  {generalLedger?.data.map((item) => {
+                                    if (item.chart_of_account === "জমা") {
+                                      return (
+                                        <option>{item.general_ledger}</option>
+                                      );
+                                    }
+                                  })}
+                                </select>
+                              </div>
+                              <div>
+                                <select
+                                  {...register2("sub_ledger")}
+                                  className="form-select"
+                                >
+                                  <option disabled>
+                                    সাব লেজার নির্বাচন করুন
+                                  </option>
+                                  {subLedger?.data.map((item) => {
+                                    if (item.general_ledger === ledger2) {
+                                      return <option>{item.sub_ledger}</option>;
+                                    }
+                                    return null;
+                                  })}
+                                </select>
+                              </div>
+
+                              <button
+                                className="btn btn-success btn-sm mx-3 my-1"
+                                style={{ width: "100px" }}
+                              >
+                                খুজুন
+                              </button>
+                            </form>
                             <table
                               id="tech-companies-1"
                               className="table  bg-white text-center mb-0"
@@ -426,9 +457,7 @@ const IncomeEntryRevised = () => {
                                   <th>সাব: লেজার</th>
                                   <th>পার্টিকোলার্স</th>
                                   <th>পরিমাণ</th>
-                                  <span className="action-delete">
-                                    <i className="bi bi-trash3"></i>
-                                  </span>
+                                  <span className="action-delete"></span>
                                 </tr>
                               </thead>
                               <tbody>
@@ -451,29 +480,7 @@ const IncomeEntryRevised = () => {
                                 ))}
                               </tbody>
                             </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="my-4"></div>
-                  </div>
-                  <div className="col-lg-6 col-12 mt-4">
-                    <div className="my-4">
-                      <div className="row">
-                        {/* <input
-                          type="date"
-                          id="birthday"
-                          name="birthday"
-                          className="mx-3 my-2 p-3"
-                          style={{ width: "300px" }}
-                          onChange={(e) => setAuditData(e.target.value)}
-                        /> */}
-                        <div className="col-12">
-                          <div
-                            className="table-responsive accounts-table"
-                            data-pattern="priority-columns"
-                          >
-                            <table
+                            {/* <table
                               id="tech-companies-1"
                               className="table  bg-white text-center mb-0"
                             >
@@ -514,7 +521,7 @@ const IncomeEntryRevised = () => {
                                   }
                                 })}
                               </tbody>
-                            </table>
+                            </table> */}
                           </div>
                         </div>
                       </div>
