@@ -32,7 +32,12 @@ const IncomeEntryRevised = () => {
 
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/audit`, data);
+      return axios.post(`${serverUrl}/api/audit`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error?.data.data.message);
@@ -50,7 +55,12 @@ const IncomeEntryRevised = () => {
 
   const DataFetch = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/custom-ledger-call`, data);
+      return axios.post(`${serverUrl}/api/custom-ledger-call`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error?.data.data.message);

@@ -18,7 +18,12 @@ const FeeName = () => {
   // console.log(data);
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/fee-name`, data);
+      return axios.post(`${serverUrl}/api/fee-name`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);

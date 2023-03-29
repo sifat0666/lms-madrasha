@@ -24,7 +24,9 @@ const ExamReport = () => {
   console.log("rep", report);
 
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
-    fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
+    fetch(`${serverUrl}/api/institute-info`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: academicYear } = useQuery("academicyear", () =>
@@ -41,7 +43,12 @@ const ExamReport = () => {
 
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/filter-student-by-class`, data);
+      return axios.post(`${serverUrl}/api/filter-student-by-class`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);
@@ -55,7 +62,12 @@ const ExamReport = () => {
 
   const subjectByClass = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/filter-subject-by-class`, data);
+      return axios.post(`${serverUrl}/api/filter-subject-by-class`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);

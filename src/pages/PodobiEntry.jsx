@@ -14,7 +14,12 @@ const PodobiEntry = () => {
 
   const mutation = useMutation({
     mutationFn: (book) => {
-      return axios.post(`${serverUrl}/api/podobi`, book);
+      return axios.post(`${serverUrl}/api/podobi`, book, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);

@@ -12,12 +12,19 @@ const Attandence = ({ item, otherData }) => {
   const [att, setAtt] = useState();
 
   const { data: msg } = useQuery("msg", () =>
-    fetch(`${serverUrl}/api/msg/${1}`).then((res) => res.json())
+    fetch(`${serverUrl}/api/msg/${1}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/attendance`, data);
+      return axios.post(`${serverUrl}/api/attendance`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);

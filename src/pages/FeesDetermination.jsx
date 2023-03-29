@@ -21,7 +21,12 @@ const FeesDetermination = () => {
 
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/fees-determination`, data);
+      return axios.post(`${serverUrl}/api/fees-determination`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);

@@ -10,7 +10,12 @@ const TeacherMonthEntry = () => {
 
   const { mutate } = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/teacher-month-entry`, data);
+      return axios.post(`${serverUrl}/api/teacher-month-entry`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);

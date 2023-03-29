@@ -37,7 +37,12 @@ const MarkSheet = () => {
 
   const fetchResult = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/filter-result-per-class`, data);
+      return axios.post(`${serverUrl}/api/filter-result-per-class`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       console.log("🚀 ~ file: MarkSheet.jsx:36 ~ MarkSheet ~ error", error);
@@ -50,7 +55,12 @@ const MarkSheet = () => {
 
   const customStudent = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/custom-student-call`, data);
+      return axios.post(`${serverUrl}/api/custom-student-call`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       console.log(error.response.data.message);

@@ -5,11 +5,15 @@ import { serverUrl } from "../../../../utils/config";
 
 const DetailsShortList = () => {
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
-    fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
+    fetch(`${serverUrl}/api/institute-info`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: employee } = useQuery("employee", () =>
-    fetch(`${serverUrl}/api/employee`).then((res) => res.json())
+    fetch(`${serverUrl}/api/employee`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   console.log("data", employee?.data);

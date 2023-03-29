@@ -32,16 +32,25 @@ const AdmissionFeeModal = ({ item }) => {
   const { register: register2, handleSubmit: handleSubmit2 } = useForm();
 
   const { data: payfees } = useQuery("payfees", () =>
-    fetch(`${serverUrl}/api/pay-fees`).then((res) => res.json())
+    fetch(`${serverUrl}/api/pay-fees`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   const { data: msg } = useQuery("msg", () =>
-    fetch(`${serverUrl}/api/msg/${1}`).then((res) => res.json())
+    fetch(`${serverUrl}/api/msg/${1}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   const { data: me, isLoading } = useQuery(["me"]);
 
   const Fee = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/customfeecall`, data);
+      return axios.post(`${serverUrl}/api/customfeecall`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);
@@ -54,7 +63,12 @@ const AdmissionFeeModal = ({ item }) => {
 
   const submitFee = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/pay-fees`, data);
+      return axios.post(`${serverUrl}/api/pay-fees`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);

@@ -4,7 +4,9 @@ import { serverUrl } from "../../../../utils/config";
 
 const StudentListOld = ({ student, value }) => {
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
-    fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
+    fetch(`${serverUrl}/api/institute-info`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   return (

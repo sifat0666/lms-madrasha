@@ -4,11 +4,15 @@ import { serverUrl } from "../../../../utils/config";
 
 const ParentNo = ({ student, value }) => {
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
-    fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
+    fetch(`${serverUrl}/api/institute-info`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: payfees } = useQuery("payfees", () =>
-    fetch(`${serverUrl}/api/pay-fees`).then((res) => res.json())
+    fetch(`${serverUrl}/api/pay-fees`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   console.log("payfees", payfees);
 

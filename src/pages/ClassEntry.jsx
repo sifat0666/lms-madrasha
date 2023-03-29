@@ -18,7 +18,12 @@ const ClassEntry = () => {
   // console.log(data);
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/marhalaclass`, data);
+      return axios.post(`${serverUrl}/api/marhalaclass`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);
@@ -30,7 +35,12 @@ const ClassEntry = () => {
 
   const mutation2 = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/subject`, data);
+      return axios.post(`${serverUrl}/api/subject`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);

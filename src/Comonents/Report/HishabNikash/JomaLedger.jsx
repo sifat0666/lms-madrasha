@@ -5,11 +5,15 @@ import { serverUrl } from "../../../../utils/config";
 
 const JomaLedger = ({ data, val }) => {
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
-    fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
+    fetch(`${serverUrl}/api/institute-info`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: audit } = useQuery("audit", () =>
-    fetch(`${serverUrl}/api/audit`).then((res) => res.json())
+    fetch(`${serverUrl}/api/audit`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const total = audit?.data

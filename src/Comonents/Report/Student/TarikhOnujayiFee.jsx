@@ -8,7 +8,9 @@ const ParentNo = ({ student, value }) => {
   );
 
   const { data: payfees } = useQuery("payfees", () =>
-    fetch(`${serverUrl}/api/pay-fees`).then((res) => res.json())
+    fetch(`${serverUrl}/api/pay-fees`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   console.log("payfees", payfees);
 

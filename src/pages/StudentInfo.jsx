@@ -67,10 +67,12 @@ const StudentInfo = () => {
   const { register: register3, handleSubmit: handleSubmit3 } = useForm();
   const mutation = useMutation({
     mutationFn: (newUser) => {
-      return axios.post(`${serverUrl}/api/student`, newUser, {headers: {
-        accept: 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }});
+      return axios.post(`${serverUrl}/api/student`, newUser, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);
@@ -89,7 +91,12 @@ const StudentInfo = () => {
 
   const Fee = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/customfeecall`, data);
+      return axios.post(`${serverUrl}/api/customfeecall`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);
@@ -102,7 +109,12 @@ const StudentInfo = () => {
 
   const crustomStudent = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/custom-student-call`, data);
+      return axios.post(`${serverUrl}/api/custom-student-call`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);
@@ -117,7 +129,12 @@ const StudentInfo = () => {
 
   const submitFee = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/pay-fees`, data);
+      return axios.post(`${serverUrl}/api/pay-fees`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);

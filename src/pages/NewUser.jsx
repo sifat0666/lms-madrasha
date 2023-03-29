@@ -29,7 +29,12 @@ const NewUser = () => {
 
   const mutation = useMutation({
     mutationFn: (newUser) => {
-      return axios.post(`${serverUrl}/api/register`, newUser);
+      return axios.post(`${serverUrl}/api/register`, newUser, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);

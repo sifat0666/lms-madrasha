@@ -28,7 +28,12 @@ const Fund = () => {
   // console.log(data);
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/fund`, data);
+      return axios.post(`${serverUrl}/api/fund`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error("fund exists");
@@ -40,7 +45,12 @@ const Fund = () => {
 
   const generalLedgerMutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/general-ledger`, data);
+      return axios.post(`${serverUrl}/api/general-ledger`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // toast.error("fund exists");
@@ -52,7 +62,12 @@ const Fund = () => {
   });
   const subLedgerMutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/sub-ledger`, data);
+      return axios.post(`${serverUrl}/api/sub-ledger`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // toast.error("fund exists");

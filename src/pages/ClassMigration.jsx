@@ -14,7 +14,12 @@ const ClassMigration = () => {
   const [student, setStudent] = useState("");
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/update-student`, data);
+      return axios.post(`${serverUrl}/api/update-student`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       console.log(error.response.data.message);

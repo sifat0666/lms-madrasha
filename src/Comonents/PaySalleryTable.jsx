@@ -10,7 +10,12 @@ const PaySalleryTable = ({ item, month, session }) => {
 
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/monthly-sallery-entry`, data);
+      return axios.post(`${serverUrl}/api/monthly-sallery-entry`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);

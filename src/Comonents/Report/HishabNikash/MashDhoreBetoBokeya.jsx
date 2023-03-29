@@ -5,7 +5,9 @@ import { serverUrl } from "../../../../utils/config";
 
 const MashDhoreBetonBokeya = ({ data, value }) => {
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
-    fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
+    fetch(`${serverUrl}/api/institute-info`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   console.log("val", value);

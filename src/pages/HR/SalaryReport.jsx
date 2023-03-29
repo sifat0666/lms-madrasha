@@ -23,7 +23,12 @@ const SalaryReport = () => {
 
   const { mutate } = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/payroll-filter`, data);
+      return axios.post(`${serverUrl}/api/payroll-filter`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);
@@ -37,7 +42,12 @@ const SalaryReport = () => {
 
   const { mutate: notPaidMutate } = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/employee-payroll-queue`, data);
+      return axios.post(`${serverUrl}/api/employee-payroll-queue`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);

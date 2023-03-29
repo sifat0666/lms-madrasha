@@ -15,7 +15,12 @@ const AddPaymentSystem = () => {
 
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/payment-method`, data);
+      return axios.post(`${serverUrl}/api/payment-method`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error("error");

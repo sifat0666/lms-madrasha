@@ -9,7 +9,9 @@ const KhorochLedger = ({ data, val }) => {
   );
 
   const { data: audit } = useQuery("audit", () =>
-    fetch(`${serverUrl}/api/audit`).then((res) => res.json())
+    fetch(`${serverUrl}/api/audit`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const total = audit?.data

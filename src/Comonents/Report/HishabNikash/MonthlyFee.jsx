@@ -4,10 +4,14 @@ import { serverUrl } from "../../../../utils/config";
 
 const MonthlyFee = ({ value, student, months }) => {
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
-    fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
+    fetch(`${serverUrl}/api/institute-info`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   const { data: monthlyFee } = useQuery("monthly_fee", () =>
-    fetch(`${serverUrl}/api/monthly-fee`).then((res) => res.json())
+    fetch(`${serverUrl}/api/monthly-fee`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   console.log("monthlyFee", monthlyFee?.data);

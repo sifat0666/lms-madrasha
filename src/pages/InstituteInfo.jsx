@@ -47,7 +47,12 @@ const InstituteInfo = () => {
 
   const mutation = useMutation({
     mutationFn: (newUser) => {
-      return axios.post(`${serverUrl}/api/institute-info`, newUser);
+      return axios.post(`${serverUrl}/api/institute-info`, newUser, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       console.log(error.response.data.message);

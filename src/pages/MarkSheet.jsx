@@ -34,7 +34,12 @@ const MarkSheet = () => {
 
   const fetchResult = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/result`, data);
+      return axios.post(`${serverUrl}/api/result`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       console.log("🚀 ~ file: MarkSheet.jsx:36 ~ MarkSheet ~ error", error);

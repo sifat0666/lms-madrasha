@@ -9,7 +9,12 @@ const PayrollTable = ({ item }) => {
   console.log("iotem", item);
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/sallery-sheet`, data);
+      return axios.post(`${serverUrl}/api/sallery-sheet`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);

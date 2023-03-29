@@ -38,7 +38,12 @@ const Report = () => {
 
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/monthly-fee-report`, data);
+      return axios.post(`${serverUrl}/api/monthly-fee-report`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       console.log("ee", error.response.data.message);
@@ -52,7 +57,12 @@ const Report = () => {
 
   const mashikFeeMutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/mash-hishebe-mashik-fee`, data);
+      return axios.post(`${serverUrl}/api/mash-hishebe-mashik-fee`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       console.log(error.response.data.message);
@@ -67,7 +77,13 @@ const Report = () => {
     mutationFn: (data) => {
       return axios.post(
         `${serverUrl}/api/mash-hishebe-mashik-fee-bokeya`,
-        data
+        data,
+        {
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
     },
     onError: (error, variable, context) => {
@@ -83,7 +99,12 @@ const Report = () => {
 
   const studentMutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/filter-student-by-class`, data);
+      return axios.post(`${serverUrl}/api/filter-student-by-class`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);
@@ -97,7 +118,12 @@ const Report = () => {
 
   const { mutate } = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/moukuf-student`, data);
+      return axios.post(`${serverUrl}/api/moukuf-student`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);

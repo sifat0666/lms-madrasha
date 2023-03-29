@@ -35,7 +35,12 @@ const ResultCondition = () => {
 
   const passMark = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/pass-mark`, data);
+      return axios.post(`${serverUrl}/api/pass-mark`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);
@@ -50,7 +55,12 @@ const ResultCondition = () => {
 
   const divisionEntry = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/division-entry`, data);
+      return axios.post(`${serverUrl}/api/division-entry`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);

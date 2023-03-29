@@ -13,15 +13,24 @@ const BokeyaVortiFee = () => {
   const [student, setStudent] = useState();
 
   const { data: marhalaClass } = useQuery("marhalaclass", () =>
-    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+    fetch(`${serverUrl}/api/marhalaclass`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   const { data: academicYear } = useQuery("academicyear", () =>
-    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+    fetch(`${serverUrl}/api/academicyear`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const custonStudentMutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/custom-student-call`, data);
+      return axios.post(`${serverUrl}/api/custom-student-call`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);
@@ -39,7 +48,12 @@ const BokeyaVortiFee = () => {
 
   const Fee = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/customfeecall`, data);
+      return axios.post(`${serverUrl}/api/customfeecall`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
     },
     onError: (error, variable, context) => {
       toast.error(error.response.data.message);
