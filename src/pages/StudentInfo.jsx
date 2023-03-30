@@ -51,7 +51,12 @@ const StudentInfo = () => {
   let year = date.getFullYear();
 
   const onDelete = async (id) => {
-    const data = await axios.delete(`${serverUrl}/api/student/${id}`);
+    const data = await axios.delete(`${serverUrl}/api/student/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     location.reload();
   };
 

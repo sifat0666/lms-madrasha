@@ -95,7 +95,12 @@ const ExpenceEntryRevised = () => {
   console.log("ledger", ledger);
 
   const onDelete = async (id) => {
-    const data = await axios.delete(`${serverUrl}/api/audit/${id}`);
+    const data = await axios.delete(`${serverUrl}/api/audit/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     location.reload();
   };
 

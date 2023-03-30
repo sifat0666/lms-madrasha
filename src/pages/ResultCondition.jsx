@@ -94,7 +94,12 @@ const ResultCondition = () => {
   };
 
   const onDelete = async (id) => {
-    const data = await axios.delete(`${serverUrl}/api/division-entry/${id}`);
+    const data = await axios.delete(`${serverUrl}/api/division-entry/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     location.reload();
   };
 

@@ -49,7 +49,13 @@ const FeesDetermination = () => {
 
   const onDelete = async (id) => {
     const data = await axios.delete(
-      `${serverUrl}/api/fees-determination/${id}`
+      `${serverUrl}/api/fees-determination/${id}`,
+      {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
     );
     location.reload();
   };

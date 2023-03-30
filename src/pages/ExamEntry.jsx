@@ -49,7 +49,12 @@ const ExamEntry = () => {
     mutation.mutate(value);
   };
   const onDelete = async (id) => {
-    const data = await axios.delete(`${serverUrl}/api/exam-entry/${id}`);
+    const data = await axios.delete(`${serverUrl}/api/exam-entry/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     location.reload();
   };
 

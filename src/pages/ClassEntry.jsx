@@ -60,12 +60,22 @@ const ClassEntry = () => {
   };
 
   const onDelete1 = async (id) => {
-    const data = await axios.delete(`${serverUrl}/api/marhalaclass/${id}`);
+    const data = await axios.delete(`${serverUrl}/api/marhalaclass/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     location.reload();
   };
 
   const onDelete2 = async (id) => {
-    const data = await axios.delete(`${serverUrl}/api/subject/${id}`);
+    const data = await axios.delete(`${serverUrl}/api/subject/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     location.reload();
   };
   return (

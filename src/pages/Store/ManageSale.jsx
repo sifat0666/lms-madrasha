@@ -1,6 +1,26 @@
+import dayjs from "dayjs";
 import React from "react";
+import { useRef } from "react";
+import { useQuery } from "react-query";
+import ReactToPrint from "react-to-print";
+import { serverUrl } from "../../../utils/config";
 
 const ManageSale = () => {
+  const ref = useRef();
+
+  const { data: sale } = useQuery("doner_member", () =>
+    fetch(`${serverUrl}/api/book-sale`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
+  );
+
+  const { data: instituteInfo } = useQuery("instituteInfo", () =>
+    fetch(`${serverUrl}/api/institute-info`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
+  );
+
+  console.log(sale);
   return (
     <div>
       <section className="user-form-section d-print-none">
@@ -36,48 +56,233 @@ const ManageSale = () => {
                         >
                           <thead className="text-center accounts-table-head">
                             <tr>
-                              <th>SL.</th>
                               <th>Invoice No</th>
                               <th>Sale By</th>
                               <th>Customer Name</th>
                               <th>Date</th>
+                              <th>Quantity</th>
                               <th>Total Amount</th>
                               <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>01</td>
-                              <td>
-                                <a
-                                  href="./invoice-details.html"
-                                  className="text-decoration-none text-success"
-                                >
-                                  1000
-                                </a>
-                              </td>
-                              <td>Admin User</td>
-                              <td>Aminul Islam</td>
-                              <td>08-Aug-2022</td>
-                              <td>$13,352.00</td>
-                              <td>
-                                <span className="action-view">
-                                  <i className="bi bi-eye"></i>
-                                </span>
-                                <span
-                                  className="action-print"
-                                  onclick="window.print()"
-                                >
-                                  <i className="bi bi-printer-fill"></i>
-                                </span>
-                                <span className="action-edit">
-                                  <i className="bi bi-pencil-fill"></i>
-                                </span>
-                                <span className="action-delete">
-                                  <i className="bi bi-trash3"></i>
-                                </span>
-                              </td>
-                            </tr>
+                            {sale?.map((item) => (
+                              <tr>
+                                <td>
+                                  <a
+                                    href="./invoice-details.html"
+                                    className="text-decoration-none text-success"
+                                  >
+                                    {1000 + parseInt(item.id)}
+                                  </a>
+                                </td>
+                                <td>{item.submitted_by}</td>
+                                <td>{item.name}</td>
+                                <td>{item.date}</td>
+                                <td>{item.qty}</td>
+                                <td>{item.total}</td>
+                                <td>
+                                  <span className="action-delete">
+                                    <i className="bi bi-trash3"></i>
+                                  </span>
+
+                                  <ReactToPrint
+                                    trigger={() => (
+                                      <button className="mx-3" type="button">
+                                        <span className="action-print m-3 items-center">
+                                          <i className="bi bi-printer-fill"></i>
+                                        </span>
+                                      </button>
+                                    )}
+                                    content={() => ref.current}
+                                  />
+
+                                  <div className="d-none">
+                                    <div ref={ref}>
+                                      <div className="row">
+                                        <div className="col-md-12 w-100">
+                                          <div className="main-container">
+                                            <div
+                                              className="preview-page d-print-block"
+                                              style={{ zIndex: 1 }}
+                                            >
+                                              <span
+                                                className="print-button d-print-none"
+                                                onclick="window.print()"
+                                              >
+                                                <i className="bi bi-printer-fill"></i>
+                                              </span>
+                                              <div className="pages-title">
+                                                <h5>{instituteInfo?.name}</h5>
+                                                <p>{instituteInfo?.address}</p>
+                                                <span>
+                                                  {instituteInfo?.num}
+                                                </span>
+                                              </div>
+                                              <div className="row my-3 invoice-title">
+                                                <div className="col-4 d-flex align-items-center">
+                                                  <div className="slip-no"></div>
+                                                </div>
+                                                <div className="col-4 d-flex justify-content-center align-items-center">
+                                                  <span className="">
+                                                    ইনভয়েস
+                                                  </span>
+                                                </div>
+                                                <div className="col-4 d-flex align-items-center justify-content-lg-end justify-content-start">
+                                                  <div className="slip-date">
+                                                    <strong>তারিখঃ</strong>
+                                                    <span className="">
+                                                      {dayjs().format(
+                                                        "YYYY-MM-DD"
+                                                      )}
+                                                    </span>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <div className="pages-content">
+                                                <div className="row mb-1 customer-info">
+                                                  <div className="col-6 d-flex flex-wrap align-content-center">
+                                                    <div className="donor-name">
+                                                      <strong className="dtitle">
+                                                        কাস্টমারের নামঃ
+                                                      </strong>
+                                                      <div className="border-line w-100">
+                                                        {item.name}
+                                                      </div>
+                                                    </div>
+                                                    <div className="donor-name">
+                                                      <strong className="dtitle">
+                                                        পিতার নামঃ
+                                                      </strong>
+                                                      <div className="border-line w-100"></div>
+                                                    </div>
+                                                    <div className="donor-name">
+                                                      <strong className="dtitle">
+                                                        ঠিকানাঃ
+                                                      </strong>
+                                                      <div className="border-line w-100"></div>
+                                                    </div>
+                                                    <div className="donor-name mt-1">
+                                                      <strong className="dtitle">
+                                                        টাকাঃ
+                                                      </strong>
+                                                      <div className="border-all w-100">
+                                                        {item.total}
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div className="col-6">
+                                                    <div className="donor-name">
+                                                      <strong className="dtitle">
+                                                        মোবাইলঃ
+                                                      </strong>
+                                                      <div className="border-line w-100"></div>
+                                                    </div>
+                                                    <div className="donor-name">
+                                                      <strong className="dtitle">
+                                                        শ্রেণীঃ
+                                                      </strong>
+                                                      <div className="border-line w-100"></div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div className="row mb-2">
+                                                  <div className="col-12">
+                                                    <div className="donor-name">
+                                                      <strong className="dtitle">
+                                                        কথায়ঃ
+                                                      </strong>
+                                                      <div className="border-line w-100"></div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div className="row">
+                                                  <div className="col-12">
+                                                    <div
+                                                      className="table-responsive"
+                                                      data-pattern="priority-columns"
+                                                    >
+                                                      <table className="table  bg-white table-bordered text-center report-table">
+                                                        <thead className="text-center">
+                                                          <tr>
+                                                            <th>ক্রঃ</th>
+                                                            <th>বইয়ের নাম</th>
+                                                            <th>সংখ্যা</th>
+                                                            <th>মূল্য</th>
+                                                            <th>এমাউন্ট</th>
+                                                          </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                          <tr>
+                                                            <td>০১</td>
+                                                            <td>
+                                                              {item?.name}
+                                                            </td>
+                                                            <td>{item.qty}</td>
+                                                            <td>
+                                                              {item.price}
+                                                            </td>
+                                                            <td>
+                                                              {item.total}
+                                                            </td>
+                                                          </tr>
+
+                                                          <tr>
+                                                            <th
+                                                              colspan="4"
+                                                              className="text-right"
+                                                            >
+                                                              Grand Total
+                                                            </th>
+                                                            <td>
+                                                              {item.total}
+                                                            </td>
+                                                          </tr>
+                                                          <tr>
+                                                            <th
+                                                              colspan="4"
+                                                              className="text-right"
+                                                            >
+                                                              Paid Amount
+                                                            </th>
+                                                            <td></td>
+                                                          </tr>
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                  </div>
+                                                  <div className="col-12">
+                                                    <div className="row mt-5">
+                                                      <div className="col-lg-4 col-12 d-flex justify-content-lg-start justify-content-center">
+                                                        <div className="marksheet-sing">
+                                                          <span>
+                                                            কাস্টমারের স্বাক্ষর
+                                                          </span>
+                                                          <br />
+                                                        </div>
+                                                      </div>
+                                                      <div className="col-lg-4 col-12 d-flex justify-content-lg-end justify-content-center mt-lg-0 mt-3"></div>
+                                                      <div className="col-lg-4 col-12 d-flex justify-content-lg-end justify-content-center mt-lg-0 mt-3">
+                                                        <div className="marksheet-sing">
+                                                          <span>
+                                                            আদায়কারীর স্বাক্ষর
+                                                          </span>
+                                                          <br />
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))}
                           </tbody>
                         </table>
                       </div>

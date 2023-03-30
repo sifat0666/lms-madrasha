@@ -38,7 +38,12 @@ const PodobiEntry = () => {
     mutation.mutate(data);
   };
   const onDelete = async (id) => {
-    const data = await axios.delete(`${serverUrl}/api/podobi/${id}`);
+    const data = await axios.delete(`${serverUrl}/api/podobi/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     location.reload();
   };
 

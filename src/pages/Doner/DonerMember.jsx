@@ -41,7 +41,12 @@ const DonerMember = () => {
   };
 
   const onDelete = async (id) => {
-    const data = await axios.delete(`${serverUrl}/api/doner-member/${id}`);
+    const data = await axios.delete(`${serverUrl}/api/doner-member/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     location.reload();
   };
 

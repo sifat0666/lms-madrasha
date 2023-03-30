@@ -47,7 +47,12 @@ const AddBook = () => {
   };
 
   const onDelete = async (id) => {
-    const data = await axios.delete(`${serverUrl}/api/book/${id}`);
+    const data = await axios.delete(`${serverUrl}/api/book/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     location.reload();
   };
 
@@ -2442,7 +2447,6 @@ const AddBook = () => {
                   <button
                     className="custom-btn btn-dark"
                     data-bs-dismiss="modal"
-                    onclick="javascript:void(0)"
                     type="button"
                   >
                     Close

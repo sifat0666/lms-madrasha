@@ -17,6 +17,8 @@ const NewUser = () => {
     }).then((res) => res.json())
   );
 
+  console.log("user data", data);
+
   const { data: me, isLoading } = useQuery(["me"], () =>
     axios.get(`${serverUrl}/api/user`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -66,7 +68,12 @@ const NewUser = () => {
   }
 
   const onDelete = async (id) => {
-    const data = await axios.delete(`${serverUrl}/api/users/${id}`);
+    const data = await axios.delete(`${serverUrl}/api/users/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     location.reload();
   };
 

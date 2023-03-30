@@ -36,7 +36,12 @@ const Students = () => {
   };
 
   const onDelete = async (id) => {
-    const data = await axios.delete(`${serverUrl}/api/academicyear/${id}`);
+    const data = await axios.delete(`${serverUrl}/api/academicyear/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     location.reload();
   };
 
