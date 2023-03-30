@@ -28,13 +28,17 @@ const Report = () => {
   const [survey, setSurvey] = useState();
 
   const { data: marhalaClass } = useQuery("marhalaclass", () =>
-    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+    fetch(`${serverUrl}/api/marhalaclass`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   // const { data: studentData } = useQuery("marhalaclass", () =>
   //   fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
   // );
   const { data: academicYear } = useQuery("academicyear", () =>
-    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+    fetch(`${serverUrl}/api/academicyear`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const mutation = useMutation({

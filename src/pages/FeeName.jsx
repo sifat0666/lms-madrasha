@@ -12,7 +12,9 @@ const onSubmit = async (value) => {
 
 const FeeName = () => {
   const { data } = useQuery("fee_name", () =>
-    fetch(`${serverUrl}/api/fee-name`).then((res) => res.json())
+    fetch(`${serverUrl}/api/fee-name`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   // console.log(data);

@@ -10,11 +10,15 @@ import { useState } from "react";
 
 const Fund = () => {
   const { data } = useQuery("fund", () =>
-    fetch(`${serverUrl}/api/fund`).then((res) => res.json())
+    fetch(`${serverUrl}/api/fund`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: generalLedger } = useQuery("general-ledger", () =>
-    fetch(`${serverUrl}/api/general-ledger`).then((res) => res.json())
+    fetch(`${serverUrl}/api/general-ledger`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   console.log("general-ledger", generalLedger?.data);

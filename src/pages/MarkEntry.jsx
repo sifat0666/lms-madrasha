@@ -8,22 +8,32 @@ import { serverUrl } from "../../utils/config";
 
 const MarkEntry = () => {
   const { data: marhalaClass } = useQuery("marhalaclass", () =>
-    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+    fetch(`${serverUrl}/api/marhalaclass`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: academicYear } = useQuery("academicyear", () =>
-    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+    fetch(`${serverUrl}/api/academicyear`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: examName } = useQuery("examEnty", () =>
-    fetch(`${serverUrl}/api/exam-entry`).then((res) => res.json())
+    fetch(`${serverUrl}/api/exam-entry`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   const { data: sub } = useQuery("subject", () =>
-    fetch(`${serverUrl}/api/subject`).then((res) => res.json())
+    fetch(`${serverUrl}/api/subject`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: marks } = useQuery("marks", () =>
-    fetch(`${serverUrl}/api/marks`).then((res) => res.json())
+    fetch(`${serverUrl}/api/marks`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const [student, setStudent] = useState();

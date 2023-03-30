@@ -37,7 +37,9 @@ const StudentInfo = () => {
   console.log("joma", joma);
 
   const { data: msg } = useQuery("msg", () =>
-    fetch(`${serverUrl}/api/msg/${1}`).then((res) => res.json())
+    fetch(`${serverUrl}/api/msg/${1}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const [image, setImage] = useState();
@@ -159,10 +161,14 @@ const StudentInfo = () => {
   // console.log("first", fees);
 
   const { data: marhalaClass } = useQuery("marhalaclass", () =>
-    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+    fetch(`${serverUrl}/api/marhalaclass`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   const { data: academicYear } = useQuery("academicyear", () =>
-    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+    fetch(`${serverUrl}/api/academicyear`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   const [value, setValue] = useState({});
 

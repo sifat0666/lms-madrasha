@@ -7,7 +7,9 @@ import { serverUrl } from "../../../utils/config";
 
 const DonerMember = () => {
   const { data: doner_member } = useQuery("doner_member", () =>
-    fetch(`${serverUrl}/api/doner-member`).then((res) => res.json())
+    fetch(`${serverUrl}/api/doner-member`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   console.log("doner", doner_member);

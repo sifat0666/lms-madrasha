@@ -12,7 +12,9 @@ import { useState } from "react";
 
 const NewUser = () => {
   const { data } = useQuery("user", () =>
-    fetch(`${serverUrl}/api/users`).then((res) => res.json())
+    fetch(`${serverUrl}/api/users`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: me, isLoading } = useQuery(["me"], () =>

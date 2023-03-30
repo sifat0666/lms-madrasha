@@ -71,15 +71,21 @@ const SalaryReport = () => {
   // console.log(report);
 
   const { data: podobis } = useQuery("podobi", () =>
-    fetch(`${serverUrl}/api/podobi`).then((res) => res.json())
+    fetch(`${serverUrl}/api/podobi`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: academicYear } = useQuery("academicyear", () =>
-    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+    fetch(`${serverUrl}/api/academicyear`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: months } = useQuery("teacher_month", () =>
-    fetch(`${serverUrl}/api/teacher-month-entry`).then((res) => res.json())
+    fetch(`${serverUrl}/api/teacher-month-entry`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   const findMonth = months?.find((i) => i.session === session);
   return (

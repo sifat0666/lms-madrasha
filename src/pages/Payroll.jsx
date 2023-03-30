@@ -6,11 +6,15 @@ import PayrollTable from "../Comonents/PayrollTable";
 
 const Payroll = () => {
   const { data } = useQuery("employee", () =>
-    fetch(`${serverUrl}/api/employee-payroll-null`).then((res) => res.json())
+    fetch(`${serverUrl}/api/employee-payroll-null`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: sallery_sheet } = useQuery("sallery-sheet", () =>
-    fetch(`${serverUrl}/api/sallery-sheet`).then((res) => res.json())
+    fetch(`${serverUrl}/api/sallery-sheet`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   // console.log(data, "data");

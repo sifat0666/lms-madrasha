@@ -10,20 +10,26 @@ const Report = () => {
   const [value, setValue] = useState();
 
   const { data: marhalaClass } = useQuery("marhalaclass", () =>
-    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+    fetch(`${serverUrl}/api/marhalaclass`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   const { data: academicYear } = useQuery("academicyear", () =>
-    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+    fetch(`${serverUrl}/api/academicyear`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   const { data: months } = useQuery("months", () =>
-    fetch(`${serverUrl}/api/month-entry`).then((res) => res.json())
+    fetch(`${serverUrl}/api/month-entry`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const getStudent = (student_id) => {
     const { data: studentData } = useQuery("student", () =>
-      fetch(`${serverUrl}/api/marhalaclass/${student_id}`).then((res) =>
-        res.json()
-      )
+      fetch(`${serverUrl}/api/marhalaclass/${student_id}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }).then((res) => res.json())
     );
 
     return studentData?.data.student_name;

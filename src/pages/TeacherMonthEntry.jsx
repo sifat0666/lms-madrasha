@@ -33,17 +33,24 @@ const TeacherMonthEntry = () => {
 
   const onDelete = async (id) => {
     const data = await axios.delete(
-      `${serverUrl}/api/teacher-month-entry/${id}`
+      `${serverUrl}/api/teacher-month-entry/${id}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
     );
     location.reload();
   };
 
   const { data: academicYear } = useQuery("academicyear", () =>
-    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+    fetch(`${serverUrl}/api/academicyear`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: months } = useQuery("teacher_month", () =>
-    fetch(`${serverUrl}/api/teacher-month-entry`).then((res) => res.json())
+    fetch(`${serverUrl}/api/teacher-month-entry`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   return (

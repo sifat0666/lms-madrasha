@@ -12,22 +12,32 @@ const ExpenceEntryRevised = () => {
   const [ledger2, setLedger2] = useState();
 
   const { data } = useQuery("payment-method", () =>
-    fetch(`${serverUrl}/api/payment-method`).then((res) => res.json())
+    fetch(`${serverUrl}/api/payment-method`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   const { data: audit } = useQuery("audit", () =>
-    fetch(`${serverUrl}/api/audit`).then((res) => res.json())
+    fetch(`${serverUrl}/api/audit`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   console.log("audit", audit);
   const { data: generalLedger } = useQuery("general-ledger", () =>
-    fetch(`${serverUrl}/api/general-ledger`).then((res) => res.json())
+    fetch(`${serverUrl}/api/general-ledger`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
   const { data: subLedger } = useQuery("sub-ledger", () =>
-    fetch(`${serverUrl}/api/sub-ledger`).then((res) => res.json())
+    fetch(`${serverUrl}/api/sub-ledger`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: fundData } = useQuery("fund", () =>
-    fetch(`${serverUrl}/api/fund`).then((res) => res.json())
+    fetch(`${serverUrl}/api/fund`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const mutation = useMutation({

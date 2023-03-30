@@ -13,19 +13,27 @@ const PaySallary = () => {
   console.log("not paid table", notPaidTable);
 
   const { data: academicYear } = useQuery("academicyear", () =>
-    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+    fetch(`${serverUrl}/api/academicyear`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: sallery_sheet } = useQuery("sallery-sheet", () =>
-    fetch(`${serverUrl}/api/sallery-sheet`).then((res) => res.json())
+    fetch(`${serverUrl}/api/sallery-sheet`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: paid_sallery } = useQuery("paid_sallery", () =>
-    fetch(`${serverUrl}/api/monthly-sallery-entry`).then((res) => res.json())
+    fetch(`${serverUrl}/api/monthly-sallery-entry`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: months } = useQuery("teacher_month", () =>
-    fetch(`${serverUrl}/api/teacher-month-entry`).then((res) => res.json())
+    fetch(`${serverUrl}/api/teacher-month-entry`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const findMonth = months?.find((i) => i.session === session);

@@ -9,7 +9,9 @@ const PodobiEntry = () => {
   const { register, handleSubmit } = useForm();
 
   const { data: podobi } = useQuery("podobi", () =>
-    fetch(`${serverUrl}/api/podobi`).then((res) => res.json())
+    fetch(`${serverUrl}/api/podobi`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const mutation = useMutation({

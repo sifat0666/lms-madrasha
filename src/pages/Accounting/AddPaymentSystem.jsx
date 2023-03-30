@@ -7,7 +7,9 @@ import { serverUrl } from "../../../utils/config";
 
 const AddPaymentSystem = () => {
   const { data } = useQuery("payment-method", () =>
-    fetch(`${serverUrl}/api/payment-method`).then((res) => res.json())
+    fetch(`${serverUrl}/api/payment-method`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   console.log("payment", data?.data);

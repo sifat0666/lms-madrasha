@@ -9,7 +9,9 @@ import { Router } from "react-router-dom";
 const Students = () => {
   const { register, handleSubmit } = useForm();
   const { data } = useQuery("academicyear", () =>
-    fetch(`${serverUrl}/api/academicyear`).then((res) => res.json())
+    fetch(`${serverUrl}/api/academicyear`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const mutation = useMutation({

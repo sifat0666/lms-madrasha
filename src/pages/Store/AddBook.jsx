@@ -7,11 +7,15 @@ import { serverUrl } from "../../../utils/config";
 
 const AddBook = () => {
   const { data: book } = useQuery("doner_member", () =>
-    fetch(`${serverUrl}/api/book`).then((res) => res.json())
+    fetch(`${serverUrl}/api/book`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { data: marhala } = useQuery("marhalaclass", () =>
-    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+    fetch(`${serverUrl}/api/marhalaclass`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   console.log("doner", book);

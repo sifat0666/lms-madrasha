@@ -7,12 +7,16 @@ import { serverUrl } from "../../../utils/config";
 
 const TeacherStaff = () => {
   const { data } = useQuery("employee", () =>
-    fetch(`${serverUrl}/api/employee`).then((res) => res.json())
+    fetch(`${serverUrl}/api/employee`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   console.log("employee", data);
   const { data: podobi } = useQuery("podobi", () =>
-    fetch(`${serverUrl}/api/podobi`).then((res) => res.json())
+    fetch(`${serverUrl}/api/podobi`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const mutation = useMutation({
@@ -39,7 +43,9 @@ const TeacherStaff = () => {
   });
 
   const { data: emloyeeData } = useQuery("employeeData", () =>
-    fetch(`${serverUrl}/api/employee`).then((res) => res.json())
+    fetch(`${serverUrl}/api/employee`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   const { register, handleSubmit } = useForm();

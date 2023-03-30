@@ -10,7 +10,9 @@ const Settings = () => {
   const { register, handleSubmit } = useForm();
 
   const { data: msg } = useQuery("msg", () =>
-    fetch(`${serverUrl}/api/msg/${1}`).then((res) => res.json())
+    fetch(`${serverUrl}/api/msg/${1}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
 
   console.log(msg);
