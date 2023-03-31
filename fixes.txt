@@ -1,17 +1,16 @@
 logout if 5 min idle
 header theke delete icon dlt
 --------------
-hishab nikash report --done
 
 
 msg lekhar field banano
 
 
 
-report total
+hishab nikash report --done
 
-hajira report
 
+report total --done
 
 profile edit -- done
 

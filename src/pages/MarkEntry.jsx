@@ -224,22 +224,7 @@ const MarkEntry = () => {
                             })}
                           </select>
                         </div>
-                        <label
-                          className="col-lg-4 col-md-4 col-12 col-form-label info-lable mt-3"
-                          style={{ padding: "10px" }}
-                        >
-                          নাম্বার
-                          <i>*</i>
-                        </label>
-                        <div className="col-lg-6 col-md-6 col-10 mt-3">
-                          <input
-                            required
-                            type="text"
-                            className="form-control"
-                            placeholder="নাম্বার"
-                            {...register2("number")}
-                          />
-                        </div>
+
                         <label
                           className="col-lg-4 col-md-4 col-12 col-form-label info-lable mt-3"
                           style={{ padding: "10px" }}
@@ -286,6 +271,22 @@ const MarkEntry = () => {
                             className="form-control"
                             placeholder="আইডি"
                             {...register2("student_id")}
+                          />
+                        </div>
+                        <label
+                          className="col-lg-4 col-md-4 col-12 col-form-label info-lable mt-3"
+                          style={{ padding: "10px" }}
+                        >
+                          নাম্বার
+                          <i>*</i>
+                        </label>
+                        <div className="col-lg-6 col-md-6 col-10 mt-3">
+                          <input
+                            required
+                            type="text"
+                            className="form-control"
+                            placeholder="নাম্বার"
+                            {...register2("number")}
                           />
                         </div>
                         <div className="col-lg-6 col-md-6 col-12 mx-auto p-5">

@@ -62,7 +62,10 @@ const MarkSheet = () => {
   const [value, setValue] = useState();
   const onSubmit = async (data) => {
     const student = await axios.get(
-      `${serverUrl}/api/student/${data?.student_id}`
+      `${serverUrl}/api/student/${data?.student_id}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }
     );
     setStudent(student?.data);
     console.log(data);
@@ -172,31 +175,7 @@ const MarkSheet = () => {
                           </select>
                         </div>
                       </div>
-                      {/* <div className="row mb-3">
-                        <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                          কিতাব
-                          <i>*</i>
-                        </label>
-                        <div className="col-lg-8 col-md-8 col-12">
-                          <select className="form-select">
-                            <option selected="">শ্রেণী নির্বাচন করুন</option>
-                            <option>নাযেরা</option>
-                            <option>হিফযুল কুরআন</option>
-                            <option>ই-দাদী</option>
-                            <option>ইবতিদায়ী আউয়াল</option>
-                            <option>ইবতিদায়ী নানী</option>
-                            <option>উস্তানী আউয়াল</option>
-                            <option>উস্তানী সানী</option>
-                            <option>সানাবী আউয়াল</option>
-                            <option>সানাবী আউয়াল</option>
-                            <option>সানাবী সানী</option>
-                            <option>নিহায়ী আউয়াল</option>
-                            <option>নিহায়ী সানী</option>
-                            <option>তাকমীল</option>
-                            <option>ইফতা ১ম</option>
-                          </select>
-                        </div>
-                      </div> */}
+
                       <div className="row mb-3">
                         <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                           আইডি
