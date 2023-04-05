@@ -176,7 +176,7 @@ const Settings = () => {
                         </button>
                       </form>
                       <form
-                        onSubmit={vortiHandleSubmit(onVortiSubmit)}
+                        onSubmit={khabarHandleSubmit(onKhabarSubmit)}
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -218,7 +218,7 @@ const Settings = () => {
                         </button>
                       </form>
                       <form
-                        onSubmit={vortiHandleSubmit(onVortiSubmit)}
+                        onSubmit={presentHandleSubmit(onPresentSubmit)}
                         style={{
                           display: "flex",
                           alignItems: "center",
