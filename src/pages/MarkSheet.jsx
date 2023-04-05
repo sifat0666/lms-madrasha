@@ -12,8 +12,7 @@ const MarkSheet = () => {
   const ref = useRef();
 
   const [student, setStudent] = useState();
-
-  console.log(student?.id);
+  const [division, setDivision] = useState([]);
 
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
     fetch(`${serverUrl}/api/institute-info`, {
@@ -53,8 +52,25 @@ const MarkSheet = () => {
       console.log("🚀 ~ file: MarkSheet.jsx:36 ~ MarkSheet ~ error", error);
     },
     onSuccess: (data) => {
-      console.log(data?.data);
       setResults(data?.data);
+    },
+  });
+
+  const fetchDivision = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/division-by-class`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+    },
+    onError: (error, variable, context) => {
+      console.log("🚀 ~ file: MarkSheet.jsx:36 ~ MarkSheet ~ error", error);
+    },
+    onSuccess: (data) => {
+      console.log("dibi", data?.data);
+      setDivision(data?.data);
     },
   });
 
@@ -68,14 +84,24 @@ const MarkSheet = () => {
       }
     );
     setStudent(student?.data);
-    console.log(data);
     setValue(data);
     fetchResult.mutate(data);
+    console.log("data", data);
+    fetchDivision.mutate({
+      session: data?.session,
+      exam_name: data?.exam,
+      class: data?.class,
+    });
   };
 
-  console.log("val", value);
-
-  console.log("results", results);
+  const total = results
+    ?.map((item) => {
+      if (true) {
+        return parseInt(item?.number);
+      }
+      return null;
+    })
+    ?.reduce((accumulator, currentValue) => accumulator + currentValue)
 
   return (
     <div>
@@ -203,7 +229,7 @@ const MarkSheet = () => {
                                 className="custom-btn btn-primary my-3"
                                 type="submit"
                               >
-                                Save
+                                Print
                               </button>
                             )}
                             content={() => ref.current}
@@ -217,7 +243,13 @@ const MarkSheet = () => {
                   <div className="col-lg-8 col-md-12 col-12 mt-2 mt-lg-0 ">
                     <div
                       className="  d-flex flex-column justify-content-center"
-                      style={{ zIndex: 1, background: "white" }}
+                      style={{
+                        // borderStyle: "dashed",
+
+                        zIndex: 1,
+                        background: "white",
+                        height: "1056px",
+                      }}
                       ref={ref}
                     >
                       <div className="pages-title">
@@ -264,35 +296,82 @@ const MarkSheet = () => {
                                 className="table-responsive"
                                 data-pattern="priority-columns"
                               >
-                                <table className="table  bg-white table-bordered text-center report-table">
+                                <table
+                                  style={{ height: "20px" }}
+                                  className=" m-1  bg-white table-bordered text-center"
+                                >
                                   <thead
                                     className="text-center"
                                     style={{ backgroundColor: "gray" }}
                                   >
                                     <tr>
                                       <th colspan="4">
-                                        মোট বিষয় ৪টি পূর্নমান ১০০ x ৪ =৪০০
+                                        মোট বিষয় {results?.length}টি পূর্নমান
+                                        100 x {results?.length} ={" "}
+                                        {100 * results?.length}
                                       </th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <tr>
-                                      <td>মুমতাজ</td>
-                                      <td>৮০x4</td>
+                                      <td>{division[0]?.case1_div}</td>
+                                      <td>
+                                        {division[0]?.case1} * {results?.length}
+                                      </td>
                                       <td>=</td>
-                                      <td>৩২০</td>
+                                      <td>
+                                        {division[0]?.case1 * results?.length}
+                                      </td>
                                     </tr>
                                     <tr>
-                                      <td>মুমতাজ</td>
-                                      <td>৮০x4</td>
+                                      <td>{division[0]?.case2_div}</td>
+                                      <td>
+                                        {division[0]?.case2} * {results?.length}
+                                      </td>
                                       <td>=</td>
-                                      <td>৩২০</td>
-                                    </tr>
+                                      <td>
+                                        {division[0]?.case2 * results?.length}
+                                      </td>
+                                    </tr>{" "}
                                     <tr>
-                                      <td>মুমতাজ</td>
-                                      <td>৮০x4</td>
+                                      <td>{division[0]?.case3_div}</td>
+                                      <td>
+                                        {division[0]?.case3} * {results?.length}
+                                      </td>
                                       <td>=</td>
-                                      <td>৩২০</td>
+                                      <td>
+                                        {division[0]?.case3 * results?.length}
+                                      </td>
+                                    </tr>{" "}
+                                    <tr>
+                                      <td>{division[0]?.case4_div}</td>
+                                      <td>
+                                        {division[0]?.case4} * {results?.length}
+                                      </td>
+                                      <td>=</td>
+                                      <td>
+                                        {division[0]?.case4 * results?.length}
+                                      </td>
+                                    </tr>{" "}
+                                    <tr>
+                                      <td>{division[0]?.case5_div}</td>
+                                      <td>
+                                        {division[0]?.case5} * {results?.length}
+                                      </td>
+                                      <td>=</td>
+                                      <td>
+                                        {division[0]?.case5 * results?.length}
+                                      </td>
+                                    </tr>{" "}
+                                    <tr>
+                                      <td>{division[0]?.case6_div}</td>
+                                      <td>
+                                        {division[0]?.case6} * {results?.length}
+                                      </td>
+                                      <td>=</td>
+                                      <td>
+                                        {division[0]?.case6 * results?.length}
+                                      </td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -340,15 +419,15 @@ const MarkSheet = () => {
                                   <tr>
                                     <th>
                                       মোট নম্বর
-                                      <td>২০০</td>
+                                      <td>{total}</td>
                                     </th>
                                     <th>
                                       প্রাপ্ত বিভাগ
-                                      <td>মকবুল</td>
+                                      <td></td>
                                     </th>
                                     <th>
                                       মেধা স্থান
-                                      <td>০</td>
+                                      <td></td>
                                     </th>
                                   </tr>
                                 </tbody>

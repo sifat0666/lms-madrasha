@@ -7,15 +7,20 @@ import { msg, serverUrl } from "../../utils/config";
 import { useState } from "react";
 
 const Settings = () => {
-  const { register, handleSubmit } = useForm();
+  const { register: vortiReg, handleSubmit: vortiHandleSubmit } = useForm();
+  const { register: mashikReg, handleSubmit: mashikHandleSubmit } = useForm();
+  const { register: khabarReg, handleSubmit: khabarHandleSubmit } = useForm();
+  const { register: presentReg, handleSubmit: presentHandleSubmit } = useForm();
+  const { register: absentReg, handleSubmit: absentHandleSubmit } = useForm();
+  const { register: bunkReg, handleSubmit: bunkHandleSubmit } = useForm();
 
-  const { data: msg } = useQuery("msg", () =>
-    fetch(`${serverUrl}/api/msg/${1}`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    }).then((res) => res.json())
-  );
+  // const { data: msg } = useQuery("msg", () =>
+  //   fetch(`${serverUrl}/api/msg/${1}`, {
+  //     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+  //   }).then((res) => res.json())
+  // );
 
-  console.log(msg);
+  // console.log(msg);
 
   // const [msg, setMsg] = useState();
 
@@ -36,9 +41,40 @@ const Settings = () => {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    mutation.mutate(data);
+  const onVortiSubmit = (data) => {
+    const val = { ...data, type: "vorti" };
+    console.log(val);
+    // mutation.mutate(data);
+  };
+  const onMashikSubmit = (data) => {
+    const val = { ...data, type: "mashik" };
+    console.log(val);
+
+    // mutation.mutate(data);
+  };
+  const onKhabarSubmit = (data) => {
+    const val = { ...data, type: "khabar" };
+    console.log(val);
+
+    // mutation.mutate(data);
+  };
+  const onPresentSubmit = (data) => {
+    const val = { ...data, type: "present" };
+    console.log(val);
+
+    // mutation.mutate(data);
+  };
+  const onAbsentSubmit = (data) => {
+    const val = { ...data, type: "absent" };
+    console.log(val);
+
+    // mutation.mutate(data);
+  };
+  const onBunkSubmit = (data) => {
+    const val = { ...data, type: "bunk" };
+    console.log(val);
+
+    // mutation.mutate(data);
   };
 
   return (
@@ -53,11 +89,21 @@ const Settings = () => {
                     <div className="section-title">
                       <h4>সেটিংস্‌</h4>
                     </div>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-                      <div className="bg-white d-flex flex-column justify-content-center align-items-center ">
-                        <div class="form-group">
+                    {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+                    <div className="bg-white d-flex flex-column justify-content-center align-items-center ">
+                      <form
+                        onSubmit={vortiHandleSubmit(onVortiSubmit)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div class="form-group" style={{ width: "400px" }}>
+                          <p>
+                            Placeholder: [student_name], [date], [submitted_fee]
+                          </p>
                           <textarea
-                            {...register("vorti_msg")}
+                            {...vortiReg("vorti_msg")}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -65,9 +111,9 @@ const Settings = () => {
                             placeholder="ভর্তি ফি পরবর্তী মেসেজ"
                           />
                         </div>
-                        <div class="form-check form-switch p-3">
+                        <div class="form-check form-switch m-5">
                           <input
-                            {...register("vorti")}
+                            {...vortiReg("vorti")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
@@ -77,12 +123,29 @@ const Settings = () => {
                             class="form-check-label"
                             for="flexSwitchCheckDefault"
                           >
-                            ভর্তি এর মেসেজ যাবে
+                            ভর্তি ফি এর মেসেজ যাবে
                           </label>
                         </div>
-                        <div class="form-group">
+                        <button
+                          type="submit"
+                          className="custom-btn btn-primary d-block w-80 m-5"
+                        >
+                          Save
+                        </button>
+                      </form>
+                      <form
+                        onSubmit={mashikHandleSubmit(onMashikSubmit)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div class="form-group" style={{ width: "400px" }}>
+                          <p>
+                            Placeholder: [student_name], [date], [submitted_fee]
+                          </p>
                           <textarea
-                            {...register("mashik_msg")}
+                            {...mashikReg("khabar_msg")}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -90,13 +153,13 @@ const Settings = () => {
                             placeholder="মাসিক ফি গ্রহন পরবর্তী মেসেজ"
                           />
                         </div>
-                        <div class="form-check form-switch p-3">
+                        <div class="form-check form-switch m-5">
                           <input
+                            {...mashikReg("khabar")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
-                            {...register("mashik")}
-                            defaultChecked={msg?.mashik}
+                            defaultChecked={msg?.khabar}
                           />
                           <label
                             class="form-check-label"
@@ -105,9 +168,26 @@ const Settings = () => {
                             মাসিক ফি এর মেসেজ যাবে
                           </label>
                         </div>
-                        <div class="form-group">
+                        <button
+                          type="submit"
+                          className="custom-btn btn-primary d-block w-80 m-5"
+                        >
+                          Save
+                        </button>
+                      </form>
+                      <form
+                        onSubmit={vortiHandleSubmit(onVortiSubmit)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div class="form-group" style={{ width: "400px" }}>
+                          <p>
+                            Placeholder: [student_name], [date], [submitted_fee]
+                          </p>
                           <textarea
-                            {...register("khabar_msg")}
+                            {...khabarReg("khabar_msg")}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -115,9 +195,9 @@ const Settings = () => {
                             placeholder="খাবার ফি গ্রহন পরবর্তী মেসেজ"
                           />
                         </div>
-                        <div class="form-check form-switch p-3">
+                        <div class="form-check form-switch m-5">
                           <input
-                            {...register("khabar")}
+                            {...khabarReg("khabar")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
@@ -130,9 +210,24 @@ const Settings = () => {
                             খাবার ফি এর মেসেজ যাবে
                           </label>
                         </div>
-                        <div class="form-group">
+                        <button
+                          type="submit"
+                          className="custom-btn btn-primary d-block w-80 m-5"
+                        >
+                          Save
+                        </button>
+                      </form>
+                      <form
+                        onSubmit={vortiHandleSubmit(onVortiSubmit)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div class="form-group" style={{ width: "400px" }}>
+                          <p>Placeholder: [student_name], [date]</p>
                           <textarea
-                            {...register("present_msg")}
+                            {...presentReg("present_msg")}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -140,9 +235,9 @@ const Settings = () => {
                             placeholder="উপস্থিত এর মেসেজ"
                           />
                         </div>
-                        <div class="form-check form-switch p-3">
+                        <div class="form-check form-switch m-5">
                           <input
-                            {...register("present")}
+                            {...presentReg("present")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
@@ -155,9 +250,24 @@ const Settings = () => {
                             উপস্থিত এর মেসেজ যাবে
                           </label>
                         </div>
-                        <div class="form-group">
+                        <button
+                          type="submit"
+                          className="custom-btn btn-primary d-block w-80 m-5"
+                        >
+                          Save
+                        </button>
+                      </form>
+                      <form
+                        onSubmit={vortiHandleSubmit(onVortiSubmit)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div class="form-group" style={{ width: "400px" }}>
+                          <p>Placeholder: [student_name], [date]</p>
                           <textarea
-                            {...register("absent_msg")}
+                            {...absentReg("absent_msg")}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -165,9 +275,9 @@ const Settings = () => {
                             placeholder="অনুপস্থিত এর মেসেজ"
                           />
                         </div>
-                        <div class="form-check form-switch p-3">
+                        <div class="form-check form-switch m-5">
                           <input
-                            {...register("absent")}
+                            {...absentReg("absent")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
@@ -180,9 +290,25 @@ const Settings = () => {
                             অনুপস্থিত এর মেসেজ যাবে
                           </label>
                         </div>
-                        <div class="form-group">
+                        <button
+                          type="submit"
+                          className="custom-btn btn-primary d-block w-80 m-5"
+                        >
+                          Save
+                        </button>
+                      </form>
+                      <form
+                        onSubmit={vortiHandleSubmit(onVortiSubmit)}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div class="form-group" style={{ width: "400px" }}>
+                          <p>Placeholder: [student_name], [date]</p>
+
                           <textarea
-                            {...register("escaped_msg")}
+                            {...bunkReg("escaped_msg")}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -190,9 +316,9 @@ const Settings = () => {
                             placeholder="পালিয়ে গেলে এর মেসেজ"
                           />
                         </div>
-                        <div class="form-check form-switch p-3">
+                        <div class="form-check form-switch m-5">
                           <input
-                            {...register("escaped")}
+                            {...bunkReg("escaped")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
@@ -204,15 +330,21 @@ const Settings = () => {
                           >
                             পালিয়ে গেলে এর মেসেজ যাবে
                           </label>
-                          <button
+                        </div>
+                        <button
+                          type="submit"
+                          className="custom-btn btn-primary d-block w-80 m-5"
+                        >
+                          Save
+                        </button>
+                      </form>
+                    </div>
+                    {/* <button
                             type="submit"
                             className="custom-btn btn-primary d-block w-80 m-5"
                           >
                             Save
-                          </button>
-                        </div>
-                      </div>
-                    </form>
+                          </button></form> */}
                   </div>
                 </div>
               </div>
