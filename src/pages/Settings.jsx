@@ -26,7 +26,7 @@ const Settings = () => {
 
   const mutation = useMutation({
     mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/msg`, data, {
+      return axios.post(`${serverUrl}/api/msg-settings`, data, {
         headers: {
           accept: "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -44,37 +44,37 @@ const Settings = () => {
   const onVortiSubmit = (data) => {
     const val = { ...data, type: "vorti" };
     console.log(val);
-    // mutation.mutate(data);
+    mutation.mutate(data);
   };
   const onMashikSubmit = (data) => {
     const val = { ...data, type: "mashik" };
     console.log(val);
 
-    // mutation.mutate(data);
+    mutation.mutate(data);
   };
   const onKhabarSubmit = (data) => {
     const val = { ...data, type: "khabar" };
     console.log(val);
 
-    // mutation.mutate(data);
+    mutation.mutate(data);
   };
   const onPresentSubmit = (data) => {
     const val = { ...data, type: "present" };
     console.log(val);
 
-    // mutation.mutate(data);
+    mutation.mutate(data);
   };
   const onAbsentSubmit = (data) => {
     const val = { ...data, type: "absent" };
     console.log(val);
 
-    // mutation.mutate(data);
+    mutation.mutate(data);
   };
   const onBunkSubmit = (data) => {
     const val = { ...data, type: "bunk" };
     console.log(val);
 
-    // mutation.mutate(data);
+    mutation.mutate(data);
   };
 
   return (
@@ -103,7 +103,7 @@ const Settings = () => {
                             Placeholder: [student_name], [date], [submitted_fee]
                           </p>
                           <textarea
-                            {...vortiReg("vorti_msg")}
+                            {...vortiReg("msg")}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -113,7 +113,7 @@ const Settings = () => {
                         </div>
                         <div class="form-check form-switch m-5">
                           <input
-                            {...vortiReg("vorti")}
+                            {...vortiReg("condition")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
@@ -145,7 +145,7 @@ const Settings = () => {
                             Placeholder: [student_name], [date], [submitted_fee]
                           </p>
                           <textarea
-                            {...mashikReg("khabar_msg")}
+                            {...mashikReg("msg")}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -155,7 +155,7 @@ const Settings = () => {
                         </div>
                         <div class="form-check form-switch m-5">
                           <input
-                            {...mashikReg("khabar")}
+                            {...mashikReg("condition")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
@@ -187,7 +187,7 @@ const Settings = () => {
                             Placeholder: [student_name], [date], [submitted_fee]
                           </p>
                           <textarea
-                            {...khabarReg("khabar_msg")}
+                            {...khabarReg("msg")}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -197,7 +197,7 @@ const Settings = () => {
                         </div>
                         <div class="form-check form-switch m-5">
                           <input
-                            {...khabarReg("khabar")}
+                            {...khabarReg("condition")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
@@ -227,7 +227,7 @@ const Settings = () => {
                         <div class="form-group" style={{ width: "400px" }}>
                           <p>Placeholder: [student_name], [date]</p>
                           <textarea
-                            {...presentReg("present_msg")}
+                            {...presentReg("msg")}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -237,7 +237,7 @@ const Settings = () => {
                         </div>
                         <div class="form-check form-switch m-5">
                           <input
-                            {...presentReg("present")}
+                            {...presentReg("condition")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
@@ -258,7 +258,7 @@ const Settings = () => {
                         </button>
                       </form>
                       <form
-                        onSubmit={vortiHandleSubmit(onVortiSubmit)}
+                        onSubmit={vortiHandleSubmit(onAbsentSubmit)}
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -267,7 +267,7 @@ const Settings = () => {
                         <div class="form-group" style={{ width: "400px" }}>
                           <p>Placeholder: [student_name], [date]</p>
                           <textarea
-                            {...absentReg("absent_msg")}
+                            {...absentReg("msg")}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -277,7 +277,7 @@ const Settings = () => {
                         </div>
                         <div class="form-check form-switch m-5">
                           <input
-                            {...absentReg("absent")}
+                            {...absentReg("condition")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
@@ -298,7 +298,7 @@ const Settings = () => {
                         </button>
                       </form>
                       <form
-                        onSubmit={vortiHandleSubmit(onVortiSubmit)}
+                        onSubmit={vortiHandleSubmit(onBunkSubmit)}
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -308,7 +308,7 @@ const Settings = () => {
                           <p>Placeholder: [student_name], [date]</p>
 
                           <textarea
-                            {...bunkReg("escaped_msg")}
+                            {...bunkReg("msg")}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -318,7 +318,7 @@ const Settings = () => {
                         </div>
                         <div class="form-check form-switch m-5">
                           <input
-                            {...bunkReg("escaped")}
+                            {...bunkReg("condition")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"

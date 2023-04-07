@@ -101,7 +101,7 @@ const MarkSheet = () => {
       }
       return null;
     })
-    ?.reduce((accumulator, currentValue) => accumulator + currentValue)
+    ?.reduce((accumulator, currentValue) => accumulator + currentValue);
 
   return (
     <div>
@@ -266,8 +266,8 @@ const MarkSheet = () => {
                           {value?.exam}
                         </span>
                       </div>
-                      <div className="pages-content">
-                        <div className="row">
+                      <div className="pages-content align-items-center">
+                        <div className="row mx-auto">
                           <div className="col-5 flex-wrap align-content-center">
                             <div className="">
                               <strong>আইডিঃ</strong>
@@ -287,18 +287,26 @@ const MarkSheet = () => {
                             </div>
                           </div>
                           <div className="col-1"></div>
-                          <div className="col-6">
+                          <div
+                            className="col-6 align-items-center"
+                            style={{ justifyContent: "right" }}
+                          >
                             <div
                               className="short-info"
                               style={{ marginTop: "0px" }}
                             >
                               <div
-                                className="table-responsive"
+                                className="table-responsive align-items-center"
                                 data-pattern="priority-columns"
                               >
                                 <table
-                                  style={{ height: "20px" }}
-                                  className=" m-1  bg-white table-bordered text-center"
+                                  style={{
+                                    height: "20px",
+                                    justifyContent: "center",
+                                    alignItems: "right",
+                                    marginLeft: "150px",
+                                  }}
+                                  className=" m-1 mx-auto align-items-center  bg-white table-bordered text-center"
                                 >
                                   <thead
                                     className="text-center"
@@ -423,7 +431,27 @@ const MarkSheet = () => {
                                     </th>
                                     <th>
                                       প্রাপ্ত বিভাগ
-                                      <td></td>
+                                      <td>
+                                        {total >
+                                        division[0]?.case1 * results?.length
+                                          ? division[0]?.case1_div
+                                          : total >
+                                            division[0]?.case2 * results?.length
+                                          ? division[0]?.case2_div
+                                          : total >
+                                            division[0]?.case3 * results?.length
+                                          ? division[0]?.case3_div
+                                          : total >
+                                            division[0]?.case4 * results?.length
+                                          ? division[0]?.case4_div
+                                          : total >
+                                            division[0]?.case5 * results?.length
+                                          ? division[0]?.case5_div
+                                          : total >
+                                            division[0]?.case6 * results?.length
+                                          ? division[0]?.case6_div
+                                          : null}
+                                      </td>
                                     </th>
                                     <th>
                                       মেধা স্থান

@@ -102,6 +102,48 @@ const MarkSheet = () => {
 
   const { register, handleSubmit } = useForm();
 
+  const totalNumber = (x) => {
+    return results
+      ?.map((item) => {
+        if (item.student_id === x) {
+          return parseInt(item?.number);
+        }
+        return null;
+      })
+      ?.reduce((accumulator, currentValue) => accumulator + currentValue);
+  };
+
+  const getTotalNumber = (x) => {
+    const total = results
+      ?.map((i) => {
+        if (i.student_id == x) {
+          return parseInt(i?.number);
+        }
+        return null;
+      })
+      ?.reduce((accumulator, currentValue) => accumulator + currentValue);
+    return total || 0;
+  };
+
+  const totalt = getTotalNumber(1);
+
+  console.log("totalt", getTotalNumber);
+
+  console.log("reshults", results);
+
+  const total = students?.map((i) =>
+    results
+      ?.map((item) => {
+        if (item.student_id == i.id) {
+          return parseInt(item?.number);
+        }
+        return null;
+      })
+      ?.reduce((accumulator, currentValue) => accumulator + currentValue)
+  );
+
+  console.log("total", total);
+
   const onSubmit = async (data) => {
     customStudent.mutate(data);
     setStudent(student?.data);
@@ -423,6 +465,7 @@ const MarkSheet = () => {
                                           );
                                         }
                                       })}
+                                      {getTotalNumber(item.id)}
                                     </tbody>
                                   </table>
                                 </div>
@@ -438,10 +481,20 @@ const MarkSheet = () => {
                                         <th>
                                           মোট নম্বর
                                           <td>
-                                            {results
+                                            {/* {results
                                               ?.map((x) => {
-                                                if (x.student_id == item.id) {
+                                                if (x.student_id === item.id) {
                                                   return parseInt(item?.number);
+                                                }
+                                              })
+                                              ?.reduce(
+                                                (accumulator, currentValue) =>
+                                                  accumulator + currentValue
+                                              )} */}
+                                            {results
+                                              ?.map((i) => {
+                                                if (i.student_id == item.id) {
+                                                  return parseInt(i?.number);
                                                 }
                                                 return null;
                                               })
