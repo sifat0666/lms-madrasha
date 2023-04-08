@@ -14,14 +14,25 @@ const Settings = () => {
   const { register: absentReg, handleSubmit: absentHandleSubmit } = useForm();
   const { register: bunkReg, handleSubmit: bunkHandleSubmit } = useForm();
 
-  // const { data: msg } = useQuery("msg", () =>
-  //   fetch(`${serverUrl}/api/msg/${1}`, {
-  //     headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-  //   }).then((res) => res.json())
-  // );
+  const { data: msg } = useQuery("msg", () =>
+    fetch(`${serverUrl}/api/msg-settings`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
+  );
 
-  // console.log(msg);
+  const { data } = useQuery("msg-settings", () =>
+    fetch(`${serverUrl}/api/msg-settings`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
+  );
 
+  const mashik = data?.find((i) => i.type === "mashik");
+  const vorti = data?.find((i) => i.type === "vorti");
+  const khabar = data?.find((i) => i.type === "khabar");
+  const present = data?.find((i) => i.type === "present");
+  const absent = data?.find((i) => i.type === "absent");
+  const bunk = data?.find((i) => i.type === "bunk");
+  console.log(mashik);
   // const [msg, setMsg] = useState();
 
   const mutation = useMutation({
@@ -44,37 +55,38 @@ const Settings = () => {
   const onVortiSubmit = (data) => {
     const val = { ...data, type: "vorti" };
     console.log(val);
-    mutation.mutate(data);
+    mutation.mutate(val);
   };
   const onMashikSubmit = (data) => {
     const val = { ...data, type: "mashik" };
     console.log(val);
 
-    mutation.mutate(data);
+    mutation.mutate(val);
   };
   const onKhabarSubmit = (data) => {
     const val = { ...data, type: "khabar" };
     console.log(val);
 
-    mutation.mutate(data);
+    mutation.mutate(val);
   };
   const onPresentSubmit = (data) => {
     const val = { ...data, type: "present" };
     console.log(val);
 
-    mutation.mutate(data);
+    mutation.mutate(val);
   };
   const onAbsentSubmit = (data) => {
     const val = { ...data, type: "absent" };
     console.log(val);
+    console.log("onab", val);
 
-    mutation.mutate(data);
+    mutation.mutate(val);
   };
   const onBunkSubmit = (data) => {
     const val = { ...data, type: "bunk" };
     console.log(val);
 
-    mutation.mutate(data);
+    mutation.mutate(val);
   };
 
   return (
@@ -105,6 +117,7 @@ const Settings = () => {
                           <textarea
                             {...vortiReg("msg")}
                             type="email"
+                            defaultValue={vorti?.msg}
                             class="form-control"
                             id="exampleInputEmail1"
                             aria-describedby="emailHelp"
@@ -117,7 +130,7 @@ const Settings = () => {
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
-                            defaultChecked={msg?.vorti}
+                            defaultChecked={vorti?.condition}
                           />
                           <label
                             class="form-check-label"
@@ -151,6 +164,7 @@ const Settings = () => {
                             id="exampleInputEmail1"
                             aria-describedby="emailHelp"
                             placeholder="মাসিক ফি গ্রহন পরবর্তী মেসেজ"
+                            defaultValue={mashik?.msg}
                           />
                         </div>
                         <div class="form-check form-switch m-5">
@@ -159,7 +173,7 @@ const Settings = () => {
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
-                            defaultChecked={msg?.khabar}
+                            defaultChecked={mashik?.condition}
                           />
                           <label
                             class="form-check-label"
@@ -193,6 +207,7 @@ const Settings = () => {
                             id="exampleInputEmail1"
                             aria-describedby="emailHelp"
                             placeholder="খাবার ফি গ্রহন পরবর্তী মেসেজ"
+                            defaultValue={khabar?.msg}
                           />
                         </div>
                         <div class="form-check form-switch m-5">
@@ -201,7 +216,7 @@ const Settings = () => {
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
-                            defaultChecked={msg?.khabar}
+                            defaultChecked={khabar?.condition}
                           />
                           <label
                             class="form-check-label"
@@ -233,6 +248,7 @@ const Settings = () => {
                             id="exampleInputEmail1"
                             aria-describedby="emailHelp"
                             placeholder="উপস্থিত এর মেসেজ"
+                            defaultValue={present?.msg}
                           />
                         </div>
                         <div class="form-check form-switch m-5">
@@ -241,7 +257,7 @@ const Settings = () => {
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
-                            defaultChecked={msg?.present}
+                            defaultChecked={present?.condition}
                           />
                           <label
                             class="form-check-label"
@@ -258,7 +274,7 @@ const Settings = () => {
                         </button>
                       </form>
                       <form
-                        onSubmit={vortiHandleSubmit(onAbsentSubmit)}
+                        onSubmit={absentHandleSubmit(onAbsentSubmit)}
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -268,6 +284,7 @@ const Settings = () => {
                           <p>Placeholder: [student_name], [date]</p>
                           <textarea
                             {...absentReg("msg")}
+                            defaultValue={absent?.msg}
                             type="email"
                             class="form-control"
                             id="exampleInputEmail1"
@@ -278,10 +295,11 @@ const Settings = () => {
                         <div class="form-check form-switch m-5">
                           <input
                             {...absentReg("condition")}
+                            defaultChecked={absent?.condition}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
-                            defaultChecked={msg?.absent}
+                            // defaultChecked={msg?.absent}
                           />
                           <label
                             class="form-check-label"
@@ -298,7 +316,7 @@ const Settings = () => {
                         </button>
                       </form>
                       <form
-                        onSubmit={vortiHandleSubmit(onBunkSubmit)}
+                        onSubmit={bunkHandleSubmit(onBunkSubmit)}
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -308,6 +326,7 @@ const Settings = () => {
                           <p>Placeholder: [student_name], [date]</p>
 
                           <textarea
+                            defaultValue={bunk?.msg}
                             {...bunkReg("msg")}
                             type="email"
                             class="form-control"
@@ -318,11 +337,11 @@ const Settings = () => {
                         </div>
                         <div class="form-check form-switch m-5">
                           <input
+                            defaultChecked={bunk?.condition}
                             {...bunkReg("condition")}
                             class="form-check-input"
                             type="checkbox"
                             id="flexSwitchCheckDefault"
-                            defaultChecked={msg?.escaped}
                           />
                           <label
                             class="form-check-label"
