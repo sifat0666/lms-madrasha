@@ -57,7 +57,7 @@ const MonthlySalleryList = ({ paidTable }) => {
               ))}
             </tbody>
           </table>
-          <div className="short-report">
+          {/* <div className="short-report">
             <div className="report-item">
               <div className="items">
                 <span className="report-text">সর্বমোট জমা =</span>
@@ -73,7 +73,7 @@ const MonthlySalleryList = ({ paidTable }) => {
                 <span>৬৫৪৬.০০</span>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

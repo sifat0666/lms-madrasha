@@ -36,7 +36,7 @@ const ManageSale = () => {
                   </div>
                   <div className="col-12">
                     <div className="table-data mt-4">
-                      <div className="row form-group searchbar">
+                      {/* <div className="row form-group searchbar">
                         <div className="col-sm-6 position-relative search">
                           <i className="bi bi-search search-icon"></i>
                           <input
@@ -45,7 +45,7 @@ const ManageSale = () => {
                             placeholder="Search"
                           />
                         </div>
-                      </div>
+                      </div> */}
                       <div
                         className="table-responsive"
                         data-pattern="priority-columns"

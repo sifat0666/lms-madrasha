@@ -50,38 +50,8 @@ const MonthlyBokeyaList = ({ notPaidTable }) => {
                   <td>{item.total}</td>
                 </tr>
               ))}
-
-              <tr>
-                <td
-                  colspan="3"
-                  style={{
-                    textAlign: "right",
-                    fontWeight: "bold",
-                  }}
-                >
-                  মোট
-                </td>
-                <td>৬৪৫৫৪২৩৪২৩.০০</td>
-              </tr>
             </tbody>
           </table>
-          <div className="short-report">
-            <div className="report-item">
-              <div className="items">
-                <span className="report-text">সর্বমোট জমা =</span>
-                <span className="report-amount">৩৪৫৪৩৫৪.০০</span>
-              </div>
-              <div className="items">
-                <span>সর্বমোট খরচ =</span>
-                <span>৩৪৫৪৩৫৪.০০</span>
-              </div>
-              <hr className="lines" />
-              <div className="items">
-                <span>উদ্ধৃত্ব</span>
-                <span>৬৫৪৬.০০</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
