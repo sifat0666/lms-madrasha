@@ -10,6 +10,7 @@ const Payroll = () => {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
   );
+  console.log("🚀 ~ file: Payroll.jsx:9 ~ Payroll ~ data:", data[0].id);
 
   const { data: sallery_sheet } = useQuery("sallery-sheet", () =>
     fetch(`${serverUrl}/api/sallery-sheet`, {
@@ -39,8 +40,9 @@ const Payroll = () => {
           </tr>
         </thead>
         <tbody style={{ textAlign: "center" }}>
-          {data &&
-            data?.map((item) => <PayrollTable key={item?.id} item={item} />)}
+          {data?.map((item) => (
+            <PayrollTable key={item?.id} item={item} />
+          ))}
         </tbody>
       </table>
       <div className="section-title">
