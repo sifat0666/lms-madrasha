@@ -199,13 +199,13 @@ const Layout = ({ children }) => {
                                   </p>
                                 </Link>
                               </li>
-                              <li>
+                              {/* <li>
                                 <a class="dropdown-item menu-item" href="#">
                                   <span>ভর্তি ফি আদায়</span>
                                   <span>CTRL+A</span>
                                 </a>
-                              </li>
-                              <li>
+                              </li> */}
+                              {/* <li>
                                 <a
                                   style={{ textDecoration: "none" }}
                                   class="dropdown-item menu-item"
@@ -214,7 +214,7 @@ const Layout = ({ children }) => {
                                   <span>মাসিক ফি সেটিংস</span>
                                   <span>CTRL+C</span>
                                 </a>
-                              </li>
+                              </li> */}
                               <li>
                                 <Link to="/mashik-fee-report">
                                   <p
@@ -263,16 +263,16 @@ const Layout = ({ children }) => {
                                   </div>
                                 </Link>
                               </li>
-                              <li>
+                              {/* <li>
                                 <a class="dropdown-item" href="#">
                                   মারহালার গ্রুফ
                                 </a>
-                              </li>
-                              <li>
+                              </li> */}
+                              {/* <li>
                                 <a class="dropdown-item" href="#">
                                   বিষয়/কিতাব
                                 </a>
-                              </li>
+                              </li> */}
                               <li>
                                 <Link to="/student-info">
                                   <a
@@ -498,7 +498,7 @@ const Layout = ({ children }) => {
                                   </a>
                                 </Link>
                               </li>
-                              <li>
+                              {/* <li>
                                 <Link to="sallary-sheet">
                                   {" "}
                                   <a
@@ -508,7 +508,7 @@ const Layout = ({ children }) => {
                                     বেতন শীট
                                   </a>
                                 </Link>
-                              </li>
+                              </li> */}
                               <li>
                                 <Link to="/pay-sallary">
                                   <a
@@ -563,11 +563,11 @@ const Layout = ({ children }) => {
                                   </a>
                                 </Link>
                               </li>
-                              <li>
+                              {/* <li>
                                 <a class="dropdown-item" href="#">
                                   তালিকা তৈরি
                                 </a>
-                              </li>
+                              </li> */}
                               <li>
                                 <Link to="/donate-recive">
                                   <a

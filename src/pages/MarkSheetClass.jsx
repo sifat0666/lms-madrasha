@@ -102,47 +102,45 @@ const MarkSheet = () => {
 
   const { register, handleSubmit } = useForm();
 
-  const totalNumber = (x) => {
-    return results
-      ?.map((item) => {
-        if (item.student_id === x) {
-          return parseInt(item?.number);
-        }
-        return null;
-      })
-      ?.reduce((accumulator, currentValue) => accumulator + currentValue);
-  };
+  // const totalNumber = (x) => {
+  //   return results
+  //     ?.map((item) => {
+  //       if (item.student_id === x) {
+  //         return parseInt(item?.number);
+  //       }
+  //     })
+  //     ?.reduce((accumulator, currentValue) => accumulator + currentValue);
+  // };
 
-  const getTotalNumber = (x) => {
-    const total = results
-      ?.map((i) => {
-        if (i.student_id == x) {
-          return parseInt(i?.number);
-        }
-        return null;
-      })
-      ?.reduce((accumulator, currentValue) => accumulator + currentValue);
-    return total || 0;
-  };
+  // const getTotalNumber = (x) => {
+  //   const total = results
+  //     ?.map((i) => {
+  //       if (i.student_id == x) {
+  //         return parseInt(i?.number);
+  //       }
+  //     })
+  //     ?.reduce((accumulator, currentValue) => accumulator + currentValue);
+  //   return total || 0;
+  // };
 
-  const totalt = getTotalNumber(1);
+  // const totalt = getTotalNumber(1);
 
-  console.log("totalt", getTotalNumber);
+  // console.log("totalt", getTotalNumber);
 
-  console.log("reshults", results);
+  // console.log("reshults", results);
 
-  const total = students?.map((i) =>
-    results
-      ?.map((item) => {
-        if (item.student_id == i.id) {
-          return parseInt(item?.number);
-        }
-        return null;
-      })
-      ?.reduce((accumulator, currentValue) => accumulator + currentValue)
-  );
+  // con st total = students?.map((i) =>
+  //   results
+  //     ?.map((item) => {
+  //       if (item.student_id == i.id) {
+  //         return parseInt(item?.number);
+  //       }
+  //       return null;
+  //     })
+  //     ?.reduce((accumulator, currentValue) => accumulator + currentValue)
+  // );
 
-  console.log("total", total);
+  // console.log("total", total);
 
   const onSubmit = async (data) => {
     customStudent.mutate(data);
@@ -287,7 +285,7 @@ const MarkSheet = () => {
                     <div ref={ref}>
                       {students?.map((item) => (
                         <div
-                          className="  d-flex flex-column justify-content-center"
+                          className=" m-1 mx-auto d-flex flex-column justify-content-center"
                           style={{
                             // borderStyle: "dashed",
                             borderBottom: "dashed",
@@ -297,7 +295,7 @@ const MarkSheet = () => {
                             height: "1056px",
                           }}
                         >
-                          <div className="pages-title">
+                          <div className="pages-title mx-auto">
                             <h5>{instituteInfo?.name}</h5>
                             <p>{instituteInfo?.address}</p>
                             <span>{instituteInfo?.num}</span>
@@ -343,7 +341,7 @@ const MarkSheet = () => {
                                   >
                                     <table
                                       style={{ height: "20px" }}
-                                      className=" m-1  bg-white table-bordered text-center"
+                                      className=" m-1 mx-auto bg-white table-bordered text-center"
                                     >
                                       <thead
                                         className="text-center"
@@ -465,7 +463,6 @@ const MarkSheet = () => {
                                           );
                                         }
                                       })}
-                                      {getTotalNumber(item.id)}
                                     </tbody>
                                   </table>
                                 </div>
@@ -500,7 +497,8 @@ const MarkSheet = () => {
                                               })
                                               ?.reduce(
                                                 (accumulator, currentValue) =>
-                                                  accumulator + currentValue
+                                                  accumulator + currentValue,
+                                                0
                                               )}
                                           </td>
                                         </th>

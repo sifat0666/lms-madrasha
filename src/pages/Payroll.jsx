@@ -39,9 +39,8 @@ const Payroll = () => {
           </tr>
         </thead>
         <tbody style={{ textAlign: "center" }}>
-          {data?.map((item) => (
-            <PayrollTable key={item?.id} item={item} />
-          ))}
+          {data &&
+            data?.map((item) => <PayrollTable key={item?.id} item={item} />)}
         </tbody>
       </table>
       <div className="section-title">

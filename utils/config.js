@@ -1,4 +1,4 @@
-export const serverUrl = "http://127.0.0.1:8000";
+export const serverUrl = "https://api.milkywayitsolution.agency";
 
 export const msg = fetch(`${serverUrl}/api/msg/${1}`).then((res) => res.json());
 

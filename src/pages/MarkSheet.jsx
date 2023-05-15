@@ -94,14 +94,15 @@ const MarkSheet = () => {
     });
   };
 
+  console.log("res", results);
   const total = results
     ?.map((item) => {
       if (true) {
         return parseInt(item?.number);
       }
-      return null;
+      // return null;
     })
-    ?.reduce((accumulator, currentValue) => accumulator + currentValue);
+    ?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
   return (
     <div>
