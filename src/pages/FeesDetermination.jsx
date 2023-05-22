@@ -19,8 +19,16 @@ const FeesDetermination = () => {
     }).then((res) => res.json())
   );
 
-  const { data: fee } = useQuery("feesDitermination", () =>
+  const { data: fee, refetch } = useQuery("feesDitermination", () =>
     fetch(`${serverUrl}/api/fees-determination`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
+  );
+
+  console.log("fee", fee);
+
+  const { data: feeName } = useQuery("fee_name", () =>
+    fetch(`${serverUrl}/api/fee-name`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
   );
@@ -38,6 +46,7 @@ const FeesDetermination = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
+      refetch();
       toast.success("successfull");
     },
   });
@@ -88,6 +97,9 @@ const FeesDetermination = () => {
                             <option> ভর্তি ফি</option>
                             <option> মাসিক ফি</option>
                             <option> খাবারের ফি</option>
+                            {feeName?.data.map((item) => (
+                              <option key={item.id}>{item.fee_name}</option>
+                            ))}
                           </select>
                         </div>
                         <div className="row mb-3">

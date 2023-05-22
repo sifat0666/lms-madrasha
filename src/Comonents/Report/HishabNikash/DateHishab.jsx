@@ -23,7 +23,7 @@ const DateHishab = ({ data, value }) => {
       }
       return null;
     })
-    ?.reduce((accumulator, currentValue) => accumulator + currentValue);
+    ?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
   return (
     <>

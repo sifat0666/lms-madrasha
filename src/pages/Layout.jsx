@@ -696,6 +696,7 @@ const Layout = ({ children }) => {
                           }
                         );
 
+                        navigate("/");
                         console.log("logout", data);
 
                         // localStorage.clear();

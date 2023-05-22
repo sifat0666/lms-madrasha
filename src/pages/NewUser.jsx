@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery, useMutation } from "react-query";
+import { useQuery, useMutation, QueryClient } from "react-query";
 import { serverUrl } from "../../utils/config";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 
 const NewUser = () => {
-  const { data } = useQuery("user", () =>
+  const { data, refetch } = useQuery("user", () =>
     fetch(`${serverUrl}/api/users`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
@@ -47,12 +47,14 @@ const NewUser = () => {
     onSuccess: (data) => {
       console.log(data.data);
       toast.success(data?.data.message);
+      reset();
+      refetch("users");
     },
   });
   const [array, setArray] = useState([]);
   console.log(array);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (value) => {
     mutation.mutate({ ...value, permission: array });
@@ -74,7 +76,7 @@ const NewUser = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    location.reload();
+    refetch();
   };
 
   console.log(data?.data);

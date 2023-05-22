@@ -9,21 +9,24 @@ import { useState } from "react";
 // import { serverUrl } from "../../utils/config";
 
 const Fund = () => {
-  const { data } = useQuery("fund", () =>
+  const { data, refetch: fundRefetch } = useQuery("fund", () =>
     fetch(`${serverUrl}/api/fund`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
   );
 
-  const { data: generalLedger } = useQuery("general-ledger", () =>
-    fetch(`${serverUrl}/api/general-ledger`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    }).then((res) => res.json())
+  const { data: generalLedger, refetch: generalLedgerRefetch } = useQuery(
+    "general-ledger",
+    () =>
+      fetch(`${serverUrl}/api/general-ledger`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }).then((res) => res.json())
   );
 
   console.log("general-ledger", generalLedger?.data);
 
   const [x, setX] = useState("জমা");
+  const [fun, setFund] = useState("");
 
   console.log(x);
 
@@ -44,6 +47,7 @@ const Fund = () => {
     },
     onSuccess: (data) => {
       toast.success("fund added successfully");
+      fundRefetch();
     },
   });
 
@@ -61,6 +65,7 @@ const Fund = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
+      generalLedgerRefetch();
       toast.success("fund added successfully");
     },
   });
@@ -112,54 +117,57 @@ const Fund = () => {
                     <div className="section-title">
                       <h4>ফান্ডঃ</h4>
                     </div>
-                    <div className="my-4">
-                      <form
-                        className="feesdeterminationa-form"
-                        onSubmit={handleSubmit(onSubmit)}
-                      >
-                        <div className="row mb-3">
-                          <label className="col-sm-12 col-md-12 col-lg-4 col-form-label info-lable">
-                            ফান্ডঃ নাম
-                            <i>*</i>
-                          </label>
-                          <div className="col-sm-12 col-md-12 col-lg-8">
-                            <input
-                              type="text"
-                              className="form-control"
-                              placeholder="ফান্ডঃ নাম"
-                              {...register("fund_name")}
-                            />
+                    <div className="my-4 ">
+                      <div>
+                        {" "}
+                        <form className="" onSubmit={handleSubmit(onSubmit)}>
+                          <div className="row mb-3 p-3">
+                            <label className="col-sm-12 col-md-12 col-lg-4 col-form-label info-lable">
+                              ফান্ডঃ নাম
+                              <i>*</i>
+                            </label>
+                            <div className="">
+                              <input
+                                type="text"
+                                className="form-control"
+                                placeholder="ফান্ডঃ নাম"
+                                {...register("fund_name")}
+                              />
+                            </div>
                           </div>
-                        </div>
 
-                        {/* <!-- ButtonGroup --> */}
-                        <div className="button-container">
-                          <div className="button-group">
-                            <button
-                              className="custom-btn btn-primary"
-                              type="submit"
-                            >
-                              Save
-                            </button>{" "}
-                            <table class="table bg-white">
-                              <thead>
-                                <tr>
-                                  <th scope="col">আইডি</th>
-                                  <th scope="col">ফান্ডঃ নাম</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {data?.data.map((item) => (
-                                  <tr key={item.id}>
-                                    <th scope="row">{item.id}</th>
-                                    <td>{item.fund_name}</td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
+                          {/* <!-- ButtonGroup --> */}
+                          <div className="button-container pb-4">
+                            <div className="button-group">
+                              <button
+                                className="custom-btn btn-primary"
+                                type="submit"
+                              >
+                                Save
+                              </button>{" "}
+                            </div>
                           </div>
-                        </div>
-                      </form>
+                        </form>
+                      </div>
+                      <div>
+                        <table class="table bg-white">
+                          <thead>
+                            <tr>
+                              <th scope="col">আইডি</th>
+                              <th scope="col">ফান্ডঃ নাম</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {data?.data.map((item) => (
+                              <tr key={item.id}>
+                                <th scope="row">{item.id}</th>
+                                <td>{item.fund_name}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+
                       <div className="section-title">
                         <h4>জেনারেল লেজারঃ</h4>
                       </div>
@@ -245,6 +253,7 @@ const Fund = () => {
                                   size="4"
                                   style={{ border: "none" }}
                                   {...register3("fund")}
+                                  onChange={(e) => setFund(e.target.value)}
                                 >
                                   <option>ফান্ডঃ নির্বাচন করুন</option>
                                   {data?.data.map((item) => (
@@ -296,7 +305,10 @@ const Fund = () => {
                                       return null;
                                     })} */}
                                     {generalLedger?.data.map((item) => {
-                                      if (item.chart_of_account === x) {
+                                      if (
+                                        item.chart_of_account === x &&
+                                        item.fund === fun
+                                      ) {
                                         return (
                                           <option>{item.general_ledger}</option>
                                         );

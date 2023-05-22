@@ -19,6 +19,8 @@ const TeacherStaff = () => {
     }).then((res) => res.json())
   );
 
+  console.log("podofblim", podobi);
+
   const mutation = useMutation({
     mutationFn: (data) => {
       return axios.post(`${serverUrl}/api/employee`, data, {

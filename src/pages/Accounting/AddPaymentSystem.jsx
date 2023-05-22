@@ -6,7 +6,7 @@ import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../../utils/config";
 
 const AddPaymentSystem = () => {
-  const { data } = useQuery("payment-method", () =>
+  const { data, refetch } = useQuery("payment-method", () =>
     fetch(`${serverUrl}/api/payment-method`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
@@ -28,6 +28,7 @@ const AddPaymentSystem = () => {
       toast.error("error");
     },
     onSuccess: (data) => {
+      refetch();
       toast.success("method added successfully");
     },
   });

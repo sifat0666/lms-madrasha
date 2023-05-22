@@ -11,13 +11,14 @@ const HishabNikash = () => {
   const [coa, setCoa] = useState("জমা");
   const [ledger, setLedger] = useState();
   const [ledger2, setLedger2] = useState();
+  const [fundSelector, setFundSelector] = useState("");
 
   const { data } = useQuery("payment-method", () =>
     fetch(`${serverUrl}/api/payment-method`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
   );
-  const { data: audit } = useQuery("audit", () =>
+  const { data: audit, refetch: auditRefetch } = useQuery("audit", () =>
     fetch(`${serverUrl}/api/audit`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
@@ -55,6 +56,7 @@ const HishabNikash = () => {
     },
     onSuccess: (data) => {
       toast.success(" added successfully");
+      auditRefetch();
     },
   });
 
@@ -134,6 +136,9 @@ const HishabNikash = () => {
                                 <select
                                   required
                                   {...register("fund_name")}
+                                  onChange={(e) =>
+                                    setFundSelector(e.target.value)
+                                  }
                                   className="form-select"
                                 >
                                   <option value={""}>
@@ -147,33 +152,6 @@ const HishabNikash = () => {
                             </div>
                           </div>
                           <div className="col-md-5 col-12">
-                            <div className="row mb-3">
-                              <label className="col-md-4 col-12 col-form-label info-lable">
-                                জেনারাল লেজার
-                                <i>*</i>
-                              </label>
-                              <div className="col-md-8 col-12">
-                                <select
-                                  required
-                                  {...register("general_ledger")}
-                                  onChange={(e) => setLedger(e.target.value)}
-                                  className="form-select"
-                                >
-                                  <option value={""}> সিলেক্ট করুন</option>
-                                  {generalLedger?.data.map((item) => {
-                                    if (item.chart_of_account === coa) {
-                                      return (
-                                        <option>{item.general_ledger}</option>
-                                      );
-                                    }
-                                  })}
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-lg-7 col-md-7 col-12">
                             <div className="row mb-3">
                               <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                                 চার্ট অফ একাউন্ট
@@ -189,6 +167,36 @@ const HishabNikash = () => {
                                   <option disabled> সিলেক্ট করুন</option>
                                   <option>জমা</option>
                                   <option>খরচ</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-lg-7 col-md-7 col-12">
+                            <div className="row mb-3">
+                              <label className="col-md-4 col-12 col-form-label info-lable">
+                                জেনারাল লেজার
+                                <i>*</i>
+                              </label>
+                              <div className="col-md-8 col-12">
+                                <select
+                                  required
+                                  {...register("general_ledger")}
+                                  onChange={(e) => setLedger(e.target.value)}
+                                  className="form-select"
+                                >
+                                  <option value={""}> সিলেক্ট করুন</option>
+                                  {generalLedger?.data.map((item) => {
+                                    if (
+                                      item.chart_of_account === coa &&
+                                      fundSelector === item.fund
+                                    ) {
+                                      return (
+                                        <option>{item.general_ledger}</option>
+                                      );
+                                    }
+                                  })}
                                 </select>
                               </div>
                             </div>
@@ -501,9 +509,6 @@ const HishabNikash = () => {
                                   <th>সাব: লেজার</th>
                                   <th>পার্টিকোলার্স</th>
                                   <th>পরিমাণ</th>
-                                  <span className="action-delete">
-                                    <i className="bi bi-trash3"></i>
-                                  </span>
                                 </tr>
                               </thead>
                               <tbody>
@@ -532,6 +537,41 @@ const HishabNikash = () => {
                     </div>
                   </div>
                 </div>
+                <table
+                  id="tech-companies-1"
+                  className="table  bg-white text-center mb-0"
+                >
+                  <thead className="text-center accounts-table-head">
+                    <tr>
+                      <th>তারিখ</th>
+                      <th>জি.লেজার</th>
+                      <th>ফান্ডঃ</th>
+                      <th>পেমেন্ট মন্তব্য</th>
+                      <th>সাব: লেজার</th>
+                      <th>পার্টিকোলার্স</th>
+                      <th>পরিমাণ</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {audit?.data?.map((item) => (
+                      <tr key={item.id}>
+                        <td>{item.submit_date}</td>
+                        <td>{item.general_ledger}</td>
+                        <td>{item.fund_name}</td>
+                        <td>{item.comment}</td>
+                        <td>{item.sub_ledger}</td>
+                        <td>{item.particulars_detail}</td>
+                        <td>{item.ammount}</td>
+                        <span
+                          onClick={(id) => onDelete(item.id)}
+                          className="action-delete"
+                        >
+                          <i className="bi bi-trash3"></i>
+                        </span>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>

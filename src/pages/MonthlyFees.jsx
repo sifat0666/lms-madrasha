@@ -188,7 +188,12 @@ const MonthlyFees = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    mutation.mutate(data);
+    mutation.mutate({
+      ...data,
+      session: "null",
+      academicYear: "null",
+      class: "null",
+    });
   };
 
   const { register: FeeRegister, handleSubmit: feeHandleSubmit } = useForm();
@@ -1366,7 +1371,7 @@ const MonthlyFees = () => {
                     <div className="row">
                       <div className="col-12">
                         <div className="row mb-3">
-                          <div className="col-5">
+                          {/* <div className="col-5">
                             <div className="row">
                               <label className="col-sm-5 col-form-label info-lable">
                                 শিক্ষাবর্ষ
@@ -1390,8 +1395,8 @@ const MonthlyFees = () => {
                                 </select>
                               </div>
                             </div>
-                          </div>
-                          <div className="col-7">
+                          </div> */}
+                          {/* <div className="col-7">
                             <div className="row">
                               <label className="col-sm-5 col-form-label info-lable">
                                 জামাত/শ্রেনী
@@ -1415,10 +1420,10 @@ const MonthlyFees = () => {
                                 </select>
                               </div>
                             </div>
-                          </div>
+                          </div> */}
                         </div>
                       </div>
-                      <div className="col-12">
+                      {/* <div className="col-12">
                         <div className="row mb-3">
                           <div className="col-12">
                             <div className="section-title special-bg">
@@ -1426,7 +1431,7 @@ const MonthlyFees = () => {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                       <div className="col-12">
                         <div className="row mb-3">
                           <div className="col-4">
@@ -1683,8 +1688,7 @@ const MonthlyFees = () => {
                                       <i className="bi bi-pencil-square"></i>
                                     </span>
                                   </th>
-                                  <th>শিক্ষাবর্ষ</th>
-                                  <th>জামাত</th>
+
                                   <th>১ম মাস</th>
                                   <th>২য় মাস</th>
                                   <th>৩য় মাস</th>
@@ -1708,8 +1712,6 @@ const MonthlyFees = () => {
                                   </td>
                                   {months?.data.map((item) => (
                                     <React.Fragment key={item.id}>
-                                      <th>{item.session}</th>
-                                      <th>{item.class}</th>
                                       <th>{item.m1}</th>
                                       <th>{item.m2}</th>
                                       <th>{item.m3}</th>

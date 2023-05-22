@@ -21,7 +21,7 @@ const KhorochLedger = ({ data, val }) => {
       }
       return null;
     })
-    ?.reduce((accumulator, currentValue) => accumulator + currentValue);
+    ?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
   console.log("first", audit);
 
   console.log(instituteInfo);

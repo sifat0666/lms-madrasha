@@ -435,7 +435,7 @@ const IncomeEntryRevised = () => {
                                   className="form-select"
                                   onChange={(e) => setLedger2(e.target.value)}
                                 >
-                                  <option disabled>লেজার নির্বাচন করুন</option>
+                                  <option>লেজার নির্বাচন করুন</option>
                                   {generalLedger?.data.map((item) => {
                                     if (item.chart_of_account === "জমা") {
                                       return (
@@ -450,9 +450,7 @@ const IncomeEntryRevised = () => {
                                   {...register2("sub_ledger")}
                                   className="form-select"
                                 >
-                                  <option disabled>
-                                    সাব লেজার নির্বাচন করুন
-                                  </option>
+                                  <option>সাব লেজার নির্বাচন করুন</option>
                                   {subLedger?.data.map((item) => {
                                     if (item.general_ledger === ledger2) {
                                       return <option>{item.sub_ledger}</option>;

@@ -11,7 +11,7 @@ const onSubmit = async (value) => {
 };
 
 const FeeName = () => {
-  const { data } = useQuery("fee_name", () =>
+  const { data, refetch } = useQuery("fee_name", () =>
     fetch(`${serverUrl}/api/fee-name`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
@@ -32,6 +32,7 @@ const FeeName = () => {
     },
     onSuccess: (data) => {
       toast.success("fee created successfully");
+      refetch();
     },
   });
 

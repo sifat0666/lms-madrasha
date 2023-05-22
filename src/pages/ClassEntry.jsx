@@ -8,12 +8,19 @@ import { serverUrl } from "../../utils/config";
 const ClassEntry = () => {
   const { register, handleSubmit } = useForm();
   const { register: register2, handleSubmit: handleSubmit2 } = useForm();
-  const { data } = useQuery("marhalaclass", () =>
-    fetch(`${serverUrl}/api/marhalaclass`).then((res) => res.json())
+
+  const { data, refetch: classRefetch } = useQuery("marhalaclass", () =>
+    fetch(`${serverUrl}/api/marhalaclass`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
-  const { data: sub } = useQuery("subject", () =>
-    fetch(`${serverUrl}/api/subject`).then((res) => res.json())
+  const { data: sub, refetch: subRefetch } = useQuery("subject", () =>
+    fetch(`${serverUrl}/api/subject`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
   );
+  console.log("suv", sub);
+  console.log("class", data);
 
   // console.log(data);
   const mutation = useMutation({
@@ -30,6 +37,7 @@ const ClassEntry = () => {
     },
     onSuccess: (data) => {
       toast.success("class created successfully");
+      classRefetch();
     },
   });
 
@@ -47,6 +55,7 @@ const ClassEntry = () => {
     },
     onSuccess: (data) => {
       toast.success("subject created successfully");
+      subRefetch();
     },
   });
 
@@ -66,7 +75,8 @@ const ClassEntry = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    location.reload();
+    classRefetch();
+    toast.success("deleted successfully");
   };
 
   const onDelete2 = async (id) => {
@@ -76,7 +86,8 @@ const ClassEntry = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    location.reload();
+    subRefetch();
+    toast.success("deleted successfully");
   };
   return (
     <div>
@@ -221,73 +232,79 @@ const ClassEntry = () => {
                     </div>
                   </div>
                 </div>
+                <div className="row ">
+                  <div className="col-6">
+                    <table class="table bg-white">
+                      <thead>
+                        <tr>
+                          <th scope="col">আইডি</th>
+                          <th scope="col">ক্লাসের নাম</th>
+                          <th>
+                            <span className="action-delete">
+                              <i className="bi bi-trash3"></i>
+                            </span>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {data?.data.map((item) => (
+                          <tr key={item.id}>
+                            <th scope="row">{item.id}</th>
+                            <td>{item.class_name}</td>
+                            <td>
+                              {" "}
+                              <span
+                                onClick={(id) => onDelete1(item.id)}
+                                className="action-delete"
+                              >
+                                <i className="bi bi-trash3"></i>
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="col-6">
+                    <table class="table bg-white">
+                      <thead>
+                        <tr>
+                          <th scope="col">আইডি</th>
+                          <th scope="col">ক্লাসের নাম</th>
+                          <th scope="col">কিতাবের নাম</th>
+                          <th>
+                            <span className="action-delete">
+                              <i className="bi bi-trash3"></i>
+                            </span>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {sub?.data.map((item) => (
+                          <tr key={item.id}>
+                            <th scope="row">{item.id}</th>
+                            <td>{item.class}</td>
+                            <td>{item.subject}</td>
+                            <td>
+                              {" "}
+                              <span
+                                onClick={(id) => onDelete2(item.id)}
+                                className="action-delete"
+                              >
+                                <i className="bi bi-trash3"></i>
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <table class="table bg-white">
-        <thead>
-          <tr>
-            <th scope="col">আইডি</th>
-            <th scope="col">ক্লাসের নাম</th>
-            <th>
-              <span className="action-delete">
-                <i className="bi bi-trash3"></i>
-              </span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {data?.data.map((item) => (
-            <tr key={item.id}>
-              <th scope="row">{item.id}</th>
-              <td>{item.class_name}</td>
-              <td>
-                {" "}
-                <span
-                  onClick={(id) => onDelete1(item.id)}
-                  className="action-delete"
-                >
-                  <i className="bi bi-trash3"></i>
-                </span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <table class="table bg-white">
-        <thead>
-          <tr>
-            <th scope="col">আইডি</th>
-            <th scope="col">ক্লাসের নাম</th>
-            <th scope="col">কিতাবের নাম</th>
-            <th>
-              <span className="action-delete">
-                <i className="bi bi-trash3"></i>
-              </span>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {sub?.data.map((item) => (
-            <tr key={item.id}>
-              <th scope="row">{item.id}</th>
-              <td>{item.class}</td>
-              <td>{item.subject}</td>
-              <td>
-                {" "}
-                <span
-                  onClick={(id) => onDelete2(item.id)}
-                  className="action-delete"
-                >
-                  <i className="bi bi-trash3"></i>
-                </span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 };
