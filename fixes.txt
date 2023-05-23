@@ -1,54 +1,5 @@
-logout if 5 min idle
-header theke delete icon dlt
---------------
-
-
-msg lekhar field banano
-
-
-
-hishab nikash report --done
-
-
-report total --done
-
-profile edit -- done
-
-fee deyni entry report --done
-
-design class poriboorton -- done
-
-montoboo, particularsbornono optional --done
-
-fix logout  -- done
-
-
-
-
-
-
-moukuf entry report --done
-
-
-create dev page and call action -- done
-
-
-joma korton-p --done
-
-add 404 page --done
-
-
-korton optional korte hobe --done
-
-monthly fees print icon --done
-msg lekhar  field nullable --done
-
-
--------------------
-bokeya
-
-chuti komano barano -- !
-
-
-------------------------------
-monthly fee deadline
+1 - add delte function in fund name
+2 - add delete function in add payment method
+3 - add delte method in fee name entry
+4 - fix calculation function in (hishab nikash/reoprt) in tarikh dhore hishab
+5 - fix all the report pdf styles

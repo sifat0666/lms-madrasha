@@ -126,10 +126,10 @@ const Login = () => {
                                   id="password"
                                   {...register("password")}
                                 />
-                                <i
+                                {/* <i
                                   class="bi bi-eye pass-show"
                                   // onclick="passwordshowhide()"
-                                ></i>
+                                ></i> */}
                               </div>
                             </div>
                           </div>

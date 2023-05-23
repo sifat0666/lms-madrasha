@@ -17,6 +17,7 @@ let year = date.getFullYear();
 let currentDate = `${day}-${month}-${year}`;
 
 const AdmissionFeeModal = ({ item }) => {
+  console.log("item", item);
   const ref = useRef();
 
   const [student_id, setStudent_Id] = useState();
@@ -129,10 +130,10 @@ const AdmissionFeeModal = ({ item }) => {
               return <span>Paid</span>;
             }
           })}
-          {item.vorti_fee_dibe === 0 && <span>মৌকুফ</span>}
+          {item?.vorti_fee_dibe == 0 && <span>মৌকুফ</span>}
         </td>
         <td>
-          {item.vorti_fee_dibe === 1 && (
+          {item?.vorti_fee_dibe == 1 && (
             <a
               href="#"
               className="custom-btn btn-primary"
