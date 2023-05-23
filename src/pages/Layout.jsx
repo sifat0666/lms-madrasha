@@ -629,7 +629,7 @@ const Layout = ({ children }) => {
                                   </a>
                                 </Link>
                               </li>
-                              <li>
+                              {/* <li>
                                 <Link to="invoice-details">
                                   <a
                                     class="dropdown-item"
@@ -638,7 +638,7 @@ const Layout = ({ children }) => {
                                     ইনভয়েসের বিবরণ
                                   </a>
                                 </Link>
-                              </li>
+                              </li> */}
                             </ul>
                           </li>
                         </ul>
