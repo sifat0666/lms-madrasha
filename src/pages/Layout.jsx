@@ -726,11 +726,16 @@ const Layout = ({ children }) => {
                     </span>
                   </a>
                   <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        প্রোপাইল
-                      </a>
-                    </li>
+                    {data ? (
+                      <li class="user-menu-item">
+                        {/* <i class="bi bi-gear-fill"></i> */}
+                        <a href="/user">
+                          {isLoading ? "loading..." : data?.data.name}
+                        </a>
+                      </li>
+                    ) : (
+                      <></>
+                    )}
                     {/* data?.data.name */}
                     <li class="dropdown-item">
                       <a href="">
@@ -738,12 +743,14 @@ const Layout = ({ children }) => {
                         {data?.data.name}
                       </a>
                     </li>
-                    <li class="dropdown-item">
-                      <a style={{ textDecoration: "none" }} href="">
-                        <i class="bi bi-gear-fill"></i>
-                        সেটিংস
-                      </a>
-                    </li>
+                    <li class="user-menu-item">
+                      <i class="bi bi-gear-fill"></i>
+                      <Link to="/settings">
+                        <a style={{ textDecoration: "none" }} href="">
+                          সেটিংস
+                        </a>
+                      </Link>
+                    </li>{" "}
                     <li class="dropdown-item">
                       <a href="">
                         <i class="bi bi-info-circle-fill"></i>
@@ -751,15 +758,35 @@ const Layout = ({ children }) => {
                       </a>
                     </li>
                     <li class="dropdown-item">
-                      <button
-                        onClick={() => {
+                      <div
+                        onClick={async () => {
+                          const data = await axios.post(
+                            `${serverUrl}/api/logout`,
+                            {},
+                            {
+                              headers: {
+                                accept: "application/json",
+                                Authorization: `Bearer ${localStorage.getItem(
+                                  "token"
+                                )}`,
+                              },
+                            }
+                          );
+
+                          navigate("/");
+                          console.log("logout", data);
+
+                          // localStorage.clear();
+                          // window.location.reload();
+                          // navigate("/login");
+                          // toast.success("logged out");
+
                           // navigate("/");
-                          localStorage.clear("token");
                         }}
                       >
-                        <i class="bi bi-box-arrow-in-right"></i>
+                        {" "}
                         লগ আউট
-                      </button>
+                      </div>
                     </li>
                   </ul>
                 </li>

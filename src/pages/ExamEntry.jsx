@@ -16,7 +16,7 @@ const ExamEntry = () => {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
   );
-  const { data: examEntry } = useQuery("examEntry", () =>
+  const { data: examEntry, refetch } = useQuery("examEntry", () =>
     fetch(`${serverUrl}/api/exam-entry`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
@@ -39,6 +39,7 @@ const ExamEntry = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
+      refetch();
       toast.success("posted successfully");
       console.log(data?.data.id);
     },
