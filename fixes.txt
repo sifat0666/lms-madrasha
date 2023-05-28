@@ -1,5 +1,15 @@
+
+id card number issue
 1 - add delte function in fund name
 2 - add delete function in add payment method
 3 - add delte method in fee name entry
 4 - fix calculation function in (hishab nikash/reoprt) in tarikh dhore hishab
 5 - fix all the report pdf styles
+6 - id card issue ---- create id such as it includes session
+7 - puraton student id search [old student will have same id]
+8 - hishab nikash tarikh auto/ 
+9- voucher no comment
+10 - somosto hishab mshik/yearly
+11 - mashik fee pdf korton and joma total
+12 - result sorting report
+13- new user bangla permision name
