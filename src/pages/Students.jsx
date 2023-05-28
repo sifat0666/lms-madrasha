@@ -43,7 +43,7 @@ const Students = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    location.reload();
+    refetch();
   };
 
   return (

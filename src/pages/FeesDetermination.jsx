@@ -66,7 +66,8 @@ const FeesDetermination = () => {
         },
       }
     );
-    location.reload();
+    refetch();
+    toast.success("delted successfully");
   };
 
   // const options2 = academicYear?.data.map(item => [{`${item.academic_year}`: `${item.academic_year}`},])
