@@ -90,7 +90,9 @@ const AdmissionFeeModal = ({ item }) => {
 
   const onStudentSubmit = async (e) => {
     e.preventDefault();
-    const student = await axios.get(`${serverUrl}/api/student/${student_id}`);
+    const student = await axios.get(`${serverUrl}/api/student/${student_id}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
     setStudent(student?.data);
 
     const data = `${student?.data.gender}_${student?.data.abashik_onabashik}_${student?.data.notun_puraton}`;
