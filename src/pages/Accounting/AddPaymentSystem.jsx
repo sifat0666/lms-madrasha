@@ -38,6 +38,17 @@ const AddPaymentSystem = () => {
     mutation.mutate(data);
   };
 
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/payment-method/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    refetch();
+    toast.success("deleted successfully");
+  };
+
   return (
     <div className="user-form-section">
       <div className="section-bg" style={{ padding: "100px" }}>
@@ -108,6 +119,7 @@ const AddPaymentSystem = () => {
               <th scope="col">একাউন্ট ধরণ</th>
               <th scope="col">অ্যাকাউন্ট নাম</th>
               <th scope="col">মোবাইল নাম্বার</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -117,6 +129,14 @@ const AddPaymentSystem = () => {
                 <td>{item.account_type}</td>
                 <td>{item.account_name}</td>
                 <td>{item.mobile_number}</td>
+                <th>
+                  <span
+                    className="action-delete"
+                    onClick={(id) => onDelete(item.id)}
+                  >
+                    <i className="bi bi-trash3"></i>
+                  </span>
+                </th>
               </tr>
             ))}
           </tbody>

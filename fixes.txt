@@ -1,5 +1,5 @@
-1 - add delte function in fund name
-2 - add delete function in add payment method
+1 - add delte function in fund name ---done
+2 - add delete function in add payment method --done
 3 - add delte method in fee name entry
 4 - fix calculation function in (hishab nikash/reoprt) in tarikh dhore hishab
 5 - fix all the report pdf styles

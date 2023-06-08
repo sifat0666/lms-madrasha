@@ -43,6 +43,17 @@ const FeeName = () => {
     console.log(value);
   };
 
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/fee-name/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    refetch();
+    toast.success("deleted successfully");
+  };
+
   return (
     <div>
       <section className="user-form-section">
@@ -93,27 +104,36 @@ const FeeName = () => {
                     </div>
                   </div>
                 </div>
+                <table class="table bg-white">
+                  <thead>
+                    <tr>
+                      <th scope="col">আইডি</th>
+                      <th scope="col">ফী এর নাম</th>
+                      {/* <th></th> */}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data?.data.map((item) => (
+                      <tr key={item.id}>
+                        <th scope="row">{item.id}</th>
+                        <td>{item.fee_name}</td>
+                        {/* <th>
+                          <span
+                            className="action-delete"
+                            onClick={(id) => onDelete(item.id)}
+                          >
+                            <i className="bi bi-trash3"></i>
+                          </span>
+                        </th> */}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <table class="table bg-white">
-        <thead>
-          <tr>
-            <th scope="col">আইডি</th>
-            <th scope="col">ফী এর নাম</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data?.data.map((item) => (
-            <tr key={item.id}>
-              <th scope="row">{item.id}</th>
-              <td>{item.fee_name}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 };

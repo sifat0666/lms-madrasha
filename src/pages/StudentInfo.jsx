@@ -32,17 +32,19 @@ const styles = {
 };
 
 const StudentInfo = () => {
+  const ref = useRef();
+
   const [student, setStudent] = useState();
-  const [joma, setJoma] = useState();
-  console.log("joma", joma);
+  const [joma, setJoma] = useState(0);
+  const [fees, setFees] = useState(0);
+  const [student_ids, setStudentids] = useState("");
+  const [image, setImage] = useState();
 
   const { data: msg } = useQuery("msg", () =>
     fetch(`${serverUrl}/api/msg/${1}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
   );
-
-  const [image, setImage] = useState();
 
   const date = new Date();
 
@@ -68,7 +70,6 @@ const StudentInfo = () => {
 
   // This arrangement can be altered based on how we want the date's format to appear.
   let currentDate = `${day}-${month}-${year}`;
-  const ref = useRef();
   const { register, handleSubmit } = useForm();
   const { register: register2, handleSubmit: handleSubmit2 } = useForm();
   const { register: register3, handleSubmit: handleSubmit3 } = useForm();
@@ -93,26 +94,23 @@ const StudentInfo = () => {
     },
   });
 
-  const [fees, setFees] = useState("");
-  const [student_ids, setStudentids] = useState("");
-
-  const Fee = useMutation({
-    mutationFn: (data) => {
-      return axios.post(`${serverUrl}/api/customfeecall`, data, {
-        headers: {
-          accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-    },
-    onError: (error, variable, context) => {
-      toast.error(error.response.data.message);
-    },
-    onSuccess: (data) => {
-      console.log("fee", data?.data);
-      setFees(data?.data);
-    },
-  });
+  // const Fee = useMutation({
+  //   mutationFn: (data) => {
+  //     return axios.post(`${serverUrl}/api/customfeecall`, data, {
+  //       headers: {
+  //         accept: "application/json",
+  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //       },
+  //     });
+  //   },
+  //   onError: (error, variable, context) => {
+  //     toast.error(error.response.data.message);
+  //   },
+  //   onSuccess: (data) => {
+  //     console.log("fee", data?.data);
+  //     setFees(data?.data);
+  //   },
+  // });
 
   const crustomStudent = useMutation({
     mutationFn: (data) => {
@@ -202,7 +200,7 @@ const StudentInfo = () => {
     params.academic_year = value.session;
     params.class_name = value.class;
     // console.log("params", params);
-    Fee.mutate({ ...params, fee_name: "ভর্তি ফি" });
+    // Fee.mutate({ ...params, fee_name: "ভর্তি ফি" });
     setValue(value);
   };
 
@@ -213,7 +211,8 @@ const StudentInfo = () => {
   const [feeVal, setFeeVal] = useState();
 
   // console.log("feeVal", feeVal);
-  const korton = parseInt(fees) - parseInt(joma);
+
+  let korton = joma ? parseInt(fees) - parseInt(joma) : 0;
 
   const onSubmit2 = (value) => {
     value.determined_fee = fees;
@@ -700,7 +699,23 @@ const StudentInfo = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="col-lg-5 col-12 col-md-12"></div>
+                          <div className="col-lg-5 col-12 col-md-12">
+                            <div className="row mb-lg-3 mb-1">
+                              <label className="col-sm-4 col-form-label info-lable">
+                                ভর্তি ফি
+                                <i>*</i>
+                              </label>
+                              <div className="col-lg-8 col-12 col-md-12">
+                                <input
+                                  required
+                                  type="number"
+                                  className="form-control"
+                                  placeholder="ভর্তি ফি"
+                                  onChange={(e) => setFees(e.target.value)}
+                                />
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <div className="row">
                           <div className="col-lg-7 col-12 col-md-12">
@@ -1111,7 +1126,7 @@ const StudentInfo = () => {
                                 type="text"
                                 className="form-control"
                                 placeholder="কর্তন"
-                                value={parseInt(fees) - parseInt(joma)}
+                                value={korton}
                                 // value={fees}
                                 // {...register2("discount")}
                               />

@@ -105,6 +105,17 @@ const Fund = () => {
   const { register: register3, handleSubmit: handleSubmit3 } = useForm();
   const { register, handleSubmit } = useForm();
 
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/fund/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    fundRefetch();
+    toast.success("deleted successfully");
+  };
+
   return (
     <div>
       <section className="user-form-section">
@@ -155,6 +166,7 @@ const Fund = () => {
                             <tr>
                               <th scope="col">আইডি</th>
                               <th scope="col">ফান্ডঃ নাম</th>
+                              <th></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -162,6 +174,14 @@ const Fund = () => {
                               <tr key={item.id}>
                                 <th scope="row">{item.id}</th>
                                 <td>{item.fund_name}</td>
+                                <th>
+                                  <span
+                                    className="action-delete"
+                                    onClick={(id) => onDelete(item.id)}
+                                  >
+                                    <i className="bi bi-trash3"></i>
+                                  </span>
+                                </th>
                               </tr>
                             ))}
                           </tbody>
