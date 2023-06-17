@@ -16,9 +16,29 @@ const DateHishab = ({ data, value }) => {
     }).then((res) => res.json())
   );
 
+  console.log(audit);
+
   const total = audit?.data
     .map((item) => {
-      if (item.submit_date === value?.date) {
+      if (item.submit_date === value?.date && item.chart_of_account === "জমা") {
+        return parseInt(item?.ammount);
+      }
+      return null;
+    })
+    ?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+  const totalJoma = audit?.data
+    .map((item) => {
+      if (item.submit_date === value?.date && item.chart_of_account === "জমা") {
+        return parseInt(item?.ammount);
+      }
+      return null;
+    })
+    ?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+  const totalKhoroch = audit?.data
+    .map((item) => {
+      if (item.submit_date === value?.date && item.chart_of_account === "খরচ") {
         return parseInt(item?.ammount);
       }
       return null;
@@ -27,15 +47,15 @@ const DateHishab = ({ data, value }) => {
 
   return (
     <>
-      <div className="preview-page d-print-block" style={{ zIndex: 1 }}>
+      <div className=" d-print-block" style={{ zIndex: 1 }}>
         {/* <span className="print-button d-print-none" onclick="window.print()">
           <i className="bi bi-printer-fill"></i>
         </span> */}
 
         <div className="pages-content">
-          <div className="row my-3 justify-content-center align-items-center d-print-none"></div>
+          <div className="row my-3 justify-content-center align-items-center "></div>
           <div className="row">
-            <div className="col-12">
+            <div className="">
               <div className="table-responsive" data-pattern="priority-columns">
                 <table className="table  bg-white table-bordered text-center report-table">
                   <thead className="text-center">
@@ -75,22 +95,49 @@ const DateHishab = ({ data, value }) => {
                   <tbody>
                     {audit?.data.map((item, i) => (
                       <tr key={item.id}>
-                        {item.submit_date === value?.date && (
-                          <>
-                            <td>{item.id}</td>
-                            <td>{item.fund_name}</td>
-                            <td>{item.chart_of_account}</td>
-                            <td>{item.general_ledger}</td>
-                            <td>{item.sub_ledger}</td>
-                            <td>{item.submit_date}</td>
-                            <td>{item.ammount}</td>
-                          </>
-                        )}
+                        {item.submit_date === value?.date &&
+                          item.chart_of_account === "জমা" && (
+                            <>
+                              <td>{item.id}</td>
+                              <td>{item.fund_name}</td>
+                              <td>{item.chart_of_account}</td>
+                              <td>{item.general_ledger}</td>
+                              <td>{item.sub_ledger}</td>
+                              <td>{item.submit_date}</td>
+                              <td>{item.ammount}</td>
+                            </>
+                          )}
                       </tr>
                     ))}
                     <tr>
-                      <td colspan={6}></td>
-                      <td>total: {total}</td>
+                      <td colspan={6}>মোট জমা</td>
+                      <td>জমা: {totalJoma}</td>
+                    </tr>
+                  </tbody>
+                  <tbody>
+                    {audit?.data.map((item, i) => (
+                      <tr key={item.id}>
+                        {item.submit_date === value?.date &&
+                          item.chart_of_account === "খরচ" && (
+                            <>
+                              <td>{item.id}</td>
+                              <td>{item.fund_name}</td>
+                              <td>{item.chart_of_account}</td>
+                              <td>{item.general_ledger}</td>
+                              <td>{item.sub_ledger}</td>
+                              <td>{item.submit_date}</td>
+                              <td>{item.ammount}</td>
+                            </>
+                          )}
+                      </tr>
+                    ))}
+                    <tr>
+                      <td colspan={6}>মোট খরচ</td>
+                      <td>খরচ: {totalKhoroch}</td>
+                    </tr>
+                    <tr>
+                      <td colspan={6}>জমা খরচ মোট হিসাবে </td>
+                      <td>মোট: {totalJoma - totalKhoroch}</td>
                     </tr>
                   </tbody>
                 </table>

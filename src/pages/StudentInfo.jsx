@@ -45,6 +45,11 @@ const StudentInfo = () => {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
   );
+  const { data: studentData, refetch } = useQuery("student", () =>
+    fetch(`${serverUrl}/api/student`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
+  );
 
   const date = new Date();
 
@@ -59,7 +64,7 @@ const StudentInfo = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    location.reload();
+    refetch();
   };
 
   const imageChange = (e) => {
@@ -94,23 +99,23 @@ const StudentInfo = () => {
     },
   });
 
-  // const Fee = useMutation({
-  //   mutationFn: (data) => {
-  //     return axios.post(`${serverUrl}/api/customfeecall`, data, {
-  //       headers: {
-  //         accept: "application/json",
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     });
-  //   },
-  //   onError: (error, variable, context) => {
-  //     toast.error(error.response.data.message);
-  //   },
-  //   onSuccess: (data) => {
-  //     console.log("fee", data?.data);
-  //     setFees(data?.data);
-  //   },
-  // });
+  const Fee = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/customfeecall`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+    },
+    onError: (error, variable, context) => {
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log("fee", data?.data);
+      setFees(data?.data);
+    },
+  });
 
   const crustomStudent = useMutation({
     mutationFn: (data) => {
@@ -200,7 +205,7 @@ const StudentInfo = () => {
     params.academic_year = value.session;
     params.class_name = value.class;
     // console.log("params", params);
-    // Fee.mutate({ ...params, fee_name: "ভর্তি ফি" });
+    Fee.mutate({ ...params, fee_name: "ভর্তি ফি" });
     setValue(value);
   };
 
@@ -707,7 +712,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
-                                  required
+                                  // required
                                   type="number"
                                   className="form-control"
                                   placeholder="ভর্তি ফি"
@@ -936,87 +941,123 @@ const StudentInfo = () => {
                     </div>
                   </div>
                   <div className="col-lg-5 col-12 col-md-12">
-                    <div className="table-data mt-4">
-                      <div
-                        className="table-responsive"
-                        data-pattern="priority-columns"
-                      >
-                        <form
-                          className="row"
-                          onSubmit={handleSubmit3(onSubmit3)}
-                        >
-                          <div>
-                            <select
-                              {...register3("session")}
-                              className="form-select"
-                            >
-                              <option disabled>শিক্ষাবর্ষ নির্বাচন করুন</option>
-                              {academicYear?.data.map((item) => (
-                                <option key={item.id}>
-                                  {item.academic_year}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                          <div>
-                            <select
-                              {...register3("class")}
-                              className="form-select"
-                            >
-                              <option disabled>শ্রেণী নির্বাচন করুন</option>
-                              {marhalaClass?.data.map((item) => (
-                                <option
-                                  key={item.id}
-                                  // onClick={() => setClasss(item.academicYear)}
-                                >
-                                  {item.class_name}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
+                    <table
+                      id="tech-companies-1"
+                      className="table  bg-white table-bordered text-center"
+                      style={{ maxHeight: "200px" }}
+                    >
+                      <thead className="text-center accounts-table-head">
+                        {" "}
+                        <tr>
+                          <td>ID</td>
+                          <td>সেশন</td>
+                          <th>নাম</th>
+                          <th>শ্রেণী</th>
+                          <th>রোল</th>
+                          <td></td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {studentData?.map((item) => (
+                          <tr key={item.id}>
+                            <td>{item.id}</td>
+                            <td>{item.session}</td>
+                            <th>{item.student_name}</th>
+                            <td>{item.class}</td>
+                            <th>{item.roll}</th>
+                            <td>
+                              {" "}
+                              <span
+                                onClick={(id) => onDelete(item.id)}
+                                className="action-delete"
+                              >
+                                <i className="bi bi-trash3"></i>
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div className="col-lg-5 col-12 col-md-12">
+                  <div className="table-data mt-4">
+                    <div
+                      className="table-responsive"
+                      data-pattern="priority-columns"
+                    >
+                      <form className="row" onSubmit={handleSubmit3(onSubmit3)}>
+                        <div>
+                          <select
+                            {...register3("session")}
+                            className="form-select"
+                          >
+                            <option disabled>শিক্ষাবর্ষ নির্বাচন করুন</option>
+                            {academicYear?.data.map((item) => (
+                              <option key={item.id}>
+                                {item.academic_year}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <div>
+                          <select
+                            {...register3("class")}
+                            className="form-select"
+                          >
+                            <option disabled>শ্রেণী নির্বাচন করুন</option>
+                            {marhalaClass?.data.map((item) => (
+                              <option
+                                key={item.id}
+                                // onClick={() => setClasss(item.academicYear)}
+                              >
+                                {item.class_name}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
 
-                          <button className="btn btn-success btn-sm">
-                            খুজুন
-                          </button>
-                        </form>
-                        <table
-                          id="tech-companies-1"
-                          className="table  bg-white table-bordered text-center"
-                        >
-                          <thead className="text-center accounts-table-head">
-                            {" "}
-                            <tr>
-                              <td>ID</td>
-                              <th>নাম</th>
-                              <th>রোল</th>
+                        <button className="btn btn-success btn-sm">
+                          খুজুন
+                        </button>
+                      </form>
+                      <table
+                        id="tech-companies-1"
+                        className="table  bg-white table-bordered text-center"
+                      >
+                        <thead className="text-center accounts-table-head">
+                          {" "}
+                          <tr>
+                            <td>ID</td>
+                            <th>নাম</th>
+                            <th>রোল</th>
+                            <td>
+                              {" "}
+                              <span className="action-delete">
+                                <i className="bi bi-trash3"></i>
+                              </span>
+                            </td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {student?.map((item) => (
+                            <tr key={item.id}>
+                              <td>{item.id}</td>
+                              <th>{item.student_name}</th>
+                              <th>{item.roll}</th>
                               <td>
                                 {" "}
-                                <span className="action-delete">
+                                <span
+                                  onClick={(id) => onDelete(item.id)}
+                                  className="action-delete"
+                                >
                                   <i className="bi bi-trash3"></i>
                                 </span>
                               </td>
                             </tr>
-                          </thead>
-                          <tbody>
-                            {student?.map((item) => (
-                              <tr key={item.id}>
-                                <td>{item.id}</td>
-                                <th>{item.student_name}</th>
-                                <th>{item.roll}</th>
-                                <td>
-                                  {" "}
-                                  <span
-                                    onClick={(id) => onDelete(item.id)}
-                                    className="action-delete"
-                                  >
-                                    <i className="bi bi-trash3"></i>
-                                  </span>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../../utils/config";
+import dayjs from "dayjs";
 
 const HishabNikash = () => {
   const [name, setName] = useState("ক্যাশ");
@@ -88,7 +89,14 @@ const HishabNikash = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    mutation.mutate(data);
+    mutation.mutate({
+      ...data,
+      submit_date: dayjs().format("YYYY-MM-DD"),
+
+      submit_date_arabic: "null",
+      voucher_slip: "null",
+      book: "null",
+    });
   };
   const onSubmit2 = (data) => {
     console.log("ledger submit", data);
@@ -225,7 +233,7 @@ const HishabNikash = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="row">
+                        {/* <div className="row">
                           <div className="col-lg-7 col-md-7 col-12">
                             <div className="row mb-3">
                               <label className="col-md-4 col-12 col-form-label info-lable">
@@ -295,7 +303,7 @@ const HishabNikash = () => {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                         <div className="row">
                           <div className="col-lg-7 col-md-7 col-12">
                             <div className="row">
@@ -550,6 +558,7 @@ const HishabNikash = () => {
                       <th>সাব: লেজার</th>
                       <th>পার্টিকোলার্স</th>
                       <th>পরিমাণ</th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
