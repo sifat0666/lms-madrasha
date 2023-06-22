@@ -45,6 +45,11 @@ const StudentInfo = () => {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
   );
+  const { data: studentData, refetch } = useQuery("student_data", () =>
+    fetch(`${serverUrl}/api/student`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    }).then((res) => res.json())
+  );
 
   const date = new Date();
 
@@ -59,7 +64,7 @@ const StudentInfo = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    location.reload();
+    refetch();
   };
 
   const imageChange = (e) => {
@@ -94,23 +99,23 @@ const StudentInfo = () => {
     },
   });
 
-  // const Fee = useMutation({
-  //   mutationFn: (data) => {
-  //     return axios.post(`${serverUrl}/api/customfeecall`, data, {
-  //       headers: {
-  //         accept: "application/json",
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //       },
-  //     });
-  //   },
-  //   onError: (error, variable, context) => {
-  //     toast.error(error.response.data.message);
-  //   },
-  //   onSuccess: (data) => {
-  //     console.log("fee", data?.data);
-  //     setFees(data?.data);
-  //   },
-  // });
+  const Fee = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/customfeecall`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+    },
+    onError: (error, variable, context) => {
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      console.log("fee", data?.data);
+      setFees(data?.data);
+    },
+  });
 
   const crustomStudent = useMutation({
     mutationFn: (data) => {
@@ -200,7 +205,7 @@ const StudentInfo = () => {
     params.academic_year = value.session;
     params.class_name = value.class;
     // console.log("params", params);
-    // Fee.mutate({ ...params, fee_name: "ভর্তি ফি" });
+    Fee.mutate({ ...params, fee_name: "ভর্তি ফি" });
     setValue(value);
   };
 
@@ -711,6 +716,7 @@ const StudentInfo = () => {
                                   type="number"
                                   className="form-control"
                                   placeholder="ভর্তি ফি"
+                                  defaultValue={fees}
                                   onChange={(e) => setFees(e.target.value)}
                                 />
                               </div>
@@ -1018,6 +1024,45 @@ const StudentInfo = () => {
                         </table>
                       </div>
                     </div>
+                  </div>
+                  <div>
+                    <table
+                      id="tech-companies-1"
+                      className="table  bg-white table-bordered text-center"
+                    >
+                      <thead className="text-center accounts-table-head">
+                        {" "}
+                        <tr>
+                          <td>ID</td>
+                          <th>নাম</th>
+                          <th>রোল</th>
+                          <td>
+                            {" "}
+                            <span className="action-delete">
+                              <i className="bi bi-trash3"></i>
+                            </span>
+                          </td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {studentData?.map((item) => (
+                          <tr key={item.id}>
+                            <td>{item.id}</td>
+                            <th>{item.student_name}</th>
+                            <th>{item.roll}</th>
+                            <td>
+                              {" "}
+                              <span
+                                onClick={(id) => onDelete(item.id)}
+                                className="action-delete"
+                              >
+                                <i className="bi bi-trash3"></i>
+                              </span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>

@@ -146,24 +146,6 @@ const NewUser = () => {
                                   ></i>
                                 </div>
                               </div>
-                              {/* <div className="row form-group mb-3">
-                                <label className="col-lg-3 col-sm-12 col-form-label">
-                                  কনফার্ম পাসওয়ার্ডঃ
-                                </label>
-                                <div className="col-lg-7 col-sm-12 position-relative">
-                                  <input
-                                    className="form-control"
-                                    type="password"
-                                    placeholder=" কনফার্ম পাসওয়ার্ড"
-                                    id="password_confirmation"
-                                    {...register("password_confirmation")}
-                                  />
-                                  <i
-                                    className="bi bi-eye pass-show"
-                                    onclick="passwordshowhide()"
-                                  ></i>
-                                </div>
-                              </div> */}
                             </div>
                           </div>
                         </div>
@@ -171,7 +153,6 @@ const NewUser = () => {
                       <div className="user-role position-relative">
                         <div className="section-subtitle">ক্ষমতা প্রদান</div>
 
-                        {array}
                         <div className="user-permission">
                           <div className="user-permission-left">
                             <div className="input-group d-flex align-items-center gap-3">
@@ -500,16 +481,6 @@ const NewUser = () => {
                   </div>
                   <div className="col-lg-6 col-sm-12">
                     <div className="table-data">
-                      <div className="row form-group searchbar">
-                        <div className="col-sm-6 position-relative search">
-                          <i className="bi bi-search search-icon"></i>
-                          <input
-                            className="form-control"
-                            type="search"
-                            placeholder="Search"
-                          />
-                        </div>
-                      </div>
                       <div
                         className="table-responsive"
                         data-pattern="priority-columns"
@@ -538,7 +509,22 @@ const NewUser = () => {
                                 <td>{user.name}</td>
                                 <td>
                                   {user.permissions.map((permission) => (
-                                    <div>{permission}</div>
+                                    <div>
+                                      {permission === "audit_permission" &&
+                                        "হিসাব নিকাশ"}
+                                      {permission === "students_control" &&
+                                        "শিক্ষার্থী"}
+                                      {permission === "exam_control" &&
+                                        "পরীক্ষা"}
+                                      {permission === "result_control" &&
+                                        "ফলাফল"}
+                                      {permission === "teacher_control" &&
+                                        "শিক্ষক"}
+                                      {permission === "doner_control" &&
+                                        "দাতা সদস্য"}
+                                      {permission === "library_control" &&
+                                        "বই বিক্রি"}
+                                    </div>
                                   ))}
                                 </td>
                                 <td>{user.email}</td>
