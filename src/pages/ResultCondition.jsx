@@ -131,7 +131,7 @@ const ResultCondition = () => {
                         </button>
                       </li>
                       <li className="nav-item" role="presentation">
-                        <button
+                        {/* <button
                           className="nav-link"
                           id="pills-profile-tab"
                           data-bs-toggle="pill"
@@ -142,9 +142,9 @@ const ResultCondition = () => {
                           aria-selected="false"
                         >
                           বিষয় ও পাশ নাম্বার
-                        </button>
+                        </button> */}
                       </li>
-                      <li className="nav-item" role="presentation">
+                      {/* <li className="nav-item" role="presentation">
                         <button
                           className="nav-link"
                           id="pills-contact-tab"
@@ -157,7 +157,7 @@ const ResultCondition = () => {
                         >
                           ফলাফল কন্ডিশন
                         </button>
-                      </li>
+                      </li> */}
                     </ul>
                     <div className="tab-content" id="pills-tabContent">
                       <div

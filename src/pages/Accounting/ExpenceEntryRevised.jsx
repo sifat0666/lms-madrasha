@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../../utils/config";
+import dayjs from "dayjs";
 
 const ExpenceEntryRevised = () => {
   const [name, setName] = useState("ক্যাশ");
@@ -85,7 +86,15 @@ const ExpenceEntryRevised = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    mutation.mutate({ ...data, chart_of_account: "খরচ" });
+    mutation.mutate({
+      ...data,
+      chart_of_account: "খরচ",
+      submit_date: dayjs().format("YYYY-MM-DD"),
+
+      submit_date_arabic: "null",
+      voucher_slip: "null",
+      book: "null",
+    });
   };
   const onSubmit2 = (data) => {
     console.log("ledger submit", data);
@@ -196,7 +205,7 @@ const ExpenceEntryRevised = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="row">
+                        {/* <div className="row">
                           <div className="col-lg-7 col-md-7 col-12">
                             <div className="row mb-3">
                               <label className="col-md-4 col-12 col-form-label info-lable">
@@ -231,8 +240,8 @@ const ExpenceEntryRevised = () => {
                               </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="row">
+                        </div> */}
+                        {/* <div className="row">
                           <div className="col-lg-7 col-md-7 col-12">
                             <div className="row mb-3">
                               <label className="col-md-4 col-12 col-form-label info-lable">
@@ -266,7 +275,7 @@ const ExpenceEntryRevised = () => {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                         <div className="row">
                           <div className="col-lg-7 col-md-7 col-12">
                             <div className="row">

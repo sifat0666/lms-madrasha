@@ -1,12 +1,20 @@
 1 - add delte function in fund name ---done
 2 - add delete function in add payment method --done
 
+<<<<<<< HEAD
 id card number issue
 1 - add delete function in fund name --done
 1 - vorti fee in time of student register -done
 2 - add delete function in add payment method
 3 - add delte method in fee name entry
 4 - fix calculation function in (hishab nikash/reoprt) in tarikh dhore hishab
+=======
+id card number issue --pending
+1 - add delte function in fund name --pending
+2 - add delete function in add payment method --pending
+3 - add delte method in fee name entry --pending
+4 - fix calculation function in (hishab nikash/reoprt) in tarikh dhore hishab - in progress
+>>>>>>> 47a0940591d423030d1902e0c8b0b6c8650e67cc
 5 - fix all the report pdf styles
 6 - id card issue ---- create id such as it includes session
 7 - puraton student id search [old student will have same id]
