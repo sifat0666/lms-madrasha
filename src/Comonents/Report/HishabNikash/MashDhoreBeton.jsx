@@ -19,7 +19,7 @@ const MashDhoreBeton = ({ data, value }) => {
       }
       return null;
     })
-    ?.reduce((accumulator, currentValue) => accumulator + currentValue);
+    ?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
   const totalKhabarFee = data
     ?.map((item) => {
@@ -28,7 +28,7 @@ const MashDhoreBeton = ({ data, value }) => {
       }
       return null;
     })
-    ?.reduce((accumulator, currentValue) => accumulator + currentValue);
+    ?.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
   //   console.log(instituteInfo);
   return (

@@ -45,11 +45,7 @@ const StudentInfo = () => {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
   );
-<<<<<<< HEAD
-  const { data: studentData, refetch } = useQuery("student_data", () =>
-=======
   const { data: studentData, refetch } = useQuery("student", () =>
->>>>>>> 47a0940591d423030d1902e0c8b0b6c8650e67cc
     fetch(`${serverUrl}/api/student`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
