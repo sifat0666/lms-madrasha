@@ -3,7 +3,8 @@ import dayjs from "dayjs";
 import { useQuery } from "react-query";
 import { serverUrl } from "../../../../utils/config";
 
-const DateHishab = ({ data, value }) => {
+const BoschorHishab = ({ value }) => {
+  const bochor = value?.session;
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
     fetch(`${serverUrl}/api/institute-info`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -16,11 +17,12 @@ const DateHishab = ({ data, value }) => {
     }).then((res) => res.json())
   );
 
-  console.log(audit);
-
   const totalJoma = audit?.data
     .map((item) => {
-      if (item.submit_date === value?.date && item.chart_of_account === "জমা") {
+      if (
+        item.submit_date.slice(0, 4) === bochor &&
+        item.chart_of_account === "জমা"
+      ) {
         return parseInt(item?.ammount);
       }
       return null;
@@ -29,7 +31,10 @@ const DateHishab = ({ data, value }) => {
 
   const totalKhoroch = audit?.data
     .map((item) => {
-      if (item.submit_date === value?.date && item.chart_of_account === "খরচ") {
+      if (
+        item.submit_date.slice(0, 4) === bochor &&
+        item.chart_of_account === "খরচ"
+      ) {
         return parseInt(item?.ammount);
       }
       return null;
@@ -82,7 +87,7 @@ const DateHishab = ({ data, value }) => {
                   <tbody>
                     {audit?.data.map((item, i) => (
                       <tr key={item.id}>
-                        {item.submit_date === value?.date &&
+                        {item.submit_date.slice(0, 4) === bochor &&
                           item.chart_of_account === "জমা" && (
                             <>
                               <td>{item.id}</td>
@@ -97,16 +102,16 @@ const DateHishab = ({ data, value }) => {
                       </tr>
                     ))}
                     <tr>
-                      <td colspan={6} className="fs-6 fw-bold">
+                      <td colspan={6} className="fs-6 fw-bold p-4">
                         মোট জমা
                       </td>
-                      <td className="fs-6 fw-bold">জমা: {totalJoma}</td>
+                      <td className="fs-6 fw-bold py-4">জমা: {totalJoma}</td>
                     </tr>
                   </tbody>
                   <tbody>
                     {audit?.data.map((item, i) => (
                       <tr key={item.id}>
-                        {item.submit_date === value?.date &&
+                        {item.submit_date.slice(0, 4) === bochor &&
                           item.chart_of_account === "খরচ" && (
                             <>
                               <td>{item.id}</td>
@@ -142,4 +147,4 @@ const DateHishab = ({ data, value }) => {
   );
 };
 
-export default DateHishab;
+export default BoschorHishab;

@@ -14,6 +14,8 @@ import MashDhoreBetoBokeya from "../Comonents/Report/HishabNikash/MashDhoreBetoB
 import MashDhoreBeton from "../Comonents/Report/HishabNikash/MashDhoreBeton";
 import MonthlyFee from "../Comonents/Report/HishabNikash/MonthlyFee";
 import MoukufHishab from "../Comonents/Report/HishabNikash/MoukufHishab";
+import MaashHishab from "../Comonents/Report/HishabNikash/MaashHishab";
+import BoschorHishab from "../Comonents/Report/HishabNikash/BochorHishab";
 
 const Report = () => {
   const ref = useRef();
@@ -185,6 +187,8 @@ const Report = () => {
                             <option>৩ জমা লেজার</option>
                             <option>৪ খরচ লেজার</option>
                             <option>৫ তারিখ ধরে হিসাব</option>
+                            <option>মাস ধরে হিসাব</option>
+                            <option>বছর ধরে হিসাব</option>
                             <option>৬. ছাত্র/ছাত্রি মওকুফ তালিকা</option>
                             <option>৭. মাস হিসাবে বেতন তালিকা</option>
                             <option>৮. মাস হিসাবে বেতন বকেয়া তালিকা</option>
@@ -222,18 +226,18 @@ const Report = () => {
                             >
                               <option disabled>মাস নির্বাচন করুন</option>
 
-                              <option>{months?.data[0]?.m1}</option>
-                              <option>{months?.data[0]?.m2}</option>
-                              <option>{months?.data[0]?.m3}</option>
-                              <option>{months?.data[0]?.m4}</option>
-                              <option>{months?.data[0]?.m5}</option>
-                              <option>{months?.data[0]?.m6}</option>
-                              <option>{months?.data[0]?.m7}</option>
-                              <option>{months?.data[0]?.m8}</option>
-                              <option>{months?.data[0]?.m9}</option>
-                              <option>{months?.data[0]?.m10}</option>
-                              <option>{months?.data[0]?.m11}</option>
-                              <option>{months?.data[0]?.m12}</option>
+                              <option>01. জানুয়ারী</option>
+                              <option>02. ফেব্রুয়ারী</option>
+                              <option>03. মার্চ </option>
+                              <option>04. এপ্রিল </option>
+                              <option>05. মে </option>
+                              <option>06. জুন </option>
+                              <option>07. জুলাই </option>
+                              <option>08. আগষ্ট </option>
+                              <option>09. সেপ্টেম্বর </option>
+                              <option>10. অক্টোবর </option>
+                              <option>11. নভেম্বর </option>
+                              <option>12. ডিসেম্বর </option>
                             </select>
                           </div>
                         </div>
@@ -427,6 +431,20 @@ const Report = () => {
                       )}
                       {report === "৫ তারিখ ধরে হিসাব" && (
                         <DateHishab
+                          value={value}
+                          months={months}
+                          student={student}
+                        />
+                      )}{" "}
+                      {report === "মাস ধরে হিসাব" && (
+                        <MaashHishab
+                          value={value}
+                          months={months}
+                          student={student}
+                        />
+                      )}{" "}
+                      {report === "বছর ধরে হিসাব" && (
+                        <BoschorHishab
                           value={value}
                           months={months}
                           student={student}

@@ -30,7 +30,7 @@ const JomaLedger = ({ data, val }) => {
   console.log(instituteInfo);
   return (
     <>
-      <div className="preview-page d-print-block" style={{ zIndex: 1 }}>
+      <div className=" d-print-block" style={{ zIndex: 1 }}>
         {/* <span className="print-button d-print-none" onclick="window.print()">
           <i className="bi bi-printer-fill"></i>
         </span> */}
