@@ -951,7 +951,7 @@ const StudentInfo = () => {
                         {" "}
                         <tr>
                           <td>ID</td>
-                          <td>সেশন</td>
+                          <th>সেশন</th>
                           <th>নাম</th>
                           <th>শ্রেণী</th>
                           <th>রোল</th>
@@ -981,13 +981,13 @@ const StudentInfo = () => {
                     </table>
                   </div>
                 </div>
-                <div className="col-lg-5 col-12 col-md-12">
+                <div className="">
                   <div className="table-data mt-4">
                     <div
                       className="table-responsive"
                       data-pattern="priority-columns"
                     >
-                      <form className="row" onSubmit={handleSubmit3(onSubmit3)}>
+                      <form className="" onSubmit={handleSubmit3(onSubmit3)}>
                         <div>
                           <select
                             {...register3("session")}
@@ -1061,45 +1061,7 @@ const StudentInfo = () => {
                       </table>
                     </div>
                   </div>
-                  <div>
-                    <table
-                      id="tech-companies-1"
-                      className="table  bg-white table-bordered text-center"
-                    >
-                      <thead className="text-center accounts-table-head">
-                        {" "}
-                        <tr>
-                          <td>ID</td>
-                          <th>নাম</th>
-                          <th>রোল</th>
-                          <td>
-                            {" "}
-                            <span className="action-delete">
-                              <i className="bi bi-trash3"></i>
-                            </span>
-                          </td>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {studentData?.map((item) => (
-                          <tr key={item.id}>
-                            <td>{item.id}</td>
-                            <th>{item.student_name}</th>
-                            <th>{item.roll}</th>
-                            <td>
-                              {" "}
-                              <span
-                                onClick={(id) => onDelete(item.id)}
-                                className="action-delete"
-                              >
-                                <i className="bi bi-trash3"></i>
-                              </span>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+                  <div></div>
                 </div>
               </div>
             </div>
