@@ -922,21 +922,6 @@ const StudentInfo = () => {
                           <button className="custom-btn btn-dark" type="reset">
                             Reset
                           </button>
-                          {/* <button
-                            className="custom-btn btn-primary"
-                            type="submit"
-                          >
-                            New
-                          </button> */}
-                          {/* <button className="custom-btn btn-dark" type="submit">
-                            Close
-                          </button> */}
-                          {/* <button
-                            className="custom-btn btn-danger"
-                            type="submit"
-                          >
-                            Delete
-                          </button> */}
                         </div>
                       </form>
                     </div>

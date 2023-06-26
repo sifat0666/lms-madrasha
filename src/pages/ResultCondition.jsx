@@ -30,7 +30,7 @@ const ResultCondition = () => {
     }).then((res) => res.json())
   );
 
-  const { data: divisionEntryData } = useQuery("divisionentry", () =>
+  const { data: divisionEntryData, refetch } = useQuery("divisionentry", () =>
     fetch(`${serverUrl}/api/division-entry`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
@@ -86,11 +86,13 @@ const ResultCondition = () => {
   const onSubmit = (value) => {
     console.log("division", value);
     divisionEntry.mutate(value);
+    refetch();
   };
 
   const onMarkSubmit = (value) => {
     console.log(value);
     passMark.mutate({ ...value, subject_a: "empty" });
+    refetch();
   };
 
   const onDelete = async (id) => {
@@ -100,7 +102,7 @@ const ResultCondition = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    location.reload();
+    refetch();
   };
 
   return (

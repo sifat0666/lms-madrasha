@@ -29,7 +29,7 @@ const FeeCollectionList = ({ data, val }) => {
                 >
                   <thead className="text-center">
                     <tr>
-                      <td colspan="4">
+                      <td colspan="5">
                         <div className="pages-title">
                           <h5>{instituteInfo?.name}</h5>
                           <p>{instituteInfo?.address}</p>
@@ -42,7 +42,7 @@ const FeeCollectionList = ({ data, val }) => {
                       </td>
                     </tr>
                     <tr>
-                      <td colspan="4">
+                      <td colspan="5">
                         <div className="d-flex justify-content-between">
                           <div>
                             <strong>মারহালাঃ</strong>

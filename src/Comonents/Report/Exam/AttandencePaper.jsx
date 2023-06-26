@@ -10,7 +10,7 @@ const Attandance = ({ data, val, classData }) => {
     }).then((res) => res.json())
   );
 
-  console.log("classData", classData);
+  console.log("classData", classData?.length);
 
   // console.log(instituteInfo);
   return (
@@ -31,7 +31,7 @@ const Attandance = ({ data, val, classData }) => {
                 >
                   <thead className="text-center">
                     <tr>
-                      <td colspan="3">
+                      <td colspan="100">
                         <div className="pages-title">
                           <h5>{instituteInfo?.name}</h5>
                           <p>{instituteInfo?.address}</p>
@@ -44,7 +44,7 @@ const Attandance = ({ data, val, classData }) => {
                       </td>
                     </tr>
                     <tr>
-                      <td colspan="5">
+                      <td colspan="100">
                         <div className="d-flex justify-content-between">
                           <div>
                             <strong>মারহালাঃ</strong>
@@ -62,7 +62,6 @@ const Attandance = ({ data, val, classData }) => {
                       <th>ক্রঃ</th>
                       <th>আইডি</th>
                       <th>পরীক্ষার্থী</th>
-                      {/* <th> দস্তখত </th> */}
 
                       {classData?.map((item) => (
                         <th className="border-right border-dark p-2">
@@ -77,7 +76,9 @@ const Attandance = ({ data, val, classData }) => {
                         <td>{i}</td>
                         <td>{item.id}</td>
                         <td>{item.student_name}</td>
-                        <td></td>
+                        {classData?.map((item) => (
+                          <th className="border-right border-dark p-2"></th>
+                        ))}
                       </tr>
                     ))}
                   </tbody>
