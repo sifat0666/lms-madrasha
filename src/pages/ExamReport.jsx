@@ -12,6 +12,7 @@ import MarkSheet from "../Comonents/Report/Exam/MarkSheet";
 import SeatPlan from "../Comonents/Report/Exam/SeatPlan";
 import ReactPrint from "react-to-print";
 import { useRef } from "react";
+import IDCardLayout from "../Comonents/Report/Exam/IDCardLayout";
 
 const ExamReport = () => {
   const ref = useRef();
@@ -136,6 +137,7 @@ const ExamReport = () => {
                               <option>৩. দস্তখতপত্র</option>
                               <option>৪. নাম্বরপত্র</option>
                               <option>৫. সীট নং</option>
+                              <option>আইডি কার্ড</option>
                             </select>
                           </div>
                         </div>
@@ -245,6 +247,13 @@ const ExamReport = () => {
                       ) : null}
                       {report === "৫. সীট নং" ? (
                         <SeatPlan
+                          data={data}
+                          val={val}
+                          instituteInfo={instituteInfo}
+                        />
+                      ) : null}{" "}
+                      {report === "আইডি কার্ড" ? (
+                        <IDCardLayout
                           data={data}
                           val={val}
                           instituteInfo={instituteInfo}

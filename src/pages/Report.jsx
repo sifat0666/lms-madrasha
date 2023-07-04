@@ -18,6 +18,7 @@ import VortiFeeReport from "../Comonents/Report/Student/VortiFeeReport";
 import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import HajiraKhata from "../Comonents/Report/Student/HajiraKhata";
+import IDCardLayout from "../Comonents/Report/Exam/IDCardLayout";
 
 const Report = () => {
   const ref = useRef();
@@ -117,6 +118,7 @@ const Report = () => {
                             onChange={(e) => setReport(e.target.value)}
                           >
                             <option disabled>নির্বাচন করুন</option>
+                            <option>আইডি কার্ড</option>
                             <option>১. ভর্তি রেজিস্টার</option>
                             <option>২. ভর্তি রেজিস্টার নতুন</option>
                             <option>৩. ভর্তি রেজিস্টার পুরাতন</option>
@@ -292,6 +294,9 @@ const Report = () => {
                       {report === "১২. হাজিরা খাতা" && (
                         <HajiraKhata student={student} value={value} />
                       )}{" "}
+                      {report === "আইডি কার্ড" ? (
+                        <IDCardLayout student={student} />
+                      ) : null}
                     </div>
                   </div>
                 </div>

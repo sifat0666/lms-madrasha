@@ -5,13 +5,14 @@ id card number issue --pending
 1 - add delte function in fund name --pending
 2 - add delete function in add payment method --pending
 3 - add delte method in fee name entry --pending
-4 - fix calculation function in (hishab nikash/reoprt) in tarikh dhore hishab - pending
+4 - fix calculation function in (hishab nikash/reoprt) in tarikh dhore hishab - done
 5 - fix all the report pdf styles
-6 - id card issue ---- create id such as it includes session
-7 - puraton student id search [old student will have same id]
+6 - id card issue ---- done
+7 - puraton student id search [old student will have same id] --pending
 8 - hishab nikash tarikh auto --done
-9- voucher no comment
-10 - somosto hishab mshik/yearly
+9- voucher no comment --done
+10 - somosto hishab mshik/yearly --done
+13- new user bangla permision name  --done
+
 11 - mashik fee pdf korton and joma total
 12 - result sorting report
-13- new user bangla permision name  --done
