@@ -60,14 +60,6 @@ const JomaLedger = ({ data, val }) => {
                       <td colspan="8">
                         <div className="d-flex justify-content-between">
                           <div>
-                            <strong>মারহালাঃ</strong>
-                            {val?.class}
-                          </div>
-                          <div>
-                            <strong>মারহালাঃ</strong>
-                            {val?.class}
-                          </div>
-                          <div>
                             <strong>প্রিন্ট তারিখঃ</strong>
                             {dayjs().format("YYYY-MM-DD")}
                           </div>

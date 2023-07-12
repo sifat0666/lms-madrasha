@@ -107,14 +107,14 @@ const Navbar = () => {
                                   হিসাব নিকাশ
                                 </a>
                               </li>
-                              <li>
+                              {/* <li>
                                 <a
                                   className="dropdown-item"
                                   href="./pages/incomeExpenceEntry.html"
                                 >
                                   আয়-ব্যয় এন্ট্রি
                                 </a>
-                              </li>
+                              </li> */}
                               <li>
                                 <a
                                   className="dropdown-item"
