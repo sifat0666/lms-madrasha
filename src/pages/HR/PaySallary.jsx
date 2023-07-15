@@ -18,18 +18,6 @@ const PaySallary = () => {
     }).then((res) => res.json())
   );
 
-  const { data: sallery_sheet } = useQuery("sallery-sheet", () =>
-    fetch(`${serverUrl}/api/sallery-sheet`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    }).then((res) => res.json())
-  );
-
-  const { data: paid_sallery } = useQuery("paid_sallery", () =>
-    fetch(`${serverUrl}/api/monthly-sallery-entry`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    }).then((res) => res.json())
-  );
-
   const { data: months } = useQuery("teacher_month", () =>
     fetch(`${serverUrl}/api/teacher-month-entry`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -43,7 +31,7 @@ const PaySallary = () => {
 
   //payroll-filter
 
-  const { mutate } = useMutation({
+  const { mutate, reset } = useMutation({
     mutationFn: (data) => {
       return axios.post(`${serverUrl}/api/payroll-filter`, data, {
         headers: {
@@ -62,7 +50,7 @@ const PaySallary = () => {
     },
   });
 
-  const { mutate: notPaidMutate } = useMutation({
+  const { mutate: notPaidMutate, resetNotPaid } = useMutation({
     mutationFn: (data) => {
       return axios.post(`${serverUrl}/api/employee-payroll-queue`, data, {
         headers: {
@@ -197,6 +185,8 @@ const PaySallary = () => {
                               {notPaidTable?.data?.map((item) => (
                                 <tr key={item.id}>
                                   <PaySalleryTable
+                                    mutate={mutate}
+                                    notPaidMutate={notPaidMutate}
                                     month={month}
                                     session={session}
                                     item={item}

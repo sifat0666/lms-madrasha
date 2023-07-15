@@ -187,11 +187,12 @@ const Report = () => {
                             <option>৩ জমা লেজার</option>
                             <option>৪ খরচ লেজার</option>
                             <option>৫ তারিখ ধরে হিসাব</option>
-                            <option>মাস ধরে হিসাব</option>
-                            <option>বছর ধরে হিসাব</option>
+
                             <option>৬. ছাত্র/ছাত্রি মওকুফ তালিকা</option>
                             <option>৭. মাস হিসাবে বেতন তালিকা</option>
                             <option>৮. মাস হিসাবে বেতন বকেয়া তালিকা</option>
+                            <option>৯ মাস ধরে হিসাব</option>
+                            <option>১০ বছর ধরে হিসাব</option>
                           </select>
                         </div>
                       </div>
@@ -349,7 +350,7 @@ const Report = () => {
                   </div>
                   {/* <!--Preview Page Section--> */}
                   {/* <div className="col-lg-8 col-12 col-md-12 mt-lg-0 mt-4">
-                    <div className="preview-page d-print-block">
+                    <div className="bg-white d-print-block">
                       <span
                         className="print-button d-print-none"
                         onclick="window.print()"
@@ -436,14 +437,14 @@ const Report = () => {
                           student={student}
                         />
                       )}{" "}
-                      {report === "মাস ধরে হিসাব" && (
+                      {report === "৯ মাস ধরে হিসাব" && (
                         <MaashHishab
                           value={value}
                           months={months}
                           student={student}
                         />
                       )}{" "}
-                      {report === "বছর ধরে হিসাব" && (
+                      {report === "১০ বছর ধরে হিসাব" && (
                         <BoschorHishab
                           value={value}
                           months={months}

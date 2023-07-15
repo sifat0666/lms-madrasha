@@ -27,8 +27,8 @@ const Attandence = ({ item, otherData }) => {
       });
     },
     onError: (error, variable, context) => {
-      // console.log(error.response.data.message);
-      toast.error(error.response.data.message);
+      console.log(error.response.data.message);
+      // toast.error(error.response.data.message);
     },
     onSuccess: async (data) => {
       console.log("userdata", data.data);

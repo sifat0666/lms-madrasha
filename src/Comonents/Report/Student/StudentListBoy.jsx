@@ -11,7 +11,7 @@ const StudentListBoy = ({ student, value }) => {
 
   return (
     <div>
-      <div className="preview-page d-print-block">
+      <div className="bg-white d-print-block">
         <div className="pages-title">
           <h5>{instituteInfo?.name}</h5>
           <p>{instituteInfo?.address}</p>

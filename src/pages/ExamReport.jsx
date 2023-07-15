@@ -137,7 +137,7 @@ const ExamReport = () => {
                               <option>৩. দস্তখতপত্র</option>
                               <option>৪. নাম্বরপত্র</option>
                               <option>৫. সীট নং</option>
-                              <option>আইডি কার্ড</option>
+                              {/* <option>আইডি কার্ড</option> */}
                             </select>
                           </div>
                         </div>

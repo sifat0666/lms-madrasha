@@ -212,7 +212,7 @@ const ResultCondition = () => {
                                     <div className="col-lg-4 col-md-4 col-6 offset-lg-4 offset-0">
                                       <div className="row mb-3">
                                         <label className="col-sm-12 col-form-label info-lable text-center">
-                                          বাংলা
+                                          English
                                         </label>
                                       </div>
                                     </div>

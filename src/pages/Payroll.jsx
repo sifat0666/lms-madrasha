@@ -3,19 +3,33 @@ import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 import { serverUrl } from "../../utils/config";
 import PayrollTable from "../Comonents/PayrollTable";
+import axios from "axios";
 
 const Payroll = () => {
-  const { data } = useQuery("employee", () =>
+  const { data, refetch } = useQuery("employee", () =>
     fetch(`${serverUrl}/api/employee-payroll-null`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
   );
 
-  const { data: sallery_sheet } = useQuery("sallery-sheet", () =>
-    fetch(`${serverUrl}/api/sallery-sheet`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    }).then((res) => res.json())
+  const { data: sallery_sheet, refetch: refetchSalSheet } = useQuery(
+    "sallery-sheet",
+    () =>
+      fetch(`${serverUrl}/api/sallery-sheet`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      }).then((res) => res.json())
   );
+
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/sallery-sheet/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    refetch();
+    refetchSalSheet();
+  };
 
   // console.log(data, "data");
 
@@ -40,7 +54,12 @@ const Payroll = () => {
         </thead>
         <tbody style={{ textAlign: "center" }}>
           {data?.map((item) => (
-            <PayrollTable key={item?.id} item={item} />
+            <PayrollTable
+              key={item?.id}
+              item={item}
+              refetch={refetch}
+              refetchSalSheet={refetchSalSheet}
+            />
           ))}
         </tbody>
       </table>
@@ -70,6 +89,12 @@ const Payroll = () => {
               <td>{item.chikitsha}</td>
               <td>{item.otiriktoBeton}</td>
               <td>{item.total}</td>
+              <span
+                onClick={(id) => onDelete(item.id)}
+                className="action-delete"
+              >
+                <i className="bi bi-trash3"></i>
+              </span>
             </tr>
           ))}
         </tbody>

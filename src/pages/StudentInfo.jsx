@@ -51,6 +51,8 @@ const StudentInfo = () => {
     }).then((res) => res.json())
   );
 
+  const [id, setId] = useState("");
+
   const date = new Date();
 
   let day = date.getDate();
@@ -226,6 +228,23 @@ const StudentInfo = () => {
     // console.log("fess submit", value);
     submitFee.mutate({ ...value, ammount: joma, discount: korton });
   };
+
+  const [studentsInfo, setStudentInfo] = useState();
+  const [stat, setStat] = useState("");
+  console.log(stat);
+
+  console.log(
+    "🚀 ~ file: StudentInfo.jsx:233 ~ StudentInfo ~ studentsInfo:",
+    studentsInfo
+  );
+
+  const fetchById = async () => {
+    console.log("first", id);
+    const student = await axios.get(`${serverUrl}/api/student/${id}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+    });
+    setStudentInfo(student?.data);
+  };
   return (
     <div>
       <section className="user-form-section">
@@ -236,8 +255,22 @@ const StudentInfo = () => {
                 <div className="row">
                   <div className="col-lg-7 col-md-12 col-sm-12">
                     <div className="section-title">
-                      <h4>শিক্ষার্থীর তথ্য</h4>
+                      <h4>শিক্ষার্থীর খুঁজুন</h4>
                     </div>
+                    <input
+                      type="text"
+                      placeholder="আইডি দিয়ে সার্চ করুন"
+                      name=""
+                      id=""
+                      className="m-3 p-2 w-75"
+                      onChange={(e) => setId(e.target.value)}
+                    />
+                    <button
+                      className="custom-btn btn-primary "
+                      onClick={fetchById}
+                    >
+                      Search
+                    </button>
                     <div className="my-4">
                       <form
                         onSubmit={handleSubmit(onSubmit)}
@@ -250,13 +283,21 @@ const StudentInfo = () => {
                             </div>
                             <div className="filter-menu">
                               <select
+                                required
                                 className="form-select"
                                 size="3"
                                 style={{ border: "none" }}
                                 {...register("session")}
                               >
                                 {academicYear?.data.map((item) => (
-                                  <option key={item.id}>
+                                  <option
+                                    // value={item.academic_year}
+                                    key={item.id}
+                                    selected={
+                                      studentsInfo?.session ==
+                                      item.academic_year
+                                    }
+                                  >
                                     {item.academic_year}
                                   </option>
                                 ))}
@@ -270,6 +311,8 @@ const StudentInfo = () => {
                           </div>
                           <div className="filter-menu">
                             <select
+                              required
+                              defaultValue={studentsInfo?.class}
                               className="form-select"
                               size="4"
                               style={{ border: "none" }}
@@ -278,6 +321,9 @@ const StudentInfo = () => {
                               {marhalaClass?.data.map((item) => (
                                 <option
                                   key={item.id}
+                                  selected={
+                                    studentsInfo?.class === item.class_name
+                                  }
                                   // onClick={() => setClasss(item.academicYear)}
                                 >
                                   {item.class_name}
@@ -332,12 +378,14 @@ const StudentInfo = () => {
                                   required
                                   class="form-select form-select-sm mx-auto m-3"
                                   {...register("old_new")}
+                                  defaultValue={studentsInfo?.notun_puraton}
                                   style={{
                                     textAlign: "center",
                                     justifyItems: "center",
                                     alignContent: "center",
                                     alignItems: "center",
                                   }}
+                                  onChange={(e) => setStat(e.target.value)}
                                 >
                                   <option value="new">নতুন</option>
                                   <option value="old">পুরাতনঃ</option>
@@ -357,6 +405,7 @@ const StudentInfo = () => {
                                   type="text"
                                   className="form-control"
                                   placeholder="গ্রাম"
+                                  defaultValue={studentsInfo?.perm_graam}
                                   {...register("perm_graam")}
                                 />
                               </div>
@@ -364,23 +413,33 @@ const StudentInfo = () => {
                           </div>
                         </div>
                         <div className="row">
-                          <div className="col-lg-7 col-md-12 col-12">
-                            <div className="row mb-1 mb-lg-3">
-                              {/* <label className="col-12 col-md-12 col-lg-4 col-form-label info-lable">
-                                ছাত্রের আইডিঃ
-                                <i>*</i>
-                              </label>
-                              <div className="col-lg-8 col-12 col-md-12">
+                          <div
+                            className="col-lg-7 col-md-12 col-12"
+                            style={{
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            {stat == "old" && (
+                              <div className="row d-flex  mb-1 mb-lg-3">
                                 <input
-                                  required
                                   type="text"
-                                  className="form-control"
-                                  placeholder="ছাত্রের আইডি"
-                                  value={"auto filled"}
-                                  {...register("student_id")}
+                                  placeholder="আইডি দিয়ে সার্চ করুন"
+                                  name=""
+                                  id=""
+                                  className="m-2 p-2 w-50"
+                                  onChange={(e) => setId(e.target.value)}
                                 />
-                              </div> */}
-                            </div>
+                                <button
+                                  className="m-2 custom-btn btn-primary "
+                                  onClick={fetchById}
+                                  style={{ width: "100px", height: "50px" }}
+                                >
+                                  Search
+                                </button>
+                              </div>
+                            )}
                           </div>
                           <div className="col-lg-5 col-md-12 col-12">
                             <div className="row mb-1 mb-lg-3">
@@ -390,6 +449,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.perm_daak}
                                   required
                                   type="text"
                                   className="form-control"
@@ -409,6 +469,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.roll}
                                   required
                                   type="text"
                                   className="form-control"
@@ -426,6 +487,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.perm_thana}
                                   required
                                   type="text"
                                   className="form-control"
@@ -464,6 +526,8 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <select
+                                  required
+                                  defaultValue={studentsInfo?.gender}
                                   class="form-select form-select-sm mx-auto m-3"
                                   {...register("gender")}
                                 >
@@ -481,6 +545,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.perm_jela}
                                   required
                                   type="text"
                                   className="form-control"
@@ -515,6 +580,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <select
+                                  defaultValue={studentsInfo?.abashik_onabashik}
                                   required
                                   class="form-select form-select-sm mx-auto m-3"
                                   {...register("abashik_onabashik")}
@@ -535,6 +601,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.student_name}
                                   required
                                   type="text"
                                   className="form-control"
@@ -552,6 +619,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.graam}
                                   required
                                   type="text"
                                   className="form-control"
@@ -571,6 +639,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.father_name}
                                   required
                                   type="text"
                                   className="form-control"
@@ -588,6 +657,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.thana}
                                   required
                                   type="text"
                                   className="form-control"
@@ -607,6 +677,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.mother_name}
                                   required
                                   type="text"
                                   className="form-control"
@@ -624,6 +695,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.jela}
                                   required
                                   type="text"
                                   className="form-control"
@@ -643,6 +715,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.dob}
                                   required
                                   type="date"
                                   className="form-control"
@@ -660,6 +733,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <textarea
+                                  defaultValue={studentsInfo?.comment}
                                   className="form-control"
                                   placeholder=" মন্তব্য"
                                   {...register("comment")}
@@ -677,6 +751,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.nid_no}
                                   type="text"
                                   className="form-control"
                                   placeholder="NID/জন্ম নিবন্ধন নং"
@@ -695,6 +770,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.nationality}
                                   required
                                   type="text"
                                   className="form-control"
@@ -732,6 +808,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.blood_group}
                                   type="text"
                                   className="form-control"
                                   placeholder="রক্তের গ্রুপঃ"
@@ -750,6 +827,7 @@ const StudentInfo = () => {
                               </label>
                               <div className="col-lg-8 col-12 col-md-12">
                                 <input
+                                  defaultValue={studentsInfo?.phn_no}
                                   required
                                   type="text"
                                   className="form-control"
@@ -812,6 +890,7 @@ const StudentInfo = () => {
                                 class="form-check-input"
                                 type="checkbox"
                                 id="flexSwitchCheckDefault"
+                                defaultChecked={studentsInfo?.vorti_fee_dibe}
                               />
                               <label
                                 class="form-check-label"
@@ -822,6 +901,7 @@ const StudentInfo = () => {
                             </div>
                             <div class="form-check form-switch">
                               <input
+                                defaultChecked={studentsInfo?.mashik_fee_dibe}
                                 {...register("mashik_fee_dibe")}
                                 class="form-check-input"
                                 type="checkbox"
@@ -836,6 +916,7 @@ const StudentInfo = () => {
                             </div>
                             <div class="form-check form-switch">
                               <input
+                                defaultChecked={studentsInfo?.khabar_fee_dibe}
                                 {...register("khabar_fee_dibe")}
                                 class="form-check-input"
                                 type="checkbox"
@@ -927,125 +1008,125 @@ const StudentInfo = () => {
                     </div>
                   </div>
                   <div className="col-lg-5 col-12 col-md-12">
-                    <table
-                      id="tech-companies-1"
-                      className="table  bg-white table-bordered text-center"
-                      style={{ maxHeight: "200px" }}
-                    >
-                      <thead className="text-center accounts-table-head">
-                        {" "}
-                        <tr>
-                          <td>ID</td>
-                          <th>সেশন</th>
-                          <th>নাম</th>
-                          <th>শ্রেণী</th>
-                          <th>রোল</th>
-                          <td></td>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {studentData?.map((item) => (
-                          <tr key={item.id}>
-                            <td>{item.id}</td>
-                            <td>{item.session}</td>
-                            <th>{item.student_name}</th>
-                            <td>{item.class}</td>
-                            <th>{item.roll}</th>
-                            <td>
-                              {" "}
-                              <span
-                                onClick={(id) => onDelete(item.id)}
-                                className="action-delete"
-                              >
-                                <i className="bi bi-trash3"></i>
-                              </span>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div className="">
-                  <div className="table-data mt-4">
-                    <div
-                      className="table-responsive"
-                      data-pattern="priority-columns"
-                    >
-                      <form className="" onSubmit={handleSubmit3(onSubmit3)}>
-                        <div>
-                          <select
-                            {...register3("session")}
-                            className="form-select"
-                          >
-                            <option disabled>শিক্ষাবর্ষ নির্বাচন করুন</option>
-                            {academicYear?.data.map((item) => (
-                              <option key={item.id}>
-                                {item.academic_year}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                        <div>
-                          <select
-                            {...register3("class")}
-                            className="form-select"
-                          >
-                            <option disabled>শ্রেণী নির্বাচন করুন</option>
-                            {marhalaClass?.data.map((item) => (
-                              <option
-                                key={item.id}
-                                // onClick={() => setClasss(item.academicYear)}
-                              >
-                                {item.class_name}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-
-                        <button className="btn btn-success btn-sm">
-                          খুজুন
-                        </button>
-                      </form>
-                      <table
-                        id="tech-companies-1"
-                        className="table  bg-white table-bordered text-center"
+                    <div className="table-data mt-4">
+                      <div
+                        className="table-responsive"
+                        data-pattern="priority-columns"
                       >
-                        <thead className="text-center accounts-table-head">
-                          {" "}
-                          <tr>
-                            <td>ID</td>
-                            <th>নাম</th>
-                            <th>রোল</th>
-                            <td>
-                              {" "}
-                              <span className="action-delete">
-                                <i className="bi bi-trash3"></i>
-                              </span>
-                            </td>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {student?.map((item) => (
-                            <tr key={item.id}>
-                              <td>{item.id}</td>
-                              <th>{item.student_name}</th>
-                              <th>{item.roll}</th>
+                        <form className="" onSubmit={handleSubmit3(onSubmit3)}>
+                          <div>
+                            <select
+                              {...register3("session")}
+                              className="form-select"
+                            >
+                              <option>শিক্ষাবর্ষ নির্বাচন করুন</option>
+                              {academicYear?.data.map((item) => (
+                                <option key={item.id}>
+                                  {item.academic_year}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          <div>
+                            <select
+                              {...register3("class")}
+                              className="form-select"
+                            >
+                              <option>শ্রেণী নির্বাচন করুন</option>
+                              {marhalaClass?.data.map((item) => (
+                                <option
+                                  key={item.id}
+                                  // onClick={() => setClasss(item.academicYear)}
+                                >
+                                  {item.class_name}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <button className="btn btn-success btn-sm">
+                            খুজুন
+                          </button>
+                        </form>
+                        <table
+                          id="tech-companies-1"
+                          className="table  bg-white table-bordered text-center"
+                        >
+                          <thead className="text-center accounts-table-head">
+                            {" "}
+                            <tr>
+                              <td>ID</td>
+                              <th>নাম</th>
+                              <th>রোল</th>
                               <td>
                                 {" "}
-                                <span
-                                  onClick={(id) => onDelete(item.id)}
-                                  className="action-delete"
-                                >
+                                <span className="action-delete">
                                   <i className="bi bi-trash3"></i>
                                 </span>
                               </td>
                             </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                          </thead>
+                          <tbody>
+                            {student?.map((item) => (
+                              <tr key={item.id}>
+                                <td>{item.id}</td>
+                                <th>{item.student_name}</th>
+                                <th>{item.roll}</th>
+                                <td>
+                                  {" "}
+                                  <span
+                                    onClick={(id) => onDelete(item.id)}
+                                    className="action-delete"
+                                  >
+                                    <i className="bi bi-trash3"></i>
+                                  </span>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
+                </div>
+                <div className="">
+                  <table
+                    id="tech-companies-1"
+                    className="table  bg-white table-bordered text-center"
+                    style={{ maxHeight: "200px" }}
+                  >
+                    <thead className="text-center accounts-table-head">
+                      {" "}
+                      <tr>
+                        <td>ID</td>
+                        <th>সেশন</th>
+                        <th>নাম</th>
+                        <th>শ্রেণী</th>
+                        <th>রোল</th>
+                        <td></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {studentData?.map((item) => (
+                        <tr key={item.id}>
+                          <td>{item.id}</td>
+                          <td>{item.session}</td>
+                          <th>{item.student_name}</th>
+                          <td>{item.class}</td>
+                          <th>{item.roll}</th>
+                          <td>
+                            {" "}
+                            <span
+                              onClick={(id) => onDelete(item.id)}
+                              className="action-delete"
+                            >
+                              <i className="bi bi-trash3"></i>
+                            </span>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                   <div></div>
                 </div>
               </div>
@@ -1209,11 +1290,7 @@ const StudentInfo = () => {
       {/* <!--Admisson Fees Collect Modal End--> */}
 
       <div style={{ display: "none" }} id="invoice">
-        <div
-          ref={ref}
-          className="preview-page d-print-block"
-          style={{ zIndex: 1 }}
-        >
+        <div ref={ref} className="bg-white d-print-block" style={{ zIndex: 1 }}>
           <span className="print-button d-print-none" onclick="window.print()">
             <i className="bi bi-printer-fill"></i>
           </span>

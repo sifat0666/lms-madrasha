@@ -311,12 +311,6 @@ const MarkEntry = () => {
                               <th>মারহালা/শ্রেণীঃ</th>
 
                               {/* <th>Submit</th> */}
-
-                              <th>
-                                <span className="action-delete">
-                                  <i className="bi bi-trash3"></i>
-                                </span>
-                              </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -332,12 +326,6 @@ const MarkEntry = () => {
                                 {/* <td>
                                   <button type="submit">submit</button>
                                 </td> */}
-
-                                <td>
-                                  <span className="action-delete">
-                                    <i className="bi bi-trash3"></i>
-                                  </span>
-                                </td>
                               </tr>
                             ))}
                           </tbody>

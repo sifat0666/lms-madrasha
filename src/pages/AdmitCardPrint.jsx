@@ -131,7 +131,7 @@ const AdmitCardPrint = () => {
                   {/* <!--Preview Page Section--> */}
                   <div className="col-lg-8 col-12 col-md-12 mt-lg-0 mt-4">
                     <div
-                      className="preview-page d-print-block"
+                      className="bg-white d-print-block"
                       style={{ zIndex: 1 }}
                     >
                       <span

@@ -34,7 +34,7 @@ const StudentAttandance = () => {
     },
     onError: (error, variable, context) => {
       // console.log(error.response.data.message);
-      toast.error(error.response.data.message);
+      // toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
       console.log("userdata", data.data);

@@ -213,7 +213,7 @@ const Report = () => {
                   </div>
                   {/* <!--Preview Page Section--> */}
                   {/* <div className="col-lg-8 col-12 col-md-12 mt-lg-0 mt-4">
-                    <div className="preview-page d-print-block">
+                    <div className="bg-white d-print-block">
                       <span
                         className="print-button d-print-none"
                         onclick="window.print()"
@@ -265,7 +265,7 @@ const Report = () => {
                   </div> */}
                   <div className="col-lg-8 col-12 col-md-12 mt-lg-0 mt-4">
                     <div
-                      className="preview-page d-print-block"
+                      className="bg-white d-print-block"
                       style={{ zIndex: 1 }}
                     >
                       <span

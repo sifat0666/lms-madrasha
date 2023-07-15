@@ -53,30 +53,31 @@ const MaashHishab = ({ data, value }) => {
           <div className="row">
             <div className="">
               <div className="table-responsive" data-pattern="priority-columns">
+                <div className="bg-white w-100 p-3 d-flex flex-column">
+                  {" "}
+                  <td colspan="8" className="place-items-center">
+                    <div className="pages-title">
+                      <h5>{instituteInfo?.name}</h5>
+                      <p>{instituteInfo?.address}</p>
+                      <span>{instituteInfo?.num}</span>
+                      <br />
+                      <span className="pages-subtitle">
+                        {month} এর হিসাব এন্ট্রি
+                      </span>
+                      <div className="d-flex justify-content-between">
+                        <div>
+                          <strong>প্রিন্ট তারিখঃ</strong>
+                          {dayjs().format("YYYY-MM-DD")}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </div>
+
                 <table className="table  bg-white table-bordered text-center report-table">
                   <thead className="text-center">
                     <tr>
-                      <td colspan="8">
-                        <div className="pages-title">
-                          <h5>{instituteInfo?.name}</h5>
-                          <p>{instituteInfo?.address}</p>
-                          <span>{instituteInfo?.num}</span>
-                          <br />
-                          <span className="pages-subtitle">
-                            {month} এর হিসাব এন্ট্রি
-                          </span>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="8">
-                        <div className="d-flex justify-content-between">
-                          <div>
-                            <strong>প্রিন্ট তারিখঃ</strong>
-                            {dayjs().format("YYYY-MM-DD")}
-                          </div>
-                        </div>
-                      </td>
+                      <td colspan="8"></td>
                     </tr>
                     <tr>
                       <th>আইডি</th>

@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { useMutation } from "react-query";
 import { serverUrl } from "../../utils/config";
 
-const PaySalleryTable = ({ item, month, session }) => {
+const PaySalleryTable = ({ item, month, session, notPaidMutate, mutate }) => {
   const [sallery, setSallery] = useState();
 
   const mutation = useMutation({
@@ -22,6 +22,8 @@ const PaySalleryTable = ({ item, month, session }) => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
+      mutate({ session, month });
+      notPaidMutate({ session, month });
       console.log("userdasdfata", data.data);
       toast.success("sumitted successfully");
     },

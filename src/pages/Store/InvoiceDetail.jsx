@@ -15,10 +15,7 @@ const InvoiceDetail = () => {
                     </div>
                   </div>
                 </div>
-                <div
-                  className="preview-page d-print-block"
-                  style={{ zIndex: 1 }}
-                >
+                <div className="bg-white d-print-block" style={{ zIndex: 1 }}>
                   <span
                     className="print-button d-print-none"
                     onclick="window.print()"

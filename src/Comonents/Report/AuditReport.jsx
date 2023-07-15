@@ -3,7 +3,7 @@ import React from "react";
 const AuditReport = () => {
   return (
     <div>
-      <div className="preview-page d-print-block ">
+      <div className="bg-white d-print-block ">
         <span className="print-button d-print-none" onclick="window.print()">
           <i className="bi bi-printer-fill"></i>
         </span>

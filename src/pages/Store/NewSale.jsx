@@ -127,7 +127,7 @@ const NewSale = () => {
       {/* <!-- Employe Add Section End -->
             <!--রির্পোট প্রিন্ট সেকশন-->
             <!--Preview Page Section--> */}
-      {/* <div className="preview-page d-print-block d-none">
+      {/* <div className="bg-white d-print-block d-none">
         <span className="print-button d-print-none" onclick="window.print()">
           <i className="bi bi-printer-fill"></i>
         </span>

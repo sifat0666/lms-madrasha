@@ -125,7 +125,7 @@ const StudentIDCard = () => {
                   </div>
                   {/* <!--Preview Page Section--> */}
                   <div className="col-lg-8 col-12 col-md-12 mt-lg-0 mt-2">
-                    <div className="preview-page d-print-block">
+                    <div className="bg-white d-print-block">
                       <span
                         className="print-button d-print-none"
                         onclick="window.print()"

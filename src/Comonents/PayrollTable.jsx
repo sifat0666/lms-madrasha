@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../utils/config";
 
-const PayrollTable = ({ item }) => {
+const PayrollTable = ({ item, refetchSalSheet, refetch }) => {
   console.log("iotem", item);
   const mutation = useMutation({
     mutationFn: (data) => {
@@ -21,6 +21,8 @@ const PayrollTable = ({ item }) => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
+      refetch();
+      refetchSalSheet();
       console.log("userdasdfata", data.data);
       toast.success("sumitted successfully");
     },

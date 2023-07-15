@@ -103,7 +103,7 @@ const ManageSale = () => {
                                         <div className="col-md-12 w-100">
                                           <div className="main-container">
                                             <div
-                                              className="preview-page d-print-block"
+                                              className="bg-white d-print-block"
                                               style={{ zIndex: 1 }}
                                             >
                                               <span
@@ -296,7 +296,7 @@ const ManageSale = () => {
       </section>
       {/* <!-- Employe Add Section End -->
             <!--রির্পোট প্রিন্ট সেকশন--> */}
-      <div className="preview-page d-print-block d-none" style={{ zIndex: 1 }}>
+      <div className="bg-white d-print-block d-none" style={{ zIndex: 1 }}>
         <span className="print-button d-print-none" onclick="window.print()">
           <i className="bi bi-printer-fill"></i>
         </span>

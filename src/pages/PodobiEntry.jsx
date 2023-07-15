@@ -8,7 +8,7 @@ import { serverUrl } from "../../utils/config";
 const PodobiEntry = () => {
   const { register, handleSubmit } = useForm();
 
-  const { data: podobi } = useQuery("podobi", () =>
+  const { data: podobi, refetch } = useQuery("podobi", () =>
     fetch(`${serverUrl}/api/podobi`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
@@ -29,6 +29,7 @@ const PodobiEntry = () => {
     },
     onSuccess: (data) => {
       console.log(data?.data, "data");
+      refetch();
       toast.success("Added Successfully");
     },
   });
@@ -44,7 +45,7 @@ const PodobiEntry = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    location.reload();
+    refetch();
   };
 
   return (
@@ -92,9 +93,6 @@ const PodobiEntry = () => {
                   <tr>
                     <th scope="col">আইডি</th>
                     <th scope="col">পদবির নাম</th>
-                    <span className="action-delete">
-                      <i className="bi bi-trash3"></i>
-                    </span>
                   </tr>
                 </thead>
                 <tbody>

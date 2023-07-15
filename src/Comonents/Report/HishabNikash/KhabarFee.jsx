@@ -24,10 +24,7 @@ const KhabarFee = ({ value, student, months }) => {
           <div className="pages-content">
             <div className="row">
               <div className="col-12">
-                <div
-                  className="table-responsive"
-                  data-pattern="priority-columns"
-                >
+                <div className="" data-pattern="priority-columns">
                   <table
                     style={{ width: "100%" }}
                     className="table  bg-white table-bordered text-center report-table"

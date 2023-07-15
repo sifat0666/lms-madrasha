@@ -310,7 +310,7 @@ const AdmissionFeeModal = ({ item }) => {
       <div style={{ display: "none" }} id="invoice">
         <div
           ref={ref}
-          className="preview-page d-print-block"
+          className="bg-white d-print-block"
           style={{ zIndex: 1 }}
         >
           <span className="print-button d-print-none" onclick="window.print()">

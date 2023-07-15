@@ -6,7 +6,7 @@ import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../../utils/config";
 
 const TeacherStaff = () => {
-  const { data } = useQuery("employee", () =>
+  const { data, refetch } = useQuery("employee", () =>
     fetch(`${serverUrl}/api/employee`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
@@ -20,6 +20,16 @@ const TeacherStaff = () => {
   );
 
   console.log("podofblim", podobi);
+
+  const onDelete = async (id) => {
+    const data = await axios.delete(`${serverUrl}/api/employee/${id}`, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    refetch();
+  };
 
   const mutation = useMutation({
     mutationFn: (data) => {
@@ -35,6 +45,7 @@ const TeacherStaff = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
+      refetch();
       console.log("userdasdfata", data.data);
       //  setRecord(data.data);
       toast.success("sumitted successfully");
@@ -454,11 +465,12 @@ const TeacherStaff = () => {
                                 <td>{item.position}</td>
                                 <td>{item.phn_no}</td>
 
-                                <td>
-                                  <span className="action-delete">
-                                    <i className="bi bi-trash3"></i>
-                                  </span>
-                                </td>
+                                <span
+                                  onClick={(id) => onDelete(item.id)}
+                                  className="action-delete"
+                                >
+                                  <i className="bi bi-trash3"></i>
+                                </span>
                               </tr>
                             ))}
                           </tbody>
@@ -475,7 +487,7 @@ const TeacherStaff = () => {
       {/* <!-- Employe Add Section End --> */}
       {/* <!--রির্পোট প্রিন্ট সেকশন--> */}
       {/* <!--Preview Page Section--> */}
-      <div className="preview-page d-print-block d-none">
+      <div className="bg-white d-print-block d-none">
         <span className="print-button d-print-none" onclick="window.print()">
           <i className="bi bi-printer-fill"></i>
         </span>
