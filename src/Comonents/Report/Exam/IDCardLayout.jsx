@@ -15,7 +15,7 @@ const IDCardLayout = ({ student }) => {
     <div className="bg-light">
       {student?.map((item) => (
         <div class="black-whiteid m-2 p-2" key={item.id}>
-          <div class="id-card part-one">
+          <div class="id-card part-one mx-4">
             <div class="idcard-institute-info">
               <h6>{instituteInfo?.name}</h6>
               <p>{instituteInfo?.address}</p>
@@ -36,8 +36,8 @@ const IDCardLayout = ({ student }) => {
               <span>মুহতামিম এর সাক্ষর</span>
             </div>
           </div>
-          <div class="id-card part-two">
-            <div class="idcard-info-part-two">
+          <div class="id-card part-two mx-4 ">
+            <div class="idcard-info-part-two ">
               <div class="idcard-title"> শিক্ষার্থীর পরিচিতি</div>
               <div class="info">
                 <strong>শিক্ষার্থীর নামঃ</strong>

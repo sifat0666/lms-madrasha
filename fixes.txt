@@ -30,11 +30,9 @@ id card number issue --pending
 16. gor nirnoy change bangla to english --done
 17. mark entry delete icon delete --done
 18. pay sallery auto refetch --done
-19. sallery report bug fix
-20. staff korton report
+19. sallery report bug fix  --done
 21. data sodossho report
 22. probesh potro design change
-22. porikkhar fee uttolon double in 2 page
 23. seat number design change
 4. mashuk fee report number ---pending
 6. masher naam repeat delete---pending
@@ -43,3 +41,4 @@ id card number issue --pending
 13. hajira report maash and bochor 
 14. class wari hajira khata
 15. mash vittik hajira khata
+20. staff korton report

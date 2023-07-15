@@ -297,6 +297,7 @@ const Report = () => {
                       {report === "আইডি কার্ড" ? (
                         <IDCardLayout student={student} />
                       ) : null}
+                      {!report && <div>select something</div>}
                     </div>
                   </div>
                 </div>

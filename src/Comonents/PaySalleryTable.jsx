@@ -4,9 +4,11 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useMutation } from "react-query";
 import { serverUrl } from "../../utils/config";
+import { useRef } from "react";
 
 const PaySalleryTable = ({ item, month, session, notPaidMutate, mutate }) => {
   const [sallery, setSallery] = useState();
+  const inputRef = useRef();
 
   const mutation = useMutation({
     mutationFn: (data) => {
@@ -22,6 +24,7 @@ const PaySalleryTable = ({ item, month, session, notPaidMutate, mutate }) => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
+      inputRef.current.value = "";
       mutate({ session, month });
       notPaidMutate({ session, month });
       console.log("userdasdfata", data.data);
@@ -54,6 +57,7 @@ const PaySalleryTable = ({ item, month, session, notPaidMutate, mutate }) => {
       <td>{item.total}</td>
       <td>
         <input
+          ref={inputRef}
           onChange={(e) => setSallery(e.target.value)}
           style={{ width: "5rem" }}
           type="number"

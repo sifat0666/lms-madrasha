@@ -13,13 +13,14 @@ import PodobiShortlist from "../../Comonents/Report/EmployeeSallery/PodobiShortl
 const SalaryReport = () => {
   const [report, setReport] = useState();
   const [podobi, setPodobi] = useState();
+  console.log(
+    "🚀 ~ file: SalaryReport.jsx:16 ~ SalaryReport ~ podobi:",
+    podobi
+  );
   const [session, setSession] = useState();
   const [month, setMonth] = useState();
   const [paidTable, setPaidTable] = useState();
   const [notPaidTable, setNotPaidTable] = useState([]);
-
-  console.log("paid table", paidTable);
-  console.log("not paid table", notPaidTable);
 
   const { mutate } = useMutation({
     mutationFn: (data) => {
@@ -249,6 +250,7 @@ const SalaryReport = () => {
                               className="form-select"
                               // {...register("position")}
                             >
+                              <option>সিলেক্ট করুন</option>
                               {podobis?.map((item) => (
                                 <option>{item.podobi}</option>
                               ))}

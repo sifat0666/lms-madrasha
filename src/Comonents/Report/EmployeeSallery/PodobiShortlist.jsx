@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { serverUrl } from "../../../../utils/config";
 
 const PodobiShortlist = ({ podobi }) => {
+  console.log("pod", podobi);
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
     fetch(`${serverUrl}/api/institute-info`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
