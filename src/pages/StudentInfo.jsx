@@ -195,11 +195,20 @@ const StudentInfo = () => {
 
     console.log("img", response?.data.secure_url);
 
-    mutation.mutate({
-      ...value,
-      notun_puraton: value.old_new,
-      image: response?.data.secure_url,
-    });
+    if (id) {
+      mutation.mutate({
+        ...value,
+        id: id,
+        notun_puraton: value.old_new,
+        image: response?.data.secure_url,
+      });
+    } else {
+      mutation.mutate({
+        ...value,
+        notun_puraton: value.old_new,
+        image: response?.data.secure_url,
+      });
+    }
 
     const params = {
       state: data,

@@ -117,14 +117,14 @@ const FeeName = () => {
                       <tr key={item.id}>
                         <th scope="row">{item.id}</th>
                         <td>{item.fee_name}</td>
-                        {/* <th>
+                        <th>
                           <span
                             className="action-delete"
                             onClick={(id) => onDelete(item.id)}
                           >
                             <i className="bi bi-trash3"></i>
                           </span>
-                        </th> */}
+                        </th>
                       </tr>
                     ))}
                   </tbody>
