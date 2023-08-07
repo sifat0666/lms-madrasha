@@ -56,7 +56,8 @@ const ExamEntry = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    location.reload();
+    toast.success("deleted successfully");
+    refetch();
   };
 
   return (
@@ -291,7 +292,9 @@ const ExamEntry = () => {
 
                               <td>
                                 <span
-                                  onClick={(id) => onDelete(item.id)}
+                                  onClick={(id) => {
+                                    onDelete(item.id);
+                                  }}
                                   className="action-delete"
                                 >
                                   <i className="bi bi-trash3"></i>

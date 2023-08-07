@@ -120,7 +120,7 @@ const ResultCondition = () => {
                       role="tablist"
                     >
                       <li className="nav-item" role="presentation">
-                        <button
+                        {/* <button
                           className="nav-link active"
                           data-bs-toggle="pill"
                           data-bs-target="#pills-home"
@@ -130,7 +130,7 @@ const ResultCondition = () => {
                           aria-selected="true"
                         >
                           গড় নির্নয়
-                        </button>
+                        </button> */}
                       </li>
                       <li className="nav-item" role="presentation">
                         {/* <button
@@ -668,12 +668,6 @@ const ResultCondition = () => {
                                     <th>ডিভিশন-৩</th>
                                     <th>নাম্বার</th>
                                     <th>ডিভিশন-4</th>
-
-                                    <th>
-                                      <span className="action-delete">
-                                        <i className="bi bi-trash3"></i>
-                                      </span>
-                                    </th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -692,7 +686,12 @@ const ResultCondition = () => {
 
                                       <td>
                                         <span
-                                          onClick={() => onDelete(item.id)}
+                                          onClick={() => {
+                                            onDelete(item.id);
+                                            toast.success(
+                                              "Delete Successfully"
+                                            );
+                                          }}
                                           className="action-delete"
                                         >
                                           <i className="bi bi-trash3"></i>

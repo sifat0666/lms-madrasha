@@ -9,8 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { serverUrl } from "../../utils/config";
 
-const withouSidebarRoutes = ["/login"];
-
 const Layout = ({ children }) => {
   const { pathname } = useLocation();
 
@@ -145,11 +143,11 @@ const Layout = ({ children }) => {
                                   </p>
                                 </Link>
                               </li>
-                              <li>
+                              {/* <li>
                                 <Link to="/accounting/hishab-nikash">
                                   <p class="dropdown-item">হিসাব নিকাশ</p>
                                 </Link>
-                              </li>
+                              </li> */}
                               {/* <li>
                                 <Link to="/income-expence-entry">
                                   {" "}

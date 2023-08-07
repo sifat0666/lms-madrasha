@@ -143,6 +143,7 @@ const MarkSheet = () => {
   // console.log("total", total);
 
   const onSubmit = async (data) => {
+    console.log("class name data", data);
     customStudent.mutate(data);
     setStudent(student?.data);
     console.log(data);
