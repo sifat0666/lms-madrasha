@@ -37,9 +37,7 @@ const Attandance = ({ data, val, classData }) => {
                           <p>{instituteInfo?.address}</p>
                           <span>{instituteInfo?.num}</span>
                           <br />
-                          <span className="pages-subtitle">
-                            পরীক্ষা ফি উত্তোলন তালিকা
-                          </span>
+                          <span className="pages-subtitle">দস্তখতপত্র</span>
                         </div>
                       </td>
                     </tr>

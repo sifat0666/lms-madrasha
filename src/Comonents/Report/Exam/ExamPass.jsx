@@ -13,15 +13,30 @@ const ExamPass = ({ data, val }) => {
     <div>
       {data?.map((item) => (
         <div className="bg-light">
-          <div key={item.id} className=" bg-light p-3">
+          <div key={item.id} className=" bg-light p-1">
             {" "}
             <div className="m-2 border border-black rounded">
               {" "}
               <div className="pages-title bg-light">
-                <h5>{instituteInfo?.name}</h5>
-                <p>{instituteInfo?.address}</p>
-                <span>{instituteInfo?.num}</span>
-                <br />
+                <div
+                  style={{ display: "flex", justifyContent: "space-between" }}
+                  className="px-4"
+                >
+                  <img
+                    src={item.image}
+                    style={{ width: "120px", height: "120px" }}
+                  />
+                  <div>
+                    <h5>{instituteInfo?.name}</h5>
+                    <p>{instituteInfo?.address}</p>
+                    <span>{instituteInfo?.num}</span>
+                  </div>
+                  <img
+                    src={instituteInfo.logo}
+                    style={{ width: "120px", height: "120px" }}
+                  />
+                </div>
+
                 <span className="pages-subtitle">প্রবেশপত্র</span>
               </div>
               <div

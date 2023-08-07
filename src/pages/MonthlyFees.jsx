@@ -36,6 +36,12 @@ const MonthlyFees = () => {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
   );
+
+  const { data: instituteInfo } = useQuery("instituteInfo", () =>
+    fetch(`${serverUrl}/api/institute-info`).then((res) => res.json())
+  );
+
+  console.log("inst info", instituteInfo);
   const { data: academicYear } = useQuery("academicyear", () =>
     fetch(`${serverUrl}/api/academicyear`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -2409,9 +2415,9 @@ const MonthlyFees = () => {
             <i className="bi bi-printer-fill"></i>
           </span>
           <div className="pages-title">
-            <h5>জামিয়া আরাবিয়া ইমদাদুল ফরিদাবাদ</h5>
-            <p>১১/১২ মাদরাসা রোড, গেন্ডারিয়া, ঢাকা-১২০৪</p>
-            <span>01832-061454 # 027440235</span>
+            <h5>{instituteInfo?.name}.</h5>
+            <p>{instituteInfo?.address}.</p>
+            <span>{instituteInfo?.num}.</span>
           </div>
           <div className="row my-3 invoice-title">
             <div className="col-4 d-flex align-items-center">
@@ -2496,7 +2502,7 @@ const MonthlyFees = () => {
                         <td>{monthName}</td>
                         <td>{feeName}</td>
                         <td>{fees}</td>
-                        <td>{feeVal?.discount}</td>
+                        <td>{korton}</td>
                         <td>{feeVal?.submitted_fee}</td>
                       </tr>
                       {/* <tr>

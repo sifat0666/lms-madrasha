@@ -530,7 +530,7 @@ const Layout = ({ children }) => {
                                   </a>
                                 </Link>
                               </li>
-                              <li>
+                              {/* <li>
                                 <Link to="/individual-salary-sheet">
                                   <a
                                     class="dropdown-item"
@@ -539,7 +539,7 @@ const Layout = ({ children }) => {
                                     শিক্ষকদের বেতন সিট প্রিন্ট
                                   </a>
                                 </Link>
-                              </li>
+                              </li> */}
                             </ul>
                           </li>
                           <li class="nav-item dropdown">

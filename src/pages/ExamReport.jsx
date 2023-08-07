@@ -125,9 +125,7 @@ const ExamReport = () => {
                               onChange={(e) => setReport(e.target.value)}
                             >
                               <option>নির্বাচন করুন</option>
-                              <option selected>
-                                ১. পরীক্ষার ফি উত্তোলন তালিকা
-                              </option>
+                              <option>১. পরীক্ষার ফি উত্তোলন তালিকা</option>
                               <option
                               // data-bs-toggle="modal"
                               // data-bs-target="#admitcard"

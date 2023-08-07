@@ -6,7 +6,7 @@ import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../../utils/config";
 
 const DonerMember = () => {
-  const { data: doner_member } = useQuery("doner_member", () =>
+  const { data: doner_member, refetch } = useQuery("doner_member", () =>
     fetch(`${serverUrl}/api/doner-member`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     }).then((res) => res.json())
@@ -30,6 +30,7 @@ const DonerMember = () => {
     onSuccess: (data) => {
       console.log(data?.data, "data");
       toast.success("Registered Successfully");
+      refetch();
     },
   });
 
@@ -47,7 +48,8 @@ const DonerMember = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    location.reload();
+    refetch();
+    toast.success("deleted successfully");
   };
 
   return (
@@ -246,14 +248,14 @@ const DonerMember = () => {
                         <div className="col-lg-5 col-md-5 col-12 offset-0 offset-md-7">
                           <div className="row mb-3">
                             <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                              কপিলঃ
+                              সদস্য ধরন
                               <i>*</i>
                             </label>
                             <div className="col-lg-8 col-md-8 col-12">
                               <input
                                 {...register("copil")}
                                 className="form-control"
-                                placeholder="কপিল"
+                                placeholder="সদস্য ধরন"
                               />
                             </div>
                           </div>

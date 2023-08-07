@@ -398,14 +398,14 @@ const Navbar = () => {
                                   রিপোর্ট
                                 </a>
                               </li>
-                              <li>
+                              {/* <li>
                                 <a
                                   className="dropdown-item"
                                   href="./pages/Report/individual-salary-sheet.html"
                                 >
                                   শিক্ষকদের বেতন সিট প্রিন্ট
                                 </a>
-                              </li>
+                              </li> */}
                             </ul>
                           </li>
                           <li className="nav-item dropdown">

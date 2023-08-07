@@ -4,8 +4,11 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
 import { serverUrl } from "../../../utils/config";
+import { useState } from "react";
 
 const AddBook = () => {
+  const [other, setOther] = useState(false);
+
   const { data: book } = useQuery("doner_member", () =>
     fetch(`${serverUrl}/api/book`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -115,17 +118,34 @@ const AddBook = () => {
                               ক্যাটাগরি
                               <i>*</i>
                             </label>
-                            <div className="col-lg-8 col-md-8 col-12">
-                              <select
-                                {...register("category")}
-                                className="form-select"
-                              >
-                                <option disabled>সিলেক্ট করুন</option>
-                                <option>পাঠ্য বই</option>
-                                <option>সাহিত্য</option>
-                                <option>হাদিস</option>
-                              </select>
-                            </div>
+                            {!other ? (
+                              <div className="col-lg-8 col-md-8 col-12">
+                                <select
+                                  {...register("category")}
+                                  onClick={(e) => {
+                                    if (e.target.value === "Other") {
+                                      setOther(true);
+                                    }
+                                  }}
+                                  className="form-select"
+                                >
+                                  <option disabled>সিলেক্ট করুন</option>
+                                  <option>পাঠ্য বই</option>
+                                  <option>সাহিত্য</option>
+                                  <option>হাদিস</option>
+                                  <option>Other</option>
+                                </select>
+                              </div>
+                            ) : (
+                              <div className="col-lg-8 col-md-8 col-12">
+                                <input
+                                  {...register("category")}
+                                  type="text"
+                                  className="form-control"
+                                  placeholder=" ক্যাটাগরি"
+                                />
+                              </div>
+                            )}
                           </div>
                         </div>
                         <div className="col-lg-2 col-md-4 col-12"></div>
