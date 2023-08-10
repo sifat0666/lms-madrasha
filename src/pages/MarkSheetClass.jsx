@@ -108,7 +108,7 @@ const MarkSheet = () => {
 
 
   function sumAndSortWithPositions(array) {
-    const sums = array?.map(subArray => subArray.reduce((acc, val) => acc + val, 0));
+    const sums = array?.map(subArray => subArray?.reduce((acc, val) => acc + val, 0));
     const indexedSums = sums?.map((value, index) => ({ value, index }));
   
     indexedSums?.sort((a, b) => b.value - a.value); // Sort in descending order
