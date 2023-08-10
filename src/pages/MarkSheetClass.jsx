@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
 import ReactToPrint from "react-to-print";
 import { serverUrl } from "../../utils/config";
+import { createItemFromDescriptor } from "@babel/core/lib/config/item";
 
 const MarkSheet = () => {
   const ref = useRef();
@@ -102,45 +103,44 @@ const MarkSheet = () => {
 
   const { register, handleSubmit } = useForm();
 
-  // const totalNumber = (x) => {
-  //   return results
-  //     ?.map((item) => {
-  //       if (item.student_id === x) {
-  //         return parseInt(item?.number);
-  //       }
-  //     })
-  //     ?.reduce((accumulator, currentValue) => accumulator + currentValue);
-  // };
 
-  // const getTotalNumber = (x) => {
-  //   const total = results
-  //     ?.map((i) => {
-  //       if (i.student_id == x) {
-  //         return parseInt(i?.number);
-  //       }
-  //     })
-  //     ?.reduce((accumulator, currentValue) => accumulator + currentValue);
-  //   return total || 0;
-  // };
 
-  // const totalt = getTotalNumber(1);
 
-  // console.log("totalt", getTotalNumber);
 
-  // console.log("reshults", results);
+  function sumAndSortWithPositions(array) {
+    const sums = array?.map(subArray => subArray.reduce((acc, val) => acc + val, 0));
+    const indexedSums = sums?.map((value, index) => ({ value, index }));
+  
+    indexedSums?.sort((a, b) => b.value - a.value); // Sort in descending order
+  
+    const sortedSumsWithPositions = indexedSums?.map((item, sortedIndex) => ({
+      sum: item.value,
+      originalIndex: item.index,
+      sortedIndex : sortedIndex +1,
+    }));
+  
+    return sortedSumsWithPositions;
+  }
 
-  // con st total = students?.map((i) =>
-  //   results
-  //     ?.map((item) => {
-  //       if (item.student_id == i.id) {
-  //         return parseInt(item?.number);
-  //       }
-  //       return null;
-  //     })
-  //     ?.reduce((accumulator, currentValue) => accumulator + currentValue)
-  // );
 
-  // console.log("total", total);
+
+
+
+const total = students?.map((student) => {
+  const studentResults = results
+    ?.filter((result) => result.student_id === student.id)
+    ?.map((result) => parseInt(result?.number))
+    ?.filter((number) => !isNaN(number));
+  return studentResults;
+});
+
+  // Example usage
+
+  const result = sumAndSortWithPositions(total);
+  
+
+  console.log("total", total);
+  console.log('sorted array',result);
 
   const onSubmit = async (data) => {
     console.log("class name data", data);
@@ -173,24 +173,9 @@ const MarkSheet = () => {
                   </div>
                 </div>
                 <div className="row">
-                  {/* <!--Filter Menu Section--> */}
                   <div className="col-lg-4 col-md-12 col-12 d-print-none">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                      {/* <div className="row mb-3">
-                        <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
-                          রিপোর্ট
-                          <i>*</i>
-                        </label>
-                        <div className="col-lg-8 col-md-8 col-12">
-                          <select className="form-select">
-                            <option value="" selected="">
-                              সিলেক্ট করুন
-                            </option>
-                            <option value="">A4 পেপার</option>
-                            <option value="">Ligal Paper</option>
-                          </select>
-                        </div>
-                      </div> */}
+            
                       <div className="row mb-3">
                         <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                           শিক্ষাবর্ষ
@@ -284,12 +269,12 @@ const MarkSheet = () => {
 
                   <div className="col-lg-8 col-md-12 col-12 mt-2 mt-lg-0 ">
                     <div ref={ref}>
-                      {students?.map((item) => (
+                      {students?.map((item, index) => (
                         <div
                           className=" m-1 mx-auto d-flex flex-column justify-content-center"
                           style={{
                             // borderStyle: "dashed",
-                            borderBottom: "dashed",
+                            // borderBottom: "dashed",
 
                             zIndex: 1,
                             background: "white",
@@ -350,9 +335,9 @@ const MarkSheet = () => {
                                       >
                                         <tr>
                                           <th colspan="4">
-                                            মোট বিষয় {results?.length}টি
-                                            পূর্নমান 100 x {results?.length} ={" "}
-                                            {100 * results?.length}
+                                            মোট বিষয় {total[index]?.length}টি
+                                            পূর্নমান 100 x {total[index]?.length} ={" "}
+                                            {100 * total[index]?.length}
                                           </th>
                                         </tr>
                                       </thead>
@@ -361,72 +346,72 @@ const MarkSheet = () => {
                                           <td>{division[0]?.case1_div}</td>
                                           <td>
                                             {division[0]?.case1} *{" "}
-                                            {results?.length}
+                                            {total[index]?.length}
                                           </td>
                                           <td>=</td>
                                           <td>
                                             {division[0]?.case1 *
-                                              results?.length}
+                                              total[index]?.length}
                                           </td>
                                         </tr>
                                         <tr>
                                           <td>{division[0]?.case2_div}</td>
                                           <td>
                                             {division[0]?.case2} *{" "}
-                                            {results?.length}
+                                            {total[index]?.length}
                                           </td>
                                           <td>=</td>
                                           <td>
                                             {division[0]?.case2 *
-                                              results?.length}
+                                              total[index]?.length}
                                           </td>
                                         </tr>{" "}
                                         <tr>
                                           <td>{division[0]?.case3_div}</td>
                                           <td>
                                             {division[0]?.case3} *{" "}
-                                            {results?.length}
+                                            {total[index]?.length}
                                           </td>
                                           <td>=</td>
                                           <td>
                                             {division[0]?.case3 *
-                                              results?.length}
+                                              total[index]?.length}
                                           </td>
                                         </tr>{" "}
                                         <tr>
                                           <td>{division[0]?.case4_div}</td>
                                           <td>
                                             {division[0]?.case4} *{" "}
-                                            {results?.length}
+                                            {total[index]?.length}
                                           </td>
                                           <td>=</td>
                                           <td>
                                             {division[0]?.case4 *
-                                              results?.length}
+                                              total[index]?.length}
                                           </td>
                                         </tr>{" "}
                                         <tr>
                                           <td>{division[0]?.case5_div}</td>
                                           <td>
                                             {division[0]?.case5} *{" "}
-                                            {results?.length}
+                                            {total[index]?.length}
                                           </td>
                                           <td>=</td>
                                           <td>
                                             {division[0]?.case5 *
-                                              results?.length}
+                                              total[index]?.length}
                                           </td>
                                         </tr>{" "}
                                         <tr>
                                           <td>{division[0]?.case6_div}</td>
                                           <td>
                                             {division[0]?.case6} *{" "}
-                                            {results?.length}
+                                            {total[index]?.length}
                                           </td>
                                           <td>=</td>
                                           <td>
                                             {division[0]?.case6 *
-                                              results?.length}
+                                              total[index]?.length}
                                           </td>
                                         </tr>
                                       </tbody>
@@ -505,11 +490,38 @@ const MarkSheet = () => {
                                         </th>
                                         <th>
                                           প্রাপ্ত বিভাগ
-                                          <td>মকবুল</td>
+                                          <td>
+                                              
+                                              {total[index].reduce((accumulator, currentValue) => accumulator + currentValue, 0) >
+                                                division[0]?.case1 
+                                                  ? division[0]?.case1_div
+                                                  : total[index].reduce((accumulator, currentValue) => accumulator + currentValue, 0) >=
+                                                    division[0]?.case2 
+                                                  ? division[0]?.case2_div
+                                                  : total[index].reduce((accumulator, currentValue) => accumulator + currentValue, 0) >=
+                                                    division[0]?.case3
+                                                  ? division[0]?.case3_div
+                                                  : total[index].reduce((accumulator, currentValue) => accumulator + currentValue, 0) >=
+                                                    division[0]?.case4 
+                                                  ? division[0]?.case4_div
+                                                  : total[index].reduce((accumulator, currentValue) => accumulator + currentValue, 0) >=
+                                                    division[0]?.case5 
+                                                  ? division[0]?.case5_div
+                                                  : total[index].reduce((accumulator, currentValue) => accumulator + currentValue, 0) >=
+                                                    division[0]?.case6 
+                                                  ? division[0]?.case6_div
+                                                  :<div style={{color: "red", fontWeight: "bold"}}>
+                                                    F</div>}
+                                                  
+                                                  </td>
                                         </th>
                                         <th>
                                           মেধা স্থান
-                                          <td>০</td>
+                                          <td>{result?.map(res => {
+                                            if(res.originalIndex == index){
+                                              return res.sortedIndex
+                                            }
+                                          })}</td>
                                         </th>
                                       </tr>
                                     </tbody>
