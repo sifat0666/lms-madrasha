@@ -8,13 +8,11 @@ const Dasboard = () => {
   //   fetch(`${serverUrl}/api/dashboard`, {headers:  {Authorization: { Authorization: `Bearer ${localStorage.getItem("token")}` } }}).then((res) => res.json())
   // );
 
-    const { data, isLoading } = useQuery(["dashboard"], () =>
+  const { data, isLoading } = useQuery(["dashboard"], () =>
     axios.get(`${serverUrl}/api/dashboard`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     })
   );
-
-  console.log('data',data?.data);
 
   return (
     <div>
@@ -25,20 +23,30 @@ const Dasboard = () => {
           <div className="row">
             <div className="col-lg-8">
               <div className="grid-container">
-                <div className="grid-card">Total Users: {data?.data?.total_user}</div>
+                <div className="grid-card">
+                  Total Users: {data?.data?.total_user}
+                </div>
                 <div className="grid-card">
                   Total Students: {data?.data?.total_student}
                 </div>
-                {/* <div className="grid-card">Group</div> */}
-                {/* <div className="grid-card">Subject</div> */}
-                {/* <div className="grid-card">Section</div> */}
+                <div className="grid-card">Group</div>
+                <div className="grid-card">Subject</div>
+                <div className="grid-card">Section</div>
                 <div className="grid-card">
                   Total Class: {data?.data?.total_class}
                 </div>
-                {/* <div className="grid-card">Subjects</div> */}
-                {/* <div className="grid-card">Report</div> */}
-                {/* <div className="grid-card">Group</div> */}
-                {/* <div className="grid-card">Subject</div> */}
+                <div className="grid-card">Subjects</div>
+                <div className="grid-card">Report</div>
+                <div className="grid-card">Group</div>
+                <div className="grid-card">Subject</div>
+                <div className="grid-card">Subject</div>
+                <div className="grid-card">Subject</div>
+                <div className="grid-card">Subject</div>
+                <div className="grid-card">Subject</div>
+                <div className="grid-card">Subject</div>
+                <div className="grid-card">Subject</div>
+                <div className="grid-card">Subject</div>
+                <div className="grid-card">Subject</div>
               </div>
             </div>
             <div className="col-lg-4 company-about">
@@ -49,7 +57,7 @@ const Dasboard = () => {
                   </div>
                   <div className="card-content text-center">
                     <h5>যোগাযোগ</h5>
-                    <p>+88018xxxxxxxxx</p>
+                    <p>01842709014</p>
                     <p>
                       যোগাযোগের সময়
                       <br />
