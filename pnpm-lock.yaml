@@ -12,6 +12,7 @@ specifiers:
   react-dom: ^18.2.0
   react-hook-form: ^7.41.2
   react-hot-toast: ^2.4.0
+  react-icons: ^4.10.1
   react-query: ^3.39.2
   react-reconciler: 0.23.0
   react-router-dom: ^6.6.1
@@ -28,6 +29,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.41.2_react@18.2.0
   react-hot-toast: 2.4.0_owo25xnefcwdq3zjgtohz6dbju
+  react-icons: 4.10.1_react@18.2.0
   react-query: 3.39.2_biqbaboplfbrettd7655fr4n2y
   react-reconciler: 0.23.0_react@18.2.0
   react-router-dom: 6.6.1_biqbaboplfbrettd7655fr4n2y
@@ -1157,6 +1159,14 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     transitivePeerDependencies:
       - csstype
+    dev: false
+
+  /react-icons/4.10.1_react@18.2.0:
+    resolution: {integrity: sha512-/ngzDP/77tlCfqthiiGNZeYFACw85fUjZtLbedmJ5DTlNDIwETxhwBzdOJ21zj4iJdvc0J3y7yOsX3PpxAJzrw==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is/16.13.1:

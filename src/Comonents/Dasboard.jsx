@@ -2,6 +2,9 @@ import axios from "axios";
 import React from "react";
 import { useQuery } from "react-query";
 import { serverUrl } from "../../utils/config";
+import { useNavigate } from "react-router-dom";
+import { PiStudentBold } from "react-icons/pi";
+import { Link } from "react-router-dom";
 
 const Dasboard = () => {
   // const { data } = useQuery("dashboard", () =>
@@ -13,6 +16,9 @@ const Dasboard = () => {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     })
   );
+  const { navigate } = useNavigate();
+
+  console.log("data", data?.data);
 
   return (
     <div>
@@ -22,31 +28,46 @@ const Dasboard = () => {
         <div className="containers">
           <div className="row">
             <div className="col-lg-8">
-              <div className="grid-container">
-                <div className="grid-card">
-                  Total Users: {data?.data?.total_user}
-                </div>
+              <div className="grid-container" style={{ cursor: "pointer" }}>
+                {/* <div className="grid-card">Total Users: {data?.data?.total_user}</div>
                 <div className="grid-card">
                   Total Students: {data?.data?.total_student}
-                </div>
-                <div className="grid-card">Group</div>
-                <div className="grid-card">Subject</div>
-                <div className="grid-card">Section</div>
-                <div className="grid-card">
+                </div> */}
+                <Link to="/student-info">
+                  <div className="grid-card">
+                    {/* <PiStudentBold /> */}
+                    ছাত্র ছাত্রি রেজিস্টার
+                  </div>
+                </Link>
+                <div className="grid-card">ক্লাস ও সাবজেক্ট রেজিস্টার</div>
+                <div className="grid-card">পরিক্ষা রেজিস্টার</div>
+                <div className="grid-card">ভর্তি রিপোর্ট</div>
+                <div className="grid-card">আইডি কার্ড প্রিন্ট</div>
+                <div className="grid-card">পরিক্ষা রিপোর্ট</div>
+                {/* <div className="grid-card">
                   Total Class: {data?.data?.total_class}
-                </div>
-                <div className="grid-card">Subjects</div>
-                <div className="grid-card">Report</div>
-                <div className="grid-card">Group</div>
-                <div className="grid-card">Subject</div>
-                <div className="grid-card">Subject</div>
-                <div className="grid-card">Subject</div>
-                <div className="grid-card">Subject</div>
-                <div className="grid-card">Subject</div>
-                <div className="grid-card">Subject</div>
-                <div className="grid-card">Subject</div>
-                <div className="grid-card">Subject</div>
-                <div className="grid-card">Subject</div>
+                </div> */}
+                <div className="grid-card">রেজাল্ট এন্ট্রি</div>
+                <div className="grid-card">রেজাল্ট প্রিন্ট</div>
+                <div className="grid-card">বেতন নির্ধারণ</div>
+                <div className="grid-card">বেতন গ্রহন</div>
+                <div className="grid-card">বকেয়া ভর্তি ফি গ্রহন</div>
+                <div className="grid-card">আয় এন্ট্রি</div>
+              </div>
+              <div
+                className="grid-container pt-2"
+                style={{ cursor: "pointer" }}
+              >
+                <div className="grid-card bg-">ব্যয় এন্ট্রি</div>
+                <div className="grid-card">আয়-ব্যয় হিসাব</div>
+                <div className="grid-card">শিক্ষক/কর্মচারী রেজিস্টার</div>
+                <div className="grid-card">শিক্ষক/কর্মচারী পেয়রোল</div>
+                <div className="grid-card">শিক্ষক/কর্মচারী রিপোর্ট</div>
+                <div className="grid-card">দাতা সদস্য রেজিস্টার</div>
+                <div className="grid-card">দাতা সদস্য ফি গ্রহণ</div>
+                <div className="grid-card">বই এন্ট্রি</div>
+                <div className="grid-card">বই বিক্রি</div>
+                <div className="grid-card">মেনেজ সেল</div>
               </div>
             </div>
             <div className="col-lg-4 company-about">
@@ -57,7 +78,7 @@ const Dasboard = () => {
                   </div>
                   <div className="card-content text-center">
                     <h5>যোগাযোগ</h5>
-                    <p>01842709014</p>
+                    <p>+88018xxxxxxxxx</p>
                     <p>
                       যোগাযোগের সময়
                       <br />
