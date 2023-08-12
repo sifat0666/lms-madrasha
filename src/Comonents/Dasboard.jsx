@@ -39,8 +39,12 @@ const Dasboard = () => {
                     ছাত্র ছাত্রি রেজিস্টার
                   </div>
                 </Link>
-                <div className="grid-card">ক্লাস ও সাবজেক্ট রেজিস্টার</div>
-                <div className="grid-card">পরিক্ষা রেজিস্টার</div>
+                <Link to="/class-entry">
+                  <div className="grid-card">ক্লাস ও সাবজেক্ট রেজিস্টার</div>
+                </Link>
+                <Link to="/exam-entry">
+                  <div className="grid-card">পরিক্ষা রেজিস্টার</div>
+                </Link>
                 <div className="grid-card">ভর্তি রিপোর্ট</div>
                 <div className="grid-card">আইডি কার্ড প্রিন্ট</div>
                 <div className="grid-card">পরিক্ষা রিপোর্ট</div>
