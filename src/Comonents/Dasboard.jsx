@@ -29,50 +29,129 @@ const Dasboard = () => {
           <div className="row">
             <div className="col-lg-8">
               <div className="grid-container" style={{ cursor: "pointer" }}>
-                {/* <div className="grid-card">Total Users: {data?.data?.total_user}</div>
-                <div className="grid-card">
+                {/* <div className="grid-card" style={{height: "150px"}}>Total Users: {data?.data?.total_user}</div>
+                <div className="grid-card" style={{height: "150px"}}>
                   Total Students: {data?.data?.total_student}
                 </div> */}
                 <Link to="/student-info">
-                  <div className="grid-card">
+                  <div className="grid-card" style={{ height: "150px" }}>
                     {/* <PiStudentBold /> */}
                     ছাত্র ছাত্রি রেজিস্টার
                   </div>
                 </Link>
                 <Link to="/class-entry">
-                  <div className="grid-card">ক্লাস ও সাবজেক্ট রেজিস্টার</div>
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    ক্লাস ও সাবজেক্ট রেজিস্টার
+                  </div>
                 </Link>
                 <Link to="/exam-entry">
-                  <div className="grid-card">পরিক্ষা রেজিস্টার</div>
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    পরিক্ষা রেজিস্টার
+                  </div>
                 </Link>
-                <div className="grid-card">ভর্তি রিপোর্ট</div>
-                <div className="grid-card">আইডি কার্ড প্রিন্ট</div>
-                <div className="grid-card">পরিক্ষা রিপোর্ট</div>
-                {/* <div className="grid-card">
+                <Link to="/student-report">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    ভর্তি রিপোর্ট
+                  </div>
+                </Link>{" "}
+                <Link to="/student-report">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    আইডি কার্ড প্রিন্ট
+                  </div>
+                </Link>
+                <Link to="/exam-report">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    পরিক্ষা রিপোর্ট
+                  </div>
+                </Link>
+                {/* <div className="grid-card" style={{height: "150px"}}>
                   Total Class: {data?.data?.total_class}
                 </div> */}
-                <div className="grid-card">রেজাল্ট এন্ট্রি</div>
-                <div className="grid-card">রেজাল্ট প্রিন্ট</div>
-                <div className="grid-card">বেতন নির্ধারণ</div>
-                <div className="grid-card">বেতন গ্রহন</div>
-                <div className="grid-card">বকেয়া ভর্তি ফি গ্রহন</div>
-                <div className="grid-card">আয় এন্ট্রি</div>
+                <Link to="/marks-entry">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    রেজাল্ট এন্ট্রি
+                  </div>
+                </Link>
+                <Link to="/mark-sheet-class">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    রেজাল্ট প্রিন্ট
+                  </div>
+                </Link>
+                <Link to="/fees-determination">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    ফি নির্ধারণ
+                  </div>
+                </Link>
+                <Link to="/accounting/monthly-fees">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    ফি গ্রহন
+                  </div>
+                </Link>
+                <Link to="/bokeya-vorti-fee">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    বকেয়া ভর্তি ফি গ্রহন
+                  </div>
+                </Link>{" "}
+                <Link to="/income-entry">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    আয় এন্ট্রি
+                  </div>
+                </Link>
+                <Link to="/expence-entry">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    ব্যয় এন্ট্রি
+                  </div>
+                </Link>
+                <Link to="/mashik-fee-report">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    আয়-ব্যয় হিসাব
+                  </div>
+                </Link>{" "}
+                <Link to="/teacher-staff">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    শিক্ষক/কর্মচারী রেজিস্টার
+                  </div>
+                </Link>
+                <Link to="/payroll">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    শিক্ষক/কর্মচারী পেয়রোল
+                  </div>
+                </Link>
+                <Link to="/salary-report">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    শিক্ষক/কর্মচারী রিপোর্ট
+                  </div>
+                </Link>
+                <Link to="/doner-member">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    দাতা সদস্য রেজিস্টার
+                  </div>
+                </Link>
+                <Link to="/donate-recive">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    দাতা সদস্য ফি গ্রহণ
+                  </div>
+                </Link>
+                <Link to="/add-book">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    বই এন্ট্রি
+                  </div>
+                </Link>
+                <Link to="/new-sale">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    বই বিক্রি
+                  </div>
+                </Link>{" "}
+                <Link to="/manage-sell">
+                  <div className="grid-card" style={{ height: "150px" }}>
+                    মেনেজ সেল
+                  </div>
+                </Link>
               </div>
               <div
                 className="grid-container pt-2"
                 style={{ cursor: "pointer" }}
-              >
-                <div className="grid-card bg-">ব্যয় এন্ট্রি</div>
-                <div className="grid-card">আয়-ব্যয় হিসাব</div>
-                <div className="grid-card">শিক্ষক/কর্মচারী রেজিস্টার</div>
-                <div className="grid-card">শিক্ষক/কর্মচারী পেয়রোল</div>
-                <div className="grid-card">শিক্ষক/কর্মচারী রিপোর্ট</div>
-                <div className="grid-card">দাতা সদস্য রেজিস্টার</div>
-                <div className="grid-card">দাতা সদস্য ফি গ্রহণ</div>
-                <div className="grid-card">বই এন্ট্রি</div>
-                <div className="grid-card">বই বিক্রি</div>
-                <div className="grid-card">মেনেজ সেল</div>
-              </div>
+              ></div>
             </div>
             <div className="col-lg-4 company-about">
               <div className="card">

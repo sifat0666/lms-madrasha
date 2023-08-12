@@ -1518,3 +1518,11 @@ Login Form
   font-size: 16px;
   margin-top: 4px;
 }
+
+.grid-container > div {
+  width: 400px;
+  height: 500px;
+  margin: 10px; /* Adjust margin as needed */
+  box-sizing: border-box; /* Include padding and border in the total width and height */
+  border: 1px solid #ccc; /* Optional: Add a border for visualization */
+}
