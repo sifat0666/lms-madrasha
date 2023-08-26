@@ -459,7 +459,7 @@ const IncomeEntryRevised = () => {
                                 </tr>
                               </thead>
                               <tbody>
-                                {ledgerData?.map((item) => (
+                                {ledgerData?.map((item, i) => (
                                   <tr key={item.id}>
                                     <td>{item.submit_date}</td>
                                     <td>{item.general_ledger}</td>

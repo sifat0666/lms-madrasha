@@ -182,8 +182,10 @@ const Report = () => {
                             aria-label="size 3 select example"
                           >
                             <option disabled>নির্বাচন করুন</option>
-                            <option>১. সংক্ষিপ্ত মাসিক ফির তালিকা</option>
-                            <option>২. সংক্ষিপ্ত খাবার ফির তালিকা</option>
+                            {/* <option>১. সংক্ষিপ্ত মাসিক ফির তালিকা</option> */}
+                            {/* <option>২. সংক্ষিপ্ত খাবার ফির তালিকা</option> */}
+                            <option>১. বছর ধরে হিসাব</option>
+                            <option>2. মাস ধরে হিসাব</option>
                             <option>৩ জমা লেজার</option>
                             <option>৪ খরচ লেজার</option>
                             <option>৫ তারিখ ধরে হিসাব</option>
@@ -191,8 +193,6 @@ const Report = () => {
                             <option>৬. ছাত্র/ছাত্রি মওকুফ তালিকা</option>
                             <option>৭. মাস হিসাবে বেতন তালিকা</option>
                             <option>৮. মাস হিসাবে বেতন বকেয়া তালিকা</option>
-                            <option>৯ মাস ধরে হিসাব</option>
-                            <option>১০ বছর ধরে হিসাব</option>
                           </select>
                         </div>
                       </div>
@@ -437,14 +437,14 @@ const Report = () => {
                           student={student}
                         />
                       )}{" "}
-                      {report === "৯ মাস ধরে হিসাব" && (
+                      {report === "2. মাস ধরে হিসাব" && (
                         <MaashHishab
                           value={value}
                           months={months}
                           student={student}
                         />
                       )}{" "}
-                      {report === "১০ বছর ধরে হিসাব" && (
+                      {report === "১. বছর ধরে হিসাব" && (
                         <BoschorHishab
                           value={value}
                           months={months}

@@ -247,9 +247,9 @@ const ClassEntry = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {data?.data.map((item) => (
+                        {data?.data.map((item, i) => (
                           <tr key={item.id}>
-                            <th scope="row">{item.id}</th>
+                            <th scope="row">{i + 1}</th>
                             <td>{item.class_name}</td>
                             <td>
                               {" "}
@@ -280,9 +280,9 @@ const ClassEntry = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {sub?.data.map((item) => (
+                        {sub?.data.map((item, i) => (
                           <tr key={item.id}>
-                            <th scope="row">{item.id}</th>
+                            <th scope="row">{i + 1}</th>
                             <td>{item.class}</td>
                             <td>{item.subject}</td>
                             <td>

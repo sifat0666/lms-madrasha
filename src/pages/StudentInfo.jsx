@@ -95,9 +95,10 @@ const StudentInfo = () => {
       console.log(error);
     },
     onSuccess: (data) => {
-      toast.success(`student registered successfully, ID ${data?.data.id}`);
-      console.log("data student", data?.data.id);
-      setStudentids(data?.data.id);
+      toast.success(`student registered successfully, ID ${data?.data?.id}`);
+      console.log("data student", data?.data);
+      setStudentids(data?.data?.id);
+      refetch();
     },
   });
 

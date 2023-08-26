@@ -81,7 +81,7 @@ const JomaLedger = ({ data, val }) => {
                       <tr key={item.id}>
                         {item.chart_of_account === "জমা" && (
                           <>
-                            <td>{item.id}</td>
+                            <td>{i + 1}</td>
                             <td>{item.fund_name}</td>
                             <td>{item.chart_of_account}</td>
                             <td>{item.general_ledger}</td>
