@@ -1119,7 +1119,9 @@ const StudentInfo = () => {
                     <tbody>
                       {studentData?.map((item) => (
                         <tr key={item.id}>
-                          <td>{item.id}</td>
+                          <td>
+                            {item.session}-00{item.id}
+                          </td>
                           <td>{item.session}</td>
                           <th>{item.student_name}</th>
                           <td>{item.class}</td>

@@ -103,44 +103,37 @@ const MarkSheet = () => {
 
   const { register, handleSubmit } = useForm();
 
-
-
-
-
   function sumAndSortWithPositions(array) {
-    const sums = array?.map(subArray => subArray?.reduce((acc, val) => acc + val, 0));
+    const sums = array?.map((subArray) =>
+      subArray?.reduce((acc, val) => acc + val, 0)
+    );
     const indexedSums = sums?.map((value, index) => ({ value, index }));
-  
+
     indexedSums?.sort((a, b) => b.value - a.value); // Sort in descending order
-  
+
     const sortedSumsWithPositions = indexedSums?.map((item, sortedIndex) => ({
       sum: item.value,
       originalIndex: item.index,
-      sortedIndex : sortedIndex +1,
+      sortedIndex: sortedIndex + 1,
     }));
-  
+
     return sortedSumsWithPositions;
   }
 
-
-
-
-
-const total = students?.map((student) => {
-  const studentResults = results
-    ?.filter((result) => result.student_id === student.id)
-    ?.map((result) => parseInt(result?.number))
-    ?.filter((number) => !isNaN(number));
-  return studentResults;
-});
+  const total = students?.map((student) => {
+    const studentResults = results
+      ?.filter((result) => result.student_id === student.id)
+      ?.map((result) => parseInt(result?.number))
+      ?.filter((number) => !isNaN(number));
+    return studentResults;
+  });
 
   // Example usage
 
   const result = sumAndSortWithPositions(total);
-  
 
   console.log("total", total);
-  console.log('sorted array',result);
+  console.log("sorted array", result);
 
   const onSubmit = async (data) => {
     console.log("class name data", data);
@@ -175,7 +168,6 @@ const total = students?.map((student) => {
                 <div className="row">
                   <div className="col-lg-4 col-md-12 col-12 d-print-none">
                     <form onSubmit={handleSubmit(onSubmit)}>
-            
                       <div className="row mb-3">
                         <label className="col-lg-4 col-md-4 col-12 col-form-label info-lable">
                           শিক্ষাবর্ষ
@@ -300,7 +292,10 @@ const total = students?.map((student) => {
                               <div className="col-5 flex-wrap align-content-center">
                                 <div className="">
                                   <strong>আইডিঃ</strong>
-                                  <span> {item.id}</span>
+                                  <span>
+                                    {" "}
+                                    {item.session}-00{item.id}
+                                  </span>
                                 </div>
                                 <div className="student-name">
                                   <strong>পরীক্ষার্থীর নামঃ </strong>
@@ -336,7 +331,8 @@ const total = students?.map((student) => {
                                         <tr>
                                           <th colspan="4">
                                             মোট বিষয় {total[index]?.length}টি
-                                            পূর্নমান 100 x {total[index]?.length} ={" "}
+                                            পূর্নমান 100 x{" "}
+                                            {total[index]?.length} ={" "}
                                             {100 * total[index]?.length}
                                           </th>
                                         </tr>
@@ -491,37 +487,63 @@ const total = students?.map((student) => {
                                         <th>
                                           প্রাপ্ত বিভাগ
                                           <td>
-                                              
-                                              {total[index].reduce((accumulator, currentValue) => accumulator + currentValue, 0) >
-                                                division[0]?.case1 
-                                                  ? division[0]?.case1_div
-                                                  : total[index].reduce((accumulator, currentValue) => accumulator + currentValue, 0) >=
-                                                    division[0]?.case2 
-                                                  ? division[0]?.case2_div
-                                                  : total[index].reduce((accumulator, currentValue) => accumulator + currentValue, 0) >=
-                                                    division[0]?.case3
-                                                  ? division[0]?.case3_div
-                                                  : total[index].reduce((accumulator, currentValue) => accumulator + currentValue, 0) >=
-                                                    division[0]?.case4 
-                                                  ? division[0]?.case4_div
-                                                  : total[index].reduce((accumulator, currentValue) => accumulator + currentValue, 0) >=
-                                                    division[0]?.case5 
-                                                  ? division[0]?.case5_div
-                                                  : total[index].reduce((accumulator, currentValue) => accumulator + currentValue, 0) >=
-                                                    division[0]?.case6 
-                                                  ? division[0]?.case6_div
-                                                  :<div style={{color: "red", fontWeight: "bold"}}>
-                                                    F</div>}
-                                                  
-                                                  </td>
+                                            {total[index].reduce(
+                                              (accumulator, currentValue) =>
+                                                accumulator + currentValue,
+                                              0
+                                            ) > division[0]?.case1 ? (
+                                              division[0]?.case1_div
+                                            ) : total[index].reduce(
+                                                (accumulator, currentValue) =>
+                                                  accumulator + currentValue,
+                                                0
+                                              ) >= division[0]?.case2 ? (
+                                              division[0]?.case2_div
+                                            ) : total[index].reduce(
+                                                (accumulator, currentValue) =>
+                                                  accumulator + currentValue,
+                                                0
+                                              ) >= division[0]?.case3 ? (
+                                              division[0]?.case3_div
+                                            ) : total[index].reduce(
+                                                (accumulator, currentValue) =>
+                                                  accumulator + currentValue,
+                                                0
+                                              ) >= division[0]?.case4 ? (
+                                              division[0]?.case4_div
+                                            ) : total[index].reduce(
+                                                (accumulator, currentValue) =>
+                                                  accumulator + currentValue,
+                                                0
+                                              ) >= division[0]?.case5 ? (
+                                              division[0]?.case5_div
+                                            ) : total[index].reduce(
+                                                (accumulator, currentValue) =>
+                                                  accumulator + currentValue,
+                                                0
+                                              ) >= division[0]?.case6 ? (
+                                              division[0]?.case6_div
+                                            ) : (
+                                              <div
+                                                style={{
+                                                  color: "red",
+                                                  fontWeight: "bold",
+                                                }}
+                                              >
+                                                F
+                                              </div>
+                                            )}
+                                          </td>
                                         </th>
                                         <th>
                                           মেধা স্থান
-                                          <td>{result?.map(res => {
-                                            if(res.originalIndex == index){
-                                              return res.sortedIndex
-                                            }
-                                          })}</td>
+                                          <td>
+                                            {result?.map((res) => {
+                                              if (res.originalIndex == index) {
+                                                return res.sortedIndex;
+                                              }
+                                            })}
+                                          </td>
                                         </th>
                                       </tr>
                                     </tbody>

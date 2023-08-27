@@ -447,6 +447,15 @@ const Layout = ({ children }) => {
                                     মার্কশিট
                                   </a>
                                 </Link>
+                                <Link to="mark-sheet-list">
+                                  {" "}
+                                  <a
+                                    class="dropdown-item"
+                                    // href="./pages/Exam/mark-sheet.html"
+                                  >
+                                    নোটিশবোর্ড মার্কশিট
+                                  </a>
+                                </Link>
                               </li>
                             </ul>
                           </li>

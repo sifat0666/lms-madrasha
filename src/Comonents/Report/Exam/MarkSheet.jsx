@@ -55,7 +55,6 @@ const MarkSheet = ({ data, val, classData }) => {
                     </td>
                   </tr>
                   <tr>
-                    <th>ক্রঃ</th>
                     <th>আইডি</th>
                     <th>পরীক্ষার্থী</th>
                     <tr
@@ -73,8 +72,9 @@ const MarkSheet = ({ data, val, classData }) => {
                 <tbody>
                   {data?.map((item, i) => (
                     <tr key={item.id}>
-                      <td>{i}</td>
-                      <td>{item.id}</td>
+                      <td>
+                        {item.session}-00{item.id}
+                      </td>
                       <td>{item.student_name}</td>
                       <td></td>
                     </tr>
