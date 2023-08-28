@@ -286,7 +286,7 @@ const MarkSheet = () => {
                                 <tbody>
                                   {total?.map((item, i) => (
                                     <tr key={item.id}>
-                                      {item.notun_puraton === "new" && (
+                                      {true && (
                                         <>
                                           <td>
                                             {item.session}-00{item.id}

@@ -2,8 +2,11 @@ import React from "react";
 import { useQuery } from "react-query";
 import { serverUrl } from "../../../../utils/config";
 
-const HajiraReport = ({ students, value, hajira }) => {
-  console.log("hajire", hajira);
+const HajiraReport = ({ student, value, hajira }) => {
+  const month = value?.month?.slice(0, 2);
+  console.log("🚀 ~ file: HajiraReport.jsx:7 ~ HajiraReport ~ month:", month);
+  console.log("hajire", hajira[0]?.updated_at.slice(5, 7));
+  console.log("st", student);
 
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
     fetch(`${serverUrl}/api/institute-info`, {
@@ -11,20 +14,79 @@ const HajiraReport = ({ students, value, hajira }) => {
     }).then((res) => res.json())
   );
 
-  const total = students?.map((student) => {
-    const studentResults = results
-      ?.filter((result) => result.student_id === student.id)
-      ?.map((result) => parseInt(result?.number))
-      ?.filter((number) => !isNaN(number));
-
-    const sum = studentResults?.reduce((acc, curr) => acc + curr, 0); // Calculate the sum
-
-    return {
-      ...student,
-      student_id: student.id,
-      total_sum: sum, // Include the sum in the returned object
-    };
+  const attendanceMap = {};
+  hajira?.forEach((att) => {
+    const studentId = att.student_id;
+    if (!attendanceMap[studentId]) {
+      attendanceMap[studentId] = [];
+    }
+    attendanceMap[studentId]?.push(att);
   });
+
+  // Merge attendance data into students array
+  const mergedStudents = student?.map((student) => {
+    const studentId = student.id;
+    const studentAttendance = attendanceMap[studentId] || [];
+
+    // Initialize the columns
+    const present = [];
+    const absent = [];
+    const escaped = [];
+
+    // Categorize attendance data into columns
+    studentAttendance.forEach((att) => {
+      if (
+        att.attandance === "Present" &&
+        att.updated_at.slice(5, 7) == month &&
+        true
+      ) {
+        present?.push(att);
+      } else if (
+        att.attandance === "Absent" &&
+        att.updated_at.slice(5, 7) == month &&
+        true
+      ) {
+        absent?.push(att);
+      } else if (
+        att.attandance === "Escaped" &&
+        att.updated_at.slice(5, 7) === month
+      ) {
+        escaped?.push(att);
+      }
+    });
+
+    // Add attendance-related columns to the student object
+    student.Present = present;
+    student.Absent = absent;
+    student.Escaped = escaped;
+
+    // You can add other columns or modifications as needed here
+
+    return student;
+  });
+
+  console.log("mrege", mergedStudents);
+
+  // const total = student?.map((student) => {
+  //   const studentResults = hajira
+  //     ?.filter((result) => result.student_id === student.id)
+  //     ?.map((result) => result);
+
+  //   const attended = student?.map(
+  //     (item) => student.student_id === item.student_id
+  //   ); // Calculate the sum
+
+  //   console.log("attend", attended);
+
+  //   return {
+  //     ...student,
+  //     student_id: student.id,
+  //     total_sum: sum, // Include the sum in the returned object
+  //     attended: attended?.length,
+  //   };
+  // });
+
+  // console.log("total", total);
   return (
     <div>
       <div className="bg-white d-print-block">
@@ -44,13 +106,14 @@ const HajiraReport = ({ students, value, hajira }) => {
                   <th>ID</th>
                   <th>নাম</th>
                   <th>রোল</th>
-                  <th>মেধা স্থান</th>
-                  <th>মোট নাম্বার</th>
+                  <th>Present</th>
+                  <th>Absent</th>
+                  <th>Escaped</th>
                 </tr>
               </thead>
 
               <tbody>
-                {total?.map((item, i) => (
+                {mergedStudents?.map((item, i) => (
                   <tr key={item.id}>
                     {item.notun_puraton === "new" && (
                       <>
@@ -59,8 +122,9 @@ const HajiraReport = ({ students, value, hajira }) => {
                         </td>
                         <td>{item.student_name}</td>
                         <td>{item.roll}</td>
-                        <td>{i + 1}</td>
-                        <td>{item.total_sum}</td>
+                        <td>{item.Present?.length}</td>
+                        <td>{item.Absent?.length}</td>
+                        <td>{item.Escaped?.length}</td>
                       </>
                     )}
                   </tr>

@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { serverUrl } from "../../../../utils/config";
 
 const MaashHishab = ({ data, value }) => {
-  const month = value?.session + "-" + value?.month?.slice(0, 2);
+  const month = value?.session?.slice(0, 4) + "-" + value?.month?.slice(0, 2);
 
   console.log(month);
 

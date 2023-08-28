@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
 import { sendSms, serverUrl } from "../../utils/config";
 
-const state = ["Preset", "Absent", "Escaped"];
+const state = ["Present", "Absent", "Escaped"];
 
 const Attandence = ({ item, otherData }) => {
   const [att, setAtt] = useState();
@@ -47,7 +47,7 @@ const Attandence = ({ item, otherData }) => {
           );
         }
       }
-      if (data?.data.attandance === "Preset") {
+      if (data?.data.attandance === "Present") {
         if (true) {
           sendSms(
             student?.data.phn_no,
