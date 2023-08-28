@@ -7,7 +7,6 @@ import { toast } from "react-hot-toast";
 import { useMutation, useQuery } from "react-query";
 import ReactToPrint from "react-to-print";
 import { serverUrl } from "../../utils/config";
-import { createItemFromDescriptor } from "@babel/core/lib/config/item";
 
 const MarkSheet = () => {
   const ref = useRef();
@@ -19,8 +18,6 @@ const MarkSheet = () => {
   const [division, setDivision] = useState([]);
 
   console.log("students ", students);
-
-  console.log(student?.id);
 
   const { data: instituteInfo } = useQuery("instituteInfo", () =>
     fetch(`${serverUrl}/api/institute-info`, {
@@ -77,7 +74,7 @@ const MarkSheet = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
-      console.log("userdata", data.data);
+      // console.log("userdata", data.data);
       setStudents(data?.data);
       // window.location.reload(true);
     },
@@ -103,39 +100,31 @@ const MarkSheet = () => {
 
   const { register, handleSubmit } = useForm();
 
-  function sumAndSortWithPositions(array) {
-    const sums = array?.map((subArray) =>
-      subArray?.reduce((acc, val) => acc + val, 0)
-    );
-    const indexedSums = sums?.map((value, index) => ({ value, index }));
-
-    indexedSums?.sort((a, b) => b.value - a.value); // Sort in descending order
-
-    const sortedSumsWithPositions = indexedSums?.map((item, sortedIndex) => ({
-      sum: item.value,
-      originalIndex: item.index,
-      sortedIndex: sortedIndex + 1,
-    }));
-
-    return sortedSumsWithPositions;
-  }
-
   const total = students?.map((student) => {
     const studentResults = results
       ?.filter((result) => result.student_id === student.id)
       ?.map((result) => parseInt(result?.number))
       ?.filter((number) => !isNaN(number));
-    return studentResults;
+
+    const sum = studentResults?.reduce((acc, curr) => acc + curr, 0); // Calculate the sum
+
+    return {
+      ...student,
+      student_id: student.id,
+      total_sum: sum, // Include the sum in the returned object
+    };
   });
+
+  total?.sort((a, b) => b.total_sum - a.total_sum);
 
   console.log("total", total);
 
   // Example usage
 
-  const result = sumAndSortWithPositions(total);
+  // const result = sumAndSortWithPositions(total);
 
   console.log("total", total);
-  console.log("sorted array", result);
+  // console.log("sorted array", result);
 
   const onSubmit = async (data) => {
     console.log("class name data", data);
@@ -247,10 +236,10 @@ const MarkSheet = () => {
                           <ReactToPrint
                             trigger={() => (
                               <button
-                                className="custom-btn btn-primary my-3"
+                                className="custom-btn btn-primary d-block w-100 my-3"
                                 type="submit"
                               >
-                                Save
+                                Print
                               </button>
                             )}
                             content={() => ref.current}
@@ -263,9 +252,59 @@ const MarkSheet = () => {
 
                   <div className="col-lg-8 col-md-12 col-12 mt-2 mt-lg-0 ">
                     <div ref={ref}>
-                      {result?.map((res) => {
-                        return <div>{JSON.stringify(res)}</div>;
-                      })}
+                      <div>
+                        <div className="bg-white d-print-block">
+                          <div className="pages-title">
+                            <h5>{instituteInfo?.name}</h5>
+                            <p>{instituteInfo?.address}</p>
+                            <span>{instituteInfo?.num}</span>
+                            <br />
+                            <span className="pages-subtitle">
+                              {" "}
+                              Result - {value?.session}
+                            </span>
+                          </div>
+                          <div className="pages-content">
+                            <p className="my-2 font-weight-bold">
+                              জামাত/ক্লাশ : {value?.class}
+                            </p>
+                            <div
+                              className="table-responsive"
+                              data-pattern="priority-columns"
+                            >
+                              <table className="table  bg-white table-bordered text-center report-table">
+                                <thead className="text-center">
+                                  <tr>
+                                    <th>ID</th>
+                                    <th>নাম</th>
+                                    <th>রোল</th>
+                                    <th>মেধা স্থান</th>
+                                    <th>মোট নাম্বার</th>
+                                  </tr>
+                                </thead>
+
+                                <tbody>
+                                  {total?.map((item, i) => (
+                                    <tr key={item.id}>
+                                      {item.notun_puraton === "new" && (
+                                        <>
+                                          <td>
+                                            {item.session}-00{item.id}
+                                          </td>
+                                          <td>{item.student_name}</td>
+                                          <td>{item.roll}</td>
+                                          <td>{i + 1}</td>
+                                          <td>{item.total_sum}</td>
+                                        </>
+                                      )}
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

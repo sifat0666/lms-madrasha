@@ -928,6 +928,14 @@ span.print-button {
 .report-table {
   border: 1px solid;
 }
+
+.rotate {
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  width: 1.5em;
+}
+
 .sl-no,
 .idno,
 .students-tdname {
@@ -1518,5 +1526,3 @@ Login Form
   font-size: 16px;
   margin-top: 4px;
 }
-
-

@@ -19,6 +19,7 @@ import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import HajiraKhata from "../Comonents/Report/Student/HajiraKhata";
 import IDCardLayout from "../Comonents/Report/Exam/IDCardLayout";
+import HajiraReport from "../Comonents/Report/Student/HajiraReport";
 
 const Report = () => {
   const ref = useRef();
@@ -56,7 +57,6 @@ const Report = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
-      console.log("userdata", data.data);
       setStudent(data.data);
       // window.location.reload(true);
     },
@@ -76,18 +76,37 @@ const Report = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
-      console.log("userdata", data.data);
       // window.location.reload(true);
       setSurvey(data?.data);
+    },
+  });
+
+  const [hajira, setHajira] = useState([]);
+  const hajiraMutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/attendance-surveys`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      // window.location.reload(true);
+      setHajira(data?.data);
     },
   });
 
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     mutation.mutate(data);
     surveyMutaion.mutate(data);
+    hajiraMutation.mutate(data);
     setValue(data);
   };
 
@@ -293,6 +312,13 @@ const Report = () => {
                       )}
                       {report === "১২. হাজিরা খাতা" && (
                         <HajiraKhata student={student} value={value} />
+                      )}{" "}
+                      {report === "১৩. হাজিরা রিপোর্ট" && (
+                        <HajiraReport
+                          student={student}
+                          value={value}
+                          hajira={hajira}
+                        />
                       )}{" "}
                       {report === "আইডি কার্ড" ? (
                         <IDCardLayout student={student} />

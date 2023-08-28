@@ -32,14 +32,7 @@ const Dasboard = () => {
   //   fetch(`${serverUrl}/api/dashboard`, {headers:  {Authorization: { Authorization: `Bearer ${localStorage.getItem("token")}` } }}).then((res) => res.json())
   // );
 
-  const { data, isLoading } = useQuery(["dashboard"], () =>
-    axios.get(`${serverUrl}/api/dashboard`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    })
-  );
   const { navigate } = useNavigate();
-
-  console.log("data", data?.data);
 
   return (
     <div>

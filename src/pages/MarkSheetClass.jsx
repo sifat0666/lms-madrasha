@@ -245,10 +245,10 @@ const MarkSheet = () => {
                           <ReactToPrint
                             trigger={() => (
                               <button
-                                className="custom-btn btn-primary my-3"
+                                className="custom-btn btn-primary d-block w-100 my-3"
                                 type="submit"
                               >
-                                Save
+                                Print
                               </button>
                             )}
                             content={() => ref.current}
