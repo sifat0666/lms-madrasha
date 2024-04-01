@@ -1,4 +1,4 @@
-export const serverUrl = "https://lmsapi.milkywayitsolution.com/";
+export const serverUrl = "https://lmsapi.milkywayitsolution.com";
 
 export const msg = fetch(`${serverUrl}/api/msg/${1}`).then((res) => res.json());
 
