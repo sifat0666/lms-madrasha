@@ -284,9 +284,9 @@ const ExamEntry = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {examEntry?.data.map((item) => (
+                          {examEntry?.data.map((item, i) => (
                             <tr key={item.id}>
-                              <td>{item.id}</td>
+                              <td>{i + 1}</td>
                               <td>{item.exam_name}</td>
                               <td>{item.fee}</td>
 

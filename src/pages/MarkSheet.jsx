@@ -272,7 +272,10 @@ const MarkSheet = () => {
                           <div className="col-5 flex-wrap align-content-center">
                             <div className="">
                               <strong>আইডিঃ</strong>
-                              <span> {student?.id}</span>
+                              <span>
+                                {" "}
+                                {student?.session}-00{student?.id}
+                              </span>
                             </div>
                             <div className="student-name">
                               <strong>পরীক্ষার্থীর নামঃ </strong>

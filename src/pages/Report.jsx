@@ -19,6 +19,7 @@ import { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import HajiraKhata from "../Comonents/Report/Student/HajiraKhata";
 import IDCardLayout from "../Comonents/Report/Exam/IDCardLayout";
+import HajiraReport from "../Comonents/Report/Student/HajiraReport";
 
 const Report = () => {
   const ref = useRef();
@@ -56,7 +57,6 @@ const Report = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
-      console.log("userdata", data.data);
       setStudent(data.data);
       // window.location.reload(true);
     },
@@ -76,18 +76,37 @@ const Report = () => {
       toast.error(error.response.data.message);
     },
     onSuccess: (data) => {
-      console.log("userdata", data.data);
       // window.location.reload(true);
       setSurvey(data?.data);
+    },
+  });
+
+  const [hajira, setHajira] = useState([]);
+  const hajiraMutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post(`${serverUrl}/api/attendance-surveys`, data, {
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+    },
+    onError: (error, variable, context) => {
+      // console.log(error.response.data.message);
+      toast.error(error.response.data.message);
+    },
+    onSuccess: (data) => {
+      // window.location.reload(true);
+      setHajira(data?.data);
     },
   });
 
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     mutation.mutate(data);
     surveyMutaion.mutate(data);
+    hajiraMutation.mutate(data);
     setValue(data);
   };
 
@@ -118,7 +137,7 @@ const Report = () => {
                             onChange={(e) => setReport(e.target.value)}
                           >
                             <option disabled>নির্বাচন করুন</option>
-                            <option>আইডি কার্ড</option>
+                            <option>0. আইডি কার্ড</option>
                             <option>১. ভর্তি রেজিস্টার</option>
                             <option>২. ভর্তি রেজিস্টার নতুন</option>
                             <option>৩. ভর্তি রেজিস্টার পুরাতন</option>
@@ -142,10 +161,10 @@ const Report = () => {
                               ৮. মারহালা ওয়ারী কিতাব/বিষয়ের তালিকা
                             </option>
                             <option>
-                              ৯. শিক্ষার্থীদের পরিচয় পত্র (আইডি কার্ড)
+                              ৯. শিক্ষার্থীদের পরিচয় পত্র (0. আইডি কার্ড)
                             </option>
                             <option>
-                              ১০. শিক্ষার্থীদের পরিচয় পত্র (আইডি কার্ড)
+                              ১০. শিক্ষার্থীদের পরিচয় পত্র (0. আইডি কার্ড)
                             </option> */}
                           </select>
                         </div>
@@ -213,6 +232,37 @@ const Report = () => {
                           </div>
                         </div>
                       </div>
+
+                      {report === "১৩. হাজিরা রিপোর্ট" && (
+                        <div className="row mt-3">
+                          <div className="col-12">
+                            <div className="filter-menu">
+                              <select
+                                className="form-select"
+                                size="4"
+                                style={{ border: "none" }}
+                                {...register("month")}
+                              >
+                                <option disabled>মাস নির্বাচন করুন</option>
+
+                                <option>01. জানুয়ারী</option>
+                                <option>02. ফেব্রুয়ারী</option>
+                                <option>03. মার্চ </option>
+                                <option>04. এপ্রিল </option>
+                                <option>05. মে </option>
+                                <option>06. জুন </option>
+                                <option>07. জুলাই </option>
+                                <option>08. আগষ্ট </option>
+                                <option>09. সেপ্টেম্বর </option>
+                                <option>10. অক্টোবর </option>
+                                <option>11. নভেম্বর </option>
+                                <option>12. ডিসেম্বর </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
                       {/* <div className="row mt-3">
                         <div className="col-12">
                           <div className="filter-menu">
@@ -294,7 +344,14 @@ const Report = () => {
                       {report === "১২. হাজিরা খাতা" && (
                         <HajiraKhata student={student} value={value} />
                       )}{" "}
-                      {report === "আইডি কার্ড" ? (
+                      {report === "১৩. হাজিরা রিপোর্ট" && (
+                        <HajiraReport
+                          student={student}
+                          value={value}
+                          hajira={hajira}
+                        />
+                      )}
+                      {report === "0. আইডি কার্ড" ? (
                         <IDCardLayout student={student} />
                       ) : null}
                       {!report && <div>select something</div>}

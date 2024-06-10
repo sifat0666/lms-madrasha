@@ -96,9 +96,9 @@ const PodobiEntry = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {podobi?.map((item) => (
+                  {podobi?.map((item, i) => (
                     <tr key={item.id}>
-                      <th scope="row">{item.id}</th>
+                      <th scope="row">{i + 1}</th>
                       <td>{item.podobi}</td>
                       <span
                         onClick={(id) => onDelete(item.id)}

@@ -123,9 +123,9 @@ const AddPaymentSystem = () => {
             </tr>
           </thead>
           <tbody>
-            {data?.data.map((item) => (
+            {data?.data.map((item, i) => (
               <tr key={item.id}>
-                <th scope="row">{item.id}</th>
+                <th scope="row">{i + 1}</th>
                 <td>{item.account_type}</td>
                 <td>{item.account_name}</td>
                 <td>{item.mobile_number}</td>

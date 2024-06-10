@@ -63,6 +63,7 @@ import Payroll from "./pages/Payroll";
 import TeacherMonthEntry from "./pages/TeacherMonthEntry";
 import Contact from "./pages/Contact";
 import User from "./pages/User";
+import ResultListNoticeBoard from "./pages/ResultListNoticeBoard";
 
 function App() {
   const navigate = useNavigate();
@@ -455,6 +456,16 @@ function App() {
           element={
             user?.permissions.includes("result_control") ? (
               <MarkSheet />
+            ) : (
+              <NotAuthenticated />
+            )
+          }
+        />{" "}
+        <Route
+          path="mark-sheet-list"
+          element={
+            user?.permissions.includes("result_control") ? (
+              <ResultListNoticeBoard />
             ) : (
               <NotAuthenticated />
             )

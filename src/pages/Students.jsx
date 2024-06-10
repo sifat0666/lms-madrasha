@@ -108,7 +108,7 @@ const Students = () => {
                         </div>
                         <div className="row mb-3">
                           <label className="col-sm-12 col-lg-4 col-form-label info-lable">
-                            আরবী হিজরী
+                            আরবী হিজরীa
                           </label>
                           <div className="col-sm-12 col-md-12 col-lg-8">
                             <input
@@ -263,24 +263,22 @@ const Students = () => {
                   <th scope="col">শিক্ষাবর্ষের নাম</th>
                   <th scope="col">বাংলা সন</th>
                   <th scope="col">আরবী হিজরী</th>
-                  <span className="action-delete">
-                    <i className="bi bi-trash3"></i>
-                  </span>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-                {data?.data.map((item) => (
+                {data?.data.map((item, i) => (
                   <tr key={item.id}>
-                    <th scope="row">{item.id}</th>
+                    <th scope="row">{i + 1}</th>
                     <td>{item.academic_year}</td>
                     <td>{item.bangla_year}</td>
                     <td>{item.arabic_year}</td>
-                    <span
+                    <td
                       onClick={(id) => onDelete(item.id)}
                       className="action-delete"
                     >
                       <i className="bi bi-trash3"></i>
-                    </span>
+                    </td>
                   </tr>
                 ))}
               </tbody>

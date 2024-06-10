@@ -113,9 +113,9 @@ const FeeName = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data?.data.map((item) => (
+                    {data?.data.map((item, i) => (
                       <tr key={item.id}>
-                        <th scope="row">{item.id}</th>
+                        <th scope="row">{i + 1}</th>
                         <td>{item.fee_name}</td>
                         <th>
                           <span

@@ -74,7 +74,7 @@ const KhorochLedger = ({ data, val }) => {
                       <tr key={item.id}>
                         {item.chart_of_account === "খরচ" && (
                           <>
-                            <td>{item.id}</td>
+                            <td>{i + 1}</td>
                             <td>{item.fund_name}</td>
                             <td>{item.chart_of_account}</td>
                             <td>{item.general_ledger}</td>

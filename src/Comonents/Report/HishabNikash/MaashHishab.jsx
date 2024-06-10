@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { serverUrl } from "../../../../utils/config";
 
 const MaashHishab = ({ data, value }) => {
-  const month = value?.session + "-" + value?.month?.slice(0, 2);
+  const month = value?.session?.slice(0, 4) + "-" + value?.month?.slice(0, 2);
 
   console.log(month);
 
@@ -96,7 +96,7 @@ const MaashHishab = ({ data, value }) => {
                           item.submit_date.slice(0, 7) === month &&
                           item.chart_of_account === "জমা" && (
                             <>
-                              <td>{item.id}</td>
+                              <td>{i + 1}</td>
                               <td>{item.fund_name}</td>
                               <td>{item.chart_of_account}</td>
                               <td>{item.general_ledger}</td>

@@ -37,13 +37,13 @@ id card number issue --pending
 24. fee name dlt -- done
 6. masher naam repeat delete---done
 4. mashuk fee report number ---done
-13. hajira report maash and bochor 
 
-15. mash vittik hajira khata
+11. result list
+13. hajira report maash and bochor 
 14. class wari hajir
-7. id issue
-9 . make id to increment in every table
-10. home page icon
+7. id issue --done
+9 . make id to increment in every table --done
+10. home page icon -- done
 -----------------------------------------------------------------
 
 21. data sodossho report

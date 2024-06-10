@@ -95,9 +95,10 @@ const StudentInfo = () => {
       console.log(error);
     },
     onSuccess: (data) => {
-      toast.success(`student registered successfully, ID ${data?.data.id}`);
-      console.log("data student", data?.data.id);
-      setStudentids(data?.data.id);
+      toast.success(`student registered successfully, ID ${data?.data?.id}`);
+      console.log("data student", data?.data);
+      setStudentids(data?.data?.id);
+      refetch();
     },
   });
 
@@ -1118,7 +1119,9 @@ const StudentInfo = () => {
                     <tbody>
                       {studentData?.map((item) => (
                         <tr key={item.id}>
-                          <td>{item.id}</td>
+                          <td>
+                            {item.session}-00{item.id}
+                          </td>
                           <td>{item.session}</td>
                           <th>{item.student_name}</th>
                           <td>{item.class}</td>
