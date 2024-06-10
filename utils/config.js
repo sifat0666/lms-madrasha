@@ -1,4 +1,4 @@
-export const serverUrl = "https://api.milkywayitsolution.agency";
+export const serverUrl = "https://api.babydolnagallery.com";
 
 export const msg = fetch(`${serverUrl}/api/msg/${1}`).then((res) => res.json());
 
